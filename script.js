@@ -1,44 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Smooth Scrolling for Navigation Links
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                // Account for fixed header height
-                const headerOffset = 70; 
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
-        });
-    });
+    // 현재 페이지 URL을 확인하여 네비게이션 메뉴에 active 클래스 추가
+    const currentLocation = location.href;
+    const menuItems = document.querySelectorAll('.nav-links a');
+    const menuLength = menuItems.length;
 
-    // 2. Tab Navigation Logic for Contact & Admissions Section
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Add active class to clicked button
-            button.classList.add('active');
-
-            // Show target content
-            const targetId = button.getAttribute('data-target');
-            document.getElementById(targetId).classList.add('active');
-        });
-    });
+    for (let i = 0; i < menuLength; i++) {
+        if (menuItems[i].href === currentLocation) {
+            menuItems[i].classList.add("active");
+        }
+    }
 });
