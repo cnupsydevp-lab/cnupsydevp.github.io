@@ -3,206 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Research Lab</title>
+    <title>발달심리 연구실</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 배경 글래스모르피즘 효과를 위한 블롭(Blob) -->
+    <!-- 공통 배경 -->
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
-    <div class="bg-blob blob-3"></div>
 
-    <!-- 네비게이션 바 -->
+    <!-- 공통 네비게이션 -->
     <header class="glass-nav">
         <div class="container nav-wrapper">
-            <h1 class="logo"><a href="#about">AR LAB</a></h1>
+            <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#about">연구실 소개</a></li>
-                    <li><a href="#pi">지도 교수</a></li>
-                    <li><a href="#research">연구분야</a></li>
-                    <li><a href="#members">구성원</a></li>
-                    <li><a href="#notices">공지사항</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="index.html">연구실 소개</a></li>
+                    <li><a href="pi.html">지도 교수</a></li>
+                    <li><a href="research.html">연구분야</a></li>
+                    <li><a href="members.html">구성원</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="admissions.html">대학원 진학</a></li>
+                    <li><a href="intern.html">연구실 인턴</a></li>
+                    <li><a href="notices.html">공지사항</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <!-- 1. 연구실 소개 -->
-        <section id="about" class="section-padding">
-            <div class="container glass-panel">
-                <h2 class="section-title">연구실 소개</h2>
-                <p class="about-text">
-                    <strong>Advanced Research Lab(AR LAB)</strong>에 오신 것을 환영합니다. <br>
-                    우리는 인공지능과 데이터 과학의 새로운 패러다임을 연구하며, <span class="highlight">이론적 한계를 극복하고 실생활에 적용 가능한 혁신적인 솔루션</span>을 개발하는 것을 목표로 합니다.
-                </p>
-            </div>
-        </section>
-
-        <!-- 2. 지도 교수 -->
-        <section id="pi" class="section-padding">
-            <div class="container glass-panel">
-                <h2 class="section-title">지도 교수</h2>
-                <div class="pi-profile">
-                    <div class="pi-image">
-                        <!-- 이미지 플레이스홀더 -->
-                        <img src="https://via.placeholder.com/300x400/cce4ff/003399?text=PI+Profile" alt="지도 교수 프로필">
-                    </div>
-                    <div class="pi-info">
-                        <h3>홍길동 교수 <span class="badge badge-primary">PI</span></h3>
-                        <p class="affiliation">한국대학교 인공지능융합학과</p>
-                        
-                        <blockquote class="glass-quote">
-                            "우리의 연구는 단순히 논문을 쓰는 것에 그치지 않고, 인류의 삶을 실질적으로 향상시키는 기술적 혁신을 이룩하는 데 있습니다."
-                        </blockquote>
-
-                        <div class="pi-achievements">
-                            <h4>주요 연구실적</h4>
-                            <ul>
-                                <li>대한민국 과학기술상 수상 (2025)</li>
-                                <li>NeurIPS, ICML 등 최우수 국제 학술지 논문 50여 편 게재</li>
-                                <li>글로벌 IT 기업과의 산학협력 프로젝트 총괄 (2020~현재)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. 연구분야 (프로젝트 및 논문 실적) -->
-        <section id="research" class="section-padding">
-            <div class="container">
-                <h2 class="section-title text-center">연구분야 및 실적</h2>
-                
-                <!-- 현재 진행 중인 프로젝트 -->
-                <h3 class="sub-title">진행 중인 프로젝트 (Ongoing Projects)</h3>
-                <div class="grid-cards">
-                    <div class="glass-card">
-                        <span class="badge badge-active">국책 과제</span>
-                        <h4>설명 가능한 인공지능 (XAI)</h4>
-                        <p>의료 진단 시스템에서 AI의 판단 근거를 시각적, 논리적으로 제공하여 신뢰성을 높이는 딥러닝 아키텍처 연구.</p>
-                    </div>
-                    <div class="glass-card">
-                        <span class="badge badge-active">산학 협력</span>
-                        <h4>초거대 언어모델 경량화</h4>
-                        <p>모바일 디바이스 및 엣지 컴퓨팅 환경에서도 원활하게 동작하는 LLM 파라미터 최적화 및 튜닝 기법 연구.</p>
-                    </div>
-                </div>
-
-                <!-- 최근 논문 실적 -->
-                <h3 class="sub-title" style="margin-top: 4rem;">최근 논문 실적 (Recent Publications)</h3>
-                <div class="glass-panel">
-                    <ul class="pub-list">
-                        <li>
-                            <span class="badge badge-published">Published</span>
-                            <div class="pub-info">
-                                <strong>"Efficient Scaling of Vision Transformers for Medical Imaging"</strong>
-                                <span>Gildong Hong, Chulsoo Kim</span>
-                                <span class="journal">IEEE CVPR 2026</span>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="badge badge-review">Under Review</span>
-                            <div class="pub-info">
-                                <strong>"A Novel Approach to Federated Learning Security"</strong>
-                                <span>Younghee Lee, Gildong Hong</span>
-                                <span class="journal">ICML 2026</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. 구성원 -->
-        <section id="members" class="section-padding">
-            <div class="container glass-panel">
-                <h2 class="section-title">구성원</h2>
-                <div class="grid-members">
-                    <div class="member-card">
-                        <img src="https://via.placeholder.com/120/e0ebff/003399?text=Ph.D" alt="김철수">
-                        <h4>김철수</h4>
-                        <span class="badge badge-phd">박사 과정</span>
-                    </div>
-                    <div class="member-card">
-                        <img src="https://via.placeholder.com/120/e0ebff/003399?text=M.S" alt="이영희">
-                        <h4>이영희</h4>
-                        <span class="badge badge-ms">석사 과정</span>
-                    </div>
-                    <div class="member-card">
-                        <img src="https://via.placeholder.com/120/e0ebff/003399?text=B.S" alt="박지민">
-                        <h4>박지민</h4>
-                        <span class="badge badge-intern">학부 인턴</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. 공지사항 -->
-        <section id="notices" class="section-padding">
-            <div class="container">
-                <h2 class="section-title text-center">공지사항</h2>
-                <div class="glass-panel accordion-wrapper">
-                    <details class="glass-accordion" open>
-                        <summary><span class="badge badge-notice">Notice</span> 2026학년도 후기 신입생 모집 안내</summary>
-                        <div class="accordion-content">
-                            우리 연구실에서는 2026학년도 후기 대학원 신입생(석사, 박사, 통합과정)을 모집합니다. 관심 있는 학생들은 Contact 탭을 참고하여 이메일로 지원 바랍니다.
-                        </div>
-                    </details>
-                    <details class="glass-accordion">
-                        <summary><span class="badge badge-news">News</span> 이영희 연구원, 우수 논문상 수상</summary>
-                        <div class="accordion-content">
-                            이영희 석사과정 연구원이 2026 한국인공지능학회 춘계학술대회에서 우수 논문상을 수상하였습니다. 축하합니다!
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Contact (대학원 진학 & 인턴) -->
-        <section id="contact" class="section-padding">
-            <div class="container glass-panel glass-tabs">
-                <h2 class="section-title">Contact Us</h2>
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-target="tab-general">오시는 길</button>
-                    <button class="tab-btn" data-target="tab-grad">대학원 진학</button>
-                    <button class="tab-btn" data-target="tab-intern">연구실 인턴</button>
-                </div>
-                
-                <div id="tab-general" class="tab-content active">
-                    <p>📍 <strong>위치:</strong> 한국대학교 공학관 404호 AR LAB</p>
-                    <p>📧 <strong>이메일:</strong> director@arlab.ac.kr</p>
-                    <p>📞 <strong>전화번호:</strong> 02-123-4567</p>
-                </div>
-
-                <div id="tab-grad" class="tab-content">
-                    <h3>대학원 진학 (Graduate Admissions)</h3>
-                    <p>AI 및 데이터 사이언스 분야의 혁신을 이끌어갈 열정적인 대학원생을 모집합니다.<br>
-                    지원을 희망하는 학생은 <strong>자기소개서, 성적증명서, 이력서(CV)</strong>를 첨부하여 지도 교수님 이메일로 연락 바랍니다.</p>
-                    <ul class="benefit-list">
-                        <li>✔️ 등록금 전액 지원 및 매월 최고 수준의 생활비 지급</li>
-                        <li>✔️ 국내외 최고 권위 학술대회 참가비 및 여비 전액 지원</li>
-                        <li>✔️ 최신 GPU 서버 및 개인 연구 장비 제공</li>
-                    </ul>
-                </div>
-
-                <div id="tab-intern" class="tab-content">
-                    <h3>연구실 인턴 (Lab Internship)</h3>
-                    <p>학부생을 대상으로 방학 중 또는 학기 중 연구 참여 프로그램을 운영합니다.<br>
-                    <span class="highlight">파이썬(Python) 프로그래밍 역량</span>과 딥러닝 기초 지식을 보유한 학생을 우대합니다.</p>
-                </div>
-            </div>
-        </section>
+    <!-- 페이지별 메인 콘텐츠 -->
+    <main class="container section-padding">
+        <div class="glass-panel">
+            <h2 class="section-title">연구실 소개</h2>
+            <p style="font-size: 1.15rem;">
+                <strong>아동 및 청소년 발달심리 연구실(Child & Adolescent Developmental Psychology Lab)</strong>에 오신 것을 환영합니다. <br><br>
+                우리는 생애 초기의 인지적, 사회적, 정서적 발달이 인간의 전 생애에 미치는 영향을 탐구합니다. 특히 아동의 <span class="highlight">언어 획득 과정, 또래 관계 형성, 그리고 환경적 요인</span>이 뇌 발달과 심리에 미치는 긍정적 기제를 연구하여 아이들의 건강한 성장을 돕는 것을 목표로 합니다.
+            </p>
+        </div>
     </main>
 
+    <!-- 공통 푸터 -->
     <footer class="glass-footer">
-        <div class="container text-center">
-            <p>&copy; 2026 Advanced Research Lab. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 Developmental Psychology Lab. All rights reserved.</p>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
