@@ -1,21 +1,22 @@
-/* Color & Glassmorphism Variables */
+/* Color & Glassmorphism Variables - 짙은 블루(Dark Blue) 테마 */
 :root {
-    --primary-blue: #0284c7;    /* 차분하고 신뢰감 있는 블루 */
-    --light-blue: #e0f2fe;      /* 따뜻한 느낌의 라이트 블루 */
-    --bg-color: #f8fafc;
-    --text-dark: #334155;
-    --text-light: #64748b;
+    --primary-blue: #0F2A4A;    /* 깊이 있는 짙은 네이비/블루 */
+    --accent-blue: #1D4ED8;     /* 강조용 로열 블루 */
+    --light-blue: #E0E7FF;      /* 배지 등을 위한 연한 블루 */
+    --bg-color: #F8FAFC;        /* 깔끔한 화이트/그레이 배경 */
+    --text-dark: #1E293B;
+    --text-light: #475569;
     
     /* Glass Effect */
-    --glass-bg: rgba(255, 255, 255, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.8);
-    --glass-shadow: 0 8px 32px 0 rgba(2, 132, 199, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.9);
+    --glass-shadow: 0 8px 32px 0 rgba(15, 42, 74, 0.08);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     color: var(--text-dark);
     line-height: 1.7;
     background-color: var(--bg-color);
@@ -23,17 +24,17 @@ body {
     overflow-x: hidden;
 }
 
-/* Background Blobs (발달심리의 부드러움을 표현) */
+/* Background Blobs (짙은 블루 톤의 부드러운 배경 효과) */
 .bg-blob {
     position: fixed;
     border-radius: 50%;
-    filter: blur(90px);
+    filter: blur(100px);
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.15;
     animation: float 20s infinite ease-in-out;
 }
-.blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #bae6fd; }
-.blob-2 { bottom: -10%; right: -5%; width: 60vw; height: 60vw; background: #e0f2fe; animation-delay: -5s; }
+.blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #0F2A4A; }
+.blob-2 { bottom: -10%; right: -5%; width: 60vw; height: 60vw; background: #1D4ED8; animation-delay: -5s; }
 
 @keyframes float {
     0%, 100% { transform: translate(0, 0); }
@@ -41,31 +42,31 @@ body {
 }
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-.section-padding { padding: 4rem 0; }
-.section-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 2rem; }
+.section-padding { padding: 4rem 0; min-height: 70vh; }
+.section-title { font-size: 1.8rem; color: var(--primary-blue); margin-bottom: 2rem; border-bottom: 2px solid var(--light-blue); padding-bottom: 0.5rem; }
 
 /* Header & Nav */
 .glass-nav {
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--glass-border);
     z-index: 1000;
 }
 .nav-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 1rem 24px; }
-.logo a { text-decoration: none; color: var(--primary-blue); font-weight: 800; font-size: 1.4rem; }
+.logo a { text-decoration: none; color: var(--primary-blue); font-weight: 900; font-size: 1.5rem; letter-spacing: -0.5px; }
 .nav-links { display: flex; list-style: none; gap: 1.2rem; flex-wrap: wrap; }
-.nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; padding: 0.5rem; transition: color 0.3s; }
-.nav-links a:hover, .nav-links a.active { color: var(--primary-blue); }
+.nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; padding: 0.5rem; transition: color 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
 
 /* Glass Panel Component */
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    border-radius: 20px;
     padding: 3rem;
     box-shadow: var(--glass-shadow);
     margin-bottom: 2rem;
@@ -79,23 +80,34 @@ body {
     font-weight: 700;
     display: inline-block;
 }
-.badge-blue { background-color: var(--light-blue); color: var(--primary-blue); }
-.highlight { background: linear-gradient(to top, #bae6fd 40%, transparent 40%); font-weight: bold; }
+.badge-blue { background-color: var(--primary-blue); color: #ffffff; }
+.badge-light { background-color: var(--light-blue); color: var(--primary-blue); }
+.highlight { background: linear-gradient(to top, var(--light-blue) 40%, transparent 40%); font-weight: bold; color: var(--primary-blue); }
 
 /* Grid Layouts */
 .grid-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
 
+/* Box inside Panel */
+.inner-box {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
 /* Profile Image */
-.profile-img { width: 100%; border-radius: 20px; box-shadow: var(--glass-shadow); }
+.profile-img { width: 100%; border-radius: 16px; box-shadow: var(--glass-shadow); }
 
 /* Footer */
 .glass-footer {
     text-align: center; padding: 2rem 0; color: var(--text-light); font-size: 0.9rem;
-    border-top: 1px solid var(--glass-border); margin-top: 4rem;
+    background: rgba(255, 255, 255, 0.4); border-top: 1px solid var(--glass-border);
 }
 
 @media (max-width: 768px) {
     .grid-2 { grid-template-columns: 1fr; }
     .nav-links { justify-content: center; }
+    .glass-panel { padding: 2rem; }
 }
