@@ -10,6 +10,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Manosque';
+  src: url('fonts/Manosque-Regular.ttf') format('truetype'),
+       url('fonts/Manosque-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Variables ──────────────────────────────────────────── */
 /*
   [색상 수정 가이드]
@@ -48,7 +57,7 @@
   --text-mid:      #6B5840;   /* 라이트 섹션 보조 텍스트 */
 
   --font:         'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  --font-display: 'Playfair Display', 'Nanum Myeongjo', Georgia, serif;
+  --font-display: 'Manosque', 'Nanum Myeongjo', Georgia, serif;
 
   --radius: 4px;
   --glow: 0 0 32px rgba(212, 184, 78, 0.14);
