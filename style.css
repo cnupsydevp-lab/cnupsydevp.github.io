@@ -15,6 +15,11 @@
   --border:      rgba(255, 255, 255, 0.07);
   --border-md:   rgba(255, 255, 255, 0.12);
 
+  --bg-light:      #FFFFFF;
+  --bg-light-card: #EEF3FF;
+  --text-dark:     #0D1B2E;
+  --text-mid:      #3F516B;
+
   --font: 'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 
   --radius: 4px;
@@ -227,7 +232,7 @@ body {
 
 /* ── Sections ────────────────────────────────────────────── */
 .section        { padding: 5.5rem 0; }
-.section-alt    { background: var(--bg-alt); }
+.section-alt    { background: var(--bg-light-card); }
 .section-sm     { padding: 3.5rem 0; }
 
 .section-eyebrow { margin-bottom: 0.75rem; }
@@ -609,6 +614,47 @@ hr {
   margin-bottom: 0.4rem;
   letter-spacing: 0.04em;
 }
+
+/* ── Light Section Themes ───────────────────────────────── */
+.section-light { background: #FFFFFF; }
+
+/* Override CSS variables inside light sections */
+.section-light,
+.section-alt {
+  --muted:     var(--text-mid);
+  --off-white: var(--text-dark);
+  --bg-card:   var(--bg-light-card);
+  --bg-hover:  rgba(72, 149, 239, 0.05);
+  --border:    rgba(72, 149, 239, 0.12);
+  --border-md: rgba(72, 149, 239, 0.18);
+}
+/* Cards on light-blue background should be white */
+.section-alt { --bg-card: #FFFFFF; }
+
+/* White-text elements need explicit dark override */
+.section-light .section-title, .section-alt .section-title,
+.section-light .stat-num,      .section-alt .stat-num,
+.section-light .profile-name,  .section-alt .profile-name,
+.section-light .card h4,       .section-alt .card h4,
+.section-light .step h4,       .section-alt .step h4,
+.section-light .member-card h4,.section-alt .member-card h4 {
+  color: var(--text-dark);
+}
+
+/* Ghost button in light sections */
+.section-light .btn-ghost, .section-alt .btn-ghost {
+  color: var(--text-dark);
+  border-color: rgba(13, 27, 46, 0.2);
+}
+.section-light .btn-ghost:hover, .section-alt .btn-ghost:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--blue-dim);
+}
+
+/* Stats-bar has its own background; override explicitly for light mode */
+.stats-bar.section-light { background: #FFFFFF; }
+.stats-bar.section-alt   { background: var(--bg-light-card); }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 860px) {
