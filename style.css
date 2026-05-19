@@ -357,6 +357,19 @@ body {
   line-height: 1.8;
 }
 
+/*
+  [페이지 헤더 배경 전환]
+  class="page-header"            → 다크 배경 (기본)
+  class="page-header page-header-light" → 흰색 배경 + 어두운 텍스트
+  서브페이지에서 다크로 되돌리려면 page-header-light 제거
+*/
+.page-header.page-header-light {
+  background: #FFFFFF;
+  border-bottom-color: rgba(72, 149, 239, 0.15);
+}
+.page-header.page-header-light h1 { color: var(--text-dark); }
+.page-header.page-header-light p  { color: var(--text-mid); }
+
 /* ── About Grid ──────────────────────────────────────────── */
 .about-grid {
   display: grid;
