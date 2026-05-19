@@ -780,6 +780,56 @@ hr {
 .stats-bar.section-light { background: #FAF7EE; }
 .stats-bar.section-alt   { background: var(--bg-light-card); }
 
+/* ── Animations ──────────────────────────────────────────── */
+/*
+  prefers-reduced-motion 을 존중 — 이 블록 안의 모든 애니메이션은
+  접근성 설정에서 "모션 줄이기"를 켠 사용자에게 적용되지 않음.
+*/
+@media (prefers-reduced-motion: no-preference) {
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 히어로 진입 — 각 요소가 순서대로 나타남 */
+  .hero-intro .eyebrow { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both; }
+  .hero-title          { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
+  .hero-sub            { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.40s both; }
+  .hero-cta            { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.52s both; }
+  .hero-nav-grid       { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both; }
+
+  /* 서브페이지 페이지 헤더 진입 */
+  .page-header .eyebrow { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both; }
+  .page-header h1        { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both; }
+  .page-header p         { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both; }
+
+  /* 스크롤 reveal — JS가 .reveal / .visible 추가 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* 그리드 스태거 딜레이 — JS가 부모에 .stagger 추가 */
+  .stagger > *:nth-child(1) { transition-delay: 0.00s; }
+  .stagger > *:nth-child(2) { transition-delay: 0.08s; }
+  .stagger > *:nth-child(3) { transition-delay: 0.16s; }
+  .stagger > *:nth-child(4) { transition-delay: 0.24s; }
+  .stagger > *:nth-child(5) { transition-delay: 0.32s; }
+  .stagger > *:nth-child(6) { transition-delay: 0.40s; }
+
+  /* 네비 스크롤 depth — JS가 .scrolled 추가 */
+  .site-nav.scrolled {
+    box-shadow:
+      0 1px 0 0 var(--blue),
+      0 3px 0 0 rgba(212, 184, 78, 0.22),
+      0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 860px) {
   .about-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
