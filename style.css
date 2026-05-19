@@ -37,7 +37,8 @@
   --text-dark:     #1A1510;   /* 라이트 섹션 제목·본문 */
   --text-mid:      #6B5840;   /* 라이트 섹션 보조 텍스트 */
 
-  --font: 'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font:         'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-display: 'Playfair Display', 'Nanum Myeongjo', Georgia, serif;
 
   --radius: 4px;
   --glow: 0 0 32px rgba(212, 184, 78, 0.14);
@@ -63,10 +64,14 @@ body {
 .site-nav {
   position: sticky;
   top: 0;
-  background: rgba(19, 16, 13, 0.93);
+  background: rgba(19, 16, 13, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  /* 신문 마스트헤드 이중 룰: 굵은 골드 선 + 얇은 보조 선 */
+  border-bottom: none;
+  box-shadow:
+    0 1px 0 0 var(--blue),
+    0 3px 0 0 rgba(212, 184, 78, 0.22);
   z-index: 1000;
 }
 .nav-wrapper {
@@ -78,12 +83,13 @@ body {
   margin: 0 auto;
 }
 .logo a {
-  font-family: var(--font);
-  font-weight: 800;
-  font-size: 1.3rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.45rem;
   color: var(--white);
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 .nav-links { display: flex; list-style: none; gap: 0; }
 .nav-links a {
@@ -105,11 +111,13 @@ body {
 }
 
 /* ── Gradient Divider ───────────────────────────────────── */
+/* 신문 룰: 중앙은 골드로 선명하게, 양끝은 fade */
 .grad-line {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  background: linear-gradient(90deg, transparent 0%, var(--blue) 30%, var(--blue) 70%, transparent 100%);
   border: none;
   margin: 0;
+  opacity: 0.6;
 }
 
 /* ── Hero ───────────────────────────────────────────────── */
@@ -130,6 +138,7 @@ body {
   background: radial-gradient(circle, rgba(212,184,78,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
+/* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
 .eyebrow {
   display: inline-block;
   font-family: var(--font);
@@ -139,14 +148,16 @@ body {
   text-transform: uppercase;
   color: var(--blue);
   margin-bottom: 1.5rem;
+  border-top: 1.5px solid var(--blue);
+  padding-top: 0.45rem;
 }
 .hero-title {
-  font-family: var(--font);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 900;
   font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   color: var(--white);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
 }
 .hero-title em {
@@ -285,12 +296,12 @@ body {
 }
 .stat-num {
   display: block;
-  font-family: var(--font);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 2.4rem;
   color: var(--white);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 .stat-label {
   display: block;
@@ -309,8 +320,8 @@ body {
 
 .section-eyebrow { margin-bottom: 0.75rem; }
 .section-title {
-  font-family: var(--font);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.9rem;
   color: var(--white);
   line-height: 1.2;
@@ -342,12 +353,12 @@ body {
 }
 .page-header .eyebrow { margin-bottom: 0.5rem; }
 .page-header h1 {
-  font-family: var(--font);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   color: var(--white);
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 .page-header p {
   color: var(--muted);
@@ -498,8 +509,8 @@ body {
   display: block;
 }
 .profile-name {
-  font-family: var(--font);
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.8rem;
   color: var(--white);
   margin-bottom: 0.25rem;
@@ -675,9 +686,25 @@ body {
 /* ── Divider ─────────────────────────────────────────────── */
 hr {
   border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-md), transparent);
+  /* 신문 이중 룰: 굵은 선 + 얇은 선 3px 간격 */
+  height: 4px;
+  background:
+    linear-gradient(var(--border-md), var(--border-md)) top / 100% 1px no-repeat,
+    linear-gradient(var(--border), var(--border)) bottom / 100% 1px no-repeat;
   margin: 3rem 0;
+}
+
+/* ── Section Ornament ────────────────────────────────────── */
+/* <div class="ornament">◆</div> 또는 ◆ ◆ ◆ 로 섹션 구분 */
+.ornament {
+  text-align: center;
+  color: var(--blue);
+  font-size: 0.55rem;
+  letter-spacing: 0.6em;
+  padding-right: 0.6em; /* letter-spacing 보정 */
+  margin: 3.5rem 0;
+  user-select: none;
+  opacity: 0.7;
 }
 
 /* ── Footer ──────────────────────────────────────────────── */
@@ -691,13 +718,14 @@ hr {
   background: var(--bg-card);
 }
 .site-footer .footer-logo {
-  font-family: var(--font);
-  font-weight: 800;
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.2rem;
   color: var(--white);
   display: block;
   margin-bottom: 0.4rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
 }
 
 /* ── Light Section Themes ───────────────────────────────── */
