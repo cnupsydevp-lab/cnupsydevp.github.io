@@ -1,5 +1,15 @@
 @import url('https://cdn.jsdelivr.net/gh/innks/NanumSquareNeo/css/NanumSquareNeo.min.css');
 
+@font-face {
+  font-family: 'Magilio';
+  src: url('fonts/Magilio-Regular.woff2') format('woff2'),
+       url('fonts/Magilio-Regular.ttf') format('truetype'),
+       url('fonts/Magilio-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── Variables ──────────────────────────────────────────── */
 /*
   [색상 수정 가이드]
@@ -83,9 +93,9 @@ body {
   margin: 0 auto;
 }
 .logo a {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
+  font-family: 'Magilio', var(--font-display);
+  font-style: normal;
+  font-weight: normal;
   font-size: 1.45rem;
   color: var(--white);
   text-decoration: none;
@@ -785,9 +795,9 @@ hr {
   background: var(--bg-card);
 }
 .site-footer .footer-logo {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
+  font-family: 'Magilio', var(--font-display);
+  font-style: normal;
+  font-weight: normal;
   font-size: 1.2rem;
   color: var(--white);
   display: block;
