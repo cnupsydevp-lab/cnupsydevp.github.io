@@ -3,48 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>발달심리 연구실 - 지도 교수</title>
+    <title>CDP Lab — 지도교수</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-blob blob-1"></div><div class="bg-blob blob-2"></div>
-    <header class="glass-nav">
-        <div class="container nav-wrapper">
-            <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
-            <nav><ul class="nav-links">
-                <li><a href="index.html">연구실 소개</a></li>
-                <li><a href="pi.html">지도 교수</a></li>
-                <li><a href="research.html">연구분야</a></li>
-                <li><a href="members.html">구성원</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admissions.html">대학원 진학</a></li>
-                <li><a href="intern.html">연구실 인턴</a></li>
-                <li><a href="notices.html">공지사항</a></li>
-            </ul></nav>
-        </div>
-    </header>
 
-    <main class="container section-padding">
-        <div class="glass-panel grid-2">
+<header class="site-nav">
+    <div class="nav-wrapper">
+        <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
+        <nav><ul class="nav-links">
+            <li><a href="index.html">소개</a></li>
+            <li><a href="pi.html" class="active">지도교수</a></li>
+            <li><a href="research.html">연구분야</a></li>
+            <li><a href="members.html">구성원</a></li>
+            <li><a href="admissions.html">대학원 진학</a></li>
+            <li><a href="intern.html">인턴</a></li>
+            <li><a href="notices.html">공지사항</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+    </div>
+</header>
+
+<div class="page-header">
+    <div class="container">
+        <span class="eyebrow">Principal Investigator</span>
+        <h1>지도교수</h1>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="profile-grid">
             <div>
-                <img src="https://via.placeholder.com/300x400/0F2A4A/FFFFFF?text=PI+Photo" alt="지도교수 사진" class="profile-img">
+                <img src="https://via.placeholder.com/260x347/F2E8D0/A8822A?text=PI" alt="지도교수 사진" class="profile-img">
             </div>
             <div>
-                <h2 class="section-title">지도 교수 프로필</h2>
-                <h3 style="margin-bottom: 0.5rem; color: var(--primary-blue);">김심리 교수 <span class="badge badge-light">Ph.D.</span></h3>
-                <p style="color: var(--text-light); margin-bottom: 2rem; font-weight: 500;">한국대학교 심리학과</p>
-                
-                <h4 style="margin-bottom: 1rem; color: var(--accent-blue);">주요 연구실적</h4>
-                <ul style="list-style-position: inside; margin-bottom: 2rem;">
+                <p class="profile-name">김심리 <span class="badge badge-gold">Ph.D.</span></p>
+                <p class="profile-role">충남대학교 심리학과 교수</p>
+
+                <p class="profile-section-label">연구 관심사</p>
+                <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.9;">아동·청소년 발달심리, 언어 획득, 또래 관계 형성, 환경적 요인이 뇌 발달에 미치는 긍정적 기제</p>
+
+                <p class="profile-section-label">주요 연구 실적</p>
+                <ul class="profile-list">
                     <li>유아기 정서 조절 능력과 청소년기 회복탄력성의 종단 연구 (2025)</li>
                     <li>아동 심리 발달 척도(K-CDI) 개정판 공동 연구원</li>
                     <li>Developmental Psychology 등 SSCI급 국제 학술지 30여 편 게재</li>
                 </ul>
+
+                <p class="profile-section-label">학력</p>
+                <ul class="profile-list">
+                    <li>Ph.D. — 심리학과, OO대학교</li>
+                    <li>M.A. — 심리학과, OO대학교</li>
+                    <li>B.A. — 심리학과, OO대학교</li>
+                </ul>
+
+                <p class="profile-section-label">연락처</p>
+                <ul class="profile-list">
+                    <li>Email: <a href="mailto:pi@cnu.ac.kr" style="color: var(--navy);">pi@cnu.ac.kr</a></li>
+                    <li>Office: 충남대학교 사회과학대학 XXX호</li>
+                </ul>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <footer class="glass-footer"><div class="container"><p>&copy; 2026 CDP Lab. All rights reserved.</p></div></footer>
-    <script src="script.js"></script>
+<footer class="site-footer">
+    <div class="container">
+        <span class="footer-logo">CDP Lab</span>
+        <p>충남대학교 심리학과 아동발달심리 연구실</p>
+        <p style="margin-top: 0.75rem;">&copy; 2026 CDP Lab. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

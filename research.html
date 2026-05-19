@@ -3,46 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>발달심리 연구실 - 연구분야</title>
+    <title>CDP Lab — 연구분야</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-blob blob-1"></div><div class="bg-blob blob-2"></div>
-    <header class="glass-nav">
-        <div class="container nav-wrapper">
-            <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
-            <nav><ul class="nav-links">
-                <li><a href="index.html">연구실 소개</a></li>
-                <li><a href="pi.html">지도 교수</a></li>
-                <li><a href="research.html">연구분야</a></li>
-                <li><a href="members.html">구성원</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admissions.html">대학원 진학</a></li>
-                <li><a href="intern.html">연구실 인턴</a></li>
-                <li><a href="notices.html">공지사항</a></li>
-            </ul></nav>
-        </div>
-    </header>
 
-    <main class="container section-padding">
-        <div class="glass-panel">
-            <h2 class="section-title">연구분야 (Research Areas)</h2>
-            <div class="grid-3">
-                <div class="inner-box">
-                    <span class="badge badge-blue" style="margin-bottom: 1rem;">현재 진행 중</span>
-                    <h4 style="color: var(--primary-blue);">아동 언어 발달과 사회성</h4>
-                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">팬데믹 이후 영유아의 언어 노출 빈도가 사회적 상호작용에 미치는 영향 분석.</p>
-                </div>
-                <div class="inner-box">
-                    <span class="badge badge-light" style="margin-bottom: 1rem;">최근 논문 실적</span>
-                    <h4 style="color: var(--primary-blue);">디지털 미디어와 인지 발달</h4>
-                    <p style="font-size: 0.95rem; margin-top: 0.5rem;">스마트 기기 사용 시간이 학령전기 아동의 집행기능(Executive Function)에 미치는 영향.</p>
-                </div>
+<header class="site-nav">
+    <div class="nav-wrapper">
+        <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
+        <nav><ul class="nav-links">
+            <li><a href="index.html">소개</a></li>
+            <li><a href="pi.html">지도교수</a></li>
+            <li><a href="research.html" class="active">연구분야</a></li>
+            <li><a href="members.html">구성원</a></li>
+            <li><a href="admissions.html">대학원 진학</a></li>
+            <li><a href="intern.html">인턴</a></li>
+            <li><a href="notices.html">공지사항</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+    </div>
+</header>
+
+<div class="page-header">
+    <div class="container">
+        <span class="eyebrow">Research Areas</span>
+        <h1>연구분야</h1>
+        <p>아동과 청소년의 발달 궤적을 다양한 관점에서 탐구합니다</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-badge"><span class="badge badge-navy">현재 진행 중</span></div>
+                <div class="card-num">01</div>
+                <h4>아동 언어 발달과 사회성</h4>
+                <p>팬데믹 이후 영유아의 언어 노출 빈도가 사회적 상호작용에 미치는 영향 분석</p>
+            </div>
+            <div class="card">
+                <div class="card-badge"><span class="badge badge-gold">최근 논문 실적</span></div>
+                <div class="card-num">02</div>
+                <h4>디지털 미디어와 인지 발달</h4>
+                <p>스마트 기기 사용 시간이 학령전기 아동의 집행기능(Executive Function)에 미치는 영향</p>
+            </div>
+            <div class="card">
+                <div class="card-badge"><span class="badge badge-muted">종단 연구</span></div>
+                <div class="card-num">03</div>
+                <h4>정서 조절과 회복탄력성</h4>
+                <p>유아기 정서 조절 능력과 청소년기 회복탄력성의 종단적 관계 연구</p>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <footer class="glass-footer"><div class="container"><p>&copy; 2026 CDP Lab. All rights reserved.</p></div></footer>
-    <script src="script.js"></script>
+<footer class="site-footer">
+    <div class="container">
+        <span class="footer-logo">CDP Lab</span>
+        <p>충남대학교 심리학과 아동발달심리 연구실</p>
+        <p style="margin-top: 0.75rem;">&copy; 2026 CDP Lab. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

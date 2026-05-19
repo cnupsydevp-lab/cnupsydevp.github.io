@@ -3,46 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>발달심리 연구실 - 구성원</title>
+    <title>CDP Lab — 구성원</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="bg-blob blob-1"></div><div class="bg-blob blob-2"></div>
-    <header class="glass-nav">
-        <div class="container nav-wrapper">
-            <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
-            <nav><ul class="nav-links">
-                <li><a href="index.html">연구실 소개</a></li>
-                <li><a href="pi.html">지도 교수</a></li>
-                <li><a href="research.html">연구분야</a></li>
-                <li><a href="members.html">구성원</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="admissions.html">대학원 진학</a></li>
-                <li><a href="intern.html">연구실 인턴</a></li>
-                <li><a href="notices.html">공지사항</a></li>
-            </ul></nav>
-        </div>
-    </header>
 
-    <main class="container section-padding">
-        <div class="glass-panel">
-            <h2 class="section-title">연구실 구성원</h2>
-            <div class="grid-3" style="text-align: center;">
-                <div class="inner-box">
-                    <img src="https://via.placeholder.com/150/0F2A4A/FFFFFF?text=Ph.D" alt="박사과정" style="border-radius: 50%; width: 120px; box-shadow: var(--glass-shadow);">
-                    <h4 style="margin-top: 1rem; color: var(--primary-blue);">이발달</h4>
-                    <span class="badge badge-blue" style="margin-top: 0.5rem;">박사 과정</span>
-                </div>
-                <div class="inner-box">
-                    <img src="https://via.placeholder.com/150/0F2A4A/FFFFFF?text=M.S" alt="석사과정" style="border-radius: 50%; width: 120px; box-shadow: var(--glass-shadow);">
-                    <h4 style="margin-top: 1rem; color: var(--primary-blue);">박아동</h4>
-                    <span class="badge badge-light" style="margin-top: 0.5rem;">석사 과정</span>
-                </div>
+<header class="site-nav">
+    <div class="nav-wrapper">
+        <h1 class="logo"><a href="index.html">CDP Lab</a></h1>
+        <nav><ul class="nav-links">
+            <li><a href="index.html">소개</a></li>
+            <li><a href="pi.html">지도교수</a></li>
+            <li><a href="research.html">연구분야</a></li>
+            <li><a href="members.html" class="active">구성원</a></li>
+            <li><a href="admissions.html">대학원 진학</a></li>
+            <li><a href="intern.html">인턴</a></li>
+            <li><a href="notices.html">공지사항</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul></nav>
+    </div>
+</header>
+
+<div class="page-header">
+    <div class="container">
+        <span class="eyebrow">People</span>
+        <h1>구성원</h1>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <span class="eyebrow section-eyebrow">Graduate Students</span>
+        <h2 class="section-title" style="margin-bottom: 2.5rem;">대학원생</h2>
+        <div class="member-grid">
+            <div class="member-card">
+                <img src="https://via.placeholder.com/110/F2E8D0/A8822A?text=PhD" alt="박사과정" class="member-photo">
+                <h4>이발달</h4>
+                <p>박사 과정</p>
+            </div>
+            <div class="member-card">
+                <img src="https://via.placeholder.com/110/F2E8D0/A8822A?text=MA" alt="석사과정" class="member-photo">
+                <h4>박아동</h4>
+                <p>석사 과정</p>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <footer class="glass-footer"><div class="container"><p>&copy; 2026 CDP Lab. All rights reserved.</p></div></footer>
-    <script src="script.js"></script>
+<footer class="site-footer">
+    <div class="container">
+        <span class="footer-logo">CDP Lab</span>
+        <p>충남대학교 심리학과 아동발달심리 연구실</p>
+        <p style="margin-top: 0.75rem;">&copy; 2026 CDP Lab. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
