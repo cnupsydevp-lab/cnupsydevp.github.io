@@ -168,6 +168,61 @@ body {
   flex-wrap: wrap;
 }
 
+/* ── Hero Split Layout ───────────────────────────────────── */
+/*
+  히어로를 좌/우 두 열로 나눕니다.
+  - hero-split: 2열 그리드 (왼쪽 소개, 오른쪽 빠른이동 카드)
+  - hero-nav-grid: 3×2 카드 그리드
+  - hero-nav-card: 각 섹션 링크 카드
+  열 비율 변경: grid-template-columns 값 수정 (e.g. "55% 45%")
+*/
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  text-align: left;
+}
+.hero-intro .hero-sub { margin-left: 0; margin-right: 0; }
+.hero-intro .hero-cta  { justify-content: flex-start; }
+
+.hero-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+.hero-nav-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.hero-nav-card:hover {
+  border-color: var(--blue-border);
+  background: var(--blue-dim);
+  transform: translateY(-2px);
+}
+.hero-nav-label {
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--white);
+  display: block;
+}
+.hero-nav-sub {
+  font-size: 0.63rem;
+  font-weight: 700;
+  color: var(--muted);
+  display: block;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 /* ── Buttons ─────────────────────────────────────────────── */
 .btn-primary {
   display: inline-block;
@@ -693,6 +748,10 @@ hr {
   .stats-grid > div::after { display: none; }
   .hero         { padding: 5rem 0 4rem; }
   .section      { padding: 3.5rem 0; }
+  /* 히어로 분할 → 세로 1열로 */
+  .hero-split   { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .hero-intro .hero-sub { margin: 0 auto 2.8rem; }
+  .hero-intro .hero-cta  { justify-content: center; }
 }
 @media (max-width: 640px) {
   .nav-wrapper  { flex-direction: column; gap: 0.75rem; padding: 0.9rem 1rem; }
@@ -701,4 +760,6 @@ hr {
   .container    { padding: 0 1.25rem; }
   .hero-cta     { flex-direction: column; align-items: center; }
   .hero-title   { font-size: 2rem; }
+  /* 모바일: 빠른이동 카드 2열 */
+  .hero-nav-grid { grid-template-columns: repeat(2, 1fr); }
 }

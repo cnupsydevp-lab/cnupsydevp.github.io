@@ -28,15 +28,52 @@
 <!-- =====================================================
      HERO — 다크 배경 유지 (class 수정 금지)
      배경색: body 기본 (#070E1B)
+     구조: 좌(소개 텍스트) + 우(전체 페이지 빠른이동 그리드)
      ===================================================== -->
 <section class="hero">
     <div class="container">
-        <span class="eyebrow">Child &amp; Adolescent Developmental Psychology Lab</span>
-        <h1 class="hero-title">아이들의 성장을<br>과학으로 탐구합니다</h1>
-        <p class="hero-sub">언어 발달, 또래 관계, 환경적 요인이 아동의 뇌와 심리에 미치는 영향을 연구합니다</p>
-        <div class="hero-cta">
-            <a href="research.html" class="btn-primary">연구 분야 보기</a>
-            <a href="admissions.html" class="btn-ghost">대학원 진학</a>
+        <div class="hero-split">
+
+            <!-- 왼쪽: 연구실 소개 -->
+            <div class="hero-intro">
+                <span class="eyebrow">Child &amp; Adolescent Developmental Psychology Lab</span>
+                <h1 class="hero-title">아이들의 성장을<br>과학으로 탐구합니다</h1>
+                <p class="hero-sub">언어 발달, 또래 관계, 환경적 요인이 아동의 뇌와 심리에 미치는 영향을 연구합니다</p>
+                <div class="hero-cta">
+                    <a href="research.html" class="btn-primary">연구 분야 보기</a>
+                    <a href="admissions.html" class="btn-ghost">대학원 진학</a>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 사이트 전체 섹션 바로가기 (3×2 그리드) -->
+            <!-- 카드 추가/제거: .hero-nav-card 블록을 복사하거나 삭제 -->
+            <nav class="hero-nav-grid" aria-label="사이트 섹션">
+                <a href="pi.html" class="hero-nav-card">
+                    <span class="hero-nav-label">지도교수</span>
+                    <span class="hero-nav-sub">Principal Investigator</span>
+                </a>
+                <a href="research.html" class="hero-nav-card">
+                    <span class="hero-nav-label">연구분야</span>
+                    <span class="hero-nav-sub">Research Areas</span>
+                </a>
+                <a href="members.html" class="hero-nav-card">
+                    <span class="hero-nav-label">구성원</span>
+                    <span class="hero-nav-sub">Lab Members</span>
+                </a>
+                <a href="admissions.html" class="hero-nav-card">
+                    <span class="hero-nav-label">대학원 진학</span>
+                    <span class="hero-nav-sub">Graduate Admissions</span>
+                </a>
+                <a href="intern.html" class="hero-nav-card">
+                    <span class="hero-nav-label">인턴</span>
+                    <span class="hero-nav-sub">Internship</span>
+                </a>
+                <a href="notices.html" class="hero-nav-card">
+                    <span class="hero-nav-label">공지사항</span>
+                    <span class="hero-nav-sub">Announcements</span>
+                </a>
+            </nav>
+
         </div>
     </div>
 </section>
