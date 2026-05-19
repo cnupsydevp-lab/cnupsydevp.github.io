@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // prefers-reduced-motion 이면 애니메이션 전부 건너뜀
+  initDropdown();
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   initScrollReveal();
@@ -44,4 +46,38 @@ function initNavScroll() {
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 8);
   }, { passive: true });
+}
+
+function initDropdown() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (!dropdown) return;
+
+  const btn = dropdown.querySelector('.nav-dropdown-btn');
+
+  // 클릭으로 토글
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // 외부 클릭 시 닫기
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  });
+
+  // ESC 키로 닫기
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdown.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // 현재 페이지가 contact 또는 admissions이면 버튼 active
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  if (page === 'contact.html' || page === 'admissions.html') {
+    btn.classList.add('active');
+  }
 }
