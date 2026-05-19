@@ -9,38 +9,38 @@
   - 본문 다크 텍스트 색: --text-dark / --text-mid
 */
 :root {
-  /* 다크 배경색 계열 (네비, 히어로, 푸터 등에 사용) */
-  --bg:          #070E1B;   /* 전체 body 기본 배경 */
-  --bg-card:     #0C1729;   /* 카드·푸터 배경 */
-  --bg-alt:      #0A1422;   /* 사용 안 함 (section-alt는 아래 라이트 색으로 오버라이드됨) */
-  --bg-hover:    #0F1E34;   /* 호버 시 배경 */
+  /* 다크 배경색 계열 (네비, 히어로, 푸터 등에 사용) — 따뜻한 다크 */
+  --bg:          #13100D;   /* 전체 body 기본 배경 */
+  --bg-card:     #1C1814;   /* 카드·푸터 배경 */
+  --bg-alt:      #181410;   /* (section-alt는 아래 라이트 색으로 오버라이드됨) */
+  --bg-hover:    #231F1A;   /* 호버 시 배경 */
 
-  /* 포인트 컬러 (파란색 계열) */
-  --blue:        #4895EF;              /* 버튼·강조색. 바꾸고 싶으면 여기만 수정 */
-  --blue-dim:    rgba(72, 149, 239, 0.15);
-  --blue-border: rgba(72, 149, 239, 0.25);
+  /* 포인트 컬러 (파스텔 골드-옐로우) */
+  --blue:        #D4B84E;              /* 버튼·강조색. 바꾸고 싶으면 여기만 수정 */
+  --blue-dim:    rgba(212, 184, 78, 0.15);
+  --blue-border: rgba(212, 184, 78, 0.28);
 
-  /* 다크 섹션 텍스트색 */
-  --white:       #FFFFFF;
-  --off-white:   #EBF0FF;
-  --muted:       rgba(235, 240, 255, 0.45);  /* 다크 배경의 보조 텍스트 */
+  /* 다크 섹션 텍스트색 — 따뜻한 크림 */
+  --white:       #FAF7EE;
+  --off-white:   #EDE4CB;
+  --muted:       rgba(237, 228, 203, 0.45);  /* 다크 배경의 보조 텍스트 */
 
   /* 다크 섹션 테두리색 */
-  --border:      rgba(255, 255, 255, 0.07);
-  --border-md:   rgba(255, 255, 255, 0.12);
+  --border:      rgba(255, 248, 220, 0.08);
+  --border-md:   rgba(255, 248, 220, 0.14);
 
   /* 라이트 섹션 배경색 */
-  --bg-light:      #FFFFFF;   /* section-light 배경 (순백) */
-  --bg-light-card: #EEF3FF;   /* section-alt 배경 (연한 파란색). 진하게: #DDE8FF */
+  --bg-light:      #FAF7EE;   /* section-light 배경 (따뜻한 화이트) */
+  --bg-light-card: #F0E6CC;   /* section-alt 배경 (따뜻한 베이지) */
 
   /* 라이트 섹션 텍스트색 */
-  --text-dark:     #0D1B2E;   /* 라이트 섹션 제목·본문 */
-  --text-mid:      #3F516B;   /* 라이트 섹션 보조 텍스트 */
+  --text-dark:     #1A1510;   /* 라이트 섹션 제목·본문 */
+  --text-mid:      #6B5840;   /* 라이트 섹션 보조 텍스트 */
 
   --font: 'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 
   --radius: 4px;
-  --glow: 0 0 32px rgba(72, 149, 239, 0.12);
+  --glow: 0 0 32px rgba(212, 184, 78, 0.14);
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -63,7 +63,7 @@ body {
 .site-nav {
   position: sticky;
   top: 0;
-  background: rgba(7, 14, 27, 0.88);
+  background: rgba(19, 16, 13, 0.93);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -127,7 +127,7 @@ body {
   transform: translateX(-50%);
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(72,149,239,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212,184,78,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
 .eyebrow {
@@ -240,7 +240,7 @@ body {
 .btn-primary:hover {
   opacity: 0.88;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(72,149,239,0.35);
+  box-shadow: 0 4px 20px rgba(212,184,78,0.35);
 }
 .btn-ghost {
   display: inline-block;
@@ -364,8 +364,8 @@ body {
   서브페이지에서 다크로 되돌리려면 page-header-light 제거
 */
 .page-header.page-header-light {
-  background: #FFFFFF;
-  border-bottom-color: rgba(72, 149, 239, 0.15);
+  background: #FAF7EE;
+  border-bottom-color: rgba(212, 184, 78, 0.22);
 }
 .page-header.page-header-light h1 { color: var(--text-dark); }
 .page-header.page-header-light p  { color: var(--text-mid); }
@@ -403,7 +403,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 70%, rgba(72,149,239,0.06) 0%, transparent 60%);
+  background: radial-gradient(circle at 30% 70%, rgba(212,184,78,0.05) 0%, transparent 60%);
 }
 .about-visual img {
   width: 100%;
@@ -434,7 +434,7 @@ body {
   font-family: var(--font);
   font-weight: 800;
   font-size: 2.6rem;
-  color: rgba(72,149,239,0.15);
+  color: rgba(212,184,78,0.22);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
@@ -668,7 +668,7 @@ body {
   padding: 0.2rem 0.65rem;
   border-radius: 2px;
 }
-.badge-gold  { background: rgba(72,149,239,0.15); color: var(--blue); }
+.badge-gold  { background: rgba(212,184,78,0.18); color: var(--blue); }
 .badge-navy  { background: var(--blue); color: var(--white); }
 .badge-muted { background: var(--border-md); color: var(--muted); }
 
@@ -711,7 +711,7 @@ hr {
 
   예) 특정 섹션을 다크로 되돌리고 싶으면 section-light / section-alt 제거
 */
-.section-light { background: #FFFFFF; }
+.section-light { background: #FAF7EE; }
 
 /* 라이트 섹션 안에서 CSS 변수를 라이트 모드 값으로 덮어씀 */
 /* (var(--muted) 등 변수를 쓰는 모든 요소가 자동으로 어두운 텍스트로 전환됨) */
@@ -720,12 +720,12 @@ hr {
   --muted:     var(--text-mid);
   --off-white: var(--text-dark);
   --bg-card:   var(--bg-light-card);   /* 카드 배경 = 연한 파란색 */
-  --bg-hover:  rgba(72, 149, 239, 0.05);
-  --border:    rgba(72, 149, 239, 0.12);
-  --border-md: rgba(72, 149, 239, 0.18);
+  --bg-hover:  rgba(212, 184, 78, 0.07);
+  --border:    rgba(0, 0, 0, 0.09);
+  --border-md: rgba(0, 0, 0, 0.14);
 }
-/* section-alt(연한 파란색 배경)에서 카드는 흰색이어야 자연스러움 */
-.section-alt { --bg-card: #FFFFFF; }
+/* section-alt(베이지 배경)에서 카드는 따뜻한 화이트이어야 자연스러움 */
+.section-alt { --bg-card: #FAF7EE; }
 
 /* var(--white) 로 하드코딩된 흰 텍스트는 변수 오버라이드로 바꿀 수 없어서 직접 지정 */
 .section-light .section-title, .section-alt .section-title,
@@ -740,7 +740,7 @@ hr {
 /* 라이트 배경에서 ghost 버튼: 흰 텍스트가 보이지 않으므로 어둡게 */
 .section-light .btn-ghost, .section-alt .btn-ghost {
   color: var(--text-dark);
-  border-color: rgba(13, 27, 46, 0.2);
+  border-color: rgba(26, 21, 16, 0.2);
 }
 .section-light .btn-ghost:hover, .section-alt .btn-ghost:hover {
   color: var(--blue);
@@ -749,7 +749,7 @@ hr {
 }
 
 /* stats-bar는 자체 background 속성이 있어서 별도 지정 필요 */
-.stats-bar.section-light { background: #FFFFFF; }
+.stats-bar.section-light { background: #FAF7EE; }
 .stats-bar.section-alt   { background: var(--bg-light-card); }
 
 /* ── Responsive ──────────────────────────────────────────── */
