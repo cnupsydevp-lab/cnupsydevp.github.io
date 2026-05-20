@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 현재 페이지 active 네비 링크
+  // 현재 페이지 active 네비 링크 (드롭다운 안 링크 제외)
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('.nav-links > li > a').forEach(a => {
     if (a.getAttribute('href') === currentPage) a.classList.add('active');
   });
 
@@ -75,9 +75,10 @@ function initDropdown() {
     }
   });
 
-  // 현재 페이지가 contact 또는 admissions이면 버튼 active
+  // 현재 페이지가 드롭다운 하위 페이지이면 버튼 active
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  if (page === 'contact.html' || page === 'admissions.html') {
+  const dropdownPages = ['contact.html', 'admissions.html', 'intern.html'];
+  if (dropdownPages.includes(page)) {
     btn.classList.add('active');
   }
 }
