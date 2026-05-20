@@ -58,7 +58,7 @@
   --font-display: 'Manosque', 'Nanum Myeongjo', Georgia, serif;
 
   --radius: 4px;
-  --glow: 0 0 32px rgba(212, 184, 78, 0.20);
+  --glow: 0 0 32px rgba(212, 184, 78, 0.28);
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -287,20 +287,22 @@ body {
   gap: 0.65rem;
 }
 .hero-nav-card {
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid var(--border);
+  background: #FFFFFF;
+  border: 1px solid var(--border-md);
   border-radius: var(--radius);
   padding: 1.25rem 1rem;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .hero-nav-card:hover {
   border-color: var(--blue-border);
-  background: var(--blue-dim);
+  background: #FFFDF5;
   transform: translateY(-2px);
+  box-shadow: var(--glow), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .hero-nav-label {
   font-family: var(--font);
@@ -351,6 +353,7 @@ body {
   transition: border-color 0.2s, background 0.2s;
 }
 .btn-ghost:hover {
+  color: var(--blue);
   border-color: var(--blue);
   background: var(--blue-dim);
 }
@@ -358,9 +361,9 @@ body {
 /* ── Stats Bar ───────────────────────────────────────────── */
 .stats-bar {
   padding: 2.8rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-card);
+  border-top: 1px solid var(--border-md);
+  border-bottom: 1px solid var(--border-md);
+  background: #FFFFFF;
 }
 .stats-grid {
   display: grid;
@@ -423,7 +426,7 @@ body {
 .page-header {
   padding: 4rem 0 3rem;
   border-bottom: 1px solid var(--border);
-  background: var(--bg-card);
+  background: #FAF7EE;
   position: relative;
 }
 .page-header::after {
@@ -451,19 +454,6 @@ body {
   font-size: 0.95rem;
   line-height: 1.8;
 }
-
-/*
-  [페이지 헤더 배경 전환]
-  class="page-header"            → 다크 배경 (기본)
-  class="page-header page-header-light" → 흰색 배경 + 어두운 텍스트
-  서브페이지에서 다크로 되돌리려면 page-header-light 제거
-*/
-.page-header.page-header-light {
-  background: #FAF7EE;
-  border-bottom-color: rgba(212, 184, 78, 0.22);
-}
-.page-header.page-header-light h1 { color: var(--text-dark); }
-.page-header.page-header-light p  { color: var(--text-mid); }
 
 /* ── About Grid ──────────────────────────────────────────── */
 .about-grid {
@@ -498,7 +488,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 70%, rgba(212,184,78,0.05) 0%, transparent 60%);
+  background: radial-gradient(circle at 30% 70%, rgba(212,184,78,0.09) 0%, transparent 60%);
 }
 .about-visual img {
   width: 100%;
@@ -765,7 +755,7 @@ body {
 }
 .badge-gold  { background: rgba(212,184,78,0.18); color: var(--blue); }
 .badge-navy  { background: var(--blue); color: var(--white); }
-.badge-muted { background: var(--border-md); color: var(--muted); }
+.badge-muted { background: rgba(107, 88, 64, 0.10); color: var(--muted); }
 
 /* ── Divider ─────────────────────────────────────────────── */
 hr {
@@ -793,13 +783,13 @@ hr {
 
 /* ── Footer ──────────────────────────────────────────────── */
 .site-footer {
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--blue-border);
   padding: 3rem 0;
   text-align: center;
   font-size: 0.82rem;
   color: var(--muted);
   line-height: 2;
-  background: var(--bg-card);
+  background: var(--bg-light-card);
 }
 .site-footer .footer-logo {
   font-family: 'Magilio', var(--font-display);
@@ -812,57 +802,24 @@ hr {
   letter-spacing: 0.01em;
 }
 
-/* ── Light Section Themes ───────────────────────────────── */
+/* ── Section Themes ─────────────────────────────────────── */
 /*
-  [섹션 색상 전환 방법]
-  HTML에서 <section> 클래스로 배경을 제어합니다:
-
-    class="section section-light"   → 흰색 배경 + 어두운 텍스트
-    class="section section-alt"     → 연한 파란색 배경 + 어두운 텍스트
-    class="section"                 → 다크 배경 (기본 body 색)
-
-  예) 특정 섹션을 다크로 되돌리고 싶으면 section-light / section-alt 제거
+  [섹션 배경 전환]
+    class="section section-light"  → 따뜻한 크림 배경 (#FAF7EE), 흰 카드
+    class="section section-alt"    → 베이지 배경 (#F0E6CC), 크림 카드
+    class="section"                → body 기본 배경 (#FAF7EE)
 */
-.section-light { background: #FAF7EE; }
-
-/* 라이트 섹션 안에서 CSS 변수를 라이트 모드 값으로 덮어씀 */
-/* (var(--muted) 등 변수를 쓰는 모든 요소가 자동으로 어두운 텍스트로 전환됨) */
-.section-light,
-.section-alt {
-  --muted:     var(--text-mid);
-  --off-white: var(--text-dark);
-  --bg-card:   var(--bg-light-card);   /* 카드 배경 = 연한 파란색 */
-  --bg-hover:  rgba(212, 184, 78, 0.07);
+.section-light {
+  background: #FAF7EE;
+  --bg-card:   #FFFFFF;
   --border:    rgba(0, 0, 0, 0.09);
   --border-md: rgba(0, 0, 0, 0.14);
 }
-/* section-alt(베이지 배경)에서 카드는 따뜻한 화이트이어야 자연스러움 */
-.section-alt { --bg-card: #FAF7EE; }
-
-/* var(--white) 로 하드코딩된 흰 텍스트는 변수 오버라이드로 바꿀 수 없어서 직접 지정 */
-.section-light .section-title, .section-alt .section-title,
-.section-light .stat-num,      .section-alt .stat-num,
-.section-light .profile-name,  .section-alt .profile-name,
-.section-light .card h4,       .section-alt .card h4,
-.section-light .step h4,       .section-alt .step h4,
-.section-light .member-card h4,.section-alt .member-card h4 {
-  color: var(--text-dark);
+.section-alt {
+  --bg-card:   #FAF7EE;
+  --border:    rgba(0, 0, 0, 0.09);
+  --border-md: rgba(0, 0, 0, 0.14);
 }
-
-/* 라이트 배경에서 ghost 버튼: 흰 텍스트가 보이지 않으므로 어둡게 */
-.section-light .btn-ghost, .section-alt .btn-ghost {
-  color: var(--text-dark);
-  border-color: rgba(26, 21, 16, 0.2);
-}
-.section-light .btn-ghost:hover, .section-alt .btn-ghost:hover {
-  color: var(--blue);
-  border-color: var(--blue);
-  background: var(--blue-dim);
-}
-
-/* stats-bar는 자체 background 속성이 있어서 별도 지정 필요 */
-.stats-bar.section-light { background: #FAF7EE; }
-.stats-bar.section-alt   { background: var(--bg-light-card); }
 
 /* ── Animations ──────────────────────────────────────────── */
 /*
