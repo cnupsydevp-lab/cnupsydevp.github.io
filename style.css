@@ -781,25 +781,6 @@ hr {
   margin: 3rem 0;
 }
 
-/* ── Section Ornament ────────────────────────────────────── */
-.ornament {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin: 0;
-  padding: 0 2rem;
-  color: var(--blue);
-  font-size: 0.4rem;
-  letter-spacing: 0.5em;
-  user-select: none;
-}
-.ornament::before,
-.ornament::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-md);
-}
 
 /* ── Footer ──────────────────────────────────────────────── */
 .site-footer {
