@@ -213,17 +213,6 @@ body {
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(201,168,76,0.13) 0%, transparent 68%);
-  pointer-events: none;
-}
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
 .eyebrow {
   display: inline-block;
@@ -304,7 +293,7 @@ body {
   border-color: var(--blue-border);
   background: var(--blue-dim);
   transform: translateY(-2px);
-  box-shadow: var(--glow), 0 4px 12px rgba(26, 21, 16, 0.08);
+  box-shadow: 0 4px 14px rgba(26, 21, 16, 0.10);
 }
 .hero-nav-label {
   font-family: var(--font);
@@ -398,7 +387,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--blue);
+  color: var(--muted);
   margin-top: 0.55rem;
 }
 
@@ -415,8 +404,6 @@ body {
   color: var(--white);
   line-height: 1.2;
   letter-spacing: -0.01em;
-  border-left: 3px solid var(--blue);
-  padding-left: 1rem;
 }
 .section-sub {
   color: var(--muted);
@@ -488,12 +475,6 @@ body {
   position: relative;
   overflow: hidden;
 }
-.about-visual::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 70%, rgba(201,168,76,0.14) 0%, transparent 60%);
-}
 .about-visual img {
   width: 100%;
   height: 100%;
@@ -517,14 +498,14 @@ body {
 }
 .card:hover {
   border-color: var(--blue-border);
-  box-shadow: 0 6px 20px rgba(26, 21, 16, 0.10), var(--glow);
+  box-shadow: 0 8px 24px rgba(26, 21, 16, 0.11);
   transform: translateY(-3px);
 }
 .card-num {
   font-family: var(--font);
   font-weight: 800;
   font-size: 2.6rem;
-  color: rgba(201,168,76,0.55);
+  color: rgba(26, 21, 16, 0.10);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
@@ -558,7 +539,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.info-card:hover { border-color: var(--blue-border); box-shadow: var(--glow); }
+.info-card:hover { border-color: var(--blue-border); box-shadow: 0 6px 18px rgba(26, 21, 16, 0.09); }
 .info-card-icon { font-size: 1.3rem; margin-bottom: 0.75rem; }
 .info-card h4 {
   font-size: 0.72rem;
@@ -637,7 +618,7 @@ body {
   background: var(--bg-card);
   margin: 0 auto 1rem;
   display: block;
-  border: 2px solid rgba(201, 168, 76, 0.35);
+  border: 1px solid var(--border);
 }
 .member-card h4 {
   font-size: 0.95rem;
@@ -665,7 +646,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.2s, transform 0.2s;
 }
-.step:hover { box-shadow: var(--glow); transform: translateY(-2px); }
+.step:hover { box-shadow: 0 6px 18px rgba(26, 21, 16, 0.09); transform: translateY(-2px); }
 .step-num {
   font-size: 0.68rem;
   font-weight: 700;
@@ -792,12 +773,12 @@ hr {
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(201, 168, 76, 0.28);
+  background: var(--border-md);
 }
 
 /* ── Footer ──────────────────────────────────────────────── */
 .site-footer {
-  border-top: 2px solid var(--blue-border);
+  border-top: 1px solid var(--border-md);
   padding: 3rem 0;
   text-align: center;
   font-size: 0.82rem;
