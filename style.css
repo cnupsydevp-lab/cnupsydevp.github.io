@@ -1,5 +1,3 @@
-@import url('https://cdn.jsdelivr.net/gh/innks/NanumSquareNeo/css/NanumSquareNeo.min.css');
-
 @font-face {
   font-family: 'Magilio';
   src: url('fonts/Magilio-Regular.woff2') format('woff2'),
@@ -56,7 +54,7 @@
   --text-dark:     #1A1510;   /* 라이트 섹션 제목·본문 */
   --text-mid:      #6B5840;   /* 라이트 섹션 보조 텍스트 */
 
-  --font:         'NanumSquareNeo', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font:         'Manosque', sans-serif;
   --font-display: 'Manosque', 'Nanum Myeongjo', Georgia, serif;
 
   --radius: 4px;
