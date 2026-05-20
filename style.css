@@ -26,39 +26,39 @@
   - 본문 다크 텍스트 색: --text-dark / --text-mid
 */
 :root {
-  /* 다크 배경색 계열 (네비, 히어로, 푸터 등에 사용) — 따뜻한 다크 */
-  --bg:          #13100D;   /* 전체 body 기본 배경 */
-  --bg-card:     #1C1814;   /* 카드·푸터 배경 */
-  --bg-alt:      #181410;   /* (section-alt는 아래 라이트 색으로 오버라이드됨) */
-  --bg-hover:    #231F1A;   /* 호버 시 배경 */
+  /* 배경색 계열 (네비, 히어로, 푸터 등에 사용) — 따뜻한 화이트 */
+  --bg:          #FAF7EE;   /* 전체 body 기본 배경 */
+  --bg-card:     #FFFFFF;   /* 카드·푸터 배경 */
+  --bg-alt:      #F5F0E6;   /* alt 배경 */
+  --bg-hover:    rgba(212, 184, 78, 0.07);   /* 호버 시 배경 */
 
   /* 포인트 컬러 (파스텔 골드-옐로우) */
   --blue:        #D4B84E;              /* 버튼·강조색. 바꾸고 싶으면 여기만 수정 */
   --blue-dim:    rgba(212, 184, 78, 0.15);
   --blue-border: rgba(212, 184, 78, 0.28);
 
-  /* 다크 섹션 텍스트색 — 따뜻한 크림 */
-  --white:       #FAF7EE;
-  --off-white:   #EDE4CB;
-  --muted:       rgba(237, 228, 203, 0.45);  /* 다크 배경의 보조 텍스트 */
+  /* 텍스트색 — 따뜻한 다크 */
+  --white:       #1A1510;
+  --off-white:   #2C2218;
+  --muted:       #6B5840;   /* 보조 텍스트 */
 
-  /* 다크 섹션 테두리색 */
-  --border:      rgba(255, 248, 220, 0.08);
-  --border-md:   rgba(255, 248, 220, 0.14);
+  /* 테두리색 */
+  --border:      rgba(0, 0, 0, 0.08);
+  --border-md:   rgba(0, 0, 0, 0.13);
 
   /* 라이트 섹션 배경색 */
   --bg-light:      #FAF7EE;   /* section-light 배경 (따뜻한 화이트) */
   --bg-light-card: #F0E6CC;   /* section-alt 배경 (따뜻한 베이지) */
 
   /* 라이트 섹션 텍스트색 */
-  --text-dark:     #1A1510;   /* 라이트 섹션 제목·본문 */
-  --text-mid:      #6B5840;   /* 라이트 섹션 보조 텍스트 */
+  --text-dark:     #1A1510;   /* 제목·본문 */
+  --text-mid:      #6B5840;   /* 보조 텍스트 */
 
   --font:         'Manosque', sans-serif;
   --font-display: 'Manosque', 'Nanum Myeongjo', Georgia, serif;
 
   --radius: 4px;
-  --glow: 0 0 32px rgba(212, 184, 78, 0.14);
+  --glow: 0 0 32px rgba(212, 184, 78, 0.20);
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -81,7 +81,7 @@ body {
 .site-nav {
   position: sticky;
   top: 0;
-  background: rgba(19, 16, 13, 0.95);
+  background: rgba(250, 247, 238, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   /* 신문 마스트헤드 이중 룰: 굵은 골드 선 + 얇은 보조 선 */
@@ -168,11 +168,11 @@ body {
   min-width: 148px;
   list-style: none;
   padding: 0.35rem 0;
-  background: rgba(19, 16, 13, 0.97);
+  background: rgba(250, 247, 238, 0.98);
   border: 1px solid var(--border-md);
   border-top: 1.5px solid var(--blue);   /* 신문 마스트헤드 룰 */
   border-radius: var(--radius);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
   z-index: 1001;
 }
 .nav-dropdown.open .nav-dropdown-menu { display: block; }
@@ -287,7 +287,7 @@ body {
   gap: 0.65rem;
 }
 .hero-nav-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.03);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem 1rem;
@@ -529,7 +529,7 @@ body {
   font-family: var(--font);
   font-weight: 800;
   font-size: 2.6rem;
-  color: rgba(212,184,78,0.22);
+  color: rgba(212,184,78,0.38);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
@@ -910,7 +910,7 @@ hr {
     box-shadow:
       0 1px 0 0 var(--blue),
       0 3px 0 0 rgba(212, 184, 78, 0.22),
-      0 8px 28px rgba(0, 0, 0, 0.55);
+      0 8px 28px rgba(0, 0, 0, 0.08);
   }
 }
 
