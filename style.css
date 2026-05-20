@@ -74,6 +74,8 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ── Layout ─────────────────────────────────────────────── */
@@ -212,6 +214,8 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-image: radial-gradient(circle, rgba(26, 21, 16, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
 .eyebrow {
@@ -381,6 +385,16 @@ body {
   line-height: 1;
   letter-spacing: -0.01em;
 }
+.stat-num::after {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 2px;
+  background: var(--blue);
+  margin: 0.6rem auto 0;
+  border-radius: 1px;
+  opacity: 0.65;
+}
 .stat-label {
   display: block;
   font-size: 0.7rem;
@@ -411,11 +425,12 @@ body {
   margin-top: 0.6rem;
   margin-bottom: 3rem;
   font-weight: 400;
+  max-width: 52ch;
 }
 
 /* ── Page Header ─────────────────────────────────────────── */
 .page-header {
-  padding: 4rem 0 3rem;
+  padding: 5.5rem 0 4rem;
   border-bottom: 1px solid var(--border);
   background: #FAF7EE;
   position: relative;
@@ -433,10 +448,10 @@ body {
 .page-header h1 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
   color: var(--white);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 .page-header p {
   color: var(--muted);
@@ -461,7 +476,11 @@ body {
   font-weight: 400;
 }
 .about-visual {
-  background: var(--bg-card);
+  background-color: var(--bg-card);
+  background-image:
+    linear-gradient(rgba(26, 21, 16, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 21, 16, 0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   height: 380px;
@@ -469,8 +488,8 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
@@ -779,22 +798,55 @@ hr {
 /* ── Footer ──────────────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--border-md);
-  padding: 3rem 0;
-  text-align: center;
+  padding: 3.5rem 0 2rem;
+  background: var(--bg-light-card);
   font-size: 0.82rem;
   color: var(--muted);
-  line-height: 2;
-  background: var(--bg-light-card);
 }
-.site-footer .footer-logo {
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+.footer-logo {
   font-family: 'Magilio', var(--font-display);
   font-style: normal;
   font-weight: normal;
   font-size: 1.2rem;
   color: var(--white);
   display: block;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
   letter-spacing: 0.01em;
+}
+.footer-brand p {
+  line-height: 1.85;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.footer-nav a {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.18s;
+}
+.footer-nav a:hover { color: var(--blue); }
+.footer-copy {
+  font-size: 0.75rem;
+  color: rgba(107, 88, 64, 0.50);
+  text-align: center;
 }
 
 /* ── Section Themes ─────────────────────────────────────── */
@@ -889,4 +941,7 @@ hr {
   .hero-title   { font-size: 2rem; }
   /* 모바일: 빠른이동 카드 2열 */
   .hero-nav-grid { grid-template-columns: repeat(2, 1fr); }
+  /* 모바일: 푸터 1열 */
+  .footer-inner { flex-direction: column; gap: 1.5rem; }
+  .footer-nav   { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
 }
