@@ -75,10 +75,13 @@ function initDropdown() {
     }
   });
 
-  // 현재 페이지가 드롭다운 하위 페이지이면 버튼 active
+  // 현재 페이지가 드롭다운 하위 페이지이면 버튼 + 해당 링크 active
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  const dropdownPages = ['contact.html', 'admissions.html', 'intern.html'];
-  if (dropdownPages.includes(page)) {
-    btn.classList.add('active');
-  }
+  const dropdownLinks = dropdown.querySelectorAll('a');
+  dropdownLinks.forEach(a => {
+    if (a.getAttribute('href') === page) {
+      btn.classList.add('active');
+      a.classList.add('active');
+    }
+  });
 }
