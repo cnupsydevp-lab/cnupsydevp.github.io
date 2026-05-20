@@ -26,41 +26,41 @@
   - 본문 다크 텍스트 색: --text-dark / --text-mid
 */
 :root {
-  /* 배경색 계열 (네비, 히어로, 푸터 등에 사용) — 따뜻한 화이트 */
-  --bg:          #FAF7EE;   /* 전체 body 기본 배경 */
+  /* 배경색 계열 (네비, 히어로, 푸터 등에 사용) — 크린 화이트 */
+  --bg:          #F8F9FA;   /* 전체 body 기본 배경 */
   --bg-card:     #FFFFFF;   /* 카드·푸터 배경 */
-  --bg-alt:      #F5F0E6;   /* alt 배경 */
+  --bg-alt:      #F1F3F4;   /* alt 배경 */
   --bg-hover:    rgba(201, 168, 76, 0.07);   /* 호버 시 배경 */
 
   /* 포인트 컬러 (앰버 골드) */
   --blue:        #C9A84C;              /* 버튼·강조색. 바꾸고 싶으면 여기만 수정 */
   --blue-dark:   #A8893B;              /* 호버·눌림 상태 */
-  --blue-dim:    rgba(201, 168, 76, 0.14);
-  --blue-border: rgba(201, 168, 76, 0.30);
+  --blue-dim:    rgba(201, 168, 76, 0.12);
+  --blue-border: rgba(201, 168, 76, 0.28);
 
-  /* 텍스트색 — 따뜻한 다크 */
-  --white:       #1A1510;
-  --off-white:   #2C2218;
-  --muted:       #6B5840;   /* 보조 텍스트 */
+  /* 텍스트색 — 뉴트럴 다크 */
+  --white:       #141414;
+  --off-white:   #282828;
+  --muted:       #717171;   /* 보조 텍스트 */
 
   /* 테두리색 */
   --border:      rgba(0, 0, 0, 0.08);
-  --border-md:   rgba(0, 0, 0, 0.13);
+  --border-md:   rgba(0, 0, 0, 0.12);
 
   /* 라이트 섹션 배경색 */
-  --bg-light:      #FAF7EE;   /* section-light 배경 (따뜻한 화이트) */
-  --bg-light-card: #F0E6CC;   /* section-alt 배경 (따뜻한 베이지) */
+  --bg-light:      #F8F9FA;   /* section-light 배경 */
+  --bg-light-card: #EEEEEE;   /* section-alt 배경 (뉴트럴 라이트 그레이) */
 
   /* 라이트 섹션 텍스트색 */
-  --text-dark:     #1A1510;   /* 제목·본문 */
-  --text-mid:      #6B5840;   /* 보조 텍스트 */
+  --text-dark:     #141414;   /* 제목·본문 */
+  --text-mid:      #717171;   /* 보조 텍스트 */
 
   --font:         'Manosque', sans-serif;
   --font-display: 'Nanum Myeongjo', 'Manosque', Georgia, serif;
 
   --radius: 8px;
-  --shadow-sm: 0 2px 10px rgba(26, 21, 16, 0.07);
-  --glow: 0 0 28px rgba(201, 168, 76, 0.30);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.07);
+  --glow: 0 0 28px rgba(201, 168, 76, 0.28);
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -85,7 +85,7 @@ body {
 .site-nav {
   position: sticky;
   top: 0;
-  background: rgba(250, 247, 238, 0.96);
+  background: rgba(248, 249, 250, 0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   /* 신문 마스트헤드 이중 룰: 굵은 골드 선 + 얇은 보조 선 */
@@ -172,7 +172,7 @@ body {
   min-width: 148px;
   list-style: none;
   padding: 0.35rem 0;
-  background: rgba(250, 247, 238, 0.98);
+  background: rgba(248, 249, 250, 0.99);
   border: 1px solid var(--border-md);
   border-top: 1.5px solid var(--blue);   /* 신문 마스트헤드 룰 */
   border-radius: var(--radius);
@@ -214,7 +214,7 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-image: radial-gradient(circle, rgba(26, 21, 16, 0.045) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.038) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
@@ -297,7 +297,7 @@ body {
   border-color: var(--blue-border);
   background: var(--blue-dim);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(26, 21, 16, 0.10);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
 }
 .hero-nav-label {
   font-family: var(--font);
@@ -340,7 +340,7 @@ body {
   text-decoration: none;
   padding: 0.72rem 1.9rem;
   border-radius: var(--radius);
-  border: 1.5px solid rgba(26, 21, 16, 0.20);
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
   font-family: var(--font);
   font-size: 0.85rem;
   font-weight: 700;
@@ -432,7 +432,7 @@ body {
 .page-header {
   padding: 5.5rem 0 4rem;
   border-bottom: 1px solid var(--border);
-  background: #FAF7EE;
+  background: #F8F9FA;
   position: relative;
 }
 .page-header::after {
@@ -478,8 +478,8 @@ body {
 .about-visual {
   background-color: var(--bg-card);
   background-image:
-    linear-gradient(rgba(26, 21, 16, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 21, 16, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 20px 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -517,14 +517,14 @@ body {
 }
 .card:hover {
   border-color: var(--blue-border);
-  box-shadow: 0 8px 24px rgba(26, 21, 16, 0.11);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
   transform: translateY(-3px);
 }
 .card-num {
   font-family: var(--font);
   font-weight: 800;
   font-size: 2.6rem;
-  color: rgba(26, 21, 16, 0.10);
+  color: rgba(0, 0, 0, 0.09);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
@@ -558,7 +558,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.info-card:hover { border-color: var(--blue-border); box-shadow: 0 6px 18px rgba(26, 21, 16, 0.09); }
+.info-card:hover { border-color: var(--blue-border); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
 .info-card-icon { font-size: 1.3rem; margin-bottom: 0.75rem; }
 .info-card h4 {
   font-size: 0.72rem;
@@ -665,7 +665,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.2s, transform 0.2s;
 }
-.step:hover { box-shadow: 0 6px 18px rgba(26, 21, 16, 0.09); transform: translateY(-2px); }
+.step:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
 .step-num {
   font-size: 0.68rem;
   font-weight: 700;
@@ -762,7 +762,7 @@ body {
 }
 .badge-gold  { background: rgba(201,168,76,0.16); color: var(--blue); }
 .badge-navy  { background: var(--blue); color: var(--white); }
-.badge-muted { background: rgba(107, 88, 64, 0.10); color: var(--muted); }
+.badge-muted { background: rgba(0, 0, 0, 0.07); color: var(--muted); }
 
 /* ── Divider ─────────────────────────────────────────────── */
 hr {
@@ -845,27 +845,27 @@ hr {
 .footer-nav a:hover { color: var(--blue); }
 .footer-copy {
   font-size: 0.75rem;
-  color: rgba(107, 88, 64, 0.50);
+  color: rgba(0, 0, 0, 0.38);
   text-align: center;
 }
 
 /* ── Section Themes ─────────────────────────────────────── */
 /*
   [섹션 배경 전환]
-    class="section section-light"  → 따뜻한 크림 배경 (#FAF7EE), 흰 카드
-    class="section section-alt"    → 베이지 배경 (#F0E6CC), 크림 카드
-    class="section"                → body 기본 배경 (#FAF7EE)
+    class="section section-light"  → 라이트 그레이 배경 (#F8F9FA), 흰 카드
+    class="section section-alt"    → 뉴트럴 그레이 배경 (#EEEEEE), 라이트 카드
+    class="section"                → body 기본 배경 (#F8F9FA)
 */
 .section-light {
-  background: #FAF7EE;
+  background: #F8F9FA;
   --bg-card:   #FFFFFF;
   --border:    rgba(0, 0, 0, 0.09);
-  --border-md: rgba(0, 0, 0, 0.14);
+  --border-md: rgba(0, 0, 0, 0.13);
 }
 .section-alt {
-  --bg-card:   #FAF7EE;
+  --bg-card:   #F8F9FA;
   --border:    rgba(0, 0, 0, 0.09);
-  --border-md: rgba(0, 0, 0, 0.14);
+  --border-md: rgba(0, 0, 0, 0.13);
 }
 
 /* ── Animations ──────────────────────────────────────────── */
@@ -914,7 +914,7 @@ hr {
     box-shadow:
       0 1px 0 0 var(--blue),
       0 3px 0 0 rgba(201, 168, 76, 0.18),
-      0 8px 28px rgba(26, 21, 16, 0.07);
+      0 8px 28px rgba(0, 0, 0, 0.06);
   }
 }
 
