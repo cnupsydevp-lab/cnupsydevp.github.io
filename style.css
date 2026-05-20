@@ -233,7 +233,7 @@ body {
 .hero-title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: var(--white);
   line-height: 1.15;
   letter-spacing: -0.01em;
@@ -307,7 +307,7 @@ body {
   display: block;
 }
 .hero-nav-sub {
-  font-size: 0.63rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--muted);
   display: block;
@@ -448,7 +448,7 @@ body {
 .page-header h1 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+  font-size: clamp(1.9rem, 3.5vw, 2.7rem);
   color: var(--white);
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -523,7 +523,7 @@ body {
 .card-num {
   font-family: var(--font);
   font-weight: 800;
-  font-size: 2.6rem;
+  font-size: 2.2rem;
   color: rgba(28, 20, 12, 0.09);
   line-height: 1;
   margin-bottom: 1rem;
