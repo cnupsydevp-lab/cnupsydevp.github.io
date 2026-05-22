@@ -86,14 +86,11 @@ body {
 .site-nav {
   position: sticky;
   top: 0;
-  background: rgba(255, 251, 241, 0.97);
+  background: #A35F2F;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  /* 신문 마스트헤드 이중 룰: 굵은 골드 선 + 얇은 보조 선 */
   border-bottom: none;
-  box-shadow:
-    0 1px 0 0 var(--blue),
-    0 3px 0 0 rgba(163, 95, 47, 0.18);
+  box-shadow: 0 2px 16px rgba(62, 58, 57, 0.22);
   z-index: 1000;
 }
 .nav-wrapper {
@@ -109,7 +106,7 @@ body {
   font-style: normal;
   font-weight: normal;
   font-size: 1.45rem;
-  color: var(--white);
+  color: #FFFBF1;
   text-decoration: none;
   letter-spacing: 0.01em;
 }
@@ -119,7 +116,7 @@ body {
   font-family: var(--font);
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--muted);
+  color: rgba(255, 251, 241, 0.72);
   text-decoration: none;
   padding: 0.45rem 0.7rem;
   border-radius: var(--radius);
@@ -128,8 +125,8 @@ body {
 }
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--white);
-  background: var(--blue-dim);
+  color: #FFFBF1;
+  background: rgba(255, 255, 255, 0.13);
 }
 
 /* ── Dropdown Nav ────────────────────────────────────────── */
@@ -140,7 +137,7 @@ body {
   font-family: var(--font);
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--muted);
+  color: rgba(255, 251, 241, 0.72);
   background: none;
   border: none;
   cursor: pointer;
@@ -152,8 +149,8 @@ body {
 }
 .nav-dropdown-btn:hover,
 .nav-dropdown-btn.active {
-  color: var(--white);
-  background: var(--blue-dim);
+  color: #FFFBF1;
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .nav-arrow {
@@ -906,10 +903,7 @@ hr {
 
   /* 네비 스크롤 depth — JS가 .scrolled 추가 */
   .site-nav.scrolled {
-    box-shadow:
-      0 1px 0 0 var(--blue),
-      0 3px 0 0 rgba(163, 95, 47, 0.18),
-      0 8px 28px rgba(62, 58, 57, 0.06);
+    box-shadow: 0 4px 24px rgba(62, 58, 57, 0.30);
   }
 }
 
