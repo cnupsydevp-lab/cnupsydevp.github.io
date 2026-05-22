@@ -118,7 +118,7 @@ body {
   font-weight: 700;
   color: rgba(255, 251, 241, 0.72);
   text-decoration: none;
-  padding: 0.45rem 0.7rem;
+  padding: 0.45rem 0.55rem;
   border-radius: var(--radius);
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
@@ -141,7 +141,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.45rem 0.7rem;
+  padding: 0.45rem 0.55rem;
   border-radius: var(--radius);
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
@@ -266,8 +266,8 @@ body {
 */
 .hero-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 54% 46%;
+  gap: 3.5rem;
   align-items: center;
   text-align: left;
 }
@@ -527,7 +527,7 @@ body {
   font-family: var(--font);
   font-weight: 800;
   font-size: 2.2rem;
-  color: rgba(62, 58, 57, 0.09);
+  color: rgba(163, 95, 47, 0.15);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
@@ -711,6 +711,50 @@ body {
 }
 .list-block li:last-child { border-bottom: none; }
 
+/* ── Publication List ────────────────────────────────────── */
+.pub-list {
+  border-top: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+.pub-item {
+  display: grid;
+  grid-template-columns: 44px 56px 1fr;
+  gap: 0 1rem;
+  align-items: start;
+  padding: 1.4rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.pub-item:hover { background: var(--bg-hover); border-radius: var(--radius); }
+.pub-year {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--blue);
+  padding-top: 0.15rem;
+  letter-spacing: 0.01em;
+}
+.pub-meta { display: flex; flex-direction: column; gap: 0.3rem; }
+.pub-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+.pub-authors {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.pub-journal {
+  font-size: 0.8rem;
+  color: var(--blue);
+  font-style: italic;
+}
+
+/* ── Section CTA ─────────────────────────────────────────── */
+.section-cta { text-align: center; margin-top: 3rem; }
+
 /* ── Notices ─────────────────────────────────────────────── */
 .notice-list { border-top: 1px solid var(--border); }
 .notice-item {
@@ -853,7 +897,7 @@ hr {
   --border-md: rgba(62, 58, 57, 0.13);
 }
 .section-alt {
-  --bg-card:   #FFFBF1;
+  --bg-card:   #FFFFFF;
   --border:    rgba(62, 58, 57, 0.09);
   --border-md: rgba(62, 58, 57, 0.13);
 }
