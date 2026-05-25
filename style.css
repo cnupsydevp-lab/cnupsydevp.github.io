@@ -160,7 +160,8 @@ body {
   transition: transform 0.2s ease;
   vertical-align: middle;
 }
-.nav-dropdown.open .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown.open .nav-arrow,
+.nav-dropdown:hover .nav-arrow { transform: rotate(180deg); }
 
 .nav-dropdown-menu {
   display: none;
@@ -177,7 +178,8 @@ body {
   box-shadow: 0 8px 28px rgba(62, 58, 57, 0.10);
   z-index: 1001;
 }
-.nav-dropdown.open .nav-dropdown-menu { display: block; }
+.nav-dropdown.open .nav-dropdown-menu,
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
 .nav-dropdown-menu a {
   display: block;
