@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>devp Lab — 연구참여</title>
+    <title>devp Lab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
             <li><a href="members.html">구성원</a></li>
             <li><a href="research.html">연구분야</a></li>
             <li><a href="activities.html">연구활동</a></li>
-            <li><a href="participation.html" class="active">연구참여</a></li>
+            <li><a href="participation.html">연구참여</a></li>
             <li><a href="notices.html">공지사항</a></li>
             <li class="nav-dropdown">
                 <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Contact <span class="nav-arrow">▾</span></button>
@@ -36,20 +36,24 @@
 
 <div class="page-header">
     <div class="container">
-        <span class="eyebrow">Research Participation</span>
-        <h1>연구참여</h1>
-        <p>현재 모집 중인 연구 목록입니다. 관심 있는 연구를 확인하신 후 담당 연구원에게 연락해 주세요.</p>
+        <span class="eyebrow" id="post-eyebrow"></span>
+        <h1 id="post-page-title"></h1>
     </div>
 </div>
 
 <section class="section section-light">
     <div class="container">
-        <div class="notice-list">
-            <a href="post.html?page=participation&id=1" class="notice-item">
-                <span class="notice-date">2026-05-15</span>
-                <span class="badge badge-navy" style="white-space: nowrap;">모집</span>
-                <span class="notice-title">[연구 참여자 모집] 영유아 언어 발달 연구에 참여할 가정을 모십니다.</span>
-            </a>
+        <a href="#" class="post-back" id="post-back">← 목록으로</a>
+        <div class="post-article">
+            <div class="post-meta">
+                <span class="notice-date" id="post-date"></span>
+                <span class="badge" id="post-badge"></span>
+            </div>
+            <h2 class="post-title-heading" id="post-title"></h2>
+            <hr>
+            <div class="post-body" id="post-body">
+                <p style="color:var(--muted)">게시글을 불러오는 중…</p>
+            </div>
         </div>
     </div>
 </section>
@@ -74,6 +78,49 @@
     </div>
 </footer>
 
+<script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  const id = parseInt(params.get('id'), 10);
+
+  const PAGE_META = {
+    notices: { eyebrow: 'Announcements', title: '공지사항', navHref: 'notices.html' },
+    participation: { eyebrow: 'Research Participation', title: '연구참여', navHref: 'participation.html' }
+  };
+
+  const meta = PAGE_META[page];
+  if (!meta) {
+    document.getElementById('post-body').innerHTML = '<p style="color:var(--muted)">잘못된 페이지 요청입니다.</p>';
+    return;
+  }
+
+  const post = (typeof POSTS !== 'undefined') && POSTS[page] && POSTS[page].find(p => p.id === id);
+
+  document.getElementById('post-eyebrow').textContent = meta.eyebrow;
+  document.getElementById('post-page-title').textContent = meta.title;
+  document.getElementById('post-back').href = meta.navHref;
+
+  const navLink = document.querySelector(`.nav-links a[href="${meta.navHref}"]`);
+  if (navLink) navLink.classList.add('active');
+
+  if (!post) {
+    document.getElementById('post-body').innerHTML = '<p style="color:var(--muted)">게시글을 찾을 수 없습니다.</p>';
+    return;
+  }
+
+  document.title = `devp Lab — ${post.title}`;
+  document.getElementById('post-date').textContent = post.date;
+
+  const badge = document.getElementById('post-badge');
+  badge.className = `badge ${post.badge}`;
+  badge.textContent = post.badgeText;
+
+  document.getElementById('post-title').textContent = post.title;
+  document.getElementById('post-body').innerHTML = post.body;
+});
+</script>
 </body>
 </html>

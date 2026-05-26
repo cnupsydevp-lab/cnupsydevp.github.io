@@ -899,6 +899,49 @@ body {
 .badge-navy  { background: var(--white); color: #FFFFFF; }
 .badge-muted { background: rgba(62, 58, 57, 0.08); color: var(--muted); }
 
+/* ── Post Detail ─────────────────────────────────────────── */
+.post-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color 0.18s;
+}
+.post-back:hover { color: var(--blue); }
+
+.post-article { max-width: 720px; }
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.post-title-heading {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--white);
+}
+
+.post-body {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--white);
+}
+.post-body p         { margin-bottom: 1rem; }
+.post-body ul,
+.post-body ol        { margin: 0.5rem 0 1rem 1.5rem; }
+.post-body li        { margin-bottom: 0.35rem; }
+.post-body strong    { font-weight: 700; }
+.post-body a         { color: var(--blue); }
+.post-body h3        { font-size: 1rem; font-weight: 800; margin: 1.5rem 0 0.5rem; }
+
 /* ── Divider ─────────────────────────────────────────────── */
 hr {
   border: none;
