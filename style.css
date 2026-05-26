@@ -846,11 +846,25 @@ body {
   padding: 1.25rem 0.75rem;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
+  color: inherit;
   border-radius: var(--radius);
   transition: background 0.15s;
-  cursor: pointer;
 }
 .notice-item:hover { background: var(--bg-hover); }
+/* 링크형 notice-item에만 화살표 인디케이터 */
+a.notice-item::after {
+  content: '›';
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0.4;
+  flex-shrink: 0;
+  transition: opacity 0.15s, color 0.15s;
+}
+a.notice-item:hover::after {
+  color: var(--blue);
+  opacity: 1;
+}
 .notice-date {
   font-size: 0.78rem;
   color: var(--muted);
@@ -1102,4 +1116,7 @@ hr {
   /* 모바일: 푸터 1열 */
   .footer-inner { flex-direction: column; gap: 1.5rem; }
   .footer-nav   { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+  /* 모바일: 논문 목록 2열 → 세로 스택 */
+  .pub-item { grid-template-columns: 44px 1fr; }
+  .pub-item .badge { display: none; }
 }
