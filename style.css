@@ -941,21 +941,21 @@ a.notice-item:hover::after {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: rgba(255,255,255,0.08);
-  border: none;
-  color: var(--off-white);
-  width: 2rem;
-  height: 2rem;
+  background: rgba(10, 8, 5, 0.65);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  width: 2.2rem;
+  height: 2.2rem;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.15s;
-  z-index: 1;
+  z-index: 2;
 }
-.nl-modal-close:hover { background: rgba(255,255,255,0.16); }
+.nl-modal-close:hover { background: rgba(10, 8, 5, 0.88); }
 .nl-modal-img-wrap img {
   width: 100%;
   display: block;
