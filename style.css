@@ -606,13 +606,28 @@ body {
   gap: 4rem;
   align-items: start;
 }
+.profile-polaroid {
+  display: inline-block;
+  background: #f5f0e8;
+  padding: 10px 10px 32px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25);
+  transform: rotate(-3deg);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+.profile-polaroid:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 4px 10px rgba(0,0,0,0.3);
+}
 .profile-img {
   width: 100%;
-  border-radius: var(--radius);
+  border-radius: 0;
   aspect-ratio: 3/4;
   object-fit: cover;
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: none;
   display: block;
 }
 .profile-name {
