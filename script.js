@@ -14,6 +14,9 @@ const NOTIF_LATEST = {
 document.addEventListener('DOMContentLoaded', () => {
   initDropdowns();
   initNotifBadge();
+  initMobileNav();
+  initBackToTop();
+  initRipple();
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -129,4 +132,127 @@ function isUnseen(section) {
   if (!latest) return false;
   const seen = localStorage.getItem(`dpwl_seen_${section}`);
   return !seen || latest > seen;
+}
+
+function initMobileNav() {
+  const hamburger = document.getElementById('nav-hamburger');
+  if (!hamburger) return;
+
+  const siteNav = document.querySelector('.site-nav');
+  const desktopLinks = document.querySelectorAll('.nav-links > li');
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-mobile-overlay';
+  overlay.id = 'nav-mobile-overlay';
+
+  const ul = document.createElement('ul');
+  ul.className = 'nav-mobile-links';
+
+  desktopLinks.forEach(li => {
+    const mLi = document.createElement('li');
+
+    if (li.classList.contains('nav-dropdown')) {
+      const desktopBtn = li.querySelector('.nav-dropdown-btn');
+      const desktopItems = li.querySelectorAll('.nav-dropdown-menu a');
+
+      const mBtn = document.createElement('button');
+      mBtn.className = 'nav-mobile-section-btn';
+      const label = desktopBtn.childNodes[0].textContent.trim();
+      mBtn.innerHTML = `${label} <span class="nav-mobile-arrow">▾</span>`;
+
+      const mSub = document.createElement('ul');
+      mSub.className = 'nav-mobile-sub';
+
+      let childActive = false;
+      desktopItems.forEach(a => {
+        const href = a.getAttribute('href');
+        const mSubLi = document.createElement('li');
+        const mA = document.createElement('a');
+        mA.href = href;
+        mA.textContent = a.textContent.trim();
+        if (href === page) { mA.classList.add('active'); childActive = true; }
+        mA.addEventListener('click', closeMenu);
+        mSubLi.appendChild(mA);
+        mSub.appendChild(mSubLi);
+      });
+
+      if (childActive) { mBtn.classList.add('open'); mSub.classList.add('open'); }
+
+      mBtn.addEventListener('click', () => {
+        const isOpen = mBtn.classList.toggle('open');
+        mSub.classList.toggle('open', isOpen);
+      });
+
+      mLi.appendChild(mBtn);
+      mLi.appendChild(mSub);
+    } else {
+      const a = li.querySelector('a');
+      const href = a.getAttribute('href');
+      const mA = document.createElement('a');
+      mA.href = href;
+      mA.textContent = a.childNodes[0]?.textContent?.trim() || a.textContent.trim();
+      if (href === page) mA.classList.add('active');
+      mA.addEventListener('click', closeMenu);
+      mLi.appendChild(mA);
+    }
+    ul.appendChild(mLi);
+  });
+
+  overlay.appendChild(ul);
+  siteNav.appendChild(overlay);
+
+  function updateTop() {
+    overlay.style.top = siteNav.getBoundingClientRect().height + 'px';
+  }
+  updateTop();
+  window.addEventListener('resize', updateTop, { passive: true });
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    overlay.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && hamburger.classList.contains('open')) closeMenu();
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', '맨 위로');
+  btn.innerHTML = '↑';
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 320);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+function initRipple() {
+  document.querySelectorAll('.btn-primary, .btn-ghost').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      r.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px;`;
+      this.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    });
+  });
 }
