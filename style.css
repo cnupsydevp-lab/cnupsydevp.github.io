@@ -965,7 +965,7 @@ a.notice-item:hover::after {
   width: 100%;
   display: block;
   border-radius: 12px 12px 0 0;
-  max-height: 400px;
+  max-height: 200px;
   object-fit: cover;
 }
 .nl-modal-body {
