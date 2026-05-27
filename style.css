@@ -181,6 +181,16 @@ body {
 .nav-dropdown.open .nav-dropdown-menu,
 .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
+/* 버튼과 메뉴 사이 10px 틈을 invisible 영역으로 메워 hover 유지 */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
 .nav-dropdown-menu a {
   display: block;
   font-family: var(--font);
