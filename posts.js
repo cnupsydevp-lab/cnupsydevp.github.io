@@ -36,12 +36,12 @@ const POSTS = {
 
   newsletter: [
     // 소식지 추가 시 이 배열에 객체 추가
+    // image 있으면 피드에 사진 표시, 없으면 텍스트 카드 표시
     // {
     //   id: 1,
     //   date: 'YYYY-MM-DD',
-    //   badge: 'badge-gold',
-    //   badgeText: '소식지',
     //   title: '제목',
+    //   image: 'images/파일명.jpg',   // 선택 — 없으면 텍스트 카드
     //   body: `<p>내용</p>`
     // }
   ]

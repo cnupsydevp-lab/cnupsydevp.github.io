@@ -49,8 +49,8 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="notice-list" id="newsletter-list">
-            <p style="color: var(--muted); font-size: 0.9rem;">등록된 소식지가 없습니다.</p>
+        <div class="insta-grid" id="newsletter-list">
+            <p style="color: var(--muted); font-size: 0.9rem; grid-column: 1/-1;">등록된 소식지가 없습니다.</p>
         </div>
     </div>
 </section>
@@ -82,13 +82,31 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof POSTS === 'undefined' || !POSTS.newsletter?.length) return;
 
   const list = document.getElementById('newsletter-list');
-  list.innerHTML = POSTS.newsletter.map(p => `
-    <a href="post.html?page=newsletter&id=${p.id}" class="notice-item">
-      <span class="notice-date">${p.date}</span>
-      <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
-      <span class="notice-title">${p.title}</span>
-    </a>
-  `).join('');
+  list.innerHTML = POSTS.newsletter.map(p => {
+    const href = `post.html?page=newsletter&id=${p.id}`;
+    if (p.image) {
+      return `
+        <a href="${href}" class="insta-item">
+          <img src="${p.image}" alt="${p.title}">
+          <div class="insta-overlay">
+            <span class="insta-overlay-title">${p.title}</span>
+            <span class="insta-overlay-date">${p.date}</span>
+          </div>
+        </a>`;
+    } else {
+      return `
+        <a href="${href}" class="insta-item">
+          <div class="insta-text-card">
+            <span class="insta-text-date">${p.date}</span>
+            <span class="insta-text-title">${p.title}</span>
+          </div>
+          <div class="insta-overlay">
+            <span class="insta-overlay-title">${p.title}</span>
+            <span class="insta-overlay-date">${p.date}</span>
+          </div>
+        </a>`;
+    }
+  }).join('');
 });
 </script>
 </body>

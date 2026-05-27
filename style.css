@@ -909,6 +909,85 @@ a.notice-item:hover::after {
   flex: 1;
 }
 
+/* ── Instagram Feed Grid ─────────────────────────────────── */
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+.insta-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: block;
+  background: var(--bg-card);
+  border-radius: 2px;
+  text-decoration: none;
+}
+.insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+.insta-item:hover img { transform: scale(1.05); }
+.insta-text-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  background: linear-gradient(160deg, var(--bg-card) 0%, rgba(163, 95, 47, 0.08) 100%);
+  border: 1px solid var(--border);
+}
+.insta-text-date {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+.insta-text-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--off-white);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.insta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 20, 10, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.insta-item:hover .insta-overlay { opacity: 1; }
+.insta-overlay-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.insta-overlay-date {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.65);
+  margin-top: 0.5rem;
+}
+
 /* ── Map Placeholder ─────────────────────────────────────── */
 .map-placeholder {
   background-color: var(--bg-card);
@@ -1135,6 +1214,8 @@ hr {
   .hero-intro .hero-cta  { justify-content: center; }
 }
 @media (max-width: 640px) {
+  .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
+
   .nav-wrapper  { flex-direction: column; gap: 0.75rem; padding: 0.9rem 1rem; }
   .nav-links    { flex-wrap: wrap; justify-content: center; }
   .nav-links a  { font-size: 0.75rem; padding: 0.35rem 0.5rem; }
