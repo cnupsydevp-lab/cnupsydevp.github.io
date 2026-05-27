@@ -1,6 +1,6 @@
 // 새 글 추가 시 해당 섹션의 날짜를 최신 날짜로 업데이트 (null이면 알람 비활성)
 const NOTIF_LATEST = {
-  notices:       '2026-03-02',
+  notices:       '2026-05-27',
   newsletter:    null,
   activities:    null,
   participation: null
