@@ -988,7 +988,7 @@ a.notice-item:hover::after {
 /* ── Instagram Feed Grid ─────────────────────────────────── */
 .insta-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
 }
 .insta-item {
@@ -1293,7 +1293,7 @@ hr {
   .hero-intro .hero-cta  { justify-content: center; }
 }
 @media (max-width: 640px) {
-  .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 3px; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; }
 
   .nav-wrapper  { flex-direction: column; gap: 0.75rem; padding: 0.9rem 1rem; }
   .nav-links    { flex-wrap: wrap; justify-content: center; }
