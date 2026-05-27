@@ -7,7 +7,7 @@ function _latestDate(arr) {
 const NOTIF_LATEST = {
   notices:       _latestDate(typeof POSTS !== 'undefined' ? POSTS.notices       : null),
   newsletter:    _latestDate(typeof POSTS !== 'undefined' ? POSTS.newsletter    : null),
-  activities:    null,
+  activities:    _latestDate(typeof POSTS !== 'undefined' ? POSTS.activities    : null),
   participation: _latestDate(typeof POSTS !== 'undefined' ? POSTS.participation : null),
 };
 

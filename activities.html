@@ -49,53 +49,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Publications</span>
         <h2 class="section-title">논문</h2>
-        <div class="pub-list">
-            <div class="pub-item">
-                <span class="pub-year">2025</span>
-                <span class="badge badge-navy">SSCI</span>
-                <div class="pub-meta">
-                    <span class="pub-title">Longitudinal links between emotional regulation in infancy and resilience in adolescence</span>
-                    <span class="pub-authors">Noh, S. R., et al.</span>
-                    <span class="pub-journal">Developmental Psychology, 61(2), 301–318</span>
-                </div>
-            </div>
-            <div class="pub-item">
-                <span class="pub-year">2024</span>
-                <span class="badge badge-navy">SSCI</span>
-                <div class="pub-meta">
-                    <span class="pub-title">Peer relationship quality and social competence in early childhood: A longitudinal study</span>
-                    <span class="pub-authors">Kim, J., & Noh, S. R.</span>
-                    <span class="pub-journal">Child Development, 95(4), 1102–1119</span>
-                </div>
-            </div>
-            <div class="pub-item">
-                <span class="pub-year">2023</span>
-                <span class="badge badge-navy">SSCI</span>
-                <div class="pub-meta">
-                    <span class="pub-title">Screen time and executive function in preschool-aged children: A meta-analytic review</span>
-                    <span class="pub-authors">Noh, S. R., & Park, H.</span>
-                    <span class="pub-journal">Psychological Bulletin, 149(7), 512–540</span>
-                </div>
-            </div>
-            <div class="pub-item">
-                <span class="pub-year">2023</span>
-                <span class="badge badge-gold">KCI</span>
-                <div class="pub-meta">
-                    <span class="pub-title">팬데믹 전후 영유아 언어 발달 패턴 변화</span>
-                    <span class="pub-authors">노수림, 이발달</span>
-                    <span class="pub-journal">한국심리학회지: 발달, 36(1), 45–68</span>
-                </div>
-            </div>
-            <div class="pub-item">
-                <span class="pub-year">2022</span>
-                <span class="badge badge-navy">SSCI</span>
-                <div class="pub-meta">
-                    <span class="pub-title">Environmental influences on language acquisition in bilingual toddlers</span>
-                    <span class="pub-authors">Noh, S. R., et al.</span>
-                    <span class="pub-journal">Journal of Child Language, 49(5), 978–999</span>
-                </div>
-            </div>
-        </div>
+        <div class="pub-list" id="pub-list"></div>
     </div>
 </section>
 
@@ -103,28 +57,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Presentations</span>
         <h2 class="section-title">학술발표</h2>
-        <div class="notice-list" style="margin-top: 1.5rem;">
-            <div class="notice-item">
-                <span class="notice-date">2025</span>
-                <span class="badge badge-muted" style="white-space: nowrap;">국제</span>
-                <span class="notice-title">SRCD Biennial Meeting — "Resilience trajectories across adolescence: A 10-year longitudinal study" (구두 발표, Washington D.C.)</span>
-            </div>
-            <div class="notice-item">
-                <span class="notice-date">2025</span>
-                <span class="badge badge-muted" style="white-space: nowrap;">국내</span>
-                <span class="notice-title">한국발달심리학회 연차학술대회 — 영유아 언어 발달과 디지털 미디어 노출의 상호작용 (포스터, 서울)</span>
-            </div>
-            <div class="notice-item">
-                <span class="notice-date">2024</span>
-                <span class="badge badge-muted" style="white-space: nowrap;">국제</span>
-                <span class="notice-title">ISSBD 28th Biennial Meeting — "Executive function development and digital media use in Korean preschoolers" (포스터, Lisbon)</span>
-            </div>
-            <div class="notice-item">
-                <span class="notice-date">2024</span>
-                <span class="badge badge-muted" style="white-space: nowrap;">국내</span>
-                <span class="notice-title">한국심리학회 연차학술대회 — 팬데믹 전후 영유아 사회·정서 발달 비교 (구두 발표, 부산)</span>
-            </div>
-        </div>
+        <div class="notice-list" id="pres-list" style="margin-top: 1.5rem;"></div>
     </div>
 </section>
 
@@ -132,20 +65,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Grants</span>
         <h2 class="section-title">연구과제</h2>
-        <div class="info-grid" style="margin-top: 1.5rem;">
-            <div class="info-card">
-                <h4>현재 진행</h4>
-                <p>한국연구재단 일반연구자지원사업<br>영유아 언어·사회성 발달의 디지털 환경 영향 종단 연구<br><span style="font-size: 0.78rem; color: var(--muted);">2024–2027</span></p>
-            </div>
-            <div class="info-card">
-                <h4>현재 진행</h4>
-                <p>BK21 미래인재육성사업<br>아동·청소년 발달심리 인재 양성<br><span style="font-size: 0.78rem; color: var(--muted);">2023–2027</span></p>
-            </div>
-            <div class="info-card">
-                <h4>완료</h4>
-                <p>한국연구재단 신진연구자지원사업<br>팬데믹 전후 영유아 발달 패턴 비교 연구<br><span style="font-size: 0.78rem; color: var(--muted);">2021–2023</span></p>
-            </div>
-        </div>
+        <div class="info-grid" id="grant-grid" style="margin-top: 1.5rem;"></div>
     </div>
 </section>
 
@@ -169,6 +89,43 @@
     </div>
 </footer>
 
+<script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof POSTS === 'undefined' || !POSTS.activities?.length) return;
+
+  const pubs   = POSTS.activities.filter(p => p.type === 'publication');
+  const pres   = POSTS.activities.filter(p => p.type === 'presentation');
+  const grants = POSTS.activities.filter(p => p.type === 'grant');
+
+  const pubList = document.getElementById('pub-list');
+  if (pubList) pubList.innerHTML = pubs.map(p => `
+    <div class="pub-item">
+      <span class="pub-year">${p.year}</span>
+      <span class="badge ${p.badge}">${p.badgeText}</span>
+      <div class="pub-meta">
+        <span class="pub-title">${p.title}</span>
+        <span class="pub-authors">${p.authors}</span>
+        <span class="pub-journal">${p.journal}</span>
+      </div>
+    </div>`).join('');
+
+  const presList = document.getElementById('pres-list');
+  if (presList) presList.innerHTML = pres.map(p => `
+    <div class="notice-item">
+      <span class="notice-date">${p.year}</span>
+      <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
+      <span class="notice-title">${p.title}</span>
+    </div>`).join('');
+
+  const grantGrid = document.getElementById('grant-grid');
+  if (grantGrid) grantGrid.innerHTML = grants.map(g => `
+    <div class="info-card">
+      <h4>${g.status}</h4>
+      <p>${g.title}<br>${g.description}<br><span style="font-size:0.78rem;color:var(--muted);">${g.period}</span></p>
+    </div>`).join('');
+});
+</script>
 </body>
 </html>
