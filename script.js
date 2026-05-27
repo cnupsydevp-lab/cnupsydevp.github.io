@@ -200,7 +200,7 @@ function initMobileNav() {
   });
 
   overlay.appendChild(ul);
-  siteNav.appendChild(overlay);
+  document.body.appendChild(overlay);
 
   function updateTop() {
     overlay.style.top = siteNav.getBoundingClientRect().height + 'px';
