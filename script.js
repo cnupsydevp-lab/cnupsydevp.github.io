@@ -1,7 +1,9 @@
-// 새 공지·소식지 추가 시 해당 날짜를 최신 날짜로 업데이트
+// 새 글 추가 시 해당 섹션의 날짜를 최신 날짜로 업데이트 (null이면 알람 비활성)
 const NOTIF_LATEST = {
-  notices: '2026-03-02',
-  newsletter: null
+  notices:       '2026-03-02',
+  newsletter:    null,
+  activities:    null,
+  participation: null
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,17 +102,21 @@ function initNotifBadge() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
 
   // 해당 목록 페이지 방문 시 읽음 처리
-  if (page === 'notices.html' && NOTIF_LATEST.notices) {
-    localStorage.setItem('dpwl_seen_notices', NOTIF_LATEST.notices);
-  }
-  if (page === 'newsletter.html' && NOTIF_LATEST.newsletter) {
-    localStorage.setItem('dpwl_seen_newsletter', NOTIF_LATEST.newsletter);
+  const markSeen = { 'notices.html': 'notices', 'newsletter.html': 'newsletter',
+                     'activities.html': 'activities', 'participation.html': 'participation' };
+  const section = markSeen[page];
+  if (section && NOTIF_LATEST[section]) {
+    localStorage.setItem(`dpwl_seen_${section}`, NOTIF_LATEST[section]);
   }
 
-  const hasNew = isUnseen('notices') || isUnseen('newsletter');
+  // 공지사항 드롭다운 도트 (notices + newsletter)
+  const noticeDot = document.querySelector('.nav-notif-dot:not([data-notif])');
+  if (noticeDot) noticeDot.hidden = !(isUnseen('notices') || isUnseen('newsletter'));
 
-  const dot = document.querySelector('.nav-notif-dot');
-  if (dot) dot.hidden = !hasNew;
+  // 연구활동 / 연구참여 개별 도트
+  document.querySelectorAll('.nav-notif-dot[data-notif]').forEach(dot => {
+    dot.hidden = !isUnseen(dot.dataset.notif);
+  });
 }
 
 function isUnseen(section) {
