@@ -58,6 +58,13 @@ const POSTS = {
       title: 'Health & Society 학술대회 포스터 발표',
       image: 'images/HealthSociety_Seungcheol.jpeg',
       body: `<p>승철 연구원이 Health &amp; Society 학술대회에서 포스터 발표를 진행했습니다.</p>`
+    },
+    {
+      id: 2,
+      date: '2026-05-20',
+      title: '연구실 신입 구성원 소개',
+      image: 'images/Seungcheol.jpeg',
+      body: `<p>새로운 연구실 구성원을 소개합니다.</p>`
     }
   ]
 
