@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPWL — 연구실 인턴</title>
+    <title>DPWL — 소식지</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -42,56 +42,15 @@
 
 <div class="page-header">
     <div class="container">
-        <span class="eyebrow">Undergraduate Internship</span>
-        <h1>연구실 인턴</h1>
-        <p>발달심리학에 관심 있는 학부생 인턴을 학기 단위로 모집합니다.<br>실제 연구 과정을 경험하고 대학원 진학 여부를 탐색할 수 있습니다.</p>
+        <span class="eyebrow">Newsletter</span>
+        <h1>소식지</h1>
     </div>
 </div>
 
 <section class="section section-light">
     <div class="container">
-        <span class="eyebrow section-eyebrow">Activities</span>
-        <h2 class="section-title">활동 내용</h2>
-        <div class="card-grid" style="margin-top: 1.5rem;">
-            <div class="card">
-                <h4>연구 보조</h4>
-                <p>실험 참여자 모집, 데이터 수집, 코딩 보조 등 연구 전반의 실무 경험</p>
-            </div>
-            <div class="card">
-                <h4>문헌 정리</h4>
-                <p>최신 발달심리 논문 리뷰 및 요약, 연구 주제 관련 문헌 조사</p>
-            </div>
-            <div class="card">
-                <h4>세미나 참여</h4>
-                <p>주간 랩 세미나 및 저널 클럽 참여를 통한 연구 토론 경험</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-alt">
-    <div class="container">
-        <span class="eyebrow section-eyebrow">Requirements</span>
-        <h2 class="section-title">지원 자격</h2>
-        <div class="list-block" style="margin-top: 1.5rem;">
-            <ul>
-                <li>충남대학교 재학생 (전공 무관, 심리학 관련 수강 경험 우대)</li>
-                <li>주당 최소 8시간 이상 참여 가능한 자</li>
-                <li>학기 중 1학기 이상 참여 약속 가능한 자</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section class="section section-light">
-    <div class="container">
-        <span class="eyebrow section-eyebrow">How to Apply</span>
-        <h2 class="section-title">지원 방법</h2>
-        <div class="list-block" style="margin-top: 1.5rem;">
-            <ul>
-                <li>지원서(자유 양식) 및 간단한 자기소개를 <a href="mailto:cdplab@cnu.ac.kr" style="color: var(--blue);">cdplab@cnu.ac.kr</a> 로 발송</li>
-                <li>이메일 제목 형식: <strong>[인턴 지원] 이름_학번</strong></li>
-            </ul>
+        <div class="notice-list" id="newsletter-list">
+            <p style="color: var(--muted); font-size: 0.9rem;">등록된 소식지가 없습니다.</p>
         </div>
     </div>
 </section>
@@ -116,6 +75,21 @@
     </div>
 </footer>
 
+<script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof POSTS === 'undefined' || !POSTS.newsletter?.length) return;
+
+  const list = document.getElementById('newsletter-list');
+  list.innerHTML = POSTS.newsletter.map(p => `
+    <a href="post.html?page=newsletter&id=${p.id}" class="notice-item">
+      <span class="notice-date">${p.date}</span>
+      <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
+      <span class="notice-title">${p.title}</span>
+    </a>
+  `).join('');
+});
+</script>
 </body>
 </html>

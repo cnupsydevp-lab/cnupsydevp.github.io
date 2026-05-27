@@ -198,6 +198,18 @@ body {
   background: var(--blue-dim);
 }
 
+.nav-notif-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #e03e3e;
+  border-radius: 50%;
+  vertical-align: super;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+.nav-notif-dot[hidden] { display: none; }
+
 /* ── Gradient Divider ───────────────────────────────────── */
 /* 신문 룰: 중앙은 골드로 선명하게, 양끝은 fade */
 .grad-line {

@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // 현재 페이지 active 네비 링크 (드롭다운 안 링크 제외)
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links > li > a').forEach(a => {
-    if (a.getAttribute('href') === currentPage) a.classList.add('active');
-  });
+// 새 공지·소식지 추가 시 해당 날짜를 최신 날짜로 업데이트
+const NOTIF_LATEST = {
+  notices: '2026-03-02',
+  newsletter: null
+};
 
-  // prefers-reduced-motion 이면 애니메이션 전부 건너뜀
-  initDropdown();
+document.addEventListener('DOMContentLoaded', () => {
+  initDropdowns();
+  initNotifBadge();
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -15,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initScrollReveal() {
-  // 그리드 컨테이너에 stagger 클래스 — CSS transition-delay로 순차 표시
   document.querySelectorAll('.card-grid, .steps-grid, .info-grid, .member-grid, .stats-grid, .notice-list')
     .forEach(g => g.classList.add('stagger'));
 
-  // 뷰포트 진입 시 reveal 처리할 대상들
   const targets = document.querySelectorAll(
     '.card, .step, .info-card, .member-card, .notice-item, ' +
     '.list-block, .about-visual, .map-placeholder, .ornament, ' +
@@ -48,40 +46,76 @@ function initNavScroll() {
   }, { passive: true });
 }
 
-function initDropdown() {
-  const dropdown = document.querySelector('.nav-dropdown');
-  if (!dropdown) return;
+function initDropdowns() {
+  const dropdowns = document.querySelectorAll('.nav-dropdown');
+  if (!dropdowns.length) return;
 
-  const btn = dropdown.querySelector('.nav-dropdown-btn');
+  const page = window.location.pathname.split('/').pop() || 'index.html';
 
-  // 클릭으로 토글
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = dropdown.classList.toggle('open');
-    btn.setAttribute('aria-expanded', String(isOpen));
+  dropdowns.forEach(dropdown => {
+    const btn = dropdown.querySelector('.nav-dropdown-btn');
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // 다른 드롭다운 닫기
+      dropdowns.forEach(d => {
+        if (d !== dropdown) {
+          d.classList.remove('open');
+          d.querySelector('.nav-dropdown-btn').setAttribute('aria-expanded', 'false');
+        }
+      });
+      const isOpen = dropdown.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // 현재 페이지가 드롭다운 하위 페이지이면 버튼 + 해당 링크 active
+    dropdown.querySelectorAll('a').forEach(a => {
+      if (a.getAttribute('href') === page) {
+        btn.classList.add('active');
+        a.classList.add('active');
+      }
+    });
   });
 
-  // 외부 클릭 시 닫기
+  // 외부 클릭 시 모두 닫기
   document.addEventListener('click', () => {
-    dropdown.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
+    dropdowns.forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-btn').setAttribute('aria-expanded', 'false');
+    });
   });
 
-  // ESC 키로 닫기
+  // ESC 키로 모두 닫기
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      dropdown.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
+      dropdowns.forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-btn').setAttribute('aria-expanded', 'false');
+      });
     }
   });
+}
 
-  // 현재 페이지가 드롭다운 하위 페이지이면 버튼 + 해당 링크 active
+function initNotifBadge() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  const dropdownLinks = dropdown.querySelectorAll('a');
-  dropdownLinks.forEach(a => {
-    if (a.getAttribute('href') === page) {
-      btn.classList.add('active');
-      a.classList.add('active');
-    }
-  });
+
+  // 해당 목록 페이지 방문 시 읽음 처리
+  if (page === 'notices.html' && NOTIF_LATEST.notices) {
+    localStorage.setItem('dpwl_seen_notices', NOTIF_LATEST.notices);
+  }
+  if (page === 'newsletter.html' && NOTIF_LATEST.newsletter) {
+    localStorage.setItem('dpwl_seen_newsletter', NOTIF_LATEST.newsletter);
+  }
+
+  const hasNew = isUnseen('notices') || isUnseen('newsletter');
+
+  const dot = document.querySelector('.nav-notif-dot');
+  if (dot) dot.hidden = !hasNew;
+}
+
+function isUnseen(section) {
+  const latest = NOTIF_LATEST[section];
+  if (!latest) return false;
+  const seen = localStorage.getItem(`dpwl_seen_${section}`);
+  return !seen || latest > seen;
 }
