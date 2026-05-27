@@ -1,9 +1,14 @@
-// 새 글 추가 시 해당 섹션의 날짜를 최신 날짜로 업데이트 (null이면 알람 비활성)
+// posts.js의 데이터에서 각 섹션의 최신 날짜를 자동으로 가져옴
+// activities는 posts.js에 없으므로 수동 관리 (null이면 비활성)
+function _latestDate(arr) {
+  if (!arr?.length) return null;
+  return arr.reduce((max, p) => (p.date > max ? p.date : max), '');
+}
 const NOTIF_LATEST = {
-  notices:       '2026-05-27',
-  newsletter:    null,
+  notices:       _latestDate(typeof POSTS !== 'undefined' ? POSTS.notices       : null),
+  newsletter:    _latestDate(typeof POSTS !== 'undefined' ? POSTS.newsletter    : null),
   activities:    null,
-  participation: null
+  participation: _latestDate(typeof POSTS !== 'undefined' ? POSTS.participation : null),
 };
 
 document.addEventListener('DOMContentLoaded', () => {
