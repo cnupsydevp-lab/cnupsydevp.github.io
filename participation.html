@@ -47,12 +47,8 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="notice-list">
-            <a href="post.html?page=participation&id=1" class="notice-item">
-                <span class="notice-date">2026-05-15</span>
-                <span class="badge badge-navy" style="white-space: nowrap;">모집</span>
-                <span class="notice-title">[연구 참여자 모집] 영유아 언어 발달 연구에 참여할 가정을 모십니다.</span>
-            </a>
+        <div class="notice-list" id="participation-list">
+            <p style="color: var(--muted); font-size: 0.9rem; padding: 2rem 0;">현재 모집 중인 연구가 없습니다.</p>
         </div>
     </div>
 </section>
@@ -62,7 +58,7 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <span class="footer-logo">DPWL</span>
-                <p>충남대학교 심리학과<br>아동발달심리 연구실<br>대전광역시 유성구 대학로 99</p>
+                <p>충남대학교 심리학과<br>아동발달심리 연구실<br>대전광역시 유성구 대학로 99<br>공동실험실습관(W9) 208호</p>
             </div>
             <nav class="footer-nav" aria-label="바로가기">
                 <a href="pi.html">지도교수</a>
@@ -77,6 +73,20 @@
     </div>
 </footer>
 
+<script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const list = document.getElementById('participation-list');
+  if (typeof POSTS === 'undefined' || !POSTS.participation?.length) return;
+  list.innerHTML = POSTS.participation.map(p => `
+    <a href="post.html?page=participation&id=${p.id}" class="notice-item">
+      <span class="notice-date">${p.date}</span>
+      <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
+      <span class="notice-title">${p.title}</span>
+    </a>
+  `).join('');
+});
+</script>
 </body>
 </html>
