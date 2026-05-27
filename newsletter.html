@@ -55,6 +55,20 @@
     </div>
 </section>
 
+<!-- 소식지 모달 -->
+<div class="nl-modal" id="nl-modal" hidden aria-modal="true" role="dialog">
+    <div class="nl-modal-backdrop" id="nl-modal-backdrop"></div>
+    <div class="nl-modal-box">
+        <button class="nl-modal-close" id="nl-modal-close" aria-label="닫기">✕</button>
+        <div class="nl-modal-img-wrap" id="nl-modal-img-wrap"></div>
+        <div class="nl-modal-body">
+            <p class="nl-modal-date" id="nl-modal-date"></p>
+            <h2 class="nl-modal-title" id="nl-modal-title"></h2>
+            <div class="nl-modal-content" id="nl-modal-content"></div>
+        </div>
+    </div>
+</div>
+
 <footer class="site-footer">
     <div class="container">
         <div class="footer-inner">
@@ -83,19 +97,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const list = document.getElementById('newsletter-list');
   list.innerHTML = POSTS.newsletter.map(p => {
-    const href = `post.html?page=newsletter&id=${p.id}`;
     if (p.image) {
       return `
-        <a href="${href}" class="insta-item">
+        <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">
           <img src="${p.image}" alt="${p.title}">
           <div class="insta-overlay">
             <span class="insta-overlay-title">${p.title}</span>
             <span class="insta-overlay-date">${p.date}</span>
           </div>
-        </a>`;
+        </button>`;
     } else {
       return `
-        <a href="${href}" class="insta-item">
+        <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">
           <div class="insta-text-card">
             <span class="insta-text-date">${p.date}</span>
             <span class="insta-text-title">${p.title}</span>
@@ -104,9 +117,44 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="insta-overlay-title">${p.title}</span>
             <span class="insta-overlay-date">${p.date}</span>
           </div>
-        </a>`;
+        </button>`;
     }
   }).join('');
+
+  // 모달
+  const modal    = document.getElementById('nl-modal');
+  const backdrop = document.getElementById('nl-modal-backdrop');
+  const closeBtn = document.getElementById('nl-modal-close');
+
+  function openModal(p) {
+    document.getElementById('nl-modal-date').textContent = p.date;
+    document.getElementById('nl-modal-title').textContent = p.title;
+    document.getElementById('nl-modal-content').innerHTML = p.body || '';
+    const imgWrap = document.getElementById('nl-modal-img-wrap');
+    imgWrap.innerHTML = p.image
+      ? `<img src="${p.image}" alt="${p.title}">`
+      : '';
+    imgWrap.hidden = !p.image;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('[data-id]');
+    if (!btn) return;
+    const p = POSTS.newsletter.find(x => x.id === +btn.dataset.id);
+    if (p) openModal(p);
+  });
+
+  backdrop.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 });
 </script>
 </body>

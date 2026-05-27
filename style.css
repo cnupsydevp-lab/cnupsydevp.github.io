@@ -909,6 +909,82 @@ a.notice-item:hover::after {
   flex: 1;
 }
 
+/* ── Newsletter Modal ────────────────────────────────────── */
+.nl-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.nl-modal[hidden] { display: none; }
+.nl-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 5, 0.72);
+  backdrop-filter: blur(4px);
+}
+.nl-modal-box {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius);
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+}
+.nl-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: var(--off-white);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  z-index: 1;
+}
+.nl-modal-close:hover { background: rgba(255,255,255,0.16); }
+.nl-modal-img-wrap img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius) var(--radius) 0 0;
+  max-height: 420px;
+  object-fit: cover;
+}
+.nl-modal-body {
+  padding: 1.5rem 1.75rem 2rem;
+}
+.nl-modal-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.nl-modal-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--off-white);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.nl-modal-content {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
 /* ── Instagram Feed Grid ─────────────────────────────────── */
 .insta-grid {
   display: grid;
@@ -923,6 +999,9 @@ a.notice-item:hover::after {
   background: var(--bg-card);
   border-radius: 2px;
   text-decoration: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 .insta-item img {
   width: 100%;

@@ -46,12 +46,19 @@ const POSTS = {
     // 소식지 추가 시 이 배열에 객체 추가
     // image 있으면 피드에 사진 표시, 없으면 텍스트 카드 표시
     // {
-    //   id: 1,
+    //   id: 2,
     //   date: 'YYYY-MM-DD',
     //   title: '제목',
     //   image: 'images/파일명.jpg',   // 선택 — 없으면 텍스트 카드
     //   body: `<p>내용</p>`
     // }
+    {
+      id: 1,
+      date: '2026-05-27',
+      title: 'Health & Society 학술대회 포스터 발표',
+      image: 'images/HealthSociety_Seungcheol.jpeg',
+      body: `<p>승철 연구원이 Health &amp; Society 학술대회에서 포스터 발표를 진행했습니다.</p>`
+    }
   ]
 
 };
