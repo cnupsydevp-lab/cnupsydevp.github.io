@@ -923,66 +923,73 @@ a.notice-item:hover::after {
 .nl-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(10, 8, 5, 0.72);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
 }
 .nl-modal-box {
   position: relative;
   background: var(--bg-card);
-  border: 1px solid var(--border-md);
-  border-radius: var(--radius);
-  max-width: 560px;
+  border-radius: 12px;
+  max-width: 480px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 88vh;
   overflow-y: auto;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 .nl-modal-close {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: rgba(10, 8, 5, 0.65);
-  border: 1px solid rgba(255,255,255,0.2);
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
   color: #fff;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.15s;
   z-index: 2;
 }
-.nl-modal-close:hover { background: rgba(10, 8, 5, 0.88); }
+.nl-modal-close:hover { background: rgba(0, 0, 0, 0.7); }
 .nl-modal-img-wrap img {
   width: 100%;
   display: block;
-  border-radius: var(--radius) var(--radius) 0 0;
-  max-height: 420px;
+  border-radius: 12px 12px 0 0;
+  max-height: 400px;
   object-fit: cover;
 }
 .nl-modal-body {
-  padding: 1.5rem 1.75rem 2rem;
+  padding: 1.75rem 2rem 2.25rem;
 }
 .nl-modal-date {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--muted);
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
 }
 .nl-modal-title {
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--off-white);
-  line-height: 1.4;
-  margin-bottom: 1rem;
+  line-height: 1.45;
+  margin-bottom: 1.1rem;
 }
 .nl-modal-content {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 /* ── Instagram Feed Grid ─────────────────────────────────── */
@@ -997,74 +1004,46 @@ a.notice-item:hover::after {
   overflow: hidden;
   display: block;
   background: var(--bg-card);
-  border-radius: 2px;
-  text-decoration: none;
+  border-radius: 4px;
   border: none;
   padding: 0;
   cursor: pointer;
+  transition: opacity 0.2s ease;
 }
+.insta-item:hover { opacity: 0.88; }
 .insta-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.35s ease;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.insta-item:hover img { transform: scale(1.05); }
+.insta-item:hover img { transform: scale(1.03); }
 .insta-text-card {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
-  background: linear-gradient(160deg, var(--bg-card) 0%, rgba(163, 95, 47, 0.08) 100%);
-  border: 1px solid var(--border);
+  justify-content: center;
+  padding: 1.1rem;
+  gap: 0.35rem;
 }
 .insta-text-date {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--muted);
-  margin-bottom: 0.4rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .insta-text-title {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--off-white);
   line-height: 1.45;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.insta-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(30, 20, 10, 0.55);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-.insta-item:hover .insta-overlay { opacity: 1; }
-.insta-overlay-title {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #fff;
-  text-align: center;
-  line-height: 1.5;
-  display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-.insta-overlay-date {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.65);
-  margin-top: 0.5rem;
 }
 
 /* ── Map Placeholder ─────────────────────────────────────── */

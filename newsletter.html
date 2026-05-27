@@ -101,10 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">
           <img src="${p.image}" alt="${p.title}">
-          <div class="insta-overlay">
-            <span class="insta-overlay-title">${p.title}</span>
-            <span class="insta-overlay-date">${p.date}</span>
-          </div>
         </button>`;
     } else {
       return `
@@ -112,10 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="insta-text-card">
             <span class="insta-text-date">${p.date}</span>
             <span class="insta-text-title">${p.title}</span>
-          </div>
-          <div class="insta-overlay">
-            <span class="insta-overlay-title">${p.title}</span>
-            <span class="insta-overlay-date">${p.date}</span>
           </div>
         </button>`;
     }
