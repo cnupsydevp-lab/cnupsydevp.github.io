@@ -1012,7 +1012,7 @@ a.notice-item:hover::after {
 /* ── Instagram Feed Grid ─────────────────────────────────── */
 .insta-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 4px;
 }
 .insta-item {
@@ -1474,7 +1474,7 @@ html { scroll-behavior: smooth; }
   .container { padding: 0 1.5rem; }
 }
 @media (max-width: 640px) {
-  .insta-grid { gap: 3px; }
+  .insta-grid { gap: 3px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 
   .nav-wrapper  { padding: 0.9rem 1.25rem; }
   .container    { padding: 0 1.25rem; }
