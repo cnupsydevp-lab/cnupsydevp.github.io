@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof POSTS === 'undefined' || !POSTS.newsletter?.length) return;
 
   const list = document.getElementById('newsletter-list');
-  list.innerHTML = POSTS.newsletter.map(p => {
+  list.innerHTML = [...POSTS.newsletter].sort((a, b) => b.date.localeCompare(a.date)).map(p => {
     if (p.image) {
       return `
         <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">

@@ -109,7 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('post-back').href = meta.navHref;
 
   const navLink = document.querySelector(`.nav-links a[href="${meta.navHref}"]`);
-  if (navLink) navLink.classList.add('active');
+  if (navLink) {
+    navLink.classList.add('active');
+    const parentDropdown = navLink.closest('.nav-dropdown');
+    if (parentDropdown) parentDropdown.querySelector('.nav-dropdown-btn').classList.add('active');
+  }
 
   if (!post) {
     document.getElementById('post-body').innerHTML = '<p style="color:var(--muted)">게시글을 찾을 수 없습니다.</p>';

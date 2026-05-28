@@ -80,7 +80,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const list = document.getElementById('participation-list');
   if (typeof POSTS === 'undefined' || !POSTS.participation?.length) return;
-  list.innerHTML = POSTS.participation.map(p => `
+  list.innerHTML = [...POSTS.participation].sort((a, b) => b.date.localeCompare(a.date)).map(p => `
     <a href="post.html?page=participation&id=${p.id}" class="notice-item">
       <span class="notice-date">${p.date}</span>
       <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
