@@ -42,54 +42,46 @@
     <div class="container">
         <span class="eyebrow">Undergraduate Internship</span>
         <h1>연구실 인턴</h1>
-        <p>발달심리학에 관심 있는 학부생 인턴을 학기 단위로 모집합니다.<br>실제 연구 과정을 경험하고 대학원 진학 여부를 탐색할 수 있습니다.</p>
+        <p>발달심리학에 관심 있는 학부생 인턴을 학기 단위로 모집합니다.<br>아래 양식으로 지원 문의를 남겨 주시면 검토 후 회신 드리겠습니다.</p>
     </div>
 </div>
 
 <section class="section section-light">
     <div class="container">
-        <span class="eyebrow section-eyebrow">Activities</span>
-        <h2 class="section-title">활동 내용</h2>
-        <div class="card-grid" style="margin-top: 1.5rem;">
-            <div class="card">
-                <h4>연구 보조</h4>
-                <p>실험 참여자 모집, 데이터 수집, 코딩 보조 등 연구 전반의 실무 경험</p>
+        <div class="inquiry-wrap">
+            <form class="inquiry-form" action="#" method="POST" novalidate>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label class="form-label" for="inq-name">이름 <span class="form-req">*</span></label>
+                        <input class="form-control" type="text" id="inq-name" name="name"
+                               required placeholder="홍길동" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="inq-email">이메일 <span class="form-req">*</span></label>
+                        <input class="form-control" type="email" id="inq-email" name="email"
+                               required placeholder="example@email.com" autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inq-subject">제목 <span class="form-req">*</span></label>
+                    <input class="form-control" type="text" id="inq-subject" name="subject"
+                           required placeholder="문의 제목을 입력해 주세요">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inq-body">내용 <span class="form-req">*</span></label>
+                    <textarea class="form-control form-textarea" id="inq-body" name="message"
+                              required rows="7"
+                              placeholder="문의 내용을 자유롭게 작성해 주세요&#10;(학과, 학년, 연구 관심사 등을 간략히 소개해 주시면 도움이 됩니다)"></textarea>
+                </div>
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+                <div class="form-actions">
+                    <p class="form-note"><span class="form-req">*</span> 표시 항목은 필수입니다</p>
+                    <button type="submit" class="btn-primary inq-btn">보내기</button>
+                </div>
+            </form>
+            <div class="inquiry-done" hidden aria-live="polite">
+                <p>문의가 전달되었습니다.<br>검토 후 입력하신 이메일로 회신 드리겠습니다.</p>
             </div>
-            <div class="card">
-                <h4>문헌 정리</h4>
-                <p>최신 발달심리 논문 리뷰 및 요약, 연구 주제 관련 문헌 조사</p>
-            </div>
-            <div class="card">
-                <h4>세미나 참여</h4>
-                <p>주간 랩 세미나 및 저널 클럽 참여를 통한 연구 토론 경험</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-alt">
-    <div class="container">
-        <span class="eyebrow section-eyebrow">Requirements</span>
-        <h2 class="section-title">지원 자격</h2>
-        <div class="list-block" style="margin-top: 1.5rem;">
-            <ul>
-                <li>충남대학교 재학생 (전공 무관, 심리학 관련 수강 경험 우대)</li>
-                <li>주당 최소 8시간 이상 참여 가능한 자</li>
-                <li>학기 중 1학기 이상 참여 약속 가능한 자</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section class="section section-light">
-    <div class="container">
-        <span class="eyebrow section-eyebrow">How to Apply</span>
-        <h2 class="section-title">지원 방법</h2>
-        <div class="list-block" style="margin-top: 1.5rem;">
-            <ul>
-                <li>지원서(자유 양식) 및 간단한 자기소개를 <a href="mailto:cdplab@cnu.ac.kr" style="color: var(--blue);">cdplab@cnu.ac.kr</a> 로 발송</li>
-                <li>이메일 제목 형식: <strong>[인턴 지원] 이름_학번</strong></li>
-            </ul>
         </div>
     </div>
 </section>
