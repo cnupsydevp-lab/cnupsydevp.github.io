@@ -1276,11 +1276,6 @@ a.notice-item:hover::after {
   width: 100%;
   height: 280px;
 }
-.map-mobile { display: none; }
-@media (max-width: 768px) {
-  .map-desktop { display: none; }
-  .map-mobile  { display: block; }
-}
 .map-link {
   display: block;
   padding: 0.55rem 1rem;
