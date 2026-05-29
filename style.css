@@ -923,7 +923,13 @@ body {
 }
 
 /* ── Inquiry Form ────────────────────────────────────────── */
-.inquiry-wrap { max-width: 640px; margin: 0 auto; }
+.inquiry-section {
+  display: flex;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.inquiry-wrap { width: 100%; max-width: 600px; }
 .inquiry-form { display: flex; flex-direction: column; gap: 1.25rem; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.42rem; }
