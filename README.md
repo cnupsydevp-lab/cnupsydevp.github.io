@@ -106,8 +106,4 @@ git push origin main
 
 ### 대학원 진학 / 인턴 문의 폼 이메일 연동 (`admissions.html`, `intern.html`)
 
-현재 `action="#"` 플레이스홀더 상태. [Formspree](https://formspree.io) 연동 필요:
-
-1. formspree.io 가입 (srnoh@cnu.ac.kr)
-2. New Form 생성 → Form ID 확인 (예: `xpzgdkvw`)
-3. 두 파일의 `action="#"` → `action="https://formspree.io/f/FORM_ID"` 로 교체
+현재 `action="#"` 플레이스홀더 상태. lab-api + Nodemailer(Gmail App Password) 방식으로 연동 예정.
