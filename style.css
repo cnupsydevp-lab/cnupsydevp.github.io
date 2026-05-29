@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
 /* ── Variables ──────────────────────────────────────────── */
 /*
   [색상 수정 가이드]
@@ -31,14 +33,14 @@
   /* 라이트 섹션 배경색 */
   --bg-light:      #FFFBF1;   /* section-light 배경 */
   --bg-light-card: #FFE9BE;   /* section-alt 배경 */
-  --bg-footer:     #FDC184;   /* footer 배경 */
+  --bg-footer:     #F0D4B0;   /* footer 배경 */
 
   /* 라이트 섹션 텍스트색 */
   --text-dark:     #3E3A39;
   --text-mid:      #595757;
 
-  --font:         system-ui, -apple-system, sans-serif;
-  --font-display: system-ui, -apple-system, sans-serif;
+  --font:         'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-display: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
 
   --radius: 8px;
   --shadow-sm: 0 2px 10px rgba(62, 58, 57, 0.07);
@@ -85,21 +87,21 @@ body {
 .logo a {
   font-family: var(--font-display);
   font-style: normal;
-  font-weight: normal;
+  font-weight: 900;
   font-size: 1.45rem;
   color: #FFFBF1;
   text-decoration: none;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.08em;
 }
 .nav-links { display: flex; list-style: none; gap: 0; }
 .nav-links a {
   display: block;
   font-family: var(--font);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: rgba(255, 251, 241, 0.72);
+  color: rgba(255, 251, 241, 0.88);
   text-decoration: none;
-  padding: 0.45rem 0.55rem;
+  padding: 0.45rem 0.72rem;
   border-radius: var(--radius);
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
@@ -116,9 +118,9 @@ body {
 .nav-dropdown-btn {
   display: block;
   font-family: var(--font);
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: rgba(255, 251, 241, 0.72);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 251, 241, 0.88);
   background: none;
   border: none;
   cursor: pointer;
@@ -213,11 +215,11 @@ body {
 
 /* ── Hero ───────────────────────────────────────────────── */
 .hero {
-  padding: 7.5rem 0 6rem;
+  padding: 7rem 0 5.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-image: radial-gradient(circle, rgba(163, 95, 47, 0.09) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(163, 95, 47, 0.055) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
@@ -350,7 +352,7 @@ body {
   padding: 0.82rem 1.9rem;
   min-height: 44px;
   border-radius: var(--radius);
-  border: 1.5px solid rgba(62, 58, 57, 0.18);
+  border: 1.5px solid rgba(62, 58, 57, 0.26);
   font-family: var(--font);
   font-size: 0.85rem;
   font-weight: 700;
@@ -424,10 +426,10 @@ body {
 .section-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.9rem;
+  font-size: 2rem;
   color: var(--white);
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 .section-sub {
   color: var(--muted);
@@ -442,7 +444,7 @@ body {
 .page-header {
   padding: 4rem 0 3rem;
   border-bottom: 1px solid var(--border);
-  background: #FFFFFF;
+  background: linear-gradient(170deg, #FFFFFF 0%, #FFFBF1 100%);
   position: relative;
 }
 .page-header::after {
@@ -475,10 +477,10 @@ body {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 4.5rem;
   align-items: center;
 }
-.about-text .section-title { font-size: 1.7rem; }
+.about-text .section-title { font-size: 1.75rem; }
 .about-text p {
   color: var(--muted);
   margin-top: 1.2rem;
@@ -486,29 +488,90 @@ body {
   font-weight: 400;
 }
 .about-visual {
-  background-color: var(--bg-card);
-  background-image:
-    linear-gradient(rgba(163, 95, 47, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(163, 95, 47, 0.07) 1px, transparent 1px);
-  background-size: 20px 20px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  height: 380px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
+  flex-direction: column;
+  gap: 0;
 }
 .about-visual img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: var(--radius);
+}
+
+/* ── About Research Snapshot ─────────────────────────────── */
+.about-research-snapshot {
+  background: var(--bg-card);
+  border: 1px solid var(--border-md);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem 2rem;
+  box-shadow: var(--shadow-sm);
+}
+.ars-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.ars-stat {
+  text-align: center;
+  position: relative;
+  padding: 0.5rem 0;
+}
+.ars-stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: var(--border-md);
+}
+.ars-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.ars-num sup {
+  font-size: 1.3rem;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+.ars-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 0.65rem;
+}
+.ars-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.ars-keyword {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  background: rgba(163, 95, 47, 0.08);
+  border: 1px solid rgba(163, 95, 47, 0.20);
+  border-radius: 999px;
+  padding: 0.32rem 0.9rem;
+  letter-spacing: 0.01em;
+  transition: background 0.18s, border-color 0.18s;
+  cursor: default;
+}
+.ars-keyword:hover {
+  background: rgba(163, 95, 47, 0.14);
+  border-color: rgba(163, 95, 47, 0.38);
 }
 
 /* ── Cards ───────────────────────────────────────────────── */
@@ -527,17 +590,17 @@ body {
 }
 .card:hover {
   border-color: var(--blue-border);
-  box-shadow: 0 8px 24px rgba(62, 58, 57, 0.10);
-  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(62, 58, 57, 0.13);
+  transform: translateY(-5px);
 }
 .card-num {
   font-family: var(--font);
-  font-weight: 800;
-  font-size: 2.2rem;
-  color: rgba(163, 95, 47, 0.15);
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: rgba(163, 95, 47, 0.22);
   line-height: 1;
   margin-bottom: 1rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 .card h4 {
   font-family: var(--font);
@@ -593,7 +656,7 @@ body {
   display: inline-block;
   background: #ffffff;
   padding: 10px 10px 32px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 24px rgba(62,58,57,0.32), 0 2px 6px rgba(62,58,57,0.16);
   transform: rotate(-3deg);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
   cursor: pointer;
@@ -602,7 +665,7 @@ body {
 }
 .profile-polaroid:hover {
   transform: rotate(0deg) scale(1.02);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 4px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 36px rgba(62,58,57,0.40), 0 4px 10px rgba(62,58,57,0.22);
 }
 .profile-img {
   width: 100%;
@@ -1253,12 +1316,12 @@ hr {
 .footer-logo {
   font-family: var(--font-display);
   font-style: normal;
-  font-weight: normal;
+  font-weight: 900;
   font-size: 1.2rem;
   color: var(--white);
   display: block;
   margin-bottom: 0.6rem;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.08em;
 }
 .footer-brand p {
   line-height: 1.85;
@@ -1618,6 +1681,7 @@ html { scroll-behavior: smooth; }
   .section      { padding: 2.5rem 0; }
   .hero-title   { font-size: 1.7rem; }
   .section-title { font-size: 1.35rem; }
+  .about-text .section-title { font-size: 1.35rem; }
   .page-header h1 { font-size: 1.6rem; }
   .hero-nav-grid { gap: 0.5rem; }
   .hero-nav-card { padding: 1rem 0.75rem; }
@@ -1628,4 +1692,9 @@ html { scroll-behavior: smooth; }
   .member-grid  { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
   .btn-primary,
   .btn-ghost    { width: 100%; text-align: center; justify-content: center; }
+  /* 연구 스냅샷 소형 화면 */
+  .about-research-snapshot { padding: 1.75rem 1.25rem 1.5rem; }
+  .ars-num      { font-size: 2rem; }
+  .ars-num sup  { font-size: 1rem; }
+  .ars-label    { font-size: 0.62rem; }
 }
