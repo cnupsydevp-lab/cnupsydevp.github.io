@@ -33,7 +33,7 @@
   /* 라이트 섹션 배경색 */
   --bg-light:      #FFFBF1;   /* section-light 배경 */
   --bg-light-card: #FFE9BE;   /* section-alt 배경 */
-  --bg-footer:     #F0D4B0;   /* footer 배경 */
+  --bg-footer:     #FDC184;   /* footer 배경 */
 
   /* 라이트 섹션 텍스트색 */
   --text-dark:     #3E3A39;
@@ -846,28 +846,28 @@ body {
   .member-info-card::before { border-radius: 1px; }
 }
 
-/* 카드별 개인 색상 — 은빈:핑크 / 우석:민트 / 범주:퍼플 / 주화:화이트 */
+/* 카드별 개인 색상 — 탈색·웜톤 아날로그 문구류 느낌 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #FFD6E7; --postit-lo: #FFC4D8;   /* 분홍 */
-  --postit-ink: #4A1A2E; --postit-ink2: #6B3A50;
-  --grain1: rgba(160,50,90,0.04); --grain2: rgba(160,50,90,0.03);
+  --postit: #F2C8C2; --postit-lo: #EAB8B2;   /* 테라코타 블러시 */
+  --postit-ink: #4A2526; --postit-ink2: #6E4042;
+  --grain1: rgba(140,65,60,0.04); --grain2: rgba(140,65,60,0.03);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #C8F5E8; --postit-lo: #B0EAD8;   /* 민트 */
-  --postit-ink: #1A4235; --postit-ink2: #2E6050;
-  --grain1: rgba(40,120,90,0.04); --grain2: rgba(40,120,90,0.03);
+  --postit: #C6DBC8; --postit-lo: #B5CDB8;   /* 더스티 세이지 */
+  --postit-ink: #2A3C2C; --postit-ink2: #3C5440;
+  --grain1: rgba(60,90,55,0.04); --grain2: rgba(60,90,55,0.03);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #E8D6F8; --postit-lo: #D8C2EE;   /* 퍼플 */
-  --postit-ink: #2E1A4A; --postit-ink2: #4E3A6E;
-  --grain1: rgba(100,50,160,0.04); --grain2: rgba(100,50,160,0.03);
+  --postit: #D4CAE0; --postit-lo: #C5BAD4;   /* 더스티 모브 */
+  --postit-ink: #2C2438; --postit-ink2: #463A58;
+  --grain1: rgba(75,55,100,0.04); --grain2: rgba(75,55,100,0.03);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
-  --postit: #FAFAF8; --postit-lo: #EEEEEA;   /* 화이트 */
+  --postit: #F5F3F0; --postit-lo: #EDEAE6;   /* 크림 오프화이트 */
   --postit-ink: #2A2A28; --postit-ink2: #525250;
   --grain1: rgba(80,80,80,0.04); --grain2: rgba(80,80,80,0.03);
 }
