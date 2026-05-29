@@ -1367,9 +1367,9 @@ hr {
 }
 .footer-inner {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 3rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 1.5rem;

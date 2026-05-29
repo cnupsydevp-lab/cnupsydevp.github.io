@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[미리보기] 학부생 포스트잇 카드 — _temp_</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* 미리보기 전용: 실제 members.html 에는 들어가지 않음 */
+      body { background: var(--bg); }
+      .preview-note {
+        max-width: 900px; margin: 1.5rem auto 0; padding: 0 1.5rem;
+        font-family: var(--font); color: var(--text-mid); font-size: 0.85rem; line-height: 1.6;
+      }
+      .preview-note strong { color: var(--text-dark); }
+    </style>
+</head>
+<body>
+
+<div class="preview-note">
+  <strong>임시 미리보기 파일</strong>입니다 (_temp_postit_preview.html · 커밋되지 않음).<br>
+  학부생 카드 = <strong>포스트잇 + 마스킹 테이프</strong> 신규 디자인. 마우스를 올리면 노트가 똑바로 펴지며 떠오릅니다.
+  위쪽 대학원생 카드는 비교용(기존 동작 유지) 입니다. 확인 후 이 파일은 삭제해 주세요.
+</div>
+
+<!-- 대학원생: 기존 동작(카드 단위 리프트) 비교용 -->
+<section class="section section-light">
+    <div class="container">
+        <span class="eyebrow section-eyebrow">Graduate Students (비교용)</span>
+        <h2 class="section-title" style="margin-bottom: 2rem;">대학원생</h2>
+        <div class="member-grid">
+            <div class="member-card">
+                <img src="images/Minju.jpeg" alt="김민주" class="member-photo">
+                <h4>김민주</h4>
+                <p>석사 과정</p>
+            </div>
+            <div class="member-card">
+                <img src="images/Hyemin.jpeg" alt="김혜민" class="member-photo">
+                <h4>김혜민</h4>
+                <p>석사 과정</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 학부생: 신규 포스트잇 디자인 (members.html 의 마크업과 동일) -->
+<section class="section section-alt">
+    <div class="container">
+        <span class="eyebrow section-eyebrow">Undergraduate Students</span>
+        <h2 class="section-title" style="margin-bottom: 2.5rem;">학부생</h2>
+        <div class="member-grid">
+            <div class="member-card">
+                <img src="images/eunbin.jpeg" alt="이은빈" class="member-photo">
+                <h4>이은빈</h4>
+                <div class="member-info-card">
+                    <p class="member-info-en">—</p>
+                    <p class="member-info-dept">—</p>
+                    <span class="member-badge">학부생 인턴</span>
+                    <div class="member-info-row">
+                        <span class="member-info-label">관심분야</span>
+                        <p class="member-info-value">—</p>
+                    </div>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="images/wuseok.jpeg" alt="강우석" class="member-photo">
+                <h4>강우석</h4>
+                <div class="member-info-card">
+                    <p class="member-info-en">—</p>
+                    <p class="member-info-dept">—</p>
+                    <span class="member-badge">학부생 인턴</span>
+                    <div class="member-info-row">
+                        <span class="member-info-label">관심분야</span>
+                        <p class="member-info-value">—</p>
+                    </div>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="images/beomju.JPG" alt="김범주" class="member-photo">
+                <h4>김범주</h4>
+                <div class="member-info-card">
+                    <p class="member-info-en">—</p>
+                    <p class="member-info-dept">—</p>
+                    <span class="member-badge">학부생 인턴</span>
+                    <div class="member-info-row">
+                        <span class="member-info-label">관심분야</span>
+                        <p class="member-info-value">—</p>
+                    </div>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="images/juhua.jpeg" alt="엄주화" class="member-photo">
+                <h4>엄주화</h4>
+                <div class="member-info-card">
+                    <p class="member-info-en">Ju-hwa Um</p>
+                    <p class="member-info-dept">심리학과</p>
+                    <span class="member-badge">학부생 인턴</span>
+                    <div class="member-info-row">
+                        <span class="member-info-label">관심분야</span>
+                        <p class="member-info-value">발달심리 · 노화 인지</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
