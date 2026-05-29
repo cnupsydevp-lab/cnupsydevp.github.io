@@ -689,13 +689,15 @@ body {
    순수 CSS · 추가 HTML 없음 (::before = 테이프, ::after = 컬 그림자).
    ════════════════════════════════════════════════════════════════ */
 .member-info-card {
-  /* 카드별 토큰 — 따뜻한 문구류 세트 (아래 nth-child 에서 변주) */
-  --postit:      #FCF3D2;                  /* 따뜻한 크림-옐로우 종이 */
-  --postit-lo:   #F6E8B6;                  /* 가장자리로 갈수록 깊은 톤 */
-  --postit-ink:  #4A4034;                  /* 따뜻한 먹색 (대비 9:1) */
-  --postit-ink2: #6E6048;                  /* 보조 먹색 */
-  --tape:        rgba(219,193,150,0.55);   /* 반투명 크래프트-탄 테이프 */
-  --tape-edge:   rgba(196,166,122,0.42);   /* 테이프 위·아래 음영 */
+  /* 카드별 토큰 — 개인별 색상 (아래 nth-child 에서 1인 1색 지정) */
+  --postit:      #FAFAF8;                  /* fallback: 흰색 */
+  --postit-lo:   #EEEEEA;                  /* 하단 그라데이션 */
+  --postit-ink:  #2A2A28;                  /* 본문 잉크 */
+  --postit-ink2: #525250;                  /* 보조 잉크 */
+  --grain1:      rgba(80,80,80,0.040);     /* 종이결 섬유 1 */
+  --grain2:      rgba(80,80,80,0.030);     /* 종이결 섬유 2 */
+  --tape:        rgba(255,255,255,0.75);   /* 반투명 화이트 테이프 */
+  --tape-edge:   rgba(200,200,200,0.50);   /* 테이프 위·아래 음영 */
   --tilt:       -1.8deg;                   /* 손으로 붙인 듯한 기울기 */
   --tape-tilt:   3.2deg;                   /* 테이프는 노트와 다른 각도 */
   --tape-x:      0px;                       /* 테이프 좌우 미세 이동 */
@@ -712,8 +714,8 @@ body {
   background-image:
     radial-gradient(120% 90% at 18% 12%, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0) 44%),
     radial-gradient(140% 120% at 88% 98%, rgba(150,118,80,0.10) 0%, rgba(150,118,80,0) 48%),
-    repeating-linear-gradient(48deg, rgba(120,92,58,0.040) 0 1px, rgba(120,92,58,0) 1px 3px),
-    repeating-linear-gradient(-42deg, rgba(120,92,58,0.030) 0 1px, rgba(120,92,58,0) 1px 4px),
+    repeating-linear-gradient(48deg, var(--grain1) 0 1px, rgba(120,92,58,0) 1px 3px),
+    repeating-linear-gradient(-42deg, var(--grain2) 0 1px, rgba(120,92,58,0) 1px 4px),
     linear-gradient(168deg, var(--postit) 0%, var(--postit) 70%, var(--postit-lo) 100%);
   background-blend-mode: normal, multiply, normal, normal, normal;
   /* 아래로 치우친 다층 그림자 — 데스크에 얹힌 느낌 */
@@ -781,22 +783,30 @@ body {
   .member-info-card::before { border-radius: 1px; }
 }
 
-/* 카드별 변주 — 손으로 붙인 듯한 "문구류 세트" (전부 따뜻한 H40~49 대역) */
+/* 카드별 개인 색상 — 은빈:핑크 / 우석:민트 / 범주:퍼플 / 주화:화이트 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #FCF3D2; --postit-lo: #F6E8B6;   /* 크림-옐로우 */
+  --postit: #FFD6E7; --postit-lo: #FFC4D8;   /* 분홍 */
+  --postit-ink: #4A1A2E; --postit-ink2: #6B3A50;
+  --grain1: rgba(160,50,90,0.04); --grain2: rgba(160,50,90,0.03);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #FBEFC6; --postit-lo: #F4E2AC;   /* 허니 */
+  --postit: #C8F5E8; --postit-lo: #B0EAD8;   /* 민트 */
+  --postit-ink: #1A4235; --postit-ink2: #2E6050;
+  --grain1: rgba(40,120,90,0.04); --grain2: rgba(40,120,90,0.03);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #FCEFCE; --postit-lo: #F6E3B8;   /* 따뜻한 베이지-옐로우 */
+  --postit: #E8D6F8; --postit-lo: #D8C2EE;   /* 퍼플 */
+  --postit-ink: #2E1A4A; --postit-ink2: #4E3A6E;
+  --grain1: rgba(100,50,160,0.04); --grain2: rgba(100,50,160,0.03);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
-  --postit: #FBEAC2; --postit-lo: #F3DFA8;   /* 애프리콧 기운의 크림 */
+  --postit: #FAFAF8; --postit-lo: #EEEEEA;   /* 화이트 */
+  --postit-ink: #2A2A28; --postit-ink2: #525250;
+  --grain1: rgba(80,80,80,0.04); --grain2: rgba(80,80,80,0.03);
 }
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
