@@ -112,6 +112,51 @@
     </div>
 </section>
 
+<!-- 사전 문의 폼 — action은 Formspree 설정 후 YOUR_FORM_ID 교체 -->
+<section class="section section-alt">
+    <div class="container">
+        <span class="eyebrow section-eyebrow">Inquiry</span>
+        <h2 class="section-title">사전 문의</h2>
+        <p class="section-sub">진학 전 궁금한 점이 있으신가요? 아래 양식을 작성해 주시면 검토 후 입력하신 이메일로 회신 드리겠습니다.</p>
+        <div class="inquiry-wrap">
+            <form class="inquiry-form" action="#" method="POST" novalidate>
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label class="form-label" for="inq-name">이름 <span class="form-req">*</span></label>
+                        <input class="form-control" type="text" id="inq-name" name="name"
+                               required placeholder="홍길동" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="inq-email">이메일 <span class="form-req">*</span></label>
+                        <input class="form-control" type="email" id="inq-email" name="email"
+                               required placeholder="example@email.com" autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inq-subject">제목 <span class="form-req">*</span></label>
+                    <input class="form-control" type="text" id="inq-subject" name="subject"
+                           required placeholder="문의 제목을 입력해 주세요">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="inq-body">내용 <span class="form-req">*</span></label>
+                    <textarea class="form-control form-textarea" id="inq-body" name="message"
+                              required rows="6"
+                              placeholder="문의 내용을 자유롭게 작성해 주세요&#10;(연구 관심사, 학부 전공 등을 간략히 소개해 주시면 도움이 됩니다)"></textarea>
+                </div>
+                <!-- 허니팟 스팸 방지 -->
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+                <div class="form-actions">
+                    <p class="form-note"><span class="form-req">*</span> 표시 항목은 필수입니다</p>
+                    <button type="submit" class="btn-primary inq-btn">보내기</button>
+                </div>
+            </form>
+            <div class="inquiry-done" hidden aria-live="polite">
+                <p>문의가 전달되었습니다.<br>검토 후 입력하신 이메일로 회신 드리겠습니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <footer class="site-footer">
     <div class="container">
         <div class="footer-inner">
