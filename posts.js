@@ -57,6 +57,7 @@ const POSTS = {
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
       authors: '성혜윤, 이종국, 오중근, 서정석, 노수림, 김태현, 남범우',
       journal: '정신신체의학, 27(2), 85–89',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002545683',
       pdf: 'papers/Seong_et_al_2019.pdf' },
     { type: 'publication', year: '2016', date: '2016-06-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '대학생의 개인 심리 특성이 안전행동에 미치는 영향 탐색',

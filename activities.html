@@ -98,11 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="pub-year">${p.year}</span>
       <span class="badge ${p.badge}">${p.badgeText}</span>
       <div class="pub-meta">
-        ${(p.doi || p.pdf)
-          ? `<a class="pub-title pub-title-link" href="${p.pdf || p.doi}" target="_blank" rel="noopener">${p.title}</a>`
+        ${(p.url || p.doi)
+          ? `<a class="pub-title pub-title-link" href="${p.url || p.doi}" target="_blank" rel="noopener">${p.title}</a>`
           : `<span class="pub-title">${p.title}</span>`}
         <span class="pub-authors">${p.authors}</span>
         <span class="pub-journal">${p.journal}</span>
+        ${p.pdf ? `<a class="pub-download" href="${p.pdf}" target="_blank" rel="noopener" download>다운로드</a>` : ''}
       </div>
     </div>`).join('');
 

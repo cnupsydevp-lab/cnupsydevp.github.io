@@ -1079,6 +1079,20 @@ body {
   color: var(--blue);
   text-decoration: underline;
 }
+.pub-download {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--blue);
+  text-decoration: none;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  padding: 0.15rem 0.6rem;
+}
+.pub-download:hover {
+  background: var(--blue);
+  color: #fff;
+}
 .pub-authors {
   font-size: 0.8rem;
   color: var(--muted);
