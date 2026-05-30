@@ -1042,9 +1042,62 @@ body {
 .list-block li:last-child { border-bottom: none; }
 
 /* ── Publication List ────────────────────────────────────── */
+.pub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.pub-sort-btns {
+  display: flex;
+  gap: 0.4rem;
+}
+.pub-sort-btn {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border-md);
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.pub-sort-btn.active,
+.pub-sort-btn:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--blue-dim);
+}
 .pub-list {
   border-top: 1px solid var(--border);
   margin-top: 1.5rem;
+}
+.pub-pagination {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.pub-page-btn {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-md);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+.pub-page-btn.active,
+.pub-page-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
 }
 .pub-item {
   display: grid;

@@ -49,8 +49,15 @@
 <section class="section section-light">
     <div class="container">
         <span class="eyebrow section-eyebrow">Publications</span>
-        <h2 class="section-title">논문</h2>
+        <div class="pub-header">
+          <h2 class="section-title" style="margin:0;">논문</h2>
+          <div class="pub-sort-btns">
+            <button class="pub-sort-btn active" id="sort-desc">최신순</button>
+            <button class="pub-sort-btn" id="sort-asc">오래된순</button>
+          </div>
+        </div>
         <div class="pub-list" id="pub-list"></div>
+        <div class="pub-pagination" id="pub-pagination"></div>
     </div>
 </section>
 
@@ -92,9 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pres   = POSTS.activities.filter(p => p.type === 'presentation');
   const grants = POSTS.activities.filter(p => p.type === 'grant');
 
-  const pubList = document.getElementById('pub-list');
-  if (pubList) pubList.innerHTML = pubs.map(p => `
-    <div class="pub-item">
+  const PER_PAGE = 5;
+  let sortDesc = true;
+  let currentPage = 1;
+
+  function pubCard(p) {
+    return `<div class="pub-item">
       <span class="pub-year">${p.year}</span>
       <span class="badge ${p.badge}">${p.badgeText}</span>
       <div class="pub-meta">
@@ -105,7 +115,49 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="pub-journal">${p.journal}</span>
         ${p.pdf ? `<a class="pub-download" href="${p.pdf}" target="_blank" rel="noopener" download>PDF</a>` : ''}
       </div>
-    </div>`).join('');
+    </div>`;
+  }
+
+  function renderPubs() {
+    const sorted = [...pubs].sort((a, b) =>
+      sortDesc ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)
+    );
+    const totalPages = Math.ceil(sorted.length / PER_PAGE);
+    const start = (currentPage - 1) * PER_PAGE;
+    const page = sorted.slice(start, start + PER_PAGE);
+
+    const pubList = document.getElementById('pub-list');
+    if (pubList) pubList.innerHTML = page.map(pubCard).join('');
+
+    const pagination = document.getElementById('pub-pagination');
+    if (pagination) {
+      pagination.innerHTML = totalPages <= 1 ? '' : Array.from({length: totalPages}, (_, i) => `
+        <button class="pub-page-btn${i + 1 === currentPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>
+      `).join('');
+      pagination.querySelectorAll('.pub-page-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentPage = Number(btn.dataset.page);
+          renderPubs();
+          document.querySelector('.section-light').scrollIntoView({behavior: 'smooth', block: 'start'});
+        });
+      });
+    }
+  }
+
+  document.getElementById('sort-desc').addEventListener('click', function() {
+    sortDesc = true; currentPage = 1;
+    this.classList.add('active');
+    document.getElementById('sort-asc').classList.remove('active');
+    renderPubs();
+  });
+  document.getElementById('sort-asc').addEventListener('click', function() {
+    sortDesc = false; currentPage = 1;
+    this.classList.add('active');
+    document.getElementById('sort-desc').classList.remove('active');
+    renderPubs();
+  });
+
+  renderPubs();
 
   const presList = document.getElementById('pres-list');
   if (presList) presList.innerHTML = pres.map(p => `
