@@ -47,6 +47,12 @@ const POSTS = {
   // date: 'YYYY-01-01' 형식 (연도만 알 경우) — 알림 자동화에 사용
   activities: [
     // 논문
+    { type: 'publication', year: '2022', date: '2022-06-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '노인의 문장회상발화에서 나타난 언어적 비유창성 분석',
+      authors: '노수림, 문선현, 김미숙',
+      journal: '한국자료분석학회지, 24(3), 1133–1148',
+      doi: 'https://doi.org/10.37727/jkdas.2022.24.3.1133',
+      pdf: 'papers/노수림 et al_2022_노인_문장회상_언어적비유창성.pdf' },
     { type: 'publication', year: '2019', date: '2019-01-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
       authors: '성혜윤, 이종국, 오중근, 서정석, 노수림, 김태현, 남범우',

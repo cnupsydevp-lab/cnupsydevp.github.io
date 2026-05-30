@@ -102,7 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="pub-authors">${p.authors}</span>
         <span class="pub-journal">${p.journal}</span>
       </div>
-      ${p.pdf ? `<a class="pub-pdf" href="${encodeURI(p.pdf)}" target="_blank" rel="noopener">PDF</a>` : ''}
+      <div class="pub-links">
+        ${p.doi ? `<a class="pub-pdf" href="${p.doi}" target="_blank" rel="noopener">DOI</a>` : ''}
+        ${p.pdf ? `<a class="pub-pdf" href="${encodeURI(p.pdf)}" target="_blank" rel="noopener">PDF</a>` : ''}
+      </div>
     </div>`).join('');
 
   const presList = document.getElementById('pres-list');
