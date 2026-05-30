@@ -47,26 +47,11 @@ const POSTS = {
   // date: 'YYYY-01-01' 형식 (연도만 알 경우) — 알림 자동화에 사용
   activities: [
     // 논문
-    { type: 'publication', year: '2025', date: '2025-01-01', badge: 'badge-navy', badgeText: 'SSCI',
-      title: 'Longitudinal links between emotional regulation in infancy and resilience in adolescence',
-      authors: 'Noh, S. R., et al.',
-      journal: 'Developmental Psychology, 61(2), 301–318' },
-    { type: 'publication', year: '2024', date: '2024-01-01', badge: 'badge-navy', badgeText: 'SSCI',
-      title: 'Peer relationship quality and social competence in early childhood: A longitudinal study',
-      authors: 'Kim, J., & Noh, S. R.',
-      journal: 'Child Development, 95(4), 1102–1119' },
-    { type: 'publication', year: '2023', date: '2023-01-01', badge: 'badge-navy', badgeText: 'SSCI',
-      title: 'Screen time and executive function in preschool-aged children: A meta-analytic review',
-      authors: 'Noh, S. R., & Park, H.',
-      journal: 'Psychological Bulletin, 149(7), 512–540' },
-    { type: 'publication', year: '2023', date: '2023-01-01', badge: 'badge-gold', badgeText: 'KCI',
-      title: '팬데믹 전후 영유아 언어 발달 패턴 변화',
-      authors: '노수림, 이발달',
-      journal: '한국심리학회지: 발달, 36(1), 45–68' },
-    { type: 'publication', year: '2022', date: '2022-01-01', badge: 'badge-navy', badgeText: 'SSCI',
-      title: 'Environmental influences on language acquisition in bilingual toddlers',
-      authors: 'Noh, S. R., et al.',
-      journal: 'Journal of Child Language, 49(5), 978–999' },
+    { type: 'publication', year: '2019', date: '2019-01-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
+      authors: '성혜윤, 이종국, 오중근, 서정석, 노수림, 김태현, 남범우',
+      journal: '한국정신신체의학회',
+      pdf: 'papers/성혜윤 et al_2019_후기청소년_중증근무력증.pdf' },
 
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
