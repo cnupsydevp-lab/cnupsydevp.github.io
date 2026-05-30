@@ -47,6 +47,12 @@ const POSTS = {
   // date: 'YYYY-01-01' 형식 (연도만 알 경우) — 알림 자동화에 사용
   activities: [
     // 논문
+    { type: 'publication', year: '2021', date: '2021-06-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '어휘력과 작업기억이 청년과 노인의 문장 읽기 효율성에 미치는 영향',
+      authors: '노수림, 문선현',
+      journal: '한국자료분석학회지, 23(3), 1343–1353',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002730870',
+      pdf: 'papers/Noh_et_al_2021.pdf' },
     { type: 'publication', year: '2022', date: '2022-06-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '노인의 문장회상발화에서 나타난 언어적 비유창성 분석',
       authors: '노수림, 문선현, 김미숙',
