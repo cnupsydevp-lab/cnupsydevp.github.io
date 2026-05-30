@@ -63,6 +63,7 @@ const POSTS = {
       title: '대학생의 개인 심리 특성이 안전행동에 미치는 영향 탐색',
       authors: '배성아, 노수림, 옥승용',
       journal: '한국안전학회지, 31(3), 102–108',
+      url: 'https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE10059620',
       pdf: 'papers/Bae_et_al_2016.pdf' },
 
     // 학술발표
