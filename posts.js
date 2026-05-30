@@ -58,6 +58,10 @@ const POSTS = {
       authors: '성혜윤, 이종국, 오중근, 서정석, 노수림, 김태현, 남범우',
       journal: '한국정신신체의학회',
       pdf: 'papers/Seong_et_al_2019.pdf' },
+    { type: 'publication', year: '2016', date: '2016-06-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '대학생의 개인 심리 특성이 안전행동에 미치는 영향 탐색',
+      authors: '배성아, 노수림, 옥승용',
+      journal: '한국안전학회지, 31(3), 102–108' },
 
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
