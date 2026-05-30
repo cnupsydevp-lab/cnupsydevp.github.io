@@ -51,7 +51,7 @@ const POSTS = {
       title: '노인의 문장회상발화에서 나타난 언어적 비유창성 분석',
       authors: '노수림, 문선현, 김미숙',
       journal: '한국자료분석학회지, 24(3), 1133–1148',
-      doi: 'https://doi.org/10.37727/jkdas.2022.24.3.1133',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002850883',
       pdf: 'papers/Noh_et_al_2022.pdf' },
     { type: 'publication', year: '2019', date: '2019-12-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
