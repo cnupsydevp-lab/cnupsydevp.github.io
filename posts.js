@@ -52,12 +52,12 @@ const POSTS = {
       authors: '노수림, 문선현, 김미숙',
       journal: '한국자료분석학회지, 24(3), 1133–1148',
       doi: 'https://doi.org/10.37727/jkdas.2022.24.3.1133',
-      pdf: 'papers/노수림 et al_2022_노인_문장회상_언어적비유창성.pdf' },
+      pdf: 'papers/Noh_et_al_2022.pdf' },
     { type: 'publication', year: '2019', date: '2019-01-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
       authors: '성혜윤, 이종국, 오중근, 서정석, 노수림, 김태현, 남범우',
       journal: '한국정신신체의학회',
-      pdf: 'papers/성혜윤 et al_2019_후기청소년_중증근무력증.pdf' },
+      pdf: 'papers/Seong_et_al_2019.pdf' },
 
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
