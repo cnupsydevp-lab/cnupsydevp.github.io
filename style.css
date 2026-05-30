@@ -1050,17 +1050,18 @@ body {
 }
 .pub-sort-btns {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  margin-left: auto;
 }
 .pub-sort-btn {
   font-family: var(--font);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--muted);
   background: none;
   border: 1px solid var(--border-md);
   border-radius: 20px;
-  padding: 0.25rem 0.75rem;
+  padding: 0.4rem 1rem;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
@@ -1076,16 +1077,16 @@ body {
 }
 .pub-pagination {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.5rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 1.75rem;
 }
 .pub-page-btn {
   font-family: var(--font);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
   border: 1px solid var(--border-md);
   background: none;
