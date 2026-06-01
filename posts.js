@@ -63,6 +63,7 @@ const POSTS = {
       title: '인지욕구와 읽기처리에 관련된 인지능력 및 읽기수행과의 관계',
       authors: '노수림, 김예슬, 김미숙',
       journal: '담화와 인지, 27(1), 103–121',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002561909',
       pdf: 'papers/Noh_et_al_2020.pdf' },
     { type: 'publication', year: '2019', date: '2019-12-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
