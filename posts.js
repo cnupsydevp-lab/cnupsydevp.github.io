@@ -74,6 +74,7 @@ const POSTS = {
       title: '중·노년기 주관적 연령이 주관적 안녕감과 우울에 미치는 영향: 삶의 의미의 매개효과',
       authors: '이은별, 노수림',
       journal: '한국노년학, 39(2), 363–388',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002469627',
       pdf: 'papers/Lee_et_al_2019.pdf' },
     { type: 'publication', year: '2019', date: '2019-12-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '군신체검사를 받은 후기 청소년에서 중증근무력증의 다면적 인성검사 결과',
