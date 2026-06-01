@@ -105,6 +105,7 @@ const POSTS = {
       title: '중고령자의 외로움이 스트레스에 미치는 영향: 사회적 상호작용 불안과 자기통제력의 이중 매개효과',
       authors: '이승철, 최원일, 윤소영, 노수림',
       journal: 'STRESS, 33(2), 93–102',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003218455',
       pdf: 'papers/Lee_et_al_2025.pdf' },
 
     // 학술발표
