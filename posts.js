@@ -75,7 +75,7 @@ const POSTS = {
       authors: '김미숙, 노수림',
       journal: '담화와 인지, 26(3), 23–42',
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002494479',
-      pdf: 'papers/Adult Age Differences in On-line Sentence Processi.pdf' },
+      pdf: 'papers/Kim_et_al_2019.pdf' },
     { type: 'publication', year: '2019', date: '2019-06-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '중·노년기 주관적 연령이 주관적 안녕감과 우울에 미치는 영향: 삶의 의미의 매개효과',
       authors: '이은별, 노수림',
