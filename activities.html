@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pres   = POSTS.activities.filter(p => p.type === 'presentation');
   const grants = POSTS.activities.filter(p => p.type === 'grant');
 
-  const PER_PAGE = 5;
+  const PER_PAGE = 10;
   let sortDesc = true;
   let currentPage = 1;
 
@@ -131,16 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pagination = document.getElementById('pub-pagination');
     if (pagination) {
-      pagination.innerHTML = totalPages <= 1 ? '' : Array.from({length: totalPages}, (_, i) => `
-        <button class="pub-page-btn${i + 1 === currentPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>
-      `).join('');
-      pagination.querySelectorAll('.pub-page-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentPage = Number(btn.dataset.page);
-          renderPubs();
-          document.querySelector('.section-light').scrollIntoView({behavior: 'smooth', block: 'start'});
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+      } else {
+        const prev = `<button class="pub-page-btn pub-page-nav" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>이전</button>`;
+        const nums = Array.from({length: totalPages}, (_, i) =>
+          `<button class="pub-page-btn${i + 1 === currentPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>`
+        ).join('');
+        const next = `<button class="pub-page-btn pub-page-nav" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>다음</button>`;
+        pagination.innerHTML = prev + nums + next;
+        pagination.querySelectorAll('.pub-page-btn:not([disabled])').forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentPage = Number(btn.dataset.page);
+            renderPubs();
+            document.querySelector('.section-light').scrollIntoView({behavior: 'smooth', block: 'start'});
+          });
         });
-      });
+      }
     }
   }
 

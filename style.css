@@ -1056,13 +1056,13 @@ body {
 }
 .pub-sort-btn {
   font-family: var(--font);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 600;
   color: var(--muted);
   background: none;
   border: 1px solid var(--border-md);
   border-radius: 20px;
-  padding: 0.4rem 1rem;
+  padding: 0.28rem 0.7rem;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
@@ -1084,10 +1084,10 @@ body {
 }
 .pub-page-btn {
   font-family: var(--font);
-  font-size: 0.85rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   border: 1px solid var(--border-md);
   background: none;
@@ -1100,6 +1100,20 @@ body {
   background: #1a1a1a;
   color: #fff;
   border-color: #1a1a1a;
+}
+.pub-page-nav {
+  width: auto;
+  padding: 0 0.7rem;
+  border-radius: 20px;
+  font-size: 0.74rem;
+}
+.pub-page-nav:disabled,
+.pub-page-nav:disabled:hover {
+  background: none;
+  color: var(--muted);
+  border-color: var(--border-md);
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 .pub-item {
   display: grid;
