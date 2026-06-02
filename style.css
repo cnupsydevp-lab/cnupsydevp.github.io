@@ -846,30 +846,30 @@ body {
   .member-info-card::before { border-radius: 1px; }
 }
 
-/* 카드별 개인 색상 — 탈색·웜톤 아날로그 문구류 느낌 */
+/* 카드별 개인 색상 — 파스텔 톤 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #F2C8C2; --postit-lo: #EAB8B2;   /* 테라코타 블러시 */
-  --postit-ink: #4A2526; --postit-ink2: #6E4042;
-  --grain1: rgba(140,65,60,0.04); --grain2: rgba(140,65,60,0.03);
+  --postit: #FFE8E6; --postit-lo: #FFD6D2;   /* 라이트 로즈 */
+  --postit-ink: #5A2A2E; --postit-ink2: #7A4044;
+  --grain1: rgba(160,80,75,0.04); --grain2: rgba(160,80,75,0.03);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #C6DBC8; --postit-lo: #B5CDB8;   /* 더스티 세이지 */
-  --postit-ink: #2A3C2C; --postit-ink2: #3C5440;
-  --grain1: rgba(60,90,55,0.04); --grain2: rgba(60,90,55,0.03);
+  --postit: #DFF2E2; --postit-lo: #CAE8CE;   /* 라이트 민트 */
+  --postit-ink: #2A4030; --postit-ink2: #3C5842;
+  --grain1: rgba(60,100,65,0.04); --grain2: rgba(60,100,65,0.03);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #D4CAE0; --postit-lo: #C5BAD4;   /* 더스티 모브 */
-  --postit-ink: #2C2438; --postit-ink2: #463A58;
-  --grain1: rgba(75,55,100,0.04); --grain2: rgba(75,55,100,0.03);
+  --postit: #EAE2F8; --postit-lo: #DDD4F0;   /* 라이트 라벤더 */
+  --postit-ink: #362850; --postit-ink2: #4E406A;
+  --grain1: rgba(85,65,115,0.04); --grain2: rgba(85,65,115,0.03);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
-  --postit: #F5F3F0; --postit-lo: #EDEAE6;   /* 크림 오프화이트 */
-  --postit-ink: #2A2A28; --postit-ink2: #525250;
-  --grain1: rgba(80,80,80,0.04); --grain2: rgba(80,80,80,0.03);
+  --postit: #FEFAF0; --postit-lo: #F8F0DC;   /* 웜 크림 */
+  --postit-ink: #3A3A30; --postit-ink2: #5A5A4A;
+  --grain1: rgba(80,80,60,0.04); --grain2: rgba(80,80,60,0.03);
 }
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
