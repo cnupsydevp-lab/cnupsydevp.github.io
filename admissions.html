@@ -49,7 +49,8 @@
 <section class="section section-light">
     <div class="container inquiry-section">
         <div class="inquiry-wrap">
-            <form class="inquiry-form" action="#" method="POST" novalidate>
+            <form class="inquiry-form" id="contact-form" novalidate>
+                <input type="hidden" name="type" value="admissions">
                 <div class="form-row-2">
                     <div class="form-group">
                         <label class="form-label" for="inq-name">이름 <span class="form-req">*</span></label>
@@ -73,11 +74,11 @@
                               required rows="7"
                               placeholder="문의 내용을 자유롭게 작성해 주세요&#10;(연구 관심사, 학부 전공 등을 간략히 소개해 주시면 도움이 됩니다)"></textarea>
                 </div>
-                <!-- 허니팟 스팸 방지 -->
                 <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
                 <div class="form-actions">
-                    <p class="form-note"><span class="form-req">*</span> 표시 항목은 필수입니다</p>
-                    <button type="submit" class="btn-primary inq-btn">보내기</button>
+                    <p class="form-note" id="inq-error" style="color:#c0392b;" hidden></p>
+                    <p class="form-note" id="inq-hint"><span class="form-req">*</span> 표시 항목은 필수입니다</p>
+                    <button type="submit" class="btn-primary inq-btn" id="inq-btn">보내기</button>
                 </div>
             </form>
             <div class="inquiry-done" hidden aria-live="polite">
@@ -101,5 +102,54 @@
 
 <script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+(function () {
+  var CONTACT_API = 'https://growingmind.ppai-lab.com/api/contact';
+  var form  = document.getElementById('contact-form');
+  var done  = document.querySelector('.inquiry-done');
+  var btn   = document.getElementById('inq-btn');
+  var hint  = document.getElementById('inq-hint');
+  var errEl = document.getElementById('inq-error');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    btn.disabled = true;
+    btn.textContent = '전송 중…';
+    errEl.hidden = true;
+
+    var payload = {
+      type:     form.querySelector('[name="type"]').value,
+      name:     form.querySelector('[name="name"]').value.trim(),
+      email:    form.querySelector('[name="email"]').value.trim(),
+      subject:  form.querySelector('[name="subject"]').value.trim(),
+      message:  form.querySelector('[name="message"]').value.trim(),
+      _gotcha:  form.querySelector('[name="_gotcha"]').value,
+    };
+
+    try {
+      var res  = await fetch(CONTACT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      var json = await res.json().catch(function () { return {}; });
+      if (res.ok) {
+        form.hidden = true;
+        done.hidden = false;
+      } else {
+        throw new Error(json.error || '오류가 발생했습니다.');
+      }
+    } catch (err) {
+      errEl.textContent = err.message || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+      errEl.hidden = false;
+      hint.hidden  = true;
+      btn.disabled = false;
+      btn.textContent = '보내기';
+    }
+  });
+}());
+</script>
 </body>
 </html>
