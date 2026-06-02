@@ -120,6 +120,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003218455',
       pdf: 'papers/Lee_et_al_2025.pdf' },
 
+    { type: 'publication', year: '2024', date: '2024-12-31', badge: 'badge-gold', badgeText: 'KCI',
+      title: 'Exploring the Applicability of Digital Neuropsychological Assessments: A Comparative Study of CANTAB and CERAD-K in Elderly Koreans',
+      authors: '이승철, 조성근, 심예린, 윤소영, 노수림',
+      journal: '한국자료분석학회지, 26(6), 1721–1738',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003154347',
+      pdf: 'papers/Lee_et_al_2024.pdf' },
+
     { type: 'publication', year: '2023', date: '2023-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: 'AI 스피커의 시각적 피드백 제시가 청년 및 중·장년 사용자의 지속사용의도에 미치는 영향: 사용자의 정서경험과 호감도의 이중매개 효과를 중심으로',
       authors: '이승철, 문선현, 노수림',
