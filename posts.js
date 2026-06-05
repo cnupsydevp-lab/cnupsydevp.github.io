@@ -140,6 +140,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002970273',
       pdf: 'papers/Lee_et_al_2023.pdf' },
 
+    { type: 'publication', year: '2018', date: '2018-01-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: 'Predictive Representation for Upcoming Linguistic Input in Younger and Older Adults',
+      authors: '윤홍옥, 문선현, 노수림',
+      journal: 'Language and Information, 22(2), 1–25',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002371324',
+      pdf: 'papers/Yun_et_al_2018.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
       title: 'SRCD Biennial Meeting — "Resilience trajectories across adolescence: A 10-year longitudinal study" (구두 발표, Washington D.C.)' },
