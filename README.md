@@ -15,7 +15,7 @@
 | `pi.html` | `/pi.html` | 지도교수 소개 |
 | `members.html` | `/members.html` | 구성원 (대학원생 + 학부생) |
 | `research.html` | `/research.html` | 연구분야 |
-| `activities.html` | `/activities.html` | 연구활동 |
+| `activities.html` | `/activities.html` | 연구활동 (논문·학술발표·연구과제) |
 | `participation.html` | `/participation.html` | 연구참여 모집 |
 | `notices.html` | `/notices.html` | 공지사항 |
 | `newsletter.html` | `/newsletter.html` | 소식지 |
@@ -33,7 +33,8 @@ homepage/
 ├── index.html          ← 진입점
 ├── style.css           ← 전체 디자인 시스템 (CSS 변수, 컴포넌트)
 ├── script.js           ← 네비게이션, 드롭다운, 폼 동작
-├── posts.js            ← 공지·소식지 게시글 데이터 (JS 배열)
+├── posts.js            ← 모든 콘텐츠 데이터 (공지·소식지·연구활동)
+├── papers/             ← 논문 PDF 파일 (Lastname_et_al_YYYY.pdf 형식)
 └── *.html              ← 각 페이지
 ```
 
@@ -66,22 +67,81 @@ homepage/
 
 ---
 
-## 공지·소식지 데이터 추가 방법
+## posts.js 데이터 구조
 
-`posts.js`의 `posts` 배열에 객체 추가:
+모든 콘텐츠는 `posts.js`의 `POSTS` 객체에서 관리합니다.
+
+### 공지사항 (`POSTS.notices`)
 
 ```js
 {
-  id: 'notice-003',
-  type: 'notice',            // 'notice' | 'newsletter'
+  id: 4,
+  date: 'YYYY-MM-DD',
+  badge: 'badge-muted',   // badge-muted | badge-gold | badge-navy
+  badgeText: '일반',       // 일반 | 모집 | 중요 등
   title: '제목',
-  date: '2026-06-01',
-  summary: '목록에 표시되는 한 줄 요약',
-  content: `<p>본문 HTML</p>`
+  body: `<p>본문 HTML</p>`
 }
 ```
 
-저장 후 push하면 공지사항/소식지 페이지에 자동 반영.
+### 소식지 (`POSTS.newsletter`)
+
+```js
+{
+  id: 3,
+  date: 'YYYY-MM-DD',
+  title: '제목',
+  image: 'images/파일명.jpg',   // 선택 — 없으면 텍스트 카드
+  body: `<p>본문 HTML</p>`
+}
+```
+
+### 연구참여 (`POSTS.participation`)
+
+```js
+{
+  id: 2,
+  date: 'YYYY-MM-DD',
+  badge: 'badge-navy',
+  badgeText: '모집',
+  title: '제목',
+  body: `<p>본문 HTML</p>`
+}
+```
+
+### 연구활동 (`POSTS.activities`)
+
+```js
+// 논문
+{ type: 'publication', year: '2025', date: 'YYYY-MM-DD',
+  badge: 'badge-gold', badgeText: 'KCI',
+  title: '논문 제목',
+  authors: '저자1, 저자2',
+  journal: '학술지명, 권(호), 시작쪽–끝쪽',
+  url: 'https://...',          // 선택 — KCI 등 링크
+  pdf: 'papers/Xxx_et_al_2025.pdf' },  // 선택
+
+// 학술발표
+{ type: 'presentation', year: '2025', date: 'YYYY-01-01',
+  badge: 'badge-muted', badgeText: '국제',
+  title: '학회명 — 발표 제목 (형식, 장소)' },
+
+// 연구과제
+{ type: 'grant', date: 'YYYY-01-01', status: '현재 진행',
+  title: '과제명',
+  description: '세부 설명',
+  period: 'YYYY–YYYY' },
+```
+
+---
+
+## 논문 PDF 추가 방법
+
+1. `papers/` 폴더에 PDF 업로드 — 파일명: `Lastname_et_al_YYYY.pdf`
+2. `posts.js`의 `POSTS.activities`에 `publication` 항목 추가
+3. 커밋 & 푸시
+
+> 파일명 규칙: 제1저자 성(영문) + `_et_al_` + 연도 (예: `Noh_et_al_2021.pdf`)
 
 ---
 
@@ -102,8 +162,7 @@ git push origin main
 
 ---
 
-## 미완성 항목
+## 문의 폼 연동
 
-### 대학원 진학 / 인턴 문의 폼 이메일 연동 (`admissions.html`, `intern.html`)
-
-현재 `action="#"` 플레이스홀더 상태. lab-api + Nodemailer(Gmail App Password) 방식으로 연동 예정.
+`admissions.html`, `intern.html` 두 폼 모두 `https://growingmind.ppai-lab.com/api/contact`로 `fetch` 전송.  
+ageart 서버의 Contact API가 이메일 전송을 처리합니다.
