@@ -140,6 +140,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002970273',
       pdf: 'papers/Lee_et_al_2023.pdf' },
 
+    { type: 'publication', year: '2024', date: '2024-03-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: 'Investigating the Comprehension of Passive Sentences in Korean Children: An Eye-Tracking Study',
+      authors: '김미숙, 노수림',
+      journal: '한국응용언어학, 40(1), 43–68',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003066637',
+      pdf: 'papers/Kim_et_al_2024.pdf' },
+
     { type: 'publication', year: '2018', date: '2018-01-01', badge: 'badge-gold', badgeText: 'KCI',
       title: 'Predictive Representation for Upcoming Linguistic Input in Younger and Older Adults',
       authors: '윤홍옥, 문선현, 노수림',
