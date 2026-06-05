@@ -63,6 +63,7 @@ const POSTS = {
       title: '일상적 창의성과 문제해결능력의 관계에서 공학계열 대학생의 팀워크역량과 자기주도학습력의 이중매개효과 분석',
       authors: '배성아, 옥승용, 노수림',
       journal: '공학교육연구, 23(6), 17–26',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002653626',
       pdf: 'papers/Bae_et_al_2020.pdf' },
     { type: 'publication', year: '2020', date: '2020-01-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '인지욕구와 읽기처리에 관련된 인지능력 및 읽기수행과의 관계',
