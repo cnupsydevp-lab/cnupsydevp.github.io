@@ -47,6 +47,12 @@ const POSTS = {
   // date: 'YYYY-01-01' 형식 (연도만 알 경우) — 알림 자동화에 사용
   activities: [
     // 논문
+    { type: 'publication', year: '2021', date: '2021-01-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '한국어 문장처리에서 청년과 노인의 실시간 인지자원 할당 양상과 읽기수행 비교',
+      authors: '문선현, 최원일, 노수림',
+      journal: '한국심리학회지: 일반, 40(1), 75–104',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002696637',
+      pdf: 'papers/Moon_et_al_2021.pdf' },
     { type: 'publication', year: '2021', date: '2021-06-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '어휘력과 작업기억이 청년과 노인의 문장 읽기 효율성에 미치는 영향',
       authors: '노수림, 문선현',
