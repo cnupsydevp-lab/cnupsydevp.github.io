@@ -849,7 +849,7 @@ body {
 /* 카드별 개인 색상 — 이은빈/강우석/김범주/엄주화 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #F9A8D4; --postit-lo: #F472B6;   /* 이은빈: 핑크 */
+  --postit: #FFC0CB; --postit-lo: #F5A0B0;   /* 이은빈: 핑크 */
   --postit-ink: #3E0828; --postit-ink2: #5C1240;
   --grain1: rgba(180,40,110,0.05); --grain2: rgba(180,40,110,0.03);
 }
