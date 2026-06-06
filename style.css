@@ -846,30 +846,30 @@ body {
   .member-info-card::before { border-radius: 1px; }
 }
 
-/* 카드별 개인 색상 — 파스텔 톤 */
+/* 카드별 개인 색상 — 비비드 톤 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #FFE8E6; --postit-lo: #FFD6D2;   /* 라이트 로즈 */
+  --postit: #FFB3AF; --postit-lo: #FF9490;   /* 비비드 코랄 로즈 */
   --postit-ink: #5A2A2E; --postit-ink2: #7A4044;
-  --grain1: rgba(160,80,75,0.04); --grain2: rgba(160,80,75,0.03);
+  --grain1: rgba(160,60,55,0.06); --grain2: rgba(160,60,55,0.04);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #DFF2E2; --postit-lo: #CAE8CE;   /* 라이트 민트 */
-  --postit-ink: #2A4030; --postit-ink2: #3C5842;
-  --grain1: rgba(60,100,65,0.04); --grain2: rgba(60,100,65,0.03);
+  --postit: #96E8B0; --postit-lo: #70D896;   /* 비비드 민트 */
+  --postit-ink: #1A3828; --postit-ink2: #2C5038;
+  --grain1: rgba(40,90,50,0.06); --grain2: rgba(40,90,50,0.04);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #EAE2F8; --postit-lo: #DDD4F0;   /* 라이트 라벤더 */
-  --postit-ink: #362850; --postit-ink2: #4E406A;
-  --grain1: rgba(85,65,115,0.04); --grain2: rgba(85,65,115,0.03);
+  --postit: #C4AAFC; --postit-lo: #AD8FF8;   /* 비비드 라벤더 */
+  --postit-ink: #2C1E48; --postit-ink2: #453068;
+  --grain1: rgba(75,50,120,0.06); --grain2: rgba(75,50,120,0.04);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
-  --postit: #FEFAF0; --postit-lo: #F8F0DC;   /* 웜 크림 */
-  --postit-ink: #3A3A30; --postit-ink2: #5A5A4A;
-  --grain1: rgba(80,80,60,0.04); --grain2: rgba(80,80,60,0.03);
+  --postit: #FFE450; --postit-lo: #FFD020;   /* 비비드 옐로우 */
+  --postit-ink: #2E2A10; --postit-ink2: #504A20;
+  --grain1: rgba(90,80,20,0.06); --grain2: rgba(90,80,20,0.04);
 }
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
