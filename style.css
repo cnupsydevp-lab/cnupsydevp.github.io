@@ -861,9 +861,9 @@ body {
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #5CB8FF; --postit-lo: #42A6F8;   /* 김범주: 스카이블루 */
-  --postit-ink: #0C2848; --postit-ink2: #183A60;
-  --grain1: rgba(20,70,140,0.06); --grain2: rgba(20,70,140,0.04);
+  --postit: #C080F8; --postit-lo: #A868EC;   /* 김범주: 보라색 */
+  --postit-ink: #1E0840; --postit-ink2: #2E1455;
+  --grain1: rgba(90,30,160,0.06); --grain2: rgba(90,30,160,0.04);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
