@@ -846,30 +846,30 @@ body {
   .member-info-card::before { border-radius: 1px; }
 }
 
-/* 카드별 개인 색상 — 비비드 톤 */
+/* 카드별 개인 색상 — 이은빈/강우석/김범주/엄주화 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #FFB3AF; --postit-lo: #FF9490;   /* 비비드 코랄 로즈 */
-  --postit-ink: #5A2A2E; --postit-ink2: #7A4044;
-  --grain1: rgba(160,60,55,0.06); --grain2: rgba(160,60,55,0.04);
+  --postit: #FF88BC; --postit-lo: #FF6EA8;   /* 이은빈: 핫핑크 */
+  --postit-ink: #480830; --postit-ink2: #660840;
+  --grain1: rgba(150,20,70,0.06); --grain2: rgba(150,20,70,0.04);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #96E8B0; --postit-lo: #70D896;   /* 비비드 민트 */
-  --postit-ink: #1A3828; --postit-ink2: #2C5038;
-  --grain1: rgba(40,90,50,0.06); --grain2: rgba(40,90,50,0.04);
+  --postit: #46CCAA; --postit-lo: #2CB896;   /* 강우석: 민트 */
+  --postit-ink: #0C2E22; --postit-ink2: #1A4234;
+  --grain1: rgba(20,85,60,0.06); --grain2: rgba(20,85,60,0.04);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #C4AAFC; --postit-lo: #AD8FF8;   /* 비비드 라벤더 */
-  --postit-ink: #2C1E48; --postit-ink2: #453068;
-  --grain1: rgba(75,50,120,0.06); --grain2: rgba(75,50,120,0.04);
+  --postit: #5CB8FF; --postit-lo: #42A6F8;   /* 김범주: 스카이블루 */
+  --postit-ink: #0C2848; --postit-ink2: #183A60;
+  --grain1: rgba(20,70,140,0.06); --grain2: rgba(20,70,140,0.04);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
-  --postit: #FFE450; --postit-lo: #FFD020;   /* 비비드 옐로우 */
-  --postit-ink: #2E2A10; --postit-ink2: #504A20;
-  --grain1: rgba(90,80,20,0.06); --grain2: rgba(90,80,20,0.04);
+  --postit: #FAFAF6; --postit-lo: #EEEEE8;   /* 엄주화: 화이트 */
+  --postit-ink: #2A2A26; --postit-ink2: #42423E;
+  --grain1: rgba(60,60,50,0.05); --grain2: rgba(60,60,50,0.03);
 }
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
