@@ -849,19 +849,19 @@ body {
 /* 카드별 개인 색상 — 이은빈/강우석/김범주/엄주화 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #F06292; --postit-lo: #EC407A;   /* 이은빈: 분홍 */
+  --postit: #F47BAA; --postit-lo: #EF5E90;   /* 이은빈: 분홍 */
   --postit-ink: #3A0820; --postit-ink2: #54123A;
   --grain1: rgba(180,30,80,0.06); --grain2: rgba(180,30,80,0.04);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #1ABC9C; --postit-lo: #17A589;   /* 강우석: 민트 */
+  --postit: #27CFAF; --postit-lo: #1EBA9C;   /* 강우석: 민트 */
   --postit-ink: #082820; --postit-ink2: #10382C;
   --grain1: rgba(10,120,100,0.06); --grain2: rgba(10,120,100,0.04);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #B87FE8; --postit-lo: #9E60D8;   /* 김범주: 보라 */
+  --postit: #C695EE; --postit-lo: #AD79E0;   /* 김범주: 보라 */
   --postit-ink: #1A0838; --postit-ink2: #280E50;
   --grain1: rgba(110,50,190,0.06); --grain2: rgba(110,50,190,0.04);
 }
