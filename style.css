@@ -849,27 +849,27 @@ body {
 /* 카드별 개인 색상 — 이은빈/강우석/김범주/엄주화 */
 .member-grid .member-card:nth-child(4n+1) .member-info-card {
   --tilt: -1.8deg; --tape-tilt:  3.4deg; --tape-x: -3px;
-  --postit: #FF88BC; --postit-lo: #FF6EA8;   /* 이은빈: 핫핑크 */
-  --postit-ink: #480830; --postit-ink2: #660840;
-  --grain1: rgba(150,20,70,0.06); --grain2: rgba(150,20,70,0.04);
+  --postit: #F9A8D4; --postit-lo: #F472B6;   /* 이은빈: 핑크 */
+  --postit-ink: #3E0828; --postit-ink2: #5C1240;
+  --grain1: rgba(180,40,110,0.05); --grain2: rgba(180,40,110,0.03);
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #46CCAA; --postit-lo: #2CB896;   /* 강우석: 민트 */
-  --postit-ink: #0C2E22; --postit-ink2: #1A4234;
-  --grain1: rgba(20,85,60,0.06); --grain2: rgba(20,85,60,0.04);
+  --postit: #6EE7B7; --postit-lo: #34D399;   /* 강우석: 민트 */
+  --postit-ink: #0A2C20; --postit-ink2: #163E2C;
+  --grain1: rgba(20,100,70,0.05); --grain2: rgba(20,100,70,0.03);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
-  --postit: #C080F8; --postit-lo: #A868EC;   /* 김범주: 보라색 */
-  --postit-ink: #1E0840; --postit-ink2: #2E1455;
-  --grain1: rgba(90,30,160,0.06); --grain2: rgba(90,30,160,0.04);
+  --postit: #C4B5FD; --postit-lo: #A78BFA;   /* 김범주: 보라 */
+  --postit-ink: #1E0E48; --postit-ink2: #2C1A5E;
+  --grain1: rgba(100,70,200,0.05); --grain2: rgba(100,70,200,0.03);
 }
 .member-grid .member-card:nth-child(4n+4) .member-info-card {
   --tilt:  2.0deg; --tape-tilt: -3.2deg; --tape-x: -4px;
   --postit: #FAFAF6; --postit-lo: #EEEEE8;   /* 엄주화: 화이트 */
   --postit-ink: #2A2A26; --postit-ink2: #42423E;
-  --grain1: rgba(60,60,50,0.05); --grain2: rgba(60,60,50,0.03);
+  --grain1: rgba(60,60,50,0.04); --grain2: rgba(60,60,50,0.02);
 }
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
