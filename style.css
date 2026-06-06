@@ -855,9 +855,9 @@ body {
 }
 .member-grid .member-card:nth-child(4n+2) .member-info-card {
   --tilt:  1.6deg; --tape-tilt: -2.6deg; --tape-x:  4px;
-  --postit: #6EE7B7; --postit-lo: #34D399;   /* 강우석: 민트 */
-  --postit-ink: #0A2C20; --postit-ink2: #163E2C;
-  --grain1: rgba(20,100,70,0.05); --grain2: rgba(20,100,70,0.03);
+  --postit: #00AB78; --postit-lo: #009468;   /* 강우석: 민트 */
+  --postit-ink: #00200F; --postit-ink2: #003020;
+  --grain1: rgba(0,100,65,0.07); --grain2: rgba(0,100,65,0.05);
 }
 .member-grid .member-card:nth-child(4n+3) .member-info-card {
   --tilt: -1.2deg; --tape-tilt:  2.6deg; --tape-x:  2px;
