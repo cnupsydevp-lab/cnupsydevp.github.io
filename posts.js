@@ -58,7 +58,7 @@ const POSTS = {
       authors: '문경지, 이명철, 홍우평, 노수림, 박창훈, 한경훈',
       journal: '운동학 학술지, 23(3), 11–19',
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002742492',
-      pdf: 'papers/KCI_FI002742492.pdf' },
+      pdf: 'papers/Moon_et_al_2021b.pdf' },
     { type: 'publication', year: '2021', date: '2021-06-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '어휘력과 작업기억이 청년과 노인의 문장 읽기 효율성에 미치는 영향',
       authors: '노수림, 문선현',
