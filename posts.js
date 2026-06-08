@@ -144,6 +144,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002121748',
       pdf: 'papers/Bae_et_al_2016.pdf' },
 
+    { type: 'publication', year: '2025', date: '2025-12-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: 'Quantifier-Spreading in Korean Children and Adults: Evidence from an Eye-Tracking Study',
+      authors: '김미숙, 노수림',
+      journal: 'Korean Journal of Applied Linguistics, 41(4), 35–67',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003284712',
+      pdf: 'papers/Kim_et_al_2025.pdf' },
+
     { type: 'publication', year: '2025', date: '2025-05-01', badge: 'badge-gold', badgeText: 'KCI',
       title: '메타버스 체험방식이 기억과 몰입감에 미치는 영향',
       authors: '이승철, 홍우평, 한경훈, 노수림',
