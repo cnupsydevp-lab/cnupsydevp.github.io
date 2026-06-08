@@ -50,7 +50,10 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Publications</span>
         <div class="pub-header">
-          <h2 class="section-title" style="margin:0;">논문</h2>
+          <div style="display:flex;align-items:baseline;gap:0.5rem;">
+            <h2 class="section-title" style="margin:0;">논문</h2>
+            <span id="pub-count" style="font-size:0.78rem;color:var(--muted);font-weight:normal;"></span>
+          </div>
           <div class="pub-sort-btns">
             <button class="pub-sort-btn active" id="sort-desc">최신순</button>
             <button class="pub-sort-btn" id="sort-asc">오래된순</button>
@@ -96,6 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof POSTS === 'undefined' || !POSTS.activities?.length) return;
 
   const pubs   = POSTS.activities.filter(p => p.type === 'publication');
+  const countEl = document.getElementById('pub-count');
+  if (countEl) countEl.textContent = `총 ${pubs.length}편`;
   const pres   = POSTS.activities.filter(p => p.type === 'presentation');
   const grants = POSTS.activities.filter(p => p.type === 'grant');
 
