@@ -158,6 +158,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003154347',
       pdf: 'papers/Lee_et_al_2024.pdf' },
 
+    { type: 'publication', year: '2023', date: '2023-09-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: 'Validation of the Korean Version of the Awareness of Age-Related Change (AARC) Questionnaire in a Sample of Middle-aged and Older Adults',
+      authors: '문선현, 엄진섭, 최원일, Allyson Brothers, 노수림',
+      journal: '한국심리학회지: 건강, 28(3), 789–815',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002961090',
+      pdf: 'papers/Moon_et_al_2023.pdf' },
+
     { type: 'publication', year: '2023', date: '2023-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: 'AI 스피커의 시각적 피드백 제시가 청년 및 중·장년 사용자의 지속사용의도에 미치는 영향: 사용자의 정서경험과 호감도의 이중매개 효과를 중심으로',
       authors: '이승철, 문선현, 노수림',
