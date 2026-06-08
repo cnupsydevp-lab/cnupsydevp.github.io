@@ -158,6 +158,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003046980',
       pdf: 'papers/Noh_et_al_2024.pdf' },
 
+    { type: 'publication', year: '2024', date: '2024-12-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '기능성 게임을 활용한 경도인지장애 선별도구에 대한 체계적 고찰',
+      authors: '전봄이, 이경주, 노수림, 심예린, 윤대현, 조성근',
+      journal: '한국심리학회지: 건강, 29(6), 951–975',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003139874',
+      pdf: 'papers/Jeon_et_al_2024.pdf' },
+
     { type: 'publication', year: '2024', date: '2024-12-31', badge: 'badge-gold', badgeText: 'KCI',
       title: 'Exploring the Applicability of Digital Neuropsychological Assessments: A Comparative Study of CANTAB and CERAD-K in Elderly Koreans',
       authors: '이승철, 조성근, 심예린, 윤소영, 노수림',
