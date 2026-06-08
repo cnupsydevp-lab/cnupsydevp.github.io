@@ -144,6 +144,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002121748',
       pdf: 'papers/Bae_et_al_2016.pdf' },
 
+    { type: 'publication', year: '2025', date: '2025-05-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '메타버스 체험방식이 기억과 몰입감에 미치는 영향',
+      authors: '이승철, 홍우평, 한경훈, 노수림',
+      journal: 'The Journal of the Convergence on Culture Technology (JCCT), 11(3), 545–559',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003207392',
+      pdf: 'papers/Lee_et_al_2025b.pdf' },
+
     { type: 'publication', year: '2025', date: '2025-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: '중고령자의 외로움이 스트레스에 미치는 영향: 사회적 상호작용 불안과 자기통제력의 이중 매개효과',
       authors: '이승철, 최원일, 윤소영, 노수림',
