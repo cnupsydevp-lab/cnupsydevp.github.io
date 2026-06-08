@@ -151,6 +151,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003218455',
       pdf: 'papers/Lee_et_al_2025.pdf' },
 
+    { type: 'publication', year: '2024', date: '2024-03-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '중고령성인의 자기통제력이 외로움에 미치는 영향: 사회적 배제와 좌절된 소속감의 매개효과',
+      authors: '노수림, 최원일, 김주현',
+      journal: '한국심리학회지: 건강, 29(1), 127–156',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003046980',
+      pdf: 'papers/Noh_et_al_2024.pdf' },
+
     { type: 'publication', year: '2024', date: '2024-12-31', badge: 'badge-gold', badgeText: 'KCI',
       title: 'Exploring the Applicability of Digital Neuropsychological Assessments: A Comparative Study of CANTAB and CERAD-K in Elderly Koreans',
       authors: '이승철, 조성근, 심예린, 윤소영, 노수림',
