@@ -174,13 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPubs();
 
   const presList = document.getElementById('pres-list');
-  if (presList) presList.innerHTML = pres.map(p => `
+  if (presList) presList.innerHTML = pres.map(p => p.authors ? `
+    <div class="pub-item">
+      <span class="pub-year">${p.year}</span>
+      <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
+      <div class="pub-meta">
+        <span class="pub-title">${p.title}</span>
+        <span class="pub-authors">${p.authors}</span>
+        <span class="pub-journal">${p.venue}</span>
+        ${p.abstract ? `<a class="pub-download" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
+        ${p.poster ? `<a class="pub-download" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
+      </div>
+    </div>` : `
     <div class="notice-item">
       <span class="notice-date">${p.year}</span>
-      <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
+      <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
       <span class="notice-title">${p.title}</span>
-      ${p.abstract ? `<a class="pub-download" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
-      ${p.poster ? `<a class="pub-download" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
     </div>`).join('');
 
   const grantGrid = document.getElementById('grant-grid');
