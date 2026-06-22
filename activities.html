@@ -179,6 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="notice-date">${p.year}</span>
       <span class="badge ${p.badge}" style="white-space: nowrap;">${p.badgeText}</span>
       <span class="notice-title">${p.title}</span>
+      ${p.abstract ? `<a class="pub-download" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
+      ${p.poster ? `<a class="pub-download" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
     </div>`).join('');
 
   const grantGrid = document.getElementById('grant-grid');

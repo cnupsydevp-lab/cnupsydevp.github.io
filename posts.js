@@ -215,6 +215,10 @@ const POSTS = {
       pdf: 'papers/Yun_et_al_2018.pdf' },
 
     // 학술발표
+    { type: 'presentation', year: '2025', date: '2025-08-21', badge: 'badge-muted', badgeText: '국내',
+      title: '제79차 한국심리학회 연차학술대회 — 외로움이 생애주기별 인지 편향(주의, 기억, 표정 해석)에 미치는 영향 (이승철, 김혜민, 김민주, 김아중, 노수림; 포스터 발표, 일산)',
+      abstract: 'presentations/abstracts/Lee_et_al_2025_KPS79.pdf',
+      poster: 'presentations/posters/Lee_et_al_2025_KPS79.pdf' },
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
       title: 'SRCD Biennial Meeting — "Resilience trajectories across adolescence: A 10-year longitudinal study" (구두 발표, Washington D.C.)' },
     { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국내',
