@@ -239,7 +239,7 @@ const POSTS = {
       title: '한국발달심리학회 연차학술대회 — 영유아 언어 발달과 디지털 미디어 노출의 상호작용 (포스터, 서울)' },
     { type: 'presentation', year: '2024', date: '2024-07-21', badge: 'badge-muted', badgeText: '국제',
       title: 'Validity of computerized neuropsychological assessment in healthy middle-aged and elderly Koreans',
-      authors: 'Lee, S. C., Noh, S. R., Cho, S., & Shim, Y.',
+      authors: '이승철, 노수림, 조성근, 심예린',
       venue: '33rd International Congress of Psychology, Prague, Czech Republic. (Poster presentation)',
       poster: 'presentations/posters/Lee_et_al_2024_ICP33.pdf' },
     { type: 'presentation', year: '2024', date: '2024-05-01', badge: 'badge-muted', badgeText: '국내',
