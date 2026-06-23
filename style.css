@@ -682,105 +682,48 @@ body {
   margin-top: 0.25rem;
 }
 /* ════════════════════════════════════════════════════════════════
-   학부생 INFO CARD — 포스트잇(Post-it) + 마스킹 테이프
-   따뜻한 크림-옐로우 종이(섹션 #FFE9BE 와 흰색 사이) · 종이결 텍스처 ·
-   상단 중앙에 반투명·찢긴 끝 마스킹 테이프 · 아래가 들린 컬 그림자.
-   순수 CSS · 추가 HTML 없음 (::before = 테이프, ::after = 컬 그림자).
+   멤버 INFO CARD — 사각형 말풍선
+   사진 아래에 붙는 말풍선. ::before = 위쪽 꼬리(삼각형).
+   카드별 배경색은 HTML inline --postit 으로 지정.
    ════════════════════════════════════════════════════════════════ */
 .member-info-card {
-  /* 카드별 토큰 — 개인별 색상 (아래 nth-child 에서 1인 1색 지정) */
-  --postit:      #FAFAF8;                  /* fallback: 흰색 */
-  --postit-lo:   #EEEEEA;                  /* 하단 그라데이션 */
-  --postit-ink:  #2A2A28;                  /* 본문 잉크 */
-  --postit-ink2: #525250;                  /* 보조 잉크 */
-  --grain1:      rgba(80,80,80,0.040);     /* 종이결 섬유 1 */
-  --grain2:      rgba(80,80,80,0.030);     /* 종이결 섬유 2 */
-  --tape:        rgba(255,255,255,0.75);   /* 반투명 화이트 테이프 */
-  --tape-edge:   rgba(200,200,200,0.50);   /* 테이프 위·아래 음영 */
-  --tilt:       -1.8deg;                   /* 손으로 붙인 듯한 기울기 */
-  --tape-tilt:   3.2deg;                   /* 테이프는 노트와 다른 각도 */
-  --tape-x:      0px;                       /* 테이프 좌우 미세 이동 */
+  --postit:      #FAFAF8;
+  --postit-ink:  #2A2A28;
+  --postit-ink2: #525250;
 
   position: relative;
-  margin-top: 2rem;                        /* 테이프가 위로 걸칠 여유 */
+  margin-top: 1.5rem;
   padding: 1.1rem 1.05rem 1.3rem;
   text-align: left;
   color: var(--postit-ink);
-  border: 1px solid rgba(150,118,80,0.16);
-  border-radius: 2px 3px 4px 3px;          /* 손으로 자른 듯 미세 비대칭 */
-  /* 따뜻한 종이결: 햇빛 바램 드리프트 2 + 교차 섬유 2 + 세로 베이스 */
-  background-color: var(--postit);
-  background-image:
-    radial-gradient(120% 90% at 18% 12%, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0) 44%),
-    radial-gradient(140% 120% at 88% 98%, rgba(150,118,80,0.10) 0%, rgba(150,118,80,0) 48%),
-    repeating-linear-gradient(48deg, var(--grain1) 0 1px, rgba(120,92,58,0) 1px 3px),
-    repeating-linear-gradient(-42deg, var(--grain2) 0 1px, rgba(120,92,58,0) 1px 4px),
-    linear-gradient(168deg, var(--postit) 0%, var(--postit) 70%, var(--postit-lo) 100%);
-  background-blend-mode: normal, multiply, normal, normal, normal;
-  /* 아래로 치우친 다층 그림자 — 데스크에 얹힌 느낌 */
+  background: var(--postit);
+  border-radius: 8px;
   box-shadow:
-    0 1px 1px rgba(62,58,57,0.10),
-    0 6px 12px -4px rgba(62,58,57,0.18),
-    0 15px 26px -10px rgba(62,58,57,0.16);
-  transform: rotate(var(--tilt));
-  transform-origin: 50% 0%;                /* 테이프 아래를 축으로 회전 */
+    0 1px 3px rgba(62,58,57,0.08),
+    0 6px 18px -4px rgba(62,58,57,0.16);
   transition:
-    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
   overflow: visible;
 }
 
-/* 하단 컬 그림자 — 포스트잇은 아래 가장자리가 살짝 들린다 */
-.member-info-card::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 10%;
-  right: 6%;
-  bottom: -4px;
-  height: 16px;
-  background: rgba(62,58,57,0.20);
-  border-radius: 50%;
-  filter: blur(8px);
-  transform: rotate(1.5deg);
-  transform-origin: 100% 100%;
-  transition: opacity 0.34s ease, transform 0.34s ease;
-}
-
-/* 마스킹 테이프 — 상단 중앙, 반투명(배경 비침), 찢긴 끝, 자체 그림자 */
+/* 말풍선 꼬리 — 위쪽 가운데, 사진 방향 */
 .member-info-card::before {
   content: "";
   position: absolute;
-  z-index: 2;
-  top: -14px;
+  top: -10px;
   left: 50%;
-  width: 88px;
-  height: 28px;
-  transform: translateX(calc(-50% + var(--tape-x))) rotate(var(--tape-tilt));
-  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 11px solid var(--postit);
   pointer-events: none;
-  /* 대각 광택 + 미세 섬유결 + 가장자리 음영 + 반투명 탄 베이스 */
-  background-image:
-    linear-gradient(106deg, rgba(255,255,255,0) 38%, rgba(255,255,255,0.30) 50%, rgba(255,255,255,0) 62%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, rgba(140,110,70,0.05) 2px 4px),
-    linear-gradient(0deg, var(--tape-edge), rgba(255,255,255,0.12) 24%, rgba(255,255,255,0.12) 76%, var(--tape-edge)),
-    linear-gradient(var(--tape), var(--tape));
-  box-shadow: 0 2px 4px rgba(62,58,57,0.14), 0 4px 9px -3px rgba(62,58,57,0.10);
-  /* 찢긴 끝: 좌/우 가장자리에만 지그재그, 가운데는 솔리드.
-     기본 mask-composite(add=합집합)만 사용 → 폭넓은 브라우저 호환. */
-  -webkit-mask:
-    linear-gradient(45deg,  transparent 0 4px, #000 4px) left  / 6px 6px repeat-y,
-    linear-gradient(-45deg, transparent 0 4px, #000 4px) right / 6px 6px repeat-y,
-    linear-gradient(#000, #000) center / calc(100% - 10px) 100% no-repeat;
-          mask:
-    linear-gradient(45deg,  transparent 0 4px, #000 4px) left  / 6px 6px repeat-y,
-    linear-gradient(-45deg, transparent 0 4px, #000 4px) right / 6px 6px repeat-y,
-    linear-gradient(#000, #000) center / calc(100% - 10px) 100% no-repeat;
+  z-index: 1;
 }
-/* mask 미지원(아주 오래된 브라우저) → 깔끔한 사각 테이프로 우아하게 폴백 */
-@supports not ((-webkit-mask: linear-gradient(#000,#000)) or (mask: linear-gradient(#000,#000))) {
-  .member-info-card::before { border-radius: 1px; }
-}
+
+.member-info-card::after { display: none; }
 
 
 /* 타이포 — 좌측 정렬, "—" 플레이스홀더에도 높이 유지 (에디토리얼) */
@@ -1627,32 +1570,20 @@ html { scroll-behavior: smooth; }
   border-color: var(--accent-border);
 }
 
-/* 학부생 카드(포스트잇): 카드 프레임은 고정, 포스트잇만 펴지며 떠오른다.
-   :has() 미지원 시엔 위의 카드 리프트로 우아하게 폴백된다. */
+/* 말풍선 카드: 카드 전체가 살짝 위로 뜬다 */
 .member-card:has(.member-info-card):hover { transform: none; }
 
 @media (prefers-reduced-motion: no-preference) {
   .member-card:hover .member-info-card {
-    transform: rotate(0deg) translateY(-6px);          /* 똑바로 펴지며 상승 */
+    transform: translateY(-5px);
     box-shadow:
-      0 2px 2px rgba(62,58,57,0.10),
-      0 12px 20px -6px rgba(62,58,57,0.20),
-      0 26px 44px -14px rgba(62,58,57,0.20);
-  }
-  .member-card:hover .member-info-card::after {        /* 컬 그림자 깊어짐 */
-    transform: rotate(1.5deg) scaleY(0.82) scaleX(1.05);
-    opacity: 0.9;
-  }
-  .member-card:hover .member-info-card::before {       /* 테이프는 살짝만 펴짐 */
-    transform: translateX(calc(-50% + var(--tape-x))) rotate(calc(var(--tape-tilt) * 0.45));
+      0 2px 6px rgba(62,58,57,0.10),
+      0 12px 28px -6px rgba(62,58,57,0.22);
   }
 }
 
-/* 감속 모션 선호 사용자: 정적 기울기 유지, 모든 전환/움직임 제거 */
 @media (prefers-reduced-motion: reduce) {
-  .member-info-card,
-  .member-info-card::before,
-  .member-info-card::after { transition: none; }
+  .member-info-card { transition: none; }
 }
 
 /* ── Animations ──────────────────────────────────────────── */
