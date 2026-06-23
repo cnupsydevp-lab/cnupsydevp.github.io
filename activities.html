@@ -70,8 +70,18 @@
 <section class="section section-alt">
     <div class="container">
         <span class="eyebrow section-eyebrow">Presentations</span>
-        <h2 class="section-title">학술발표</h2>
+        <div class="pub-header">
+          <div style="display:flex;align-items:baseline;gap:0.5rem;">
+            <h2 class="section-title" style="margin:0;">학술발표</h2>
+            <span id="pres-count" style="font-size:0.78rem;color:var(--muted);font-weight:normal;"></span>
+          </div>
+          <div class="pub-sort-btns">
+            <button class="pub-sort-btn active" id="pres-sort-desc">최신순</button>
+            <button class="pub-sort-btn" id="pres-sort-asc">오래된순</button>
+          </div>
+        </div>
         <div class="notice-list" id="pres-list" style="margin-top: 1.5rem;"></div>
+        <div class="pub-pagination" id="pres-pagination"></div>
     </div>
 </section>
 
@@ -192,26 +202,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderPubs();
 
-  const presList = document.getElementById('pres-list');
-  if (presList) presList.innerHTML = pres.map(p => p.authors ? `
-    <div class="pub-item">
-      <span class="pub-year">${p.year}</span>
-      <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
-      <div class="pub-meta">
-        <span class="pub-title">${p.title}</span>
-        <span class="pub-authors">${p.authors}</span>
-        <span class="pub-journal">${p.venue}</span>
-        ${(p.abstract || p.poster) ? `<div style="display:flex;gap:0.75rem;margin-top:0.45rem;">
-          ${p.abstract ? `<a class="pub-download" style="margin-top:0;" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
-          ${p.poster ? `<a class="pub-download" style="margin-top:0;" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
-        </div>` : ''}
-      </div>
-    </div>` : `
-    <div class="notice-item">
-      <span class="notice-date">${p.year}</span>
-      <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
-      <span class="notice-title">${p.title}</span>
-    </div>`).join('');
+  const presCountEl = document.getElementById('pres-count');
+  if (presCountEl) presCountEl.textContent = `총 ${pres.length}건`;
+
+  let presSortDesc = true;
+  let presPage = 1;
+
+  function renderPres() {
+    const sorted = [...pres].sort((a, b) =>
+      presSortDesc ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)
+    );
+    const totalPages = Math.ceil(sorted.length / PER_PAGE);
+    const start = (presPage - 1) * PER_PAGE;
+    const page = sorted.slice(start, start + PER_PAGE);
+
+    const presList = document.getElementById('pres-list');
+    if (presList) presList.innerHTML = page.map(p => p.authors ? `
+      <div class="pub-item">
+        <span class="pub-year">${p.year}</span>
+        <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
+        <div class="pub-meta">
+          <span class="pub-title">${p.title}</span>
+          <span class="pub-authors">${p.authors}</span>
+          <span class="pub-journal">${p.venue}</span>
+          ${(p.abstract || p.poster) ? `<div style="display:flex;gap:0.75rem;margin-top:0.45rem;">
+            ${p.abstract ? `<a class="pub-download" style="margin-top:0;" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
+            ${p.poster ? `<a class="pub-download" style="margin-top:0;" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
+          </div>` : ''}
+        </div>
+      </div>` : `
+      <div class="notice-item">
+        <span class="notice-date">${p.year}</span>
+        <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
+        <span class="notice-title">${p.title}</span>
+      </div>`).join('');
+
+    const pagination = document.getElementById('pres-pagination');
+    if (pagination) {
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+      } else {
+        const prevPage = Math.max(1, presPage - 5);
+        const nextPage = Math.min(totalPages, presPage + 5);
+        const prev = `<button class="pub-page-btn pub-page-nav" data-page="${prevPage}" ${presPage === 1 ? 'disabled' : ''}>이전</button>`;
+        const nums = Array.from({length: totalPages}, (_, i) =>
+          `<button class="pub-page-btn${i + 1 === presPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>`
+        ).join('');
+        const next = `<button class="pub-page-btn pub-page-nav" data-page="${nextPage}" ${presPage === totalPages ? 'disabled' : ''}>다음</button>`;
+        pagination.innerHTML = prev + nums + next;
+        pagination.querySelectorAll('.pub-page-btn:not([disabled])').forEach(btn => {
+          btn.addEventListener('click', () => {
+            presPage = Number(btn.dataset.page);
+            renderPres();
+            document.querySelector('.section-alt').scrollIntoView({behavior: 'smooth', block: 'start'});
+          });
+        });
+      }
+    }
+  }
+
+  document.getElementById('pres-sort-desc').addEventListener('click', function() {
+    presSortDesc = true; presPage = 1;
+    this.classList.add('active');
+    document.getElementById('pres-sort-asc').classList.remove('active');
+    renderPres();
+  });
+  document.getElementById('pres-sort-asc').addEventListener('click', function() {
+    presSortDesc = false; presPage = 1;
+    this.classList.add('active');
+    document.getElementById('pres-sort-desc').classList.remove('active');
+    renderPres();
+  });
+
+  renderPres();
 
   const grantGrid = document.getElementById('grant-grid');
   if (grantGrid) grantGrid.innerHTML = grants.map(g => `
