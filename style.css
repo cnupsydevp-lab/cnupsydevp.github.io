@@ -47,6 +47,30 @@
 /* ── Reset ──────────────────────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ── Focus ───────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ── Skip Link ───────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #FFFBF1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  transition: top 0.15s;
+}
+.skip-link:focus { top: 0; }
+
 body {
   font-family: var(--font);
   font-weight: 400;
@@ -762,7 +786,7 @@ body {
   border-top: 1px dashed rgba(74,64,52,0.22);   /* 연필선 같은 점선 */
 }
 .member-info-label {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--postit-ink2);
@@ -919,7 +943,8 @@ body {
   background: none;
   border: 1px solid var(--border-md);
   border-radius: 20px;
-  padding: 0.28rem 0.7rem;
+  padding: 0.48rem 0.85rem;
+  min-height: 36px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
@@ -943,8 +968,8 @@ body {
   font-family: var(--font);
   font-size: 0.76rem;
   font-weight: 600;
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
   border: 1px solid var(--border-md);
   background: none;
