@@ -658,8 +658,10 @@ body {
 .member-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
+  margin-top: 2.25rem;
 }
+.member-grid + .member-grid { margin-top: 3rem; }
 .member-card { text-align: center; }
 .member-photo {
   width: 110px;
@@ -667,7 +669,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
   background: var(--bg-card);
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.25rem;
   display: block;
   border: 1px solid var(--border);
 }
@@ -692,8 +694,8 @@ body {
   --postit-ink2: #525250;
 
   position: relative;
-  margin-top: 1.5rem;
-  padding: 1.1rem 1.05rem 1.3rem;
+  margin-top: 2.25rem;
+  padding: 1.25rem 1.1rem 1.4rem;
   text-align: left;
   color: var(--postit-ink);
   background: var(--postit);
