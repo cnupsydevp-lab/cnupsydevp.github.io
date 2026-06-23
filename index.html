@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DPWL — 발달·노화 심리 연구실</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="site-nav">
     <div class="nav-wrapper">
-        <h1 class="logo"><a href="index.html">DPWL</a></h1>
+        <div class="logo"><a href="index.html">DPWL</a></div>
         <nav><ul class="nav-links">
             <li><a href="index.html" class="active">소개</a></li>
             <li><a href="pi.html">지도교수</a></li>
@@ -38,54 +41,14 @@
     </div>
 </header>
 
-<!-- =====================================================
-     HERO
-     구조: 좌(소개 텍스트) + 우(전체 페이지 빠른이동 그리드)
-     ===================================================== -->
 <section class="hero">
     <div class="container">
-        <div class="hero-split">
-
-            <!-- 왼쪽: 연구실 소개 -->
-            <div class="hero-intro">
-                <span class="eyebrow">Digital Psychological Wellness Lab (DPWL)</span>
-                <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
-                <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 중년부터 노년까지 전 생애 발달을 탐구합니다</p>
-                <div class="hero-cta">
-                    <a href="research.html" class="btn-primary">연구 분야 보기</a>
-                    <a href="admissions.html" class="btn-ghost">대학원 진학</a>
-                </div>
-            </div>
-
-            <!-- 오른쪽: 사이트 전체 섹션 바로가기 (3×2 그리드) -->
-            <!-- 카드 추가/제거: .hero-nav-card 블록을 복사하거나 삭제 -->
-            <nav class="hero-nav-grid" aria-label="사이트 섹션">
-                <a href="pi.html" class="hero-nav-card">
-                    <span class="hero-nav-label">지도교수</span>
-                    <span class="hero-nav-sub">Principal Investigator</span>
-                </a>
-                <a href="research.html" class="hero-nav-card">
-                    <span class="hero-nav-label">연구분야</span>
-                    <span class="hero-nav-sub">Research Areas</span>
-                </a>
-                <a href="members.html" class="hero-nav-card">
-                    <span class="hero-nav-label">구성원</span>
-                    <span class="hero-nav-sub">Lab Members</span>
-                </a>
-                <a href="contact.html" class="hero-nav-card">
-                    <span class="hero-nav-label">Contact</span>
-                    <span class="hero-nav-sub">Admissions & Internship</span>
-                </a>
-                <a href="participation.html" class="hero-nav-card">
-                    <span class="hero-nav-label">연구참여</span>
-                    <span class="hero-nav-sub">Research Participation</span>
-                </a>
-                <a href="notices.html" class="hero-nav-card">
-                    <span class="hero-nav-label">공지사항</span>
-                    <span class="hero-nav-sub">Announcements</span>
-                </a>
-            </nav>
-
+        <span class="eyebrow">Digital Psychological Wellness Lab (DPWL)</span>
+        <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
+        <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 중년부터 노년까지 전 생애 발달을 탐구합니다</p>
+        <div class="hero-cta">
+            <a href="admissions.html" class="btn-primary">대학원 진학 안내</a>
+            <a href="research.html" class="btn-ghost">연구 분야 보기</a>
         </div>
     </div>
 </section>
@@ -173,6 +136,22 @@
                 <span class="footer-logo">DPWL</span>
                 <p>충남대학교 심리학과<br>발달·노화 심리 연구실<br>대전광역시 유성구 대학로 99<br>공동실험실습관(W9) 208호</p>
             </div>
+            <nav class="footer-nav">
+                <div class="footer-nav-group">
+                    <span class="footer-nav-title">연구실</span>
+                    <a href="pi.html">지도교수</a>
+                    <a href="members.html">구성원</a>
+                    <a href="research.html">연구분야</a>
+                    <a href="activities.html">연구활동</a>
+                </div>
+                <div class="footer-nav-group">
+                    <span class="footer-nav-title">참여 &amp; 문의</span>
+                    <a href="participation.html">연구참여</a>
+                    <a href="admissions.html">대학원 진학</a>
+                    <a href="intern.html">인턴</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </nav>
         </div>
         <p class="footer-copy">&copy; 2026 DPWL. All rights reserved.</p>
     </div>
