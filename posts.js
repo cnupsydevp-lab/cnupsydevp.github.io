@@ -233,10 +233,6 @@ const POSTS = {
       venue: '한국건강심리학회 제69차 춘계학술대회, 공주, 대한민국. (포스터 발표)',
       abstract: 'presentations/abstracts/Lee_et_al_2025_KHPA69.pdf',
       poster: 'presentations/posters/Lee_et_al_2025_KHPA69.pdf' },
-    { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국제',
-      title: 'SRCD Biennial Meeting — "Resilience trajectories across adolescence: A 10-year longitudinal study" (구두 발표, Washington D.C.)' },
-    { type: 'presentation', year: '2025', date: '2025-01-01', badge: 'badge-muted', badgeText: '국내',
-      title: '한국발달심리학회 연차학술대회 — 영유아 언어 발달과 디지털 미디어 노출의 상호작용 (포스터, 서울)' },
     { type: 'presentation', year: '2024', date: '2024-07-21', badge: 'badge-muted', badgeText: '국제',
       title: 'Validity of computerized neuropsychological assessment in healthy middle-aged and elderly Koreans',
       authors: '이승철, 노수림, 조성근, 심예린',
@@ -247,10 +243,6 @@ const POSTS = {
       authors: '이승철, 윤소영, 노수림',
       venue: '한국건강심리학회 창립 30주년 기념행사 및 제67차 춘계학술대회, 대전, 대한민국. (포스터 발표)',
       poster: 'presentations/posters/Lee_et_al_2024_KHPA67.pdf' },
-    { type: 'presentation', year: '2024', date: '2024-01-01', badge: 'badge-muted', badgeText: '국제',
-      title: 'ISSBD 28th Biennial Meeting — "Executive function development and digital media use in Korean preschoolers" (포스터, Lisbon)' },
-    { type: 'presentation', year: '2024', date: '2024-01-01', badge: 'badge-muted', badgeText: '국내',
-      title: '한국심리학회 연차학술대회 — 팬데믹 전후 영유아 사회·정서 발달 비교 (구두 발표, 부산)' },
 
     // 연구과제
     { type: 'grant', date: '2024-01-01', status: '현재 진행',
