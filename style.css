@@ -901,7 +901,7 @@ body {
 /* ── Publication List ────────────────────────────────────── */
 .pub-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 0;
 }
@@ -909,6 +909,7 @@ body {
   display: flex;
   gap: 0.5rem;
   margin-left: auto;
+  padding-top: 0.45rem;
 }
 .pub-sort-btn {
   font-family: var(--font);
