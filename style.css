@@ -562,7 +562,7 @@ body {
   margin-bottom: 1rem;
   letter-spacing: -0.04em;
 }
-.card h4 {
+.card h3 {
   font-family: var(--font);
   font-size: 0.95rem;
   font-weight: 700;
@@ -593,7 +593,7 @@ body {
 }
 .info-card:hover { border-color: var(--accent-border); box-shadow: 0 6px 18px rgba(62, 58, 57, 0.08); }
 .info-card-icon { font-size: 1.3rem; margin-bottom: 0.75rem; }
-.info-card h4 {
+.info-card h3 {
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -697,7 +697,7 @@ body {
   display: block;
   border: 1px solid var(--border);
 }
-.member-card h4 {
+.member-card h3 {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-dark);
@@ -888,7 +888,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
-.step h4 {
+.step h3 {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-dark);

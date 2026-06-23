@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DPWL — 연구활동</title>
+    <meta name="description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
@@ -280,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grantGrid = document.getElementById('grant-grid');
   if (grantGrid) grantGrid.innerHTML = grants.map(g => `
     <div class="info-card">
-      <h4>${g.status}</h4>
+      <h3>${g.status}</h3>
       <p>${g.title}<br>${g.description}<br><span style="font-size:0.78rem;color:var(--muted);">${g.period}</span></p>
     </div>`).join('');
 });
