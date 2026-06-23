@@ -218,7 +218,7 @@ const POSTS = {
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
       authors: '이승철, 김미숙, 김혜민, 노수림',
-      venue: '2025년 한국심리언어학회 정기학술대회, 서울, 대한민국. (구두 발표)',
+      venue: '한국심리언어학회 정기학술대회, 서울, 대한민국. (구두 발표)',
       abstract: 'presentations/abstracts/Lee_et_al_2025_KPLS.pdf' },
     { type: 'presentation', year: '2025', date: '2025-08-21', badge: 'badge-muted', badgeText: '국내',
       title: '외로움이 생애주기별 인지 편향(주의, 기억, 표정 해석)에 미치는 영향',
