@@ -311,7 +311,6 @@ const POSTS = {
       id: 2,
       date: '2026-05-20',
       title: '연구실 신입 구성원 소개',
-      image: 'images/Seungcheol.jpeg',
       body: `<p>새로운 연구실 구성원을 소개합니다.</p>`
     }
   ]
