@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDropdowns();
   initNotifBadge();
   initMobileNav();
+  initSearch();
   initBackToTop();
   initRipple();
 
@@ -254,5 +255,95 @@ function initRipple() {
       this.appendChild(r);
       r.addEventListener('animationend', () => r.remove());
     });
+  });
+}
+
+function initSearch() {
+  const form = document.querySelector('.nav-search');
+  if (!form) return;
+  const input = form.querySelector('.nav-search-input');
+  const results = form.querySelector('.nav-search-results');
+  if (!input || !results) return;
+
+  // 사이트 주요 페이지 인덱스 (라벨 + 검색 키워드 + 이동 경로)
+  const INDEX = [
+    { label: '소개',        url: 'index.html',         kw: 'about 소개 홈 메인 dpwl 연구실' },
+    { label: '지도교수',     url: 'pi.html',            kw: 'pi professor 교수 지도교수' },
+    { label: '구성원',       url: 'members.html',       kw: 'members 구성원 연구원 팀원 대학원생' },
+    { label: '연구분야',     url: 'research.html',      kw: 'research 연구 분야 논문 publications 성과' },
+    { label: '연구활동',     url: 'activities.html',    kw: 'activities 연구활동 활동 세미나 학회' },
+    { label: '연구참여',     url: 'participation.html', kw: 'participation 연구참여 참여 실험 모집' },
+    { label: '공지사항',     url: 'notices.html',       kw: 'notices 공지사항 공지 알림' },
+    { label: '소식지',       url: 'newsletter.html',    kw: 'newsletter 소식지 뉴스레터 소식' },
+    { label: 'Contact',     url: 'contact.html',       kw: 'contact 연락처 문의 위치 오시는길 이메일 지도' },
+    { label: '대학원 진학',  url: 'admissions.html',    kw: 'admissions 대학원 진학 입학 지원' },
+    { label: '인턴',         url: 'intern.html',        kw: 'intern 인턴 인턴십' },
+  ];
+
+  let items = [];
+  let activeIdx = -1;
+
+  function close() {
+    results.hidden = true;
+    results.innerHTML = '';
+    items = [];
+    activeIdx = -1;
+  }
+
+  function setActive(i) {
+    items.forEach(a => a.classList.remove('active'));
+    activeIdx = i;
+    if (items[i]) items[i].classList.add('active');
+  }
+
+  function render() {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { close(); return; }
+    const matches = INDEX
+      .filter(e => e.label.toLowerCase().includes(q) || e.kw.toLowerCase().includes(q))
+      .slice(0, 8);
+
+    results.innerHTML = '';
+    if (!matches.length) {
+      const li = document.createElement('li');
+      li.className = 'nav-search-empty';
+      li.textContent = '검색 결과가 없습니다';
+      results.appendChild(li);
+      results.hidden = false;
+      items = [];
+      activeIdx = -1;
+      return;
+    }
+    matches.forEach(m => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = m.url;
+      a.textContent = m.label;
+      li.appendChild(a);
+      results.appendChild(li);
+    });
+    items = Array.from(results.querySelectorAll('a'));
+    results.hidden = false;
+    setActive(0);
+  }
+
+  input.addEventListener('input', render);
+  input.addEventListener('focus', () => { if (input.value.trim()) render(); });
+
+  input.addEventListener('keydown', (e) => {
+    if (results.hidden || !items.length) return;
+    if (e.key === 'ArrowDown')      { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
+    else if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Escape')    { close(); input.blur(); }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const target = items[activeIdx] || items[0];
+    if (target) window.location.href = target.getAttribute('href');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!form.contains(e.target)) close();
   });
 }
