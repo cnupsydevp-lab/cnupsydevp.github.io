@@ -37,7 +37,10 @@
   --text-mid:      #595757;
 
   --font:         'Noto Sans KR', system-ui, -apple-system, sans-serif;
-  --font-display: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  /* 큰 글씨(제목·숫자) — 정제 티어: 영문/숫자 → Abril Fatface, 한글 → Do Hyeon */
+  --font-display: 'Abril Fatface', 'Do Hyeon', system-ui, -apple-system, sans-serif;
+  /* 로고·히어로 — 강조 티어: 영문 → Ultra, 한글 → Black Han Sans */
+  --font-display-strong: 'Ultra', 'Black Han Sans', system-ui, -apple-system, sans-serif;
 
   --radius: 8px;
   --shadow-sm: 0 2px 10px rgba(62, 58, 57, 0.07);
@@ -105,7 +108,7 @@ body {
 }
 /* 웹페이지 이름: 왼쪽 끝, 배경/박스 없이 텍스트만 */
 .logo a {
-  font-family: var(--font-display);
+  font-family: var(--font-display-strong);
   font-style: normal;
   font-weight: 900;
   font-size: 1.45rem;
@@ -347,7 +350,7 @@ body {
   padding-top: 0.45rem;
 }
 .hero-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display-strong);
   font-weight: 800;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   color: var(--text-dark);
@@ -1444,7 +1447,7 @@ hr {
   margin-bottom: 1.5rem;
 }
 .footer-logo {
-  font-family: var(--font-display);
+  font-family: var(--font-display-strong);
   font-style: normal;
   font-weight: 900;
   font-size: 1.2rem;
@@ -1820,4 +1823,22 @@ html { scroll-behavior: smooth; }
   .ars-num      { font-size: 2rem; }
   .ars-num sup  { font-size: 1rem; }
   .ars-label    { font-size: 0.62rem; }
+}
+
+/* ── 디스플레이 폰트 두께 보정 ──────────────────────────────
+   Ultra · Black Han Sans · Do Hyeon · Abril Fatface 는 단일 두께(400)만
+   제공한다. font-weight 700~900 지정이 남아 있으면 브라우저가 faux-bold 를
+   합성해 획이 뭉개질 수 있으므로, 디스플레이 계열 선택자는 실제 두께(400)로
+   고정하고 합성을 끈다. 본문(--font: Noto Sans KR)은 영향받지 않는다. */
+.logo a,
+.footer-logo,
+.hero-title,
+.section-title,
+.page-header h1,
+.profile-name,
+.stat-num,
+.ars-num,
+.pub-year {
+  font-weight: 400;
+  font-synthesis: none;
 }
