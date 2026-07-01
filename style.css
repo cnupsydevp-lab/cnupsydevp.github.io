@@ -36,7 +36,8 @@
   --text-dark:     #3E3A39;
   --text-mid:      #595757;
 
-  --font:         'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  /* 본문(작은 글씨) — IBM Plex Sans KR (한글+영문 모두 지원), Noto Sans KR 폴백 */
+  --font:         'IBM Plex Sans KR', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
   /* 큰 글씨(제목·숫자) — 정제 티어: 영문/숫자 → Abril Fatface, 한글 → Do Hyeon */
   --font-display: 'Abril Fatface', 'Do Hyeon', system-ui, -apple-system, sans-serif;
   /* 로고·히어로 — 강조 티어: 영문 → Ultra, 한글 → Black Han Sans */
