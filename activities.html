@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DPWL — 연구활동</title>
     <meta name="description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DPWL — 발달·노화 심리 연구실">
+    <meta property="og:title" content="DPWL — 연구활동">
+    <meta property="og:description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
+    <meta property="og:url" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/activities.html">
+    <meta property="og:image" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/images/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&family=Ultra&display=swap">
@@ -25,14 +34,14 @@
             <li><a href="activities.html" class="active">연구활동 <span class="nav-notif-dot" data-notif="activities" hidden></span></a></li>
             <li><a href="participation.html">연구참여 <span class="nav-notif-dot" data-notif="participation" hidden></span></a></li>
             <li class="nav-dropdown">
-                <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">공지사항 <span class="nav-arrow">▾</span><span class="nav-notif-dot" hidden></span></button>
+                <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">공지사항 <svg class="nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg><span class="nav-notif-dot" hidden></span></button>
                 <ul class="nav-dropdown-menu">
                     <li><a href="notices.html">공지사항 <span class="nav-notif-dot" data-notif="notices" hidden></span></a></li>
                     <li><a href="newsletter.html">소식지 <span class="nav-notif-dot" data-notif="newsletter" hidden></span></a></li>
                 </ul>
             </li>
             <li class="nav-dropdown">
-                <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Contact <span class="nav-arrow">▾</span></button>
+                <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Contact <svg class="nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                 <ul class="nav-dropdown-menu">
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="admissions.html">대학원 진학</a></li>
@@ -63,8 +72,8 @@
         <span class="eyebrow section-eyebrow">Publications</span>
         <div class="pub-header">
           <div>
-            <h2 class="section-title" style="margin:0;">논문</h2>
-            <span id="pub-count" style="display:block;font-size:0.78rem;color:var(--muted);font-weight:normal;margin-top:0.3rem;"></span>
+            <h2 class="section-title u-m0">논문</h2>
+            <span id="pub-count" class="pub-count"></span>
           </div>
           <div class="pub-sort-btns">
             <button class="pub-sort-btn active" id="sort-desc">최신순</button>
@@ -81,15 +90,15 @@
         <span class="eyebrow section-eyebrow">Presentations</span>
         <div class="pub-header">
           <div>
-            <h2 class="section-title" style="margin:0;">학술발표</h2>
-            <span id="pres-count" style="display:block;font-size:0.78rem;color:var(--muted);font-weight:normal;margin-top:0.3rem;"></span>
+            <h2 class="section-title u-m0">학술발표</h2>
+            <span id="pres-count" class="pub-count"></span>
           </div>
           <div class="pub-sort-btns">
             <button class="pub-sort-btn active" id="pres-sort-desc">최신순</button>
             <button class="pub-sort-btn" id="pres-sort-asc">오래된순</button>
           </div>
         </div>
-        <div class="notice-list" id="pres-list" style="margin-top: 1.5rem;"></div>
+        <div class="notice-list u-mt-15" id="pres-list"></div>
         <div class="pub-pagination" id="pres-pagination"></div>
     </div>
 </section>
@@ -98,7 +107,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Grants</span>
         <h2 class="section-title">연구과제</h2>
-        <div class="info-grid" id="grant-grid" style="margin-top: 1.5rem;"></div>
+        <div class="info-grid u-mt-15" id="grant-grid"></div>
     </div>
 </section>
 
@@ -213,20 +222,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (presList) presList.innerHTML = page.map(p => p.authors ? `
       <div class="pub-item">
         <span class="pub-year">${p.year}</span>
-        <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
+        <span class="badge ${p.badge}">${p.badgeText}</span>
         <div class="pub-meta">
           <span class="pub-title">${p.title}</span>
           <span class="pub-authors">${p.authors}</span>
           <span class="pub-journal">${p.venue}</span>
-          ${(p.abstract || p.poster) ? `<div style="display:flex;gap:0.75rem;margin-top:0.45rem;">
-            ${p.abstract ? `<a class="pub-download" style="margin-top:0;" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
-            ${p.poster ? `<a class="pub-download" style="margin-top:0;" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
+          ${(p.abstract || p.poster) ? `<div class="pub-links">
+            ${p.abstract ? `<a class="pub-download" href="${p.abstract}" target="_blank" rel="noopener" download>초록</a>` : ''}
+            ${p.poster ? `<a class="pub-download" href="${p.poster}" target="_blank" rel="noopener" download>포스터</a>` : ''}
           </div>` : ''}
         </div>
       </div>` : `
       <div class="notice-item">
         <span class="notice-date">${p.year}</span>
-        <span class="badge ${p.badge}" style="white-space:nowrap;">${p.badgeText}</span>
+        <span class="badge ${p.badge}">${p.badgeText}</span>
         <span class="notice-title">${p.title}</span>
       </div>`).join('');
 
@@ -273,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (grantGrid) grantGrid.innerHTML = grants.map(g => `
     <div class="info-card">
       <h3>${g.status}</h3>
-      <p>${g.title}<br>${g.description}<br><span style="font-size:0.78rem;color:var(--muted);">${g.period}</span></p>
+      <p>${g.title}<br>${g.description}<br><span class="grant-period">${g.period}</span></p>
     </div>`).join('');
 });
 </script>

@@ -26,13 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initScrollReveal() {
-  document.querySelectorAll('.card-grid, .steps-grid, .info-grid, .member-grid, .stats-grid, .notice-list')
+  document.querySelectorAll('.card-grid, .info-grid, .member-grid, .notice-list')
     .forEach(g => g.classList.add('stagger'));
 
   const targets = document.querySelectorAll(
-    '.card, .step, .info-card, .member-card, .notice-item, ' +
-    '.list-block, .about-visual, .map-placeholder, .ornament, ' +
-    '.stats-grid > div, .profile-grid'
+    '.card, .info-card, .member-card, .notice-item, .about-visual, .profile-grid'
   );
 
   const observer = new IntersectionObserver((entries) => {
@@ -171,7 +169,7 @@ function initMobileNav() {
       const mBtn = document.createElement('button');
       mBtn.className = 'nav-mobile-section-btn';
       const label = desktopBtn.childNodes[0].textContent.trim();
-      mBtn.innerHTML = `${label} <span class="nav-mobile-arrow">▾</span>`;
+      mBtn.innerHTML = `${label} <svg class="nav-mobile-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
       const mSub = document.createElement('ul');
       mSub.className = 'nav-mobile-sub';
@@ -269,7 +267,7 @@ function initBackToTop() {
   const btn = document.createElement('button');
   btn.className = 'back-to-top';
   btn.setAttribute('aria-label', '맨 위로');
-  btn.innerHTML = '↑';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
   document.body.appendChild(btn);
 
   window.addEventListener('scroll', () => {
@@ -305,6 +303,14 @@ function setupSearchForm(form) {
   const results = form.querySelector('.nav-search-results');
   if (!input || !results) return;
 
+  // WAI-ARIA 콤보박스 패턴: input(combobox) ↔ 결과 목록(listbox/option) 연결
+  setupSearchForm._seq = (setupSearchForm._seq || 0) + 1;
+  const listId = results.id || (results.id = 'nav-search-results-' + setupSearchForm._seq);
+  input.setAttribute('role', 'combobox');
+  input.setAttribute('aria-expanded', 'false');
+  input.setAttribute('aria-controls', listId);
+  input.setAttribute('aria-autocomplete', 'list');
+
   // 사이트 주요 페이지 인덱스 (라벨 + 검색 키워드 + 이동 경로)
   const INDEX = [
     { label: '소개',        url: 'index.html',         kw: 'about 소개 홈 메인 dpwl 연구실' },
@@ -328,12 +334,22 @@ function setupSearchForm(form) {
     results.innerHTML = '';
     items = [];
     activeIdx = -1;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
   }
 
   function setActive(i) {
-    items.forEach(a => a.classList.remove('active'));
+    items.forEach(a => {
+      a.classList.remove('active');
+      a.parentElement.setAttribute('aria-selected', 'false');
+    });
     activeIdx = i;
-    if (items[i]) items[i].classList.add('active');
+    if (items[i]) {
+      items[i].classList.add('active');
+      const li = items[i].parentElement;
+      li.setAttribute('aria-selected', 'true');
+      input.setAttribute('aria-activedescendant', li.id);
+    }
   }
 
   function render() {
@@ -347,15 +363,21 @@ function setupSearchForm(form) {
     if (!matches.length) {
       const li = document.createElement('li');
       li.className = 'nav-search-empty';
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-disabled', 'true');
       li.textContent = '검색 결과가 없습니다';
       results.appendChild(li);
       results.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      input.removeAttribute('aria-activedescendant');
       items = [];
       activeIdx = -1;
       return;
     }
-    matches.forEach(m => {
+    matches.forEach((m, i) => {
       const li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.id = listId + '-opt-' + i;
       const a = document.createElement('a');
       a.href = m.url;
       a.textContent = m.label;
@@ -364,6 +386,7 @@ function setupSearchForm(form) {
     });
     items = Array.from(results.querySelectorAll('a'));
     results.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
     setActive(0);
   }
 
