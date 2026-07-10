@@ -959,8 +959,8 @@ body {
   background: none;
   border: 1px solid var(--border-md);
   border-radius: 999px;
-  padding: 0.55rem 1rem;
-  min-height: 44px;           /* 터치 타깃 최소 크기 */
+  padding: 0.42rem 0.9rem;
+  min-height: 34px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
@@ -984,8 +984,8 @@ body {
   font-family: var(--font-ui);
   font-size: var(--fs-sm);
   font-weight: 600;
-  width: 2.75rem;             /* 터치 타깃 최소 크기(44px) */
-  height: 2.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
   border: 1px solid var(--border-md);
   background: none;
@@ -1004,6 +1004,11 @@ body {
   padding: 0 0.7rem;
   border-radius: 20px;
   font-size: var(--fs-sm);
+}
+/* 터치 기기에서만 44px 터치 타깃 유지 (마우스 환경은 위의 컴팩트 크기) */
+@media (pointer: coarse) {
+  .pub-sort-btn { min-height: 44px; padding: 0.55rem 1rem; }
+  .pub-page-btn { width: 2.75rem; height: 2.75rem; }
 }
 .pub-page-nav:disabled,
 .pub-page-nav:disabled:hover {
