@@ -12,6 +12,7 @@ const NOTIF_LATEST = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  initActiveNav();
   initDropdowns();
   initNotifBadge();
   initMobileNav();
@@ -24,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initNavScroll();
 });
+
+// 현재 페이지에 해당하는 상단 메뉴 링크에 active 표시
+// (내비 마크업이 partials/nav.html 단일 소스라 페이지별 하드코딩 대신 JS가 처리)
+function initActiveNav() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links > li > a').forEach(a => {
+    if (a.getAttribute('href') === page) a.classList.add('active');
+  });
+}
 
 function initScrollReveal() {
   document.querySelectorAll('.card-grid, .info-grid, .member-grid, .notice-list')
