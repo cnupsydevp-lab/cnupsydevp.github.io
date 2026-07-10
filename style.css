@@ -315,7 +315,7 @@ body {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--border-md);
   border-top: 1.5px solid var(--accent);   /* 신문 마스트헤드 룰 */
-  border-radius: 14px;
+  border-radius: 0;                        /* 직각 모서리 (신문 룰과 통일) */
   box-shadow: 0 12px 32px rgba(62, 58, 57, 0.14);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
