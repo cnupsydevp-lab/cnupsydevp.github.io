@@ -120,12 +120,23 @@ function initNotifBadge() {
 
   // 공지사항 드롭다운 도트 (notices + newsletter)
   const noticeDot = document.querySelector('.nav-notif-dot:not([data-notif])');
-  if (noticeDot) noticeDot.hidden = !(isUnseen('notices') || isUnseen('newsletter'));
+  if (noticeDot) setNotifDot(noticeDot, isUnseen('notices') || isUnseen('newsletter'));
 
   // 연구활동 / 연구참여 개별 도트
   document.querySelectorAll('.nav-notif-dot[data-notif]').forEach(dot => {
-    dot.hidden = !isUnseen(dot.dataset.notif);
+    setNotifDot(dot, isUnseen(dot.dataset.notif));
   });
+}
+
+// 도트 표시 + 스크린리더용 텍스트 라벨 (색상만으로 정보 전달 방지)
+function setNotifDot(dot, show) {
+  dot.hidden = !show;
+  if (show && !dot.querySelector('.sr-only')) {
+    const label = document.createElement('span');
+    label.className = 'sr-only';
+    label.textContent = '(새 글)';
+    dot.appendChild(label);
+  }
 }
 
 function isUnseen(section) {
@@ -200,8 +211,28 @@ function initMobileNav() {
     ul.appendChild(mLi);
   });
 
+  // 모바일 검색 — 오버레이 상단에 배치, initSearch가 데스크톱 검색과 함께 초기화
+  const searchForm = document.createElement('form');
+  searchForm.className = 'nav-search nav-search--mobile';
+  searchForm.setAttribute('role', 'search');
+  searchForm.setAttribute('autocomplete', 'off');
+  searchForm.innerHTML =
+    '<svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
+    '<input type="search" class="nav-search-input" placeholder="검색" aria-label="사이트 검색">' +
+    '<ul class="nav-search-results" role="listbox" hidden></ul>';
+  overlay.appendChild(searchForm);
   overlay.appendChild(ul);
   document.body.appendChild(overlay);
+
+  // Tab 포커스를 오버레이 안에 가둠 (열려 있는 동안)
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const items = overlay.querySelectorAll('a, button, input');
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
 
   function updateTop() {
     overlay.style.top = siteNav.getBoundingClientRect().height + 'px';
@@ -214,6 +245,11 @@ function initMobileNav() {
     hamburger.setAttribute('aria-expanded', String(isOpen));
     overlay.classList.toggle('open', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (isOpen) {
+      // 첫 메뉴 항목으로 포커스 이동 (검색 입력은 제외 — 키보드 자동 팝업 방지)
+      const first = ul.querySelector('a, button');
+      if (first) first.focus();
+    }
   });
 
   document.addEventListener('keydown', e => {
@@ -225,6 +261,7 @@ function initMobileNav() {
     hamburger.setAttribute('aria-expanded', 'false');
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+    hamburger.focus();   // 포커스를 연 곳으로 복귀
   }
 }
 
@@ -259,8 +296,11 @@ function initRipple() {
 }
 
 function initSearch() {
-  const form = document.querySelector('.nav-search');
-  if (!form) return;
+  // 데스크톱 내비 검색 + 모바일 오버레이 검색(initMobileNav가 생성) 모두 초기화
+  document.querySelectorAll('.nav-search').forEach(setupSearchForm);
+}
+
+function setupSearchForm(form) {
   const input = form.querySelector('.nav-search-input');
   const results = form.querySelector('.nav-search-results');
   if (!input || !results) return;

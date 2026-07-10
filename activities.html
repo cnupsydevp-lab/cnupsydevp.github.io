@@ -7,7 +7,7 @@
     <meta name="description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&family=Ultra&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (totalPages <= 1) {
         pagination.innerHTML = '';
       } else {
-        const prevPage = Math.max(1, currentPage - 5);
-        const nextPage = Math.min(totalPages, currentPage + 5);
+        const prevPage = Math.max(1, currentPage - 1);
+        const nextPage = Math.min(totalPages, currentPage + 1);
         const prev = `<button class="pub-page-btn pub-page-nav" data-page="${prevPage}" ${currentPage === 1 ? 'disabled' : ''}>이전</button>`;
         const nums = Array.from({length: totalPages}, (_, i) =>
           `<button class="pub-page-btn${i + 1 === currentPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>`
@@ -235,8 +235,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (totalPages <= 1) {
         pagination.innerHTML = '';
       } else {
-        const prevPage = Math.max(1, presPage - 5);
-        const nextPage = Math.min(totalPages, presPage + 5);
+        const prevPage = Math.max(1, presPage - 1);
+        const nextPage = Math.min(totalPages, presPage + 1);
         const prev = `<button class="pub-page-btn pub-page-nav" data-page="${prevPage}" ${presPage === 1 ? 'disabled' : ''}>이전</button>`;
         const nums = Array.from({length: totalPages}, (_, i) =>
           `<button class="pub-page-btn${i + 1 === presPage ? ' active' : ''}" data-page="${i + 1}">${i + 1}</button>`

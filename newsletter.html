@@ -7,7 +7,7 @@
     <meta name="description" content="DPWL 소식지 — 연구실 최신 활동, 논문 출판, 학술 참여 소식.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&family=Ultra&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -120,7 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const backdrop = document.getElementById('nl-modal-backdrop');
   const closeBtn = document.getElementById('nl-modal-close');
 
-  function openModal(p) {
+  let modalTrigger = null;   // 모달을 연 요소 — 닫을 때 포커스 복귀용
+
+  function openModal(p, trigger) {
     document.getElementById('nl-modal-date').textContent = p.date;
     document.getElementById('nl-modal-title').textContent = p.title;
     document.getElementById('nl-modal-content').innerHTML = p.body || '';
@@ -129,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `<img src="${p.image}" alt="${p.title}">`
       : '';
     imgWrap.hidden = !p.image;
+    modalTrigger = trigger || null;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
     closeBtn.focus();
@@ -137,18 +140,29 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal() {
     modal.hidden = true;
     document.body.style.overflow = '';
+    if (modalTrigger) { modalTrigger.focus(); modalTrigger = null; }
   }
 
   list.addEventListener('click', e => {
     const btn = e.target.closest('[data-id]');
     if (!btn) return;
     const p = POSTS.newsletter.find(x => x.id === +btn.dataset.id);
-    if (p) openModal(p);
+    if (p) openModal(p, btn);
+  });
+
+  // Tab 포커스를 모달 안에 가둠
+  modal.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const items = modal.querySelectorAll('button, a[href]');
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
   backdrop.addEventListener('click', closeModal);
   closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
 });
 </script>
 </body>
