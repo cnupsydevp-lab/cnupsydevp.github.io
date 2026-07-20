@@ -779,6 +779,9 @@ body {
   font-weight: 700;
   color: var(--text-dark);
 }
+.member-name-en {
+  margin-top: 0.4rem;
+}
 .member-card p {
   font-size: var(--fs-sm);
   color: var(--muted);
