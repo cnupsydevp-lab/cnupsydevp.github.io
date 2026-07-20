@@ -345,8 +345,10 @@ body {
   padding: 0.6rem 1rem;
   letter-spacing: 0.02em;
   transition: color 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
 .nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:active,
 .nav-dropdown-menu a.active {
   color: var(--text-dark);
   background: var(--accent-dim);
@@ -1569,8 +1571,10 @@ html {
   padding: 0.65rem 1rem 0.65rem 2.25rem;
   border-radius: var(--radius);
   transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
 .nav-mobile-sub a:hover,
+.nav-mobile-sub a:active,
 .nav-mobile-sub a.active { color: var(--accent); background: var(--accent-dim); }
 .nav-mobile-arrow {
   width: 13px;
