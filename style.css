@@ -924,9 +924,9 @@ body {
 }
 .form-note { font-size: var(--fs-xs); color: var(--muted); margin: 0; }
 .inq-btn {
-  min-width: 88px;
-  min-height: 44px;           /* 터치 타깃 최소 크기 */
-  padding: 0.6rem 1.25rem;
+  min-width: 72px;
+  min-height: 36px;
+  padding: 0.45rem 1rem;
   font-size: var(--fs-sm);
   background: #1E1E1E;
   box-shadow: none;
@@ -961,14 +961,14 @@ body {
 }
 .pub-sort-btn {
   font-family: var(--font-ui);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: var(--muted);
   background: none;
   border: 1px solid var(--border-md);
   border-radius: 999px;
-  padding: 0.42rem 0.9rem;
-  min-height: 34px;
+  padding: 0.3rem 0.7rem;
+  min-height: 28px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
@@ -990,10 +990,10 @@ body {
 }
 .pub-page-btn {
   font-family: var(--font-ui);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.85rem;
+  height: 1.85rem;
   border-radius: 50%;
   border: 1px solid var(--border-md);
   background: none;
@@ -1009,9 +1009,9 @@ body {
 }
 .pub-page-nav {
   width: auto;
-  padding: 0 0.7rem;
+  padding: 0 0.55rem;
   border-radius: 20px;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
 }
 /* 터치 기기에서만 44px 터치 타깃 유지 (마우스 환경은 위의 컴팩트 크기) */
 @media (pointer: coarse) {
