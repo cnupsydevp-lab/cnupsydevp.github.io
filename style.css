@@ -723,7 +723,7 @@ body {
 }
 .profile-role {
   font-size: var(--fs-md);
-  color: var(--muted);
+  color: #000000;
   font-weight: 700;
   margin-bottom: 2rem;
   letter-spacing: 0.02em;
@@ -740,12 +740,12 @@ body {
 .profile-list { list-style: none; border-top: 1px solid var(--border); }
 .profile-list li {
   font-size: var(--fs-md);
-  color: var(--muted);
+  color: #000000;
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
   line-height: 1.6;
 }
-.profile-list a { color: var(--accent); text-decoration: none; }
+.profile-list a { color: #000000; text-decoration: underline; }
 
 /* ── Members ─────────────────────────────────────────────── */
 .member-subgroup-label {
@@ -1803,7 +1803,7 @@ html {
 /* 폼 오류 텍스트 */
 .form-error { color: #c0392b; }
 /* PI 연구 관심사 소개문 */
-.profile-intro { font-size: var(--fs-base); color: var(--muted); line-height: 1.9; }
+.profile-intro { font-size: var(--fs-base); color: #000000; line-height: 1.9; font-style: italic; }
 
 /* ── 디스플레이 폰트 두께 보정 ──────────────────────────────
    Do Hyeon · Abril Fatface 는 단일 두께(400)만 제공한다.
