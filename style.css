@@ -745,7 +745,7 @@ body {
   border-bottom: 1px solid var(--border);
   line-height: 1.6;
 }
-.profile-list a { color: var(--accent); text-decoration: none; font-weight: 700; }
+.profile-list a { color: var(--accent); text-decoration: none; }
 
 /* ── Members ─────────────────────────────────────────────── */
 .member-subgroup-label {
@@ -852,7 +852,7 @@ body {
   display: inline-block;
   font-size: var(--fs-xs);
   font-weight: 700;
-  color: var(--accent-dark);
+  color: #000000;
   background: rgba(255,255,255,0.45);      /* 종이 위 프로스트 칩 (따뜻하게) */
   border: 1px solid var(--accent-border);
   border-radius: 999px;                    /* 라벨 스티커 같은 알약형 */
