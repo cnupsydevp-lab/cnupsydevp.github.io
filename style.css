@@ -1426,7 +1426,7 @@ hr {
 .footer-nav a:hover { color: var(--accent); }
 .footer-copy {
   font-size: var(--fs-xs);
-  color: rgba(62, 58, 57, 0.42);
+  color: var(--text-dark);
   text-align: center;
 }
 
