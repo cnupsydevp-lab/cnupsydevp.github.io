@@ -867,6 +867,7 @@ body {
 }
 .member-info-label {
   font-size: var(--fs-xs);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--postit-ink2);
@@ -875,6 +876,7 @@ body {
 }
 .member-info-value {
   font-size: var(--fs-sm);
+  font-style: italic;
   line-height: 1.45;
   color: var(--postit-ink);
   margin: 0;
