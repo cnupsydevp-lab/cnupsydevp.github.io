@@ -1398,7 +1398,7 @@ hr {
 }
 .footer-brand p {
   line-height: 1.85;
-  color: var(--muted);
+  color: var(--text-dark);
   font-size: var(--fs-sm);
 }
 .footer-brand a {
@@ -1418,7 +1418,7 @@ hr {
 .footer-nav a {
   font-size: var(--fs-sm);
   font-weight: 700;
-  color: var(--muted);
+  color: var(--text-dark);
   text-decoration: none;
   padding: 0.5rem 0.25rem;   /* 터치 여유 */
   transition: color 0.15s;
