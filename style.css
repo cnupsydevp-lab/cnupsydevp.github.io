@@ -343,6 +343,7 @@ body {
   color: var(--muted);
   text-decoration: none;
   padding: 0.6rem 1rem;
+  border-radius: 0;   /* .nav-links a의 999px가 상속되지 않도록 명시 (하위메뉴 패널 직각과 통일) */
   letter-spacing: 0.02em;
   transition: color 0.15s, background 0.15s;
   -webkit-tap-highlight-color: transparent;
