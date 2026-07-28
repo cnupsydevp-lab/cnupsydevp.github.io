@@ -283,7 +283,7 @@ body {
   border: none;
   cursor: pointer;
   padding: 0.55rem 0.55rem;   /* 태블릿 터치 대비 세로 타깃 확대 */
-  border-radius: 0;   /* 하위메뉴 패널 직각과 통일 */
+  border-radius: 999px;   /* 다른 메뉴 항목과 통일 (타원형 음영은 상위메뉴, 직각은 하위메뉴 패널) */
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
   white-space: nowrap;
