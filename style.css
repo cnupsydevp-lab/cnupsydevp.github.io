@@ -781,6 +781,7 @@ body {
 }
 .member-name-en {
   margin-top: 0.4rem;
+  color: #000000;
 }
 .member-card p {
   font-size: var(--fs-sm);
