@@ -148,7 +148,7 @@ const POSTS = {
       title: '한국 중ㆍ고령 성인의 스트레스, 외로움 및 사회적 관계망 간의 종단적 상호관계: 무선절편 교차지연 패널모형(RI-CLPM) 분석',
       authors: '윤소영, 이승철, 노수림',
       journal: 'STRESS, 34(2), 81–93',
-      url: 'https://doi.org/10.17547/kjsr.2026.34.2.81',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003350177',
       pdf: 'papers/Yoon_et_al_2026.pdf' },
 
     { type: 'publication', year: '2025', date: '2025-12-01', badge: 'badge-gold', badgeText: 'KCI',
