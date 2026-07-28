@@ -144,6 +144,13 @@ const POSTS = {
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002121748',
       pdf: 'papers/Bae_et_al_2016.pdf' },
 
+    { type: 'publication', year: '2026', date: '2026-06-30', badge: 'badge-gold', badgeText: 'KCI',
+      title: '한국 중ㆍ고령 성인의 스트레스, 외로움 및 사회적 관계망 간의 종단적 상호관계: 무선절편 교차지연 패널모형(RI-CLPM) 분석',
+      authors: '윤소영, 이승철, 노수림',
+      journal: 'STRESS, 34(2), 81–93',
+      url: 'https://doi.org/10.17547/kjsr.2026.34.2.81',
+      pdf: 'papers/Yoon_et_al_2026.pdf' },
+
     { type: 'publication', year: '2025', date: '2025-12-01', badge: 'badge-gold', badgeText: 'KCI',
       title: 'Quantifier-Spreading in Korean Children and Adults: Evidence from an Eye-Tracking Study',
       authors: '김미숙, 노수림',
