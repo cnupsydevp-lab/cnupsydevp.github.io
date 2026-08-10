@@ -76,6 +76,15 @@
   --pulp: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='p' filterUnits='userSpaceOnUse' x='0' y='0' width='520' height='520'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.013' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncG type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncB type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='520' height='520' filter='url(%23p)'/%3E%3C/svg%3E");
   --grain-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='i' filterUnits='userSpaceOnUse' x='0' y='0' width='180' height='180'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncG type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncB type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23i)'/%3E%3C/svg%3E");
   --grain-size: 180px 180px;
+  /* ── 노끈 (소식지 폴라로이드 줄) ─────────────────────────────
+     늘어진 곡선을 SVG 마스크로 그린다. 색은 background-color 가 맡으므로
+     팔레트 토큰(잉크·세이지)을 그대로 쓸 수 있다 — 파일 안의 아이콘들과 같은 방식.
+     viewBox 높이(18)를 쓰는 요소 높이와 같게 두면 세로 배율이 1 이라
+     stroke-width 가 화면에서도 그대로 유지된다. preserveAspectRatio='none' 로
+     가로만 늘어나므로 칸 너비가 달라져도 굵기는 변하지 않는다.
+     M0 3 Q50 21 100 3 → 양끝 y=3, 가장 낮은 지점 y=12 → 9px 늘어짐. */
+  --twine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 18' preserveAspectRatio='none'%3E%3Cpath d='M0 3 Q50 21 100 3' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  --twine-lit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 18' preserveAspectRatio='none'%3E%3Cpath d='M0 2 Q50 20 100 2' fill='none' stroke='%23000' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E");
   --pulp-size:  520px 520px;
 
   /* 배경색 계열 */
@@ -1308,64 +1317,107 @@ a.notice-item:hover::after {
   line-height: 1.85;
 }
 
-/* ── Newsletter — 줄에 매달린 폴라로이드 ───────────────────────
-   구조: .nl-wall-clip > .nl-wall > .nl-hang > (.nl-peg + .nl-shot)
+/* ── Newsletter — 노끈에 매달린 폴라로이드 ─────────────────────
+   구조: .nl-wall > .nl-hang > (.nl-peg + .nl-shot)
 
-   [줄이 한 행을 가로지르는 원리]
-   줄은 각 칸(.nl-hang)의 ::before 로 그린다. 좌우로 100vw 씩 늘려 두므로
-   한 행에 사진이 몇 장이든(마지막 행이 반만 차도) 같은 줄이 겹쳐 그려져
-   행 전체를 가로지르는 하나의 줄로 보인다. 넘친 부분은 .nl-wall-clip 이
-   잘라낸다. 열 개수·화면 폭이 바뀌어도 맞출 값이 없다는 게 이 방식의 요점이다.
-   (컨테이너에 repeating-linear-gradient 로 줄을 그리는 방법도 있지만
-    행 높이를 픽셀로 고정해야 하고, 캡션 줄 수나 폰트 크기가 바뀌면 어긋난다.)
+   [노끈이 한 행을 가로지르는 원리]
+   노끈은 각 칸(.nl-hang)의 ::before / ::after 로 그린다. 한 토막이 정확히
+   "칸 너비 + 좌우 간격 절반"이라 옆 칸 토막과 끝점에서 만나 한 줄로 이어진다.
+   가로로 늘려 겹치는 방식(-100vw)은 쓸 수 없다 — 곧은 선이면 겹쳐도 같은 선이지만
+   늘어진 곡선은 칸마다 위치가 달라 서로 엇갈려 그려진다.
 
-   [기울기]
-   집게(.nl-peg)는 줄에 고정돼 기울지 않고, 사진만 집게를 축(transform-origin:
-   50% 0)으로 기운다 — 빨래집게에 비뚤게 집힌 모습. 각도는 --tilt 로 칸마다 다르다.
+   행 끝까지 노끈이 이어지는 건 flex 덕이다. grid(auto-fit)와 달리 flex 는
+   마지막 행의 항목도 남은 폭을 나눠 가지므로, 사진이 한 장만 남은 행에서도
+   그 칸이 행 전체 폭을 차지해 노끈이 끊기지 않는다.
+
+   [늘어짐]
+   무게가 걸리는 집게 자리(칸 가운데)가 가장 낮고, 사진 사이(칸 경계)에서
+   올라간다 — 점하중이 걸린 끈의 실제 모양. 곡선은 SVG 마스크(--twine)로
+   그리고 색은 background-color 가 맡아, 팔레트 토큰을 그대로 쓴다
+   (border-radius 로 호를 그리면 양끝 접선이 수직이 되어 경계마다 뾰족해진다).
+   몸통(::before)과 그 위 밝은 결(::after) 두 겹이라 둥근 노끈으로 읽힌다.
+
+   [삐뚤빼뚤]
+   칸마다 --tilt(기울기) · --dx(좌우) · --dy(내려온 깊이)를 8개 주기로 다르게 준다.
+   집게와 사진이 --dx 를 함께 쓰므로 집게는 항상 사진 윗변 가운데를 물고,
+   노끈 위에서 위치만 옮겨진다. --dy 는 사진에만 걸어 집게가 노끈에 붙은 채
+   사진이 조금 더 깊이 물린 것처럼 보이게 한다(집게 길이 38px 안에서 해결).
+   숫자를 바꿀 때 지킬 조건: 기울어진 사진의 아래 모서리는 옆 사진 쪽으로
+   높이×sin(기울기) 만큼 밀려난다(한 줄 5장이면 사진 높이 ≈ 258px, 2.6° 에서 12px).
+   이웃한 두 장이 서로 다가오는 양의 합이 열 간격보다 작아야 겹치지 않는다 —
+   현재 최악의 쌍은 데스크톱 9.0px · 태블릿 4.7px · 폰 4.0px 여유.
+   --basis 를 키우면 사진이 커지고(높이↑) 밀려나는 양도 함께 늘어나니 같이 확인할 것.
+   또 각도와 --dx 를 합친 돌출이 컨테이너 좌우 여백(32/24/16px)보다 작아야
+   화면 밖에서 잘리지 않는다.
    ──────────────────────────────────────────────────────────── */
-.nl-wall-clip {
-  overflow: hidden;              /* 줄에서 넘친 부분을 자른다 */
-  margin: 0 -1.25rem;            /* 잘리는 경계를 사진 바깥으로 밀어낸다 (그림자 보존) */
-  padding: 0 1.25rem 1.75rem;    /* 아래 여백 — 마지막 행 그림자가 잘리지 않게 */
-}
 .nl-wall {
-  display: grid;
-  /* auto-fit: 사진이 적으면 남은 열을 접어 칸을 넓힌다 → 줄이 행 끝까지 이어진다 */
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 4rem 1.5rem;
+  /* 좌우 흐트러짐의 단위. 아래 nth-child 들이 이 값의 배수로 옮겨지므로
+     좁은 화면에서는 이 한 줄만 줄이면 전체가 함께 얌전해진다.
+     (미디어쿼리에서 .nl-hang 의 --dx 를 직접 덮으면 nth-child 규칙이
+      특이도로 이겨 무시된다 — 그래서 부모에서 상속으로 내려보낸다) */
+  --u: 1px;
+  /* 한 줄에 걸리는 장수를 정하는 값. flex 는 이 값을 기준으로 줄을 바꾸므로
+     "본문 폭 ≥ 장수×--basis + (장수-1)×열간격" 인 최대 장수가 한 줄에 들어간다.
+     176px + 28px 간격 → 본문 1016px 에서 5장 (사진 181px).
+     줄이면 더 많이, 늘리면 더 적게 걸린다 (210px → 4장 · 145px → 6장). */
+  --basis: 176px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem 1.75rem;
 }
 .nl-hang {
-  --tilt: -2.2deg;
+  --tilt: 0deg;
+  --dx: 0px;
+  --dy: 0px;
+  flex: 1 1 var(--basis);        /* 마지막 행도 남은 폭을 나눠 가진다 → 노끈이 끊기지 않음 */
   position: relative;
-  padding-top: 26px;             /* 줄에서 사진까지 — 집게가 걸치는 높이 */
+  padding-top: 33px;             /* 노끈에서 사진까지 — 집게가 걸치는 높이 */
   display: flex;
   justify-content: center;
 }
-.nl-hang:nth-child(4n+2) { --tilt:  1.7deg; }
-.nl-hang:nth-child(4n+3) { --tilt: -1.1deg; }
-.nl-hang:nth-child(4n+4) { --tilt:  2.4deg; }
+/* 손으로 걸어놓은 듯한 흐트러짐 — 8개 주기 */
+.nl-hang:nth-child(8n+1) { --tilt: -2.4deg; --dx: calc(-4 * var(--u)); --dy: 3px; }
+.nl-hang:nth-child(8n+2) { --tilt:  1.6deg; --dx: calc( 5 * var(--u)); --dy: 7px; }
+.nl-hang:nth-child(8n+3) { --tilt:  2.5deg; --dx: calc(-2 * var(--u)); --dy: 1px; }
+.nl-hang:nth-child(8n+4) { --tilt: -1.1deg; --dx: calc( 3 * var(--u)); --dy: 5px; }
+.nl-hang:nth-child(8n+5) { --tilt: -2.6deg; --dx: calc(-5 * var(--u)); --dy: 0px; }
+.nl-hang:nth-child(8n+6) { --tilt:  1.5deg; --dx: calc( 4 * var(--u)); --dy: 6px; }
+.nl-hang:nth-child(8n+7) { --tilt: -1.7deg; --dx: calc( 3 * var(--u)); --dy: 2px; }
+.nl-hang:nth-child(8n+8) { --tilt:  1.2deg; --dx: calc(-3 * var(--u)); --dy: 8px; }
 
-/* 줄 — 종이 위에 걸린 무명실. 아래 1px 밝은 선이 둥근 끈처럼 보이게 한다 */
-.nl-hang::before {
+/* 노끈 — 몸통(::before) + 위쪽 밝은 결(::after).
+   좌우 -0.875rem = 간격(1.75rem)의 절반 → 옆 칸 토막과 끝점이 만난다.
+   1px 더 넘겨 서브픽셀 틈을 막는다. */
+.nl-hang::before,
+.nl-hang::after {
   content: '';
   position: absolute;
-  top: 9px;
-  left: -100vw;
-  right: -100vw;
-  height: 2px;
-  background: rgba(var(--ink-rgb), 0.45);
-  box-shadow: 0 1px 0 rgba(var(--card-rgb), 0.55);
+  top: 4px;
+  left: calc(-0.875rem - 1px);
+  right: calc(-0.875rem - 1px);
+  height: 18px;                  /* viewBox 높이와 같게 → 세로 배율 1, 굵기가 그대로 유지된다 */
+  pointer-events: none;
   z-index: 0;
 }
+.nl-hang::before {
+  background-color: rgba(var(--ink-rgb), 0.55);
+  -webkit-mask: var(--twine) center / 100% 100% no-repeat;
+  mask: var(--twine) center / 100% 100% no-repeat;
+}
+.nl-hang::after {
+  background-color: rgba(var(--sage-rgb), 0.95);
+  -webkit-mask: var(--twine-lit) center / 100% 100% no-repeat;
+  mask: var(--twine-lit) center / 100% 100% no-repeat;
+}
 
-/* 집게 — 줄에 물려 있다. 사진과 달리 기울지 않는다 */
+/* 집게 — 노끈에 물려 있다. 좌우(--dx)로만 옮겨지고 기울지 않는다 */
 .nl-peg {
   position: absolute;
-  top: 1px;
+  top: 7px;
   left: 50%;
-  margin-left: -5.5px;
-  width: 11px;
-  height: 30px;                  /* 줄(9px)과 사진 윗변(26px)을 함께 물어야 한다 */
+  margin-left: calc(-6px + var(--dx));
+  width: 12px;
+  height: 38px;                  /* 노끈(가장 낮은 지점 y≈16)과 사진 윗변(y=33+--dy)을 함께 물어야 한다 */
   border-radius: 3px 3px 2px 2px;
   background: var(--sage);
   border: 1px solid rgba(var(--ink-rgb), 0.38);   /* 세이지는 종이 위 1.8:1 이라 윤곽선이 필요 */
@@ -1377,7 +1429,7 @@ a.notice-item:hover::after {
   position: absolute;
   left: -1px;
   right: -1px;
-  top: 13px;
+  top: 17px;
   height: 2px;
   border-radius: 1px;
   background: rgba(var(--ink-rgb), 0.45);
@@ -1399,19 +1451,20 @@ a.notice-item:hover::after {
   cursor: pointer;
   text-align: center;
   font-family: var(--font-ui);
-  transform: rotate(var(--tilt));
-  transform-origin: 50% 0;       /* 집게 자리 — 기울어도 윗변 가운데가 줄에 붙어 있다 */
+  /* 오른쪽부터 적용된다: 집게를 축으로 기운 뒤 --dx/--dy 만큼 옮겨진다 */
+  transform: translate(var(--dx), var(--dy)) rotate(var(--tilt));
+  transform-origin: 50% 0;       /* 집게 자리 — 기울어도 윗변 가운데가 집게에 물려 있다 */
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
 }
-/* hover·포커스 — 사진을 똑바로 세워 들여다보는 동작 */
+/* hover·포커스 — 사진을 똑바로 세워 들여다보는 동작 (--dx/--dy 는 유지) */
 .nl-shot:hover,
 .nl-shot:focus-visible {
-  transform: rotate(0deg) scale(1.025);
+  transform: translate(var(--dx), var(--dy)) rotate(0deg) scale(1.025);
   box-shadow: 0 2px 6px rgba(var(--ink-rgb), 0.16),
               0 16px 34px -8px rgba(var(--ink-rgb), 0.34);
   z-index: 2;
 }
-.nl-shot:active { transform: rotate(0deg) scale(0.995); }
+.nl-shot:active { transform: translate(var(--dx), var(--dy)) rotate(0deg) scale(0.995); }
 
 /* 인화면 — 폴라로이드는 정사각. 원본이 세로여도 잘라 맞추고, 전체는 모달에서 본다 */
 .nl-shot-img {
@@ -1959,15 +2012,18 @@ html {
   /* 컨테이너 패딩 조정 */
   .container { padding: 0 1.5rem; }
   /* 폴라로이드 벽 — 태블릿 폭에서 한 줄에 3장 */
-  .nl-wall { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 3.5rem 1.25rem; }
+  .nl-wall { gap: 3.5rem 1.5rem; --basis: 180px; }   /* 한 줄 4장 */
   /* iOS 입력창 자동 확대 방지 (폰트 16px 미만이면 탭 시 화면 줌) */
   .form-control { font-size: 16px; }
 }
 @media (max-width: 640px) {
   /* 폴라로이드 벽 — 좁은 화면에서도 두 장씩은 한 줄에 걸린다 */
-  .nl-wall      { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 3rem 1rem; }
+  .nl-wall      { gap: 3rem 1.5rem; --basis: 150px; }   /* 한 줄 3장 (480px 이하 2장) */
   .nl-shot      { padding: 7px 7px 0; }
   .nl-shot-note { padding: 0.55rem 0.3rem 0.8rem; min-height: 3.8rem; }
+  /* 좁은 화면에서는 사진이 작아 좌우 흐트러짐을 절반으로 —
+     기운 사진의 아래 모서리가 컨테이너 여백(16px)을 넘어 잘리지 않게 */
+  .nl-wall      { --u: 0.5px; }
 
   .nav-wrapper  { padding: 0.9rem 1.25rem; }
   .container    { padding: 0 1.25rem; }
