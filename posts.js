@@ -303,17 +303,35 @@ const POSTS = {
     // image 있으면 인화면에 사진(정사각으로 잘림), 없으면 빈 인화지.
     // {
     //   id: 2,
-    //   date: 'YYYY-MM-DD',
+    //   date: 'YYYY-MM-DD',           // 게시일. 목록은 이 날짜로 정렬되고 폴라로이드에도 찍힌다
+    //                                 // (행사 날짜·사진 촬영일과 달라도 된다)
     //   title: '제목',                 // 모달 제목. caption 이 없으면 폴라로이드 밑에도 이 글이 들어간다
     //   caption: '짧은 한 줄',          // 선택 — 폴라로이드 아래 여백에 적는 글 (세 줄까지, 넘치면 잘림)
-    //   image: 'images/파일명.jpg',    // 선택 — 없으면 빈 인화지
+    //   image: 'images/newsletter/<촬영일>_<행사코드>_01.jpeg',   // 선택 — 없으면 빈 인화지
     //   body: `<p>내용</p>`
     // }
+    //
+    // 사진이 여러 장이면 image 대신 images 배열을 쓴다. 폴라로이드에는 첫 장이 걸리고
+    // (장수가 인화면 구석에 표시된다), 모달에서 화살표·방향키·손가락으로 넘겨 본다.
+    //   images: ['images/newsletter/..._01.jpeg', 'images/newsletter/..._02.jpeg']
+    //
+    // 사진을 새로 넣을 때: images/newsletter/ 에 넣고 파일명을
+    //   <촬영일>_<행사코드>_<번호>.jpeg (예: 2026-07-22_ICAP_01.jpeg) 로 맞춘 뒤
+    //   python3 tools/make-newsletter-thumbs.py 를 실행한다.
+    //   목록용 정사각 썸네일(thumb/)은 그 스크립트가 만들고 경로는 자동으로 붙으므로
+    //   여기에는 image 만 적으면 된다.
+    //   ※ 카카오톡 파일명의 날짜는 '전송한 날'이라 촬영일과 다를 수 있다 (스크립트가 EXIF 로 확인해 준다)
     {
       id: 1,
-      date: '2026-05-27',
+      date: '2026-05-27',        // 소식지를 올린 날 (사진 촬영일과 다르다 — 아래 참고)
       title: 'Health & Society 학술대회 포스터 발표',
-      image: 'images/newsletter/HealthSociety_Seungcheol.jpeg',
+      // 사진 촬영일은 2025-12-12, 행사는 한국건강심리학회 제70차 동계학술대회.
+      // 'Health & Society' 는 그 학술대회의 주제다 (명찰·포스터로 확인).
+      // 날짜가 어긋나 보이지만 맞는 것 — date 는 게시일이므로 고치지 말 것.
+      images: [
+        'images/newsletter/2025-12-12_KHPA70_01.jpeg',
+        'images/newsletter/2025-12-12_KHPA70_02.jpeg'
+      ],
       body: `<p>승철 연구원이 Health &amp; Society 학술대회에서 포스터 발표를 진행했습니다.</p>`
     },
     {

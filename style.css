@@ -1286,12 +1286,62 @@ a.notice-item:hover::after {
   z-index: 2;
 }
 .nl-modal-close:hover { background: var(--ink); }
+
+/* 사진 무대 — 사진이 여러 장이면 화살표로 넘겨 본다 (posts.js 의 images 배열).
+   [자르지 않는다 — object-fit: contain]
+   목록의 폴라로이드는 이미 정사각으로 자른 그림이고, 모달은 '원본을 그대로
+   보는 자리'다. 포스터 사진에서 제목이 잘리면 소식지의 뜻이 없어진다.
+   [무대 비율을 1:1 로 고정하는 이유]
+   가로 사진과 세로 사진이 섞여 있어도 넘길 때 높이가 뛰지 않아 화살표가
+   제자리에 머문다. 남는 자리는 종이색이라 사진을 대지에 붙인 것처럼 보인다. */
+.nl-modal-img-wrap {
+  position: relative;
+  background-color: var(--paper);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
 .nl-modal-img-wrap img {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 60vh;              /* 화면이 낮으면 무대를 낮춘다 — 넘기기 줄이 화면 밖으로
+                                    밀려나지 않게. 폭은 그대로라 사진은 가운데 놓이고
+                                    남는 자리는 뒤의 종이색이 비친다 */
+  object-fit: contain;
   display: block;
-  border-radius: 12px 12px 0 0;
-  max-height: 400px;
-  object-fit: cover;
+}
+/* 넘기기 줄 — 사진이 두 장 이상일 때만 나타난다.
+   화살표를 사진 위에 얹지 않고 아래에 두는 이유: 이 소식지 사진은 포스터가 많아
+   가운데 좌우를 44px 원이 가리면 정작 읽어야 할 글자가 덮인다. */
+.nl-shots-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: 0.85rem 1rem 0;
+}
+.nl-shots-bar[hidden] { display: none; }
+.nl-shots-nav {
+  width: 2.75rem;                /* 터치 타깃 최소 크기(44px) */
+  height: 2.75rem;
+  border: 1px solid var(--accent-border);   /* 테두리가 유일한 경계선 → 3:1 필요 */
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.nl-shots-nav:hover,
+.nl-shots-nav:focus-visible { background: var(--ink); color: var(--card); }
+.nl-shots-count {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  min-width: 3.4em;              /* '1 / 2' 와 '10 / 12' 에서 화살표가 움직이지 않게 */
+  text-align: center;
 }
 .nl-modal-body {
   padding: 1.75rem 2rem 2.25rem;
@@ -1469,6 +1519,7 @@ a.notice-item:hover::after {
 /* 인화면 — 폴라로이드는 정사각. 원본이 세로여도 잘라 맞추고, 전체는 모달에서 본다 */
 .nl-shot-img {
   display: block;
+  position: relative;             /* 장수 표시(.nl-shot-more) 기준 */
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: rgba(var(--ink-rgb), 0.06);
@@ -1481,6 +1532,22 @@ a.notice-item:hover::after {
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .nl-shot:hover .nl-shot-img img { transform: scale(1.04); }
+
+/* 사진이 여러 장인 소식 — 인화면 구석에 장수를 적어 넘겨 볼 수 있음을 알린다.
+   뒤에 인화지를 한 장 더 겹쳐 두는 방식이 더 그럴듯하지만, 겹친 종이가
+   기울기(--tilt) 때문에 옆 폴라로이드를 침범한다(여유가 2.5px 뿐). */
+.nl-shot-more {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 0.1rem 0.45rem;
+  border-radius: 2px;
+  background: rgba(var(--card-rgb), 0.93);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(var(--ink-rgb), 0.22);
+}
 
 /* 사진 없는 소식 — 빈 인화지. 깨진 이미지처럼 보이지 않게 모노그램만 옅게 */
 .nl-shot-img.is-blank {
@@ -2137,6 +2204,7 @@ html {
 .nl-shot,
 .nl-shot-img.is-blank,
 .nl-modal-box,
+.nl-modal-img-wrap,     /* 사진이 무대보다 좁을 때 남는 여백 — 대지처럼 결이 보이게 */
 .form-control,
 .btn-primary,
 .map-link {

@@ -77,7 +77,15 @@
     <div class="nl-modal-backdrop" id="nl-modal-backdrop"></div>
     <div class="nl-modal-box">
         <button class="nl-modal-close" id="nl-modal-close" aria-label="닫기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
-        <div class="nl-modal-img-wrap" id="nl-modal-img-wrap"></div>
+        <div class="nl-modal-img-wrap" id="nl-modal-img-wrap" hidden>
+            <img id="nl-modal-img" alt="">
+        </div>
+        <!-- 넘기기 줄 — 사진 2장 이상일 때만 (posts.js 의 images 배열) -->
+        <div class="nl-shots-bar" id="nl-shots-bar" hidden>
+            <button class="nl-shots-nav" id="nl-shots-prev" aria-label="이전 사진"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+            <span class="nl-shots-count" id="nl-shots-count"></span>
+            <button class="nl-shots-nav" id="nl-shots-next" aria-label="다음 사진"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+        </div>
         <div class="nl-modal-body">
             <p class="nl-modal-date" id="nl-modal-date"></p>
             <h2 class="nl-modal-title" id="nl-modal-title"></h2>
@@ -119,15 +127,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // 폴라로이드에 적는 날짜는 손으로 쓴 것처럼 점으로 (2026-05-27 → 2026.05.27)
   const stamp = d => d.replace(/-/g, '.');
 
+  // 사진은 여러 장 넣을 수 있다 — posts.js 의 images 배열. 폴라로이드에는 첫 장만
+  // 걸리고, 모달에서 화살표로 넘겨 본다. image 로 한 장만 적어도 그대로 동작한다.
+  const shotsOf = p => (p.images?.length ? p.images : (p.image ? [p.image] : []));
+
+  // 목록은 정사각 썸네일(thumb/)을 쓴다 — 인화면이 163~181px 인데 원본은 2~5MB 라서.
+  // 경로는 자동으로 만들므로 posts.js 에 따로 적지 않아도 된다 (thumb 필드로 덮어쓸 수 있음).
+  // 썸네일이 없으면 onerror 가 원본으로 되돌린다 → 사진이 안 뜨는 일은 없다.
+  // 썸네일 생성: python3 tools/make-newsletter-thumbs.py
+  const thumbOf = (p, first) => p.thumb || first.replace(/^images\/newsletter\//, 'images/newsletter/thumb/');
+
   list.innerHTML = [...POSTS.newsletter].sort((a, b) => b.date.localeCompare(a.date)).map(p => {
+    const shots = shotsOf(p);
     // 사진이 없는 소식은 빈 인화지로 — 아래 여백의 글이 대신 내용을 전한다
-    const photo = p.image
-      ? `<span class="nl-shot-img"><img src="${p.image}" alt="${p.title}"></span>`
+    const photo = shots.length
+      ? `<span class="nl-shot-img"><img src="${thumbOf(p, shots[0])}" alt="${p.title}" loading="lazy"
+             onerror="this.onerror=null; this.src='${shots[0]}'">${
+             shots.length > 1 ? `<span class="nl-shot-more" aria-hidden="true">${shots.length}장</span>` : ''}</span>`
       : `<span class="nl-shot-img is-blank" aria-hidden="true"></span>`;
+    const more = shots.length > 1 ? ` (사진 ${shots.length}장)` : '';
     return `
       <div class="nl-hang">
         <span class="nl-peg" aria-hidden="true"></span>
-        <button class="nl-shot" data-id="${p.id}" aria-label="${p.title} — 자세히 보기">
+        <button class="nl-shot" data-id="${p.id}" aria-label="${p.title} — 자세히 보기${more}">
           ${photo}
           <span class="nl-shot-note">
             <span class="nl-shot-date">${stamp(p.date)}</span>
@@ -141,18 +163,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal    = document.getElementById('nl-modal');
   const backdrop = document.getElementById('nl-modal-backdrop');
   const closeBtn = document.getElementById('nl-modal-close');
+  const imgWrap  = document.getElementById('nl-modal-img-wrap');
+  const shotImg  = document.getElementById('nl-modal-img');
+  const shotsBar = document.getElementById('nl-shots-bar');
+  const prevBtn  = document.getElementById('nl-shots-prev');
+  const nextBtn  = document.getElementById('nl-shots-next');
+  const countEl  = document.getElementById('nl-shots-count');
 
   let modalTrigger = null;   // 모달을 연 요소 — 닫을 때 포커스 복귀용
+  let shots = [], shotIdx = 0, shotTitle = '';
+
+  // 현재 장을 무대에 올린다. 한 장뿐이면 화살표와 장수 표시를 감춘다
+  function showShot() {
+    const multi = shots.length > 1;
+    shotImg.src = shots[shotIdx];
+    shotImg.alt = multi ? `${shotTitle} 사진 ${shotIdx + 1}/${shots.length}` : shotTitle;
+    countEl.textContent = `${shotIdx + 1} / ${shots.length}`;
+    shotsBar.hidden = !multi;
+  }
+
+  // 끝에서 처음으로 돌아온다 — 두세 장뿐이라 버튼을 비활성으로 만드는 것보다 편하다
+  function stepShot(step) {
+    if (shots.length < 2) return;
+    shotIdx = (shotIdx + step + shots.length) % shots.length;
+    showShot();
+  }
 
   function openModal(p, trigger) {
     document.getElementById('nl-modal-date').textContent = p.date;
     document.getElementById('nl-modal-title').textContent = p.title;
     document.getElementById('nl-modal-content').innerHTML = p.body || '';
-    const imgWrap = document.getElementById('nl-modal-img-wrap');
-    imgWrap.innerHTML = p.image
-      ? `<img src="${p.image}" alt="${p.title}">`
-      : '';
-    imgWrap.hidden = !p.image;
+    shots = shotsOf(p);
+    shotIdx = 0;
+    shotTitle = p.title;
+    imgWrap.hidden = !shots.length;
+    shotsBar.hidden = shots.length < 2;   // 사진 없는 소식으로 바꿔 열었을 때 지난 줄이 남지 않게
+    if (shots.length) {
+      showShot();
+      // 둘째 장부터 미리 받아 둔다 — 넘겼을 때 빈 자리가 보이지 않게
+      shots.slice(1).forEach(src => { const im = new Image(); im.src = src; });
+    }
     modalTrigger = trigger || null;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -172,10 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (p) openModal(p, btn);
   });
 
-  // Tab 포커스를 모달 안에 가둠
+  // Tab 포커스를 모달 안에 가둠 — 감춰진 화살표는 포커스를 받을 수 없으니 제외한다
   modal.addEventListener('keydown', e => {
     if (e.key !== 'Tab') return;
-    const items = modal.querySelectorAll('button, a[href]');
+    const items = [...modal.querySelectorAll('button, a[href]')].filter(el => el.offsetParent !== null);
     if (!items.length) return;
     const first = items[0], last = items[items.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -184,7 +234,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   backdrop.addEventListener('click', closeModal);
   closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+  prevBtn.addEventListener('click', () => stepShot(-1));
+  nextBtn.addEventListener('click', () => stepShot(1));
+
+  document.addEventListener('keydown', e => {
+    if (modal.hidden) return;
+    if (e.key === 'Escape') closeModal();
+    else if (e.key === 'ArrowLeft')  stepShot(-1);
+    else if (e.key === 'ArrowRight') stepShot(1);
+  });
+
+  // 손가락으로 밀어도 넘어간다. 세로 스크롤과 헷갈리지 않게 가로 이동이 확실할 때만
+  let swipeX = 0, swipeY = 0;
+  imgWrap.addEventListener('touchstart', e => {
+    swipeX = e.touches[0].clientX; swipeY = e.touches[0].clientY;
+  }, { passive: true });
+  imgWrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - swipeX;
+    const dy = e.changedTouches[0].clientY - swipeY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) stepShot(dx < 0 ? 1 : -1);
+  }, { passive: true });
 });
 </script>
 </body>
