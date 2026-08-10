@@ -141,7 +141,10 @@ body {
 .logo {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.site-nav.scrolled .logo {
+/* 홈 버튼도 랩실 이름과 함께 사라진다. visibility로만 감춰 자리는 남기므로
+   메뉴 알약 위치가 스크롤 시 흔들리지 않는다. */
+.site-nav.scrolled .logo,
+.site-nav.scrolled .nav-home {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -190,7 +193,7 @@ body {
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
   color: var(--muted);
-  transition: color 0.18s, background 0.18s;
+  transition: color 0.18s, background 0.18s, opacity 0.3s ease, visibility 0.3s ease;
 }
 .nav-home svg {
   width: 20px;
