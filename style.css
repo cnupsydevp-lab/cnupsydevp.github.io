@@ -6,7 +6,8 @@
     --mint  #C1EBE9  기본 배경 (body · section-light)
     --cream #FFF7C5  카드·종이 면 (section-alt 배경) · 잉크 면 위의 글자
     --amber #F4AE52  강조 (기본 버튼 · 활성 메뉴 · eyebrow 룰 · 포커스 헤일로)
-    --ink   #4F252E  모든 텍스트 · 아이콘 · 선 · 푸터 면
+    --ink   #4F252E  '면'과 '선' 전용 — 푸터·문의버튼·모달 면, 테두리·그림자 알파
+    --text  #221619  '글자' 전용 근접 검정 (아래 참고)
 
   - 면 색 변경: --bg / --bg-card / --bg-light-card / --bg-footer 조정
   - 테두리·그림자·hover 음영은 위 4색의 rgba 알파값만 사용
@@ -32,6 +33,13 @@
      크림 위 3.9:1 · 민트 위 3.3:1 로 그래픽 요소 기준(3:1) 충족.
      도트는 색 하나로만 뜻을 전달한다 (텍스트 라벨 없음 — 요청 사항).
      스크린리더 지원이 필요해지면 도트 span 에 aria-label 을 다는 방식이 있다. */
+  /* 타이포 전용 근접 검정.
+     잉크(#4F252E)와 같은 색상환(H≈345)에서 명도·채도만 낮춘 값이라
+     검정으로 읽히면서도 푸터 마룬과 한 가족으로 남는다.
+     순수 #000 은 민트·크림 위에서 차갑게 겉돌아 쓰지 않는다.
+     대비: 크림 위 16.2:1 · 민트 위 13.7:1 · 앰버 위 9.2:1 */
+  --text: #221619;
+
   --alert: #e03e3e;
 
   /* 배경색 계열 */
@@ -42,12 +50,12 @@
 
   /* 포인트 컬러 (앰버) — 면에만 사용 */
   --accent:        var(--amber);
-  --accent-dark:   var(--ink);                 /* 구 강조 텍스트 → 잉크 */
+  --accent-dark:   var(--text);                /* 구 강조 텍스트 → 본문 검정 */
   --accent-dim:    rgba(244, 174, 82, 0.38);   /* hover·active 면 */
   --accent-border: rgba(79, 37, 46, 0.55);     /* 상태 테두리 (3:1 확보) */
 
   /* 텍스트색 */
-  --muted:       rgba(79, 37, 46, 0.80);
+  --muted:       rgba(34, 22, 25, 0.74);   /* 크림 위 6.7:1 · 민트 위 6.3:1 */
 
   /* 테두리색 */
   --border:      rgba(79, 37, 46, 0.14);
@@ -59,8 +67,8 @@
   --bg-footer:     var(--ink);     /* footer 배경 — 페이지를 아래에서 눌러 닫는 앵커 */
 
   /* 라이트 섹션 텍스트색 */
-  --text-dark:     var(--ink);
-  --text-mid:      rgba(79, 37, 46, 0.80);
+  --text-dark:     var(--text);
+  --text-mid:      rgba(34, 22, 25, 0.74);
 
   /* 본문 — IBM Plex Sans KR (한글+영문 모두 지원) */
   --font:         'IBM Plex Sans KR', system-ui, -apple-system, sans-serif;
@@ -94,7 +102,7 @@
 
 /* ── Focus ───────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--text);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -121,7 +129,7 @@
   z-index: 9999;
   padding: 0.5rem 1rem;
   background: var(--accent);
-  color: var(--ink);
+  color: var(--text);
   font-size: var(--fs-md);
   font-weight: 700;
   text-decoration: none;
@@ -181,7 +189,7 @@ body {
   font-style: normal;
   font-weight: 900;
   font-size: 1.45rem;
-  color: var(--ink);
+  color: var(--text);
   text-decoration: none;
   letter-spacing: 0.08em;
 }
@@ -227,7 +235,7 @@ body {
 }
 .nav-home:hover,
 .nav-home.active {
-  color: var(--ink);
+  color: var(--text);
   background: var(--accent-dim);
 }
 /* 메뉴: 글래스모피즘 알약(타원형) 한 줄 */
@@ -258,7 +266,7 @@ body {
 }
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--ink);
+  color: var(--text);
   background: var(--accent-dim);
 }
 /* ── Dropdown Nav ────────────────────────────────────────── */
@@ -281,7 +289,7 @@ body {
 }
 .nav-dropdown-btn:hover,
 .nav-dropdown-btn.active {
-  color: var(--ink);
+  color: var(--text);
   background: var(--accent-dim);
 }
 
@@ -376,7 +384,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 1.5rem;
   border-top: 3px solid var(--amber);
   padding-top: 0.45rem;
@@ -393,7 +401,7 @@ body {
 /* 강조어 — 앰버는 글자색 대비가 부족하므로 밑줄 하이라이트 "면"으로 쓴다 */
 .hero-title em {
   font-style: normal;
-  color: var(--ink);
+  color: var(--text);
   background: linear-gradient(transparent 62%, var(--amber) 62%);
   padding: 0 0.06em;
 }
@@ -416,7 +424,7 @@ body {
 .btn-primary {
   display: inline-block;
   background: var(--amber);
-  color: var(--ink);
+  color: var(--text);
   text-decoration: none;
   padding: 0.82rem 1.9rem;
   min-height: 44px;
@@ -450,8 +458,8 @@ body {
   transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
 .btn-ghost:hover {
-  color: var(--ink);
-  border-color: var(--ink);
+  color: var(--text);
+  border-color: var(--text);
   background: var(--accent-dim);
 }
 /* 눌림(pressed) 상태 — 클릭 순간 살짝 가라앉는 피드백 */
@@ -579,7 +587,7 @@ body {
   font-family: var(--font-display);
   font-size: 2.6rem;
   font-weight: 900;
-  color: var(--ink);
+  color: var(--text);
   line-height: 1;
   letter-spacing: -0.04em;
 }
@@ -605,7 +613,7 @@ body {
 .ars-keyword {
   font-size: var(--fs-sm);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--text);
   /* 칩이 7개라 앰버를 채우면 강조가 아니라 면이 된다 — 잉크 워시로 낮춤 */
   background: rgba(79, 37, 46, 0.08);
   border: 1px solid rgba(79, 37, 46, 0.28);
@@ -634,7 +642,7 @@ body {
   font-family: var(--font-ui-num);
   font-weight: 900;
   font-size: 2.4rem;
-  color: rgba(79, 37, 46, 0.30);
+  color: rgba(34, 22, 25, 0.26);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.04em;
@@ -674,11 +682,11 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 .info-card p { font-size: var(--fs-md); color: var(--text-dark); line-height: 1.7; }
-.info-card a { color: var(--ink); font-weight: 700; text-decoration: underline; }
+.info-card a { color: var(--text); font-weight: 700; text-decoration: underline; }
 .info-card a:hover { text-decoration: underline; }
 
 /* ── Profile (PI) ────────────────────────────────────────── */
@@ -722,7 +730,7 @@ body {
 }
 .profile-role {
   font-size: var(--fs-md);
-  color: var(--ink);
+  color: var(--text);
   font-weight: 700;
   margin-bottom: 2rem;
   letter-spacing: 0.02em;
@@ -732,19 +740,19 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--ink);
+  color: var(--text);
   margin-bottom: 0.75rem;
   margin-top: 2rem;
 }
 .profile-list { list-style: none; border-top: 1px solid var(--border); }
 .profile-list li {
   font-size: var(--fs-md);
-  color: var(--ink);
+  color: var(--text);
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
   line-height: 1.6;
 }
-.profile-list a { color: var(--ink); text-decoration: underline; }
+.profile-list a { color: var(--text); text-decoration: underline; }
 
 /* ── Members ─────────────────────────────────────────────── */
 .member-subgroup-label {
@@ -780,7 +788,7 @@ body {
 }
 .member-name-en {
   margin-top: 0.4rem;
-  color: var(--ink);
+  color: var(--text);
 }
 .member-card p {
   font-size: var(--fs-sm);
@@ -794,8 +802,8 @@ body {
    ════════════════════════════════════════════════════════════════ */
 .member-info-card {
   --postit:      var(--cream);
-  --postit-ink:  var(--ink);
-  --postit-ink2: rgba(79, 37, 46, 0.85);   /* 앰버 말풍선에서도 4.9:1 */
+  --postit-ink:  var(--text);
+  --postit-ink2: rgba(34, 22, 25, 0.82);   /* 앰버 말풍선에서도 5.6:1 */
 
   position: relative;
   margin-top: 2.25rem;
@@ -852,7 +860,7 @@ body {
   display: inline-block;
   font-size: var(--fs-xs);
   font-weight: 700;
-  color: var(--ink);
+  color: var(--text);
   background: rgba(255, 247, 197, 0.55);   /* 종이 위 프로스트 칩 (크림 알파) */
   border: 1px solid var(--accent-border);
   border-radius: 999px;                    /* 라벨 스티커 같은 알약형 */
@@ -896,7 +904,7 @@ body {
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.42rem; }
 .form-label { font-size: var(--fs-sm); font-weight: 700; color: var(--text-dark); letter-spacing: 0.01em; }
-.form-req { color: var(--ink); margin-left: 0.1rem; }
+.form-req { color: var(--text); margin-left: 0.1rem; }
 .form-control {
   font-family: var(--font-ui);
   font-size: var(--fs-md);
@@ -909,9 +917,9 @@ body {
   outline: none;
   transition: border-color 0.18s, box-shadow 0.18s;
 }
-.form-control::placeholder { color: rgba(79, 37, 46, 0.60); }
+.form-control::placeholder { color: rgba(34, 22, 25, 0.55); }
 .form-control:focus {
-  border-color: var(--ink);
+  border-color: var(--text);
   box-shadow: 0 0 0 3px rgba(244, 174, 82, 0.7);
 }
 .form-textarea { resize: vertical; min-height: 148px; line-height: 1.7; }
@@ -1058,7 +1066,7 @@ body {
   cursor: pointer;
 }
 .pub-title-link:hover {
-  color: var(--ink);
+  color: var(--text);
   text-decoration: underline;
 }
 .pub-download {
@@ -1081,7 +1089,7 @@ body {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cpolyline points='5 12 12 19 19 12'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .pub-download:hover {
-  color: var(--ink);
+  color: var(--text);
 }
 .pub-authors {
   font-size: var(--fs-sm);
@@ -1124,7 +1132,7 @@ a.notice-item::after {
   transition: opacity 0.15s, background-color 0.15s;
 }
 a.notice-item:hover::after {
-  background-color: var(--ink);
+  background-color: var(--text);
   opacity: 1;
 }
 .notice-date {
@@ -1294,7 +1302,7 @@ a.notice-item:hover::after {
   padding: 0.55rem 1rem;
   background: var(--bg-card);
   font-size: var(--fs-sm);
-  color: var(--ink);
+  color: var(--text);
   text-decoration: underline;
   border-top: 1px solid var(--border);
   text-align: right;
@@ -1314,9 +1322,9 @@ a.notice-item:hover::after {
 }
 /* 세 배지는 윤곽선 / 채움 / 워시 세 단계로 구분한다.
    badge-gold 는 논문 목록에서만 28회 반복되므로 앰버를 쓰면 배지 벽이 된다. */
-.badge-gold  { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.badge-gold  { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--text); }
 .badge-navy  { background: var(--ink); color: var(--cream); }
-.badge-muted { background: rgba(79, 37, 46, 0.13); color: var(--ink); }
+.badge-muted { background: rgba(79, 37, 46, 0.13); color: var(--text); }
 
 /* ── Post Detail ─────────────────────────────────────────── */
 .post-back {
@@ -1330,7 +1338,7 @@ a.notice-item:hover::after {
   margin-bottom: 2rem;
   transition: color 0.18s;
 }
-.post-back:hover { color: var(--ink); }
+.post-back:hover { color: var(--text); }
 
 .post-article { max-width: 720px; }
 
@@ -1358,7 +1366,7 @@ a.notice-item:hover::after {
 .post-body ol        { margin: 0.5rem 0 1rem 1.5rem; }
 .post-body li        { margin-bottom: 0.35rem; }
 .post-body strong    { font-weight: 700; }
-.post-body a         { color: var(--ink); text-decoration: underline; }
+.post-body a         { color: var(--text); text-decoration: underline; }
 .post-body h3        { font-size: var(--fs-lg); font-weight: 800; margin: 1.5rem 0 0.5rem; }
 
 /* ── Divider ─────────────────────────────────────────────── */
@@ -1489,7 +1497,7 @@ html {
   display: block;
   width: 20px;
   height: 2px;
-  background: var(--ink);
+  background: var(--text);   /* 내비 글자와 같은 색 — 아이콘은 타입을 따른다 */
   border-radius: 2px;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
   transform-origin: center;
@@ -1554,7 +1562,7 @@ html {
 .nav-mobile-links > li > button.nav-mobile-section-btn:hover,
 .nav-mobile-links > li > a.active {
   background: var(--accent-dim);
-  color: var(--ink);
+  color: var(--text);
 }
 .nav-mobile-sub {
   list-style: none;
@@ -1577,7 +1585,7 @@ html {
 }
 .nav-mobile-sub a:hover,
 .nav-mobile-sub a:active,
-.nav-mobile-sub a.active { color: var(--ink); background: var(--accent-dim); }
+.nav-mobile-sub a.active { color: var(--text); background: var(--accent-dim); }
 /* 새 글 도트 — 모바일에서도 PC와 동일하게 붉은 점으로 표시 (글자 크기가 커서 살짝 크게) */
 .nav-mobile-links .nav-notif-dot {
   width: 7px;
@@ -1811,9 +1819,9 @@ html {
 /* 연구과제 기간 */
 .grant-period { font-size: var(--fs-sm); color: var(--muted); }
 /* 폼 오류 텍스트 */
-.form-error { color: var(--ink); font-weight: 700; }
+.form-error { color: var(--ink); font-weight: 700; }   /* 본문 검정과 구분되는 오류 톤 */
 /* PI 연구 관심사 소개문 */
-.profile-intro { font-size: var(--fs-base); color: var(--ink); line-height: 1.9; font-style: italic; }
+.profile-intro { font-size: var(--fs-base); color: var(--text); line-height: 1.9; font-style: italic; }
 
 /* ── 디스플레이 폰트 두께 보정 ──────────────────────────────
    Do Hyeon · Abril Fatface 는 단일 두께(400)만 제공한다.
