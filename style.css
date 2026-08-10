@@ -156,20 +156,24 @@ body {
   text-decoration: none;
   letter-spacing: 0.08em;
 }
-/* 홈 버튼 + 메뉴바: 오른쪽 끝에 배치
+/* 홈 버튼 + 메뉴바: 오른쪽 끝에 배치 (랩실 이름 · 홈 · 메뉴 순서)
    모바일(≤860px)에서는 기존대로 .nav-cluster 통째로 숨김 */
 .nav-cluster {
   display: flex;
-  align-items: center;
+  align-items: stretch;   /* 홈 버튼 높이를 메뉴 알약에 맞춤 */
   gap: 0.6rem;
 }
-/* 홈 버튼: 메뉴바와 별도의 원형 글래스모피즘 아이콘 버튼 */
+/* 홈 버튼: 메뉴 알약과 동일한 글래스모피즘 + 정원형.
+   높이를 알약에 맞추고(align-self: stretch) 정비율로 폭을 잡아
+   알약 패딩이 바뀌어도 둘의 높이·중심선이 어긋나지 않게 한다.
+   (min-width는 aspect-ratio 미지원 브라우저 대비 + 터치 타깃 최소 크기) */
 .nav-home {
+  align-self: stretch;
+  aspect-ratio: 1;
+  min-width: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
   flex-shrink: 0;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
@@ -179,6 +183,10 @@ body {
   backdrop-filter: blur(14px) saturate(140%);
   color: var(--muted);
   transition: color 0.18s, background 0.18s;
+}
+.nav-home svg {
+  width: 20px;
+  height: 20px;
 }
 .nav-home:hover,
 .nav-home.active {
