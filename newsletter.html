@@ -65,8 +65,11 @@
 
 <section class="section section-light">
     <div class="container">
-        <div class="insta-grid" id="newsletter-list">
-            <p class="empty-note">등록된 소식지가 없습니다.</p>
+        <!-- 폴라로이드 벽 — .nl-wall-clip 이 줄에서 넘친 부분을 자른다 (style.css 참고) -->
+        <div class="nl-wall-clip">
+            <div class="nl-wall" id="newsletter-list">
+                <p class="empty-note">등록된 소식지가 없습니다.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -114,21 +117,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof POSTS === 'undefined' || !POSTS.newsletter?.length) return;
 
   const list = document.getElementById('newsletter-list');
+
+  // 폴라로이드에 적는 날짜는 손으로 쓴 것처럼 점으로 (2026-05-27 → 2026.05.27)
+  const stamp = d => d.replace(/-/g, '.');
+
   list.innerHTML = [...POSTS.newsletter].sort((a, b) => b.date.localeCompare(a.date)).map(p => {
-    if (p.image) {
-      return `
-        <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">
-          <img src="${p.image}" alt="${p.title}">
-        </button>`;
-    } else {
-      return `
-        <button class="insta-item" data-id="${p.id}" aria-label="${p.title}">
-          <div class="insta-text-card">
-            <span class="insta-text-date">${p.date}</span>
-            <span class="insta-text-title">${p.title}</span>
-          </div>
-        </button>`;
-    }
+    // 사진이 없는 소식은 빈 인화지로 — 아래 여백의 글이 대신 내용을 전한다
+    const photo = p.image
+      ? `<span class="nl-shot-img"><img src="${p.image}" alt="${p.title}"></span>`
+      : `<span class="nl-shot-img is-blank" aria-hidden="true"></span>`;
+    return `
+      <div class="nl-hang">
+        <span class="nl-peg" aria-hidden="true"></span>
+        <button class="nl-shot" data-id="${p.id}" aria-label="${p.title} — 자세히 보기">
+          ${photo}
+          <span class="nl-shot-note">
+            <span class="nl-shot-date">${stamp(p.date)}</span>
+            <span class="nl-shot-cap">${p.caption || p.title}</span>
+          </span>
+        </button>
+      </div>`;
   }).join('');
 
   // 모달

@@ -96,15 +96,21 @@ homepage/
 
 ### 소식지 (`POSTS.newsletter`)
 
+목록은 **줄에 매달린 폴라로이드**로 표시되고, 클릭하면 모달에 `body`가 열립니다.
+
 ```js
 {
   id: 3,
   date: 'YYYY-MM-DD',
-  title: '제목',
-  image: 'images/파일명.jpg',   // 선택 — 없으면 텍스트 카드
+  title: '제목',                 // 모달 제목 + caption 없을 때 폴라로이드 아래 글
+  caption: '짧은 한 줄',          // 선택 — 폴라로이드 아래 여백에 적는 글 (세 줄까지)
+  image: 'images/파일명.jpg',    // 선택 — 없으면 빈 인화지 (모노그램만)
   body: `<p>본문 HTML</p>`
 }
 ```
+
+> 사진은 폴라로이드 인화면에 맞춰 **정사각으로 잘립니다**(`object-fit: cover`).
+> 잘리면 안 되는 사진은 모달에서 전체가 보이므로 목록용 정사각 이미지를 따로 두지 않아도 됩니다.
 
 ### 연구참여 (`POSTS.participation`)
 
