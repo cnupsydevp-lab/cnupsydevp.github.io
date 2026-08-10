@@ -178,7 +178,7 @@ body {
 .nav-home {
   align-self: stretch;
   aspect-ratio: 1;
-  min-width: 44px;
+  min-width: 40px;   /* aspect-ratio 미지원 대비 하한 — 알약 높이보다 작아야 정원 유지 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +207,7 @@ body {
   align-items: center;
   list-style: none;
   gap: 0.1rem;
-  padding: 0.3rem 0.4rem;
+  padding: 0.25rem 0.4rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.7);
@@ -222,7 +222,7 @@ body {
   font-weight: 700;
   color: var(--muted);
   text-decoration: none;
-  padding: 0.55rem 0.7rem;   /* 태블릿 터치 대비 세로 타깃 확대 */
+  padding: 0.45rem 0.7rem;   /* 세로 여백 축소 — 터치 타깃(약 37px)과의 균형점 */
   border-radius: 999px;
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
@@ -244,7 +244,7 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.55rem 0.55rem;   /* 태블릿 터치 대비 세로 타깃 확대 */
+  padding: 0.45rem 0.55rem;   /* .nav-links a와 동일하게 세로 여백 축소 */
   border-radius: 999px;   /* 다른 메뉴 항목과 통일 (타원형 음영은 상위메뉴, 직각은 하위메뉴 패널) */
   letter-spacing: 0.02em;
   transition: color 0.18s, background 0.18s;
