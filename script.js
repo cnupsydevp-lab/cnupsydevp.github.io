@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initDropdowns();
   initNotifBadge();
   initMobileNav();
-  initSearch();
   initBackToTop();
   initRipple();
 
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // (내비 마크업이 partials/nav.html 단일 소스라 페이지별 하드코딩 대신 JS가 처리)
 function initActiveNav() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links > li > a').forEach(a => {
+  document.querySelectorAll('.nav-links > li > a, .nav-home').forEach(a => {
     if (a.getAttribute('href') === page) a.classList.add('active');
   });
 }
@@ -169,6 +168,19 @@ function initMobileNav() {
   const ul = document.createElement('ul');
   ul.className = 'nav-mobile-links';
 
+  // 홈 버튼(.nav-home)은 nav-links 밖에 있어 아래 desktopLinks 루프에 안 잡히므로 수동 추가
+  const homeBtn = document.querySelector('.nav-home');
+  if (homeBtn) {
+    const mLi = document.createElement('li');
+    const mA = document.createElement('a');
+    mA.href = homeBtn.getAttribute('href');
+    mA.textContent = '홈';
+    if (mA.getAttribute('href') === page) mA.classList.add('active');
+    mA.addEventListener('click', closeMenu);
+    mLi.appendChild(mA);
+    ul.appendChild(mLi);
+  }
+
   desktopLinks.forEach(li => {
     const mLi = document.createElement('li');
 
@@ -219,16 +231,6 @@ function initMobileNav() {
     ul.appendChild(mLi);
   });
 
-  // 모바일 검색 — 오버레이 상단에 배치, initSearch가 데스크톱 검색과 함께 초기화
-  const searchForm = document.createElement('form');
-  searchForm.className = 'nav-search nav-search--mobile';
-  searchForm.setAttribute('role', 'search');
-  searchForm.setAttribute('autocomplete', 'off');
-  searchForm.innerHTML =
-    '<svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>' +
-    '<input type="search" class="nav-search-input" placeholder="검색" aria-label="사이트 검색">' +
-    '<ul class="nav-search-results" role="listbox" hidden></ul>';
-  overlay.appendChild(searchForm);
   overlay.appendChild(ul);
   document.body.appendChild(overlay);
 
@@ -303,120 +305,3 @@ function initRipple() {
   });
 }
 
-function initSearch() {
-  // 데스크톱 내비 검색 + 모바일 오버레이 검색(initMobileNav가 생성) 모두 초기화
-  document.querySelectorAll('.nav-search').forEach(setupSearchForm);
-}
-
-function setupSearchForm(form) {
-  const input = form.querySelector('.nav-search-input');
-  const results = form.querySelector('.nav-search-results');
-  if (!input || !results) return;
-
-  // WAI-ARIA 콤보박스 패턴: input(combobox) ↔ 결과 목록(listbox/option) 연결
-  setupSearchForm._seq = (setupSearchForm._seq || 0) + 1;
-  const listId = results.id || (results.id = 'nav-search-results-' + setupSearchForm._seq);
-  input.setAttribute('role', 'combobox');
-  input.setAttribute('aria-expanded', 'false');
-  input.setAttribute('aria-controls', listId);
-  input.setAttribute('aria-autocomplete', 'list');
-
-  // 사이트 주요 페이지 인덱스 (라벨 + 검색 키워드 + 이동 경로)
-  const INDEX = [
-    { label: '소개',        url: 'index.html',         kw: 'about 소개 홈 메인 dpwl 연구실' },
-    { label: '지도교수',     url: 'pi.html',            kw: 'pi professor 교수 지도교수' },
-    { label: '구성원',       url: 'members.html',       kw: 'members 구성원 연구원 팀원 대학원생' },
-    { label: '연구분야',     url: 'research.html',      kw: 'research 연구 분야 논문 publications 성과' },
-    { label: '연구활동',     url: 'activities.html',    kw: 'activities 연구활동 활동 세미나 학회' },
-    { label: '연구참여',     url: 'participation.html', kw: 'participation 연구참여 참여 실험 모집' },
-    { label: '공지사항',     url: 'notices.html',       kw: 'notices 공지사항 공지 알림' },
-    { label: '소식지',       url: 'newsletter.html',    kw: 'newsletter 소식지 뉴스레터 소식' },
-    { label: 'Contact',     url: 'contact.html',       kw: 'contact 연락처 문의 위치 오시는길 이메일 지도' },
-    { label: '대학원 진학',  url: 'admissions.html',    kw: 'admissions 대학원 진학 입학 지원' },
-    { label: '인턴',         url: 'intern.html',        kw: 'intern 인턴 인턴십' },
-  ];
-
-  let items = [];
-  let activeIdx = -1;
-
-  function close() {
-    results.hidden = true;
-    results.innerHTML = '';
-    items = [];
-    activeIdx = -1;
-    input.setAttribute('aria-expanded', 'false');
-    input.removeAttribute('aria-activedescendant');
-  }
-
-  function setActive(i) {
-    items.forEach(a => {
-      a.classList.remove('active');
-      a.parentElement.setAttribute('aria-selected', 'false');
-    });
-    activeIdx = i;
-    if (items[i]) {
-      items[i].classList.add('active');
-      const li = items[i].parentElement;
-      li.setAttribute('aria-selected', 'true');
-      input.setAttribute('aria-activedescendant', li.id);
-    }
-  }
-
-  function render() {
-    const q = input.value.trim().toLowerCase();
-    if (!q) { close(); return; }
-    const matches = INDEX
-      .filter(e => e.label.toLowerCase().includes(q) || e.kw.toLowerCase().includes(q))
-      .slice(0, 8);
-
-    results.innerHTML = '';
-    if (!matches.length) {
-      const li = document.createElement('li');
-      li.className = 'nav-search-empty';
-      li.setAttribute('role', 'option');
-      li.setAttribute('aria-disabled', 'true');
-      li.textContent = '검색 결과가 없습니다';
-      results.appendChild(li);
-      results.hidden = false;
-      input.setAttribute('aria-expanded', 'true');
-      input.removeAttribute('aria-activedescendant');
-      items = [];
-      activeIdx = -1;
-      return;
-    }
-    matches.forEach((m, i) => {
-      const li = document.createElement('li');
-      li.setAttribute('role', 'option');
-      li.id = listId + '-opt-' + i;
-      const a = document.createElement('a');
-      a.href = m.url;
-      a.textContent = m.label;
-      li.appendChild(a);
-      results.appendChild(li);
-    });
-    items = Array.from(results.querySelectorAll('a'));
-    results.hidden = false;
-    input.setAttribute('aria-expanded', 'true');
-    setActive(0);
-  }
-
-  input.addEventListener('input', render);
-  input.addEventListener('focus', () => { if (input.value.trim()) render(); });
-
-  input.addEventListener('keydown', (e) => {
-    if (results.hidden || !items.length) return;
-    if (e.key === 'ArrowDown')      { e.preventDefault(); setActive(Math.min(activeIdx + 1, items.length - 1)); }
-    else if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
-    else if (e.key === 'Escape')    { close(); input.blur(); }
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const target = items[activeIdx] || items[0];
-    if (target) window.location.href = target.getAttribute('href');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!form.contains(e.target)) close();
-  });
-}
