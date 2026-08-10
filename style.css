@@ -1,74 +1,112 @@
 
 /* ── Variables ──────────────────────────────────────────── */
 /*
-  [색상 수정 가이드 — 4색 팔레트 + 알림색 1]
-  이 사이트는 아래 4색만 사용한다. 새 색을 추가하지 말 것.
-    --mint  #C1EBE9  기본 배경 (body · section-light)
-    --cream #FFF7C5  카드·종이 면 (section-alt 배경) · 잉크 면 위의 글자
-    --amber #F4AE52  강조 (기본 버튼 · 활성 메뉴 · eyebrow 룰 · 포커스 헤일로)
-    --ink   #4F252E  '면'과 '선' 전용 — 푸터·문의버튼·모달 면, 테두리·그림자 알파
-    --text  #221619  '글자' 전용 근접 검정 (아래 참고)
+  [색상 수정 가이드 — 5색 팔레트 + 잉크 2단 + 알림색 1]
+  이 사이트는 아래 색만 사용한다. 새 색을 추가하지 말 것.
 
+    --paper #EDE8DC  지면 (body · section · section-light)
+    --card  #F5F3F0  지면 위에 얹힌 종이 — 카드·구성원 프로필 카드(고정)·모달·입력면·내비 알약
+    --blush #E7CCCC  따뜻한 교차 밴드 (section-alt) · 상단 워시 · 하이라이터 마커
+    --sage  #A5B68D  강조 '면' (기본 버튼 · 활성 메뉴 · 포커스 헤일로 · 푸터 상단 룰)
+    --moss  #C1CFA1  부드러운 '면' (칩 · 배지 워시)
+    --ink   #3D4A33  '면'과 '선' 전용 — 푸터·문의버튼·모달 면, 테두리·그림자 알파
+    --text  #23281C  '글자' 전용 근접 검정
+
+  [다섯 색은 모두 밝다 — 어두운 끝은 잉크가 맡는다]
+  팔레트 5색은 명도가 높아 '눌러 닫는 어두운 면'을 만들 수 없다. 그래서
+  --ink / --text 를 둔다. 둘 다 --sage 와 같은 색상환(H≈85°)에서 명도만
+  내린 값이라, 팔레트 밖 색이 아니라 '세이지의 어두운 끝'으로 읽힌다.
+  순수 #000 은 이 종이 위에서 차갑게 겉돌아 쓰지 않는다.
+
+  [규칙]
   - 면 색 변경: --bg / --bg-card / --bg-light-card / --bg-footer 조정
-  - 테두리·그림자·hover 음영은 위 4색의 rgba 알파값만 사용
-  - 앰버를 글자색으로 쓰지 말 것 (크림 위 1.8:1, 민트 위 1.5:1 — WCAG AA 미달).
-    앰버는 항상 "면"이고, 그 위 글자는 항상 잉크(6.7:1).
-  - 앰버는 아껴 쓸 것. 한 화면에 앰버 면이 여러 개면 강조로 읽히지 않는다.
+  - 테두리·그림자·hover 음영은 팔레트 색의 rgba 알파값만 사용.
+    rgba() 안에는 hex 를 쓸 수 없으므로 반드시 --*-rgb 토큰을 거친다
+    → rgba(var(--ink-rgb), 0.14)
+  - 블러시·세이지·모스를 글자색으로 쓰지 말 것. 셋은 항상 "면"이고,
+    그 위 글자는 항상 --text (7:1 이상).
+  - 블러시 밴드(section-alt)는 한 페이지에 하나. 두 개 이상이면 밴드로 읽히지 않는다.
+  - 세이지도 아껴 쓸 것. 한 화면에 세이지 면이 여러 개면 강조로 읽히지 않는다.
+
+  [대비 — WCAG]
+    text/paper 12.3:1 · text/card 13.6:1 · text/blush 10.0:1
+    text/moss   9.1:1 · text/sage  7.0:1 · card/ink  8.5:1
+    ink/paper   7.7:1 · ink/card   8.5:1 · ink/blush  6.3:1
 
   [예외 1개 — --alert]
   새 글 알림 도트만 팔레트 밖의 붉은색을 쓴다. "새 것"은 팔레트 안의 어떤 색으로도
-  대체할 수 없는 관습적 신호이고, 앰버로 바꾸면 강조 면과 구분되지 않는다.
+  대체할 수 없는 관습적 신호이고, 세이지로 바꾸면 강조 면과 구분되지 않는다.
+  다만 색상환(H≈4°)은 블러시와 같아서 '농축된 블러시'로 읽힌다.
+  종이 위 3.7:1 · 카드 위 4.0:1 로 그래픽 요소 기준(3:1) 충족.
   이 색은 알림 도트 외에 쓰지 말 것.
 */
 :root {
-  /* ── 원색 4개 (Single Source of Truth) ────────────────────
-     대비: 잉크/크림 11.8:1 · 잉크/민트 10.0:1 · 잉크/앰버 6.7:1
-           앰버/크림 1.8:1 · 앰버/민트 1.5:1 → 앰버는 면 전용 */
-  --mint:  #C1EBE9;
-  --cream: #FFF7C5;
-  --amber: #F4AE52;
-  --ink:   #4F252E;
+  /* ── 원색 5개 + 잉크 2단 (Single Source of Truth) ────────── */
+  --paper: #EDE8DC;
+  --card:  #F5F3F0;
+  --blush: #E7CCCC;
+  --sage:  #A5B68D;
+  --moss:  #C1CFA1;
+  --ink:   #3D4A33;
+  --text:  #23281C;
 
-  /* 팔레트 예외 — 새 글 알림 도트 전용. 다른 곳에 쓰지 말 것.
-     크림 위 3.9:1 · 민트 위 3.3:1 로 그래픽 요소 기준(3:1) 충족.
-     도트는 색 하나로만 뜻을 전달한다 (텍스트 라벨 없음 — 요청 사항).
-     스크린리더 지원이 필요해지면 도트 span 에 aria-label 을 다는 방식이 있다. */
-  /* 타이포 전용 근접 검정.
-     잉크(#4F252E)와 같은 색상환(H≈345)에서 명도·채도만 낮춘 값이라
-     검정으로 읽히면서도 푸터 마룬과 한 가족으로 남는다.
-     순수 #000 은 민트·크림 위에서 차갑게 겉돌아 쓰지 않는다.
-     대비: 크림 위 16.2:1 · 민트 위 13.7:1 · 앰버 위 9.2:1 */
-  --text: #221619;
+  --alert: #C2554E;
 
-  --alert: #e03e3e;
+  /* 알파 파생용 rgb 트리플렛 — 위 hex 를 바꾸면 이 값도 함께 바꾼다 */
+  --paper-rgb: 237, 232, 220;
+  --card-rgb:  245, 243, 240;
+  --blush-rgb: 231, 204, 204;
+  --sage-rgb:  165, 182, 141;
+  --moss-rgb:  193, 207, 161;
+  --ink-rgb:    61,  74,  51;
+  --text-rgb:   35,  40,  28;
+
+  /* ── 종이 질감 ─────────────────────────────────────────────
+     외부 이미지 없이 SVG feTurbulence 로 만든 두 겹 노이즈.
+       --grain     : 잔 섬유 (180px 타일). 값을 0.86~1.0 으로 압축했으므로
+                     multiply 로 얹으면 최대 14% 만 어두워진다.
+       --pulp      : 큰 얼룩 = 펄프 뭉침 (520px 타일). 최대 7%.
+       --grain-ink : 잉크 면(푸터)용. 값이 0~0.08 이라 screen 으로 얹어
+                     섬유가 빛을 받는 것처럼 밝아진다.
+     두 겹을 겹치는 이유: 잔 섬유만으로는 프린터 노이즈처럼 균일해 보이고,
+     큰 얼룩이 함께 있어야 손으로 뜬 종이로 읽힌다.
+     사용법 → "종이 면 · 질감" 섹션의 셀렉터 목록 참고. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g' filterUnits='userSpaceOnUse' x='0' y='0' width='180' height='180'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.14' intercept='0.86'/%3E%3CfeFuncG type='linear' slope='0.14' intercept='0.86'/%3E%3CfeFuncB type='linear' slope='0.14' intercept='0.86'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  --pulp: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='p' filterUnits='userSpaceOnUse' x='0' y='0' width='520' height='520'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.013' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncG type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncB type='linear' slope='0.07' intercept='0.93'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='520' height='520' filter='url(%23p)'/%3E%3C/svg%3E");
+  --grain-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='i' filterUnits='userSpaceOnUse' x='0' y='0' width='180' height='180'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncG type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncB type='linear' slope='0.08' intercept='0'/%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23i)'/%3E%3C/svg%3E");
+  --grain-size: 180px 180px;
+  --pulp-size:  520px 520px;
 
   /* 배경색 계열 */
-  --bg:          var(--mint);    /* 전체 body 기본 배경 */
-  --bg-card:     var(--cream);   /* 카드 배경 — 민트 위에 얹힌 크림 종이 */
-  --bg-alt:      var(--cream);   /* alt 배경 */
-  --bg-hover:    rgba(79, 37, 46, 0.07);
+  --bg:          var(--paper);   /* 전체 body 기본 배경 */
+  --bg-card:     var(--card);    /* 카드 배경 — 지면 위에 얹힌 종이 */
+  --bg-alt:      var(--blush);   /* alt 배경 */
+  --bg-hover:    rgba(var(--ink-rgb), 0.06);
 
-  /* 포인트 컬러 (앰버) — 면에만 사용 */
-  --accent:        var(--amber);
-  --accent-dark:   var(--text);                /* 구 강조 텍스트 → 본문 검정 */
-  --accent-dim:    rgba(244, 174, 82, 0.38);   /* hover·active 면 */
-  --accent-border: rgba(79, 37, 46, 0.55);     /* 상태 테두리 (3:1 확보) */
+  /* 포인트 컬러 (세이지) — 면에만 사용 */
+  --accent:        var(--sage);
+  --accent-dark:   var(--text);                    /* 구 강조 텍스트 → 본문 검정 */
+  --accent-dim:    rgba(var(--sage-rgb), 0.38);    /* hover·active 면 */
+  /* 상태 테두리(hover 등) — WCAG 1.4.11 의 3:1 을 세 지면 모두에서 확보해야 한다.
+     새 잉크(올리브)는 구 잉크(마룬)보다 밝아 0.55 로는 2.5~2.8:1 밖에 안 나온다 → 0.70.
+     (종이 3.7:1 · 카드 3.9:1 · 블러시 3.3:1) */
+  --accent-border: rgba(var(--ink-rgb), 0.70);
 
   /* 텍스트색 */
-  --muted:       rgba(34, 22, 25, 0.74);   /* 크림 위 6.7:1 · 민트 위 6.3:1 */
+  --muted:       rgba(var(--text-rgb), 0.78);   /* 종이 위 6.5:1 · 블러시 위 5.7:1 */
 
   /* 테두리색 */
-  --border:      rgba(79, 37, 46, 0.14);
-  --border-md:   rgba(79, 37, 46, 0.22);
+  --border:      rgba(var(--ink-rgb), 0.14);
+  --border-md:   rgba(var(--ink-rgb), 0.22);
 
   /* 라이트 섹션 배경색 */
-  --bg-light:      var(--mint);    /* section-light 배경 */
-  --bg-light-card: var(--cream);   /* section-alt 배경 */
+  --bg-light:      var(--paper);   /* section-light 배경 */
+  --bg-light-card: var(--blush);   /* section-alt 배경 */
   --bg-footer:     var(--ink);     /* footer 배경 — 페이지를 아래에서 눌러 닫는 앵커 */
 
   /* 라이트 섹션 텍스트색 */
   --text-dark:     var(--text);
-  --text-mid:      rgba(34, 22, 25, 0.74);
+  --text-mid:      rgba(var(--text-rgb), 0.78);
 
   /* 본문 — IBM Plex Sans KR (한글+영문 모두 지원) */
   --font:         'IBM Plex Sans KR', system-ui, -apple-system, sans-serif;
@@ -93,8 +131,8 @@
   --fs-4xl:  2rem;       /* 섹션 타이틀 */
 
   --radius: 8px;
-  --shadow-sm: 0 2px 10px rgba(79, 37, 46, 0.10);
-  --glow: 0 0 28px rgba(244, 174, 82, 0.45);
+  --shadow-sm: 0 2px 10px rgba(var(--ink-rgb), 0.10);
+  --glow: 0 0 28px rgba(var(--sage-rgb), 0.45);
 }
 
 /* ── Reset ──────────────────────────────────────────────── */
@@ -142,7 +180,11 @@ body {
   font-family: var(--font);
   font-weight: 400;
   color: var(--text-dark);
-  background: var(--bg);
+  /* 지면 — 종이색 위에 잔 섬유(grain) + 큰 얼룩(pulp) 두 겹을 multiply 로 얹는다 */
+  background-color: var(--bg);
+  background-image: var(--grain), var(--pulp);
+  background-size: var(--grain-size), var(--pulp-size);
+  background-blend-mode: multiply, multiply;
   line-height: 1.75;
   letter-spacing: -0.01em;   /* IBM Plex Sans KR 본문 자간 보정 (한글 살짝 조임) */
   -webkit-font-smoothing: antialiased;
@@ -221,9 +263,11 @@ body {
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background: rgba(255, 247, 197, 0.62);
-  border: 1px solid rgba(255, 247, 197, 0.85);
-  box-shadow: 0 6px 24px rgba(79, 37, 46, 0.13), inset 0 1px 0 rgba(255, 247, 197, 0.7);
+  background: rgba(var(--card-rgb), 0.82);
+  /* 지면과 알약이 둘 다 밝은 종이색이라 밝은 테두리는 보이지 않는다.
+     윤곽은 잉크 실선이 잡고, 안쪽 위 1px 밝은 선이 종이가 접힌 결을 만든다. */
+  border: 1px solid rgba(var(--ink-rgb), 0.10);
+  box-shadow: 0 6px 22px rgba(var(--ink-rgb), 0.13), inset 0 1px 0 rgba(var(--card-rgb), 0.9);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
   color: var(--muted);
@@ -246,9 +290,11 @@ body {
   gap: 0.1rem;
   padding: 0.25rem 0.4rem;
   border-radius: 999px;
-  background: rgba(255, 247, 197, 0.62);
-  border: 1px solid rgba(255, 247, 197, 0.85);
-  box-shadow: 0 6px 24px rgba(79, 37, 46, 0.13), inset 0 1px 0 rgba(255, 247, 197, 0.7);
+  background: rgba(var(--card-rgb), 0.82);
+  /* 지면과 알약이 둘 다 밝은 종이색이라 밝은 테두리는 보이지 않는다.
+     윤곽은 잉크 실선이 잡고, 안쪽 위 1px 밝은 선이 종이가 접힌 결을 만든다. */
+  border: 1px solid rgba(var(--ink-rgb), 0.10);
+  box-shadow: 0 6px 22px rgba(var(--ink-rgb), 0.13), inset 0 1px 0 rgba(var(--card-rgb), 0.9);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
 }
@@ -312,11 +358,11 @@ body {
   min-width: 148px;
   list-style: none;
   padding: 0.35rem 0;
-  background: rgba(255, 247, 197, 0.96);
+  background: rgba(var(--card-rgb), 0.96);
   border: 1px solid var(--border-md);
-  border-top: 2px solid var(--amber);      /* 신문 마스트헤드 룰 */
+  border-top: 2px solid var(--ink);       /* 신문 마스트헤드 룰 — eyebrow 룰과 같은 잉크 선 */
   border-radius: 0;                        /* 직각 모서리 (신문 룰과 통일) */
-  box-shadow: 0 12px 32px rgba(79, 37, 46, 0.18);
+  box-shadow: 0 12px 32px rgba(var(--ink-rgb), 0.18);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
   z-index: 1001;
@@ -373,8 +419,17 @@ body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-image: radial-gradient(circle, rgba(79, 37, 46, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
+  /* 위 → 아래 순서: 점 격자(모눈) · 잔 섬유 · 큰 얼룩 · 블러시 워시 · 종이색.
+     워시는 rgba(블러시, 0) 으로 끝낸다 — transparent 로 끝내면 회색을 지나며 탁해진다.
+     워시가 74% 에서 종이색으로 수렴하므로 다음 섹션과 이음선이 생기지 않는다. */
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle, rgba(var(--ink-rgb), 0.07) 1px, rgba(var(--ink-rgb), 0) 1px),
+    var(--grain),
+    var(--pulp),
+    linear-gradient(168deg, var(--blush) 0%, rgba(var(--blush-rgb), 0) 74%);
+  background-size: 28px 28px, var(--grain-size), var(--pulp-size), auto;
+  background-blend-mode: normal, multiply, multiply, normal;
 }
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
 .eyebrow {
@@ -386,7 +441,9 @@ body {
   text-transform: uppercase;
   color: var(--text);
   margin-bottom: 1.5rem;
-  border-top: 3px solid var(--amber);
+  /* 신문 kicker 룰 — 세이지·모스·블러시는 종이 위 대비가 1.4~1.9:1 이라
+     3px 선으로 쓰면 흐려진다. '선'은 잉크가 맡는다 (종이 7.7:1 · 블러시 6.3:1). */
+  border-top: 3px solid var(--ink);
   padding-top: 0.45rem;
 }
 .hero-title {
@@ -398,11 +455,12 @@ body {
   letter-spacing: -0.01em;
   margin-bottom: 1.5rem;
 }
-/* 강조어 — 앰버는 글자색 대비가 부족하므로 밑줄 하이라이트 "면"으로 쓴다 */
+/* 강조어 — 팔레트 색은 글자색 대비가 부족하므로 밑줄 하이라이트 "면"으로 쓴다.
+   블러시 = 종이에 형광펜을 그은 자리. 글자는 그대로 잉크라 대비 10:1 유지. */
 .hero-title em {
   font-style: normal;
   color: var(--text);
-  background: linear-gradient(transparent 62%, var(--amber) 62%);
+  background: linear-gradient(rgba(var(--blush-rgb), 0) 58%, var(--blush) 58%);
   padding: 0 0.06em;
 }
 .hero-sub {
@@ -423,7 +481,7 @@ body {
 /* ── Buttons ─────────────────────────────────────────────── */
 .btn-primary {
   display: inline-block;
-  background: var(--amber);
+  background: var(--sage);
   color: var(--text);
   text-decoration: none;
   padding: 0.82rem 1.9rem;
@@ -434,14 +492,14 @@ body {
   font-weight: 700;
   letter-spacing: 0.04em;
   transition: opacity 0.2s, transform 0.12s, box-shadow 0.2s;
-  box-shadow: inset 0 1px 0 rgba(255, 247, 197, 0.5);
+  box-shadow: inset 0 1px 0 rgba(var(--card-rgb), 0.5);
 }
 .btn-primary:hover {
   transform: translateY(-1px);
-  /* 앰버 면을 잉크 알파로 눌러 어둡게 — 글자색은 그대로 유지해 대비 보존 */
-  box-shadow: inset 0 1px 0 rgba(255, 247, 197, 0.4),
-              inset 0 0 0 999px rgba(79, 37, 46, 0.12),
-              0 4px 20px rgba(79, 37, 46, 0.28);
+  /* 세이지 면을 잉크 알파로 눌러 어둡게 — 글자색은 그대로 유지해 대비 보존 */
+  box-shadow: inset 0 1px 0 rgba(var(--card-rgb), 0.4),
+              inset 0 0 0 999px rgba(var(--ink-rgb), 0.12),
+              0 4px 20px rgba(var(--ink-rgb), 0.28);
 }
 .btn-ghost {
   display: inline-block;
@@ -450,7 +508,7 @@ body {
   padding: 0.82rem 1.9rem;
   min-height: 44px;
   border-radius: var(--radius);
-  border: 1.5px solid rgba(79, 37, 46, 0.55);
+  border: 1.5px solid rgba(var(--ink-rgb), 0.55);
   font-family: var(--font-ui);
   font-size: var(--fs-md);
   font-weight: 700;
@@ -472,7 +530,12 @@ body {
 
 /* ── Sections ────────────────────────────────────────────── */
 .section        { padding: 5.5rem 0; }
-.section-alt    { background: var(--bg-light-card); }
+.section-alt    {
+  background-color: var(--bg-light-card);
+  background-image: var(--grain), var(--pulp);
+  background-size: var(--grain-size), var(--pulp-size);
+  background-blend-mode: multiply, multiply;
+}
 .section-sm     { padding: 3.5rem 0; }
 
 .section-eyebrow { margin-bottom: 0.75rem; }
@@ -497,7 +560,14 @@ body {
 .page-header {
   padding: 4rem 0 3rem;
   border-bottom: 1px solid var(--border);
-  background: linear-gradient(170deg, var(--cream) 0%, var(--mint) 100%);
+  /* 히어로와 같은 상단 워시 — 아래쪽이 지면색으로 수렴해 본문 섹션과 이어진다 */
+  background-color: var(--paper);
+  background-image:
+    var(--grain),
+    var(--pulp),
+    linear-gradient(168deg, var(--blush) 0%, rgba(var(--blush-rgb), 0) 82%);
+  background-size: var(--grain-size), var(--pulp-size), auto;
+  background-blend-mode: multiply, multiply, normal;
   position: relative;
 }
 .page-header::after {
@@ -507,7 +577,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  background: linear-gradient(90deg, rgba(var(--ink-rgb), 0) 0%, rgba(var(--ink-rgb), 0.5) 50%, rgba(var(--ink-rgb), 0) 100%);
 }
 .page-header .eyebrow { margin-bottom: 0.5rem; }
 .page-header h1 {
@@ -614,9 +684,10 @@ body {
   font-size: var(--fs-sm);
   font-weight: 700;
   color: var(--text);
-  /* 칩이 7개라 앰버를 채우면 강조가 아니라 면이 된다 — 잉크 워시로 낮춤 */
-  background: rgba(79, 37, 46, 0.08);
-  border: 1px solid rgba(79, 37, 46, 0.28);
+  /* 칩이 7개라 세이지를 채우면 강조가 아니라 면이 된다 — 한 단 밝은 모스 워시로 낮춤.
+     모스는 세이지와 같은 색상환이라 강조와 다투지 않고 같은 가족으로 읽힌다 (글자 10:1) */
+  background: rgba(var(--moss-rgb), 0.7);
+  border: 1px solid rgba(var(--ink-rgb), 0.22);
   border-radius: 999px;
   padding: 0.32rem 0.9rem;
   letter-spacing: 0.01em;
@@ -642,7 +713,7 @@ body {
   font-family: var(--font-ui-num);
   font-weight: 900;
   font-size: 2.4rem;
-  color: rgba(34, 22, 25, 0.26);
+  color: rgba(var(--text-rgb), 0.26);
   line-height: 1;
   margin-bottom: 1rem;
   letter-spacing: -0.04em;
@@ -676,7 +747,7 @@ body {
   box-shadow: var(--shadow-sm);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.info-card:hover { border-color: var(--accent-border); box-shadow: 0 6px 18px rgba(79, 37, 46, 0.14); }
+.info-card:hover { border-color: var(--accent-border); box-shadow: 0 6px 18px rgba(var(--ink-rgb), 0.14); }
 .info-card h3 {
   font-size: var(--fs-md);
   font-weight: 700;
@@ -698,9 +769,9 @@ body {
 }
 .profile-polaroid {
   display: inline-block;
-  background: var(--cream);
+  background: var(--card);
   padding: 10px 10px 32px;
-  box-shadow: 0 6px 24px rgba(79, 37, 46, 0.30), 0 2px 6px rgba(79, 37, 46, 0.16);
+  box-shadow: 0 6px 24px rgba(var(--ink-rgb), 0.30), 0 2px 6px rgba(var(--ink-rgb), 0.16);
   transform: rotate(-3deg);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
   cursor: pointer;
@@ -709,7 +780,7 @@ body {
 }
 .profile-polaroid:hover {
   transform: rotate(0deg) scale(1.02);
-  box-shadow: 0 12px 36px rgba(79, 37, 46, 0.38), 0 4px 10px rgba(79, 37, 46, 0.22);
+  box-shadow: 0 12px 36px rgba(var(--ink-rgb), 0.38), 0 4px 10px rgba(var(--ink-rgb), 0.22);
 }
 .profile-img {
   width: 100%;
@@ -798,12 +869,16 @@ body {
 /* ════════════════════════════════════════════════════════════════
    멤버 INFO CARD — 사각형 말풍선
    사진 아래에 붙는 말풍선. ::before = 위쪽 꼬리(삼각형).
-   카드별 배경색은 HTML inline --postit 으로 지정.
+   배경색은 전원 동일하게 --card(#F5F3F0) 로 고정한다. 구성원마다 색을
+   달리하면 카드 색이 '과정·소속을 뜻하는 신호'처럼 읽히는데 실제로는
+   아무 뜻이 없어 오해를 만든다. 색은 지면(종이/블러시)이 맡고,
+   카드는 그 위에 놓인 같은 종이 한 장으로 통일한다.
+   → HTML 의 inline --postit 지정은 제거했다. 다시 넣지 말 것.
    ════════════════════════════════════════════════════════════════ */
 .member-info-card {
-  --postit:      var(--cream);
+  --postit:      var(--card);
   --postit-ink:  var(--text);
-  --postit-ink2: rgba(34, 22, 25, 0.82);   /* 앰버 말풍선에서도 5.6:1 */
+  --postit-ink2: rgba(var(--text-rgb), 0.82);   /* 흰 종이 위 11:1 */
 
   position: relative;
   margin-top: 2.25rem;
@@ -813,8 +888,8 @@ body {
   background: var(--postit);
   border-radius: 8px;
   box-shadow:
-    0 1px 3px rgba(79, 37, 46, 0.10),
-    0 6px 18px -4px rgba(79, 37, 46, 0.20);
+    0 1px 3px rgba(var(--ink-rgb), 0.10),
+    0 6px 18px -4px rgba(var(--ink-rgb), 0.20);
   transition:
     transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
@@ -861,17 +936,18 @@ body {
   font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--text);
-  background: rgba(255, 247, 197, 0.55);   /* 종이 위 프로스트 칩 (크림 알파) */
-  border: 1px solid var(--accent-border);
+  /* 흰 종이 말풍선 위에 얹히므로 카드색 알파로는 보이지 않는다 → 모스 스티커 (글자 9:1) */
+  background: rgba(var(--moss-rgb), 0.85);
+  border: 1px solid rgba(var(--ink-rgb), 0.30);
   border-radius: 999px;                    /* 라벨 스티커 같은 알약형 */
   padding: 0.14rem 0.55rem;
   letter-spacing: 0.02em;
-  box-shadow: inset 0 1px 0 rgba(255, 247, 197, 0.55);
+  box-shadow: inset 0 1px 0 rgba(var(--card-rgb), 0.55);
 }
 .member-info-row {
   margin-top: 0.7rem;
   padding-top: 0.6rem;
-  border-top: 1px dashed rgba(79, 37, 46, 0.32);   /* 연필선 같은 점선 */
+  border-top: 1px dashed rgba(var(--ink-rgb), 0.32);   /* 연필선 같은 점선 */
 }
 .member-info-label {
   font-size: var(--fs-xs);
@@ -917,10 +993,10 @@ body {
   outline: none;
   transition: border-color 0.18s, box-shadow 0.18s;
 }
-.form-control::placeholder { color: rgba(34, 22, 25, 0.55); }
+.form-control::placeholder { color: rgba(var(--text-rgb), 0.55); }
 .form-control:focus {
   border-color: var(--text);
-  box-shadow: 0 0 0 3px rgba(244, 174, 82, 0.7);
+  box-shadow: 0 0 0 3px rgba(var(--sage-rgb), 0.7);
 }
 .form-textarea { resize: vertical; min-height: 148px; line-height: 1.7; }
 .form-actions {
@@ -937,19 +1013,19 @@ body {
   padding: 0.45rem 1rem;
   font-size: var(--fs-sm);
   background: var(--ink);
-  color: var(--cream);
+  color: var(--card);
   box-shadow: none;
 }
 .inq-btn:hover {
   background: var(--ink);
-  box-shadow: inset 0 0 0 999px rgba(255, 247, 197, 0.16);
+  box-shadow: inset 0 0 0 999px rgba(var(--card-rgb), 0.16);
   transform: translateY(-1px);
 }
 .inq-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none !important; }
 .inquiry-done {
   padding: 1.5rem 1.75rem;
-  background: rgba(244, 174, 82, 0.32);
-  border: 1px solid rgba(79, 37, 46, 0.25);
+  background: rgba(var(--sage-rgb), 0.32);
+  border: 1px solid rgba(var(--ink-rgb), 0.25);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius);
 }
@@ -983,7 +1059,7 @@ body {
 }
 .pub-sort-btn.active,
 .pub-sort-btn:hover {
-  color: var(--cream);
+  color: var(--card);
   border-color: var(--ink);
   background: var(--ink);
 }
@@ -1013,7 +1089,7 @@ body {
 .pub-page-btn.active,
 .pub-page-btn:hover {
   background: var(--ink);
-  color: var(--cream);
+  color: var(--card);
   border-color: var(--ink);
 }
 .pub-page-nav {
@@ -1163,7 +1239,7 @@ a.notice-item:hover::after {
 .nl-modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(79, 37, 46, 0.74);
+  background: rgba(var(--ink-rgb), 0.74);
   backdrop-filter: blur(6px);
 }
 .nl-modal-box {
@@ -1174,7 +1250,7 @@ a.notice-item:hover::after {
   width: 100%;
   max-height: 88vh;
   overflow-y: auto;
-  box-shadow: 0 32px 80px rgba(79, 37, 46, 0.55);
+  box-shadow: 0 32px 80px rgba(var(--ink-rgb), 0.55);
   animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @keyframes modalIn {
@@ -1185,9 +1261,9 @@ a.notice-item:hover::after {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(79, 37, 46, 0.78);
+  background: rgba(var(--ink-rgb), 0.78);
   border: none;
-  color: var(--cream);
+  color: var(--card);
   width: 2.75rem;             /* 터치 타깃 최소 크기(44px) */
   height: 2.75rem;
   border-radius: 50%;
@@ -1321,10 +1397,10 @@ a.notice-item:hover::after {
   white-space: nowrap;
 }
 /* 세 배지는 윤곽선 / 채움 / 워시 세 단계로 구분한다.
-   badge-gold 는 논문 목록에서만 28회 반복되므로 앰버를 쓰면 배지 벽이 된다. */
-.badge-gold  { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--text); }
-.badge-navy  { background: var(--ink); color: var(--cream); }
-.badge-muted { background: rgba(79, 37, 46, 0.13); color: var(--text); }
+   badge-gold 는 논문 목록에서만 28회 반복되므로 채우지 않고 연필 윤곽선으로 둔다. */
+.badge-gold  { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px rgba(var(--ink-rgb), 0.7); }   /* 연필 윤곽선 — 카드 위 3.9:1 */
+.badge-navy  { background: var(--ink); color: var(--card); }
+.badge-muted { background: rgba(var(--moss-rgb), 0.85); color: var(--text); }   /* 논문 목록 13회 — 모스 워시 (글자 9:1) */
 
 /* ── Post Detail ─────────────────────────────────────────── */
 .post-back {
@@ -1383,19 +1459,27 @@ hr {
 
 /* ── Footer ──────────────────────────────────────────────── */
 /* 푸터는 잉크 면이다. 자식들이 쓰는 토큰을 이 스코프에서 뒤집어,
-   개별 선택자를 고치지 않고도 크림 글자로 전환된다 (.section-alt 와 같은 방식). */
+   개별 선택자를 고치지 않고도 밝은 종이색 글자로 전환된다 (.section-alt 와 같은 방식). */
 .site-footer {
-  border-top: 1px solid var(--border-md);
+  /* 세이지 3px = 지면과 잉크 면 사이를 마감하는 제책선. 사이트에서 유일하게
+     세이지가 '선'으로 쓰이는 자리다 (밝은 지면이 아니라 잉크 면에 접해 있어
+     대비 4.4:1 로 또렷하게 읽힌다 — 종이 위였다면 1.8:1 로 흐려진다). */
+  border-top: 3px solid var(--sage);
   padding: 3.5rem 0 2rem;
-  background: var(--bg-footer);
+  /* 잉크 면의 종이 질감 — 어두운 면에서는 multiply 가 보이지 않으므로
+     0~8% 밝은 노이즈를 screen 으로 얹어 섬유가 빛을 받는 것처럼 만든다 */
+  background-color: var(--bg-footer);
+  background-image: var(--grain-ink);
+  background-size: var(--grain-size);
+  background-blend-mode: screen;
   font-size: var(--fs-sm);
-  color: var(--cream);
+  color: var(--card);
 
-  --text-dark:   var(--cream);                    /* 11.8:1 */
-  --muted:       rgba(255, 247, 197, 0.78);       /*  8.0:1 */
-  --accent-dark: var(--cream);                    /* 푸터 링크 — 밑줄로 구분 */
-  --border:      rgba(255, 247, 197, 0.18);
-  --border-md:   rgba(255, 247, 197, 0.28);
+  --text-dark:   var(--card);                       /* 8.5:1 */
+  --muted:       rgba(var(--card-rgb), 0.78);       /* 5.6:1 */
+  --accent-dark: var(--card);                       /* 푸터 링크 — 밑줄로 구분 */
+  --border:      rgba(var(--card-rgb), 0.18);
+  --border-md:   rgba(var(--card-rgb), 0.28);
 }
 .footer-inner {
   display: flex;
@@ -1423,7 +1507,7 @@ hr {
 .footer-brand a {
   color: var(--accent-dark);
   font-weight: 700;
-  /* 앰버 면에서는 색으로 링크를 구분할 수 없어 밑줄을 항상 노출 */
+  /* 잉크 면에서는 색으로 링크를 구분할 수 없어 밑줄을 항상 노출 */
   text-decoration: underline;
 }
 .footer-brand a:hover { text-decoration-thickness: 2px; }
@@ -1452,22 +1536,34 @@ hr {
 
 /* ── Section Themes ─────────────────────────────────────── */
 /*
-  [섹션 배경 전환]
-    class="section section-light"  → 민트(#C1EBE9) 배경 + 크림 카드
-    class="section section-alt"    → 크림(#FFF7C5) 배경 + 민트 카드 (반전)
-    class="section"                → body 기본 배경 = 민트(#C1EBE9)
-  민트/크림은 명도차가 작아 카드 경계는 잉크 알파 테두리 + 그림자가 담당한다.
+  [섹션 배경 전환 — 지면(종이)과 밴드(블러시)의 교차]
+    class="section"                → body 기본 지면 = 종이(#EDE8DC)
+    class="section section-light"  → 종이(#EDE8DC) 지면 + 흰 종이 카드(#F5F3F0)
+    class="section section-alt"    → 블러시(#E7CCCC) 밴드 + 흰 종이 카드(#F5F3F0)
+
+  카드는 두 지면에서 모두 같은 색(--card)이다. 지면만 바뀌므로 카드가 '뒤집히는'
+  대신 밴드 위에서 더 또렷하게 떠오른다(명도차 1.4:1). 종이 지면 위에서는
+  명도차가 1.1:1 뿐이라 카드 경계는 잉크 알파 테두리 + 그림자가 담당한다
+  (민트/크림 4색 시절과 같은 구조).
+  블러시 밴드는 한 페이지에 하나만 — 두 개 이상이면 밴드로 읽히지 않는다.
 */
 .section-light {
-  background: var(--bg-light);
-  --bg-card:   var(--cream);
-  --border:    rgba(79, 37, 46, 0.14);
-  --border-md: rgba(79, 37, 46, 0.22);
+  background-color: var(--bg-light);
+  background-image: var(--grain), var(--pulp);
+  background-size: var(--grain-size), var(--pulp-size);
+  background-blend-mode: multiply, multiply;
+  --bg-card:   var(--card);
+  --border:    rgba(var(--ink-rgb), 0.14);
+  --border-md: rgba(var(--ink-rgb), 0.22);
 }
 .section-alt {
-  --bg-card:   var(--mint);
-  --border:    rgba(79, 37, 46, 0.14);
-  --border-md: rgba(79, 37, 46, 0.22);
+  /* 밴드 위·아래 잉크 실선 = 지면에 다른 종이를 한 장 붙여 놓은 자리 */
+  border-top: 1px solid rgba(var(--ink-rgb), 0.10);
+  border-bottom: 1px solid rgba(var(--ink-rgb), 0.10);
+  --bg-card:   var(--card);
+  /* 블러시는 종이보다 어두워 같은 알파도 더 진하게 읽힌다 → 살짝 올려 균형 */
+  --border:    rgba(var(--ink-rgb), 0.16);
+  --border-md: rgba(var(--ink-rgb), 0.24);
 }
 
 /* ── Smooth Scroll ───────────────────────────────────────── */
@@ -1515,7 +1611,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(193, 235, 233, 0.98);
+  background: rgba(var(--paper-rgb), 0.98);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   z-index: 998;
@@ -1612,9 +1708,9 @@ html {
   right: 1.5rem;
   width: 44px;
   height: 44px;
-  /* 스크롤 내내 떠 있는 유틸리티라 앰버를 쓰면 기본 CTA와 강조가 겹친다 */
+  /* 스크롤 내내 떠 있는 유틸리티라 세이지를 쓰면 기본 CTA(btn-primary)와 강조가 겹친다 */
   background: var(--ink);
-  color: var(--cream);
+  color: var(--card);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -1627,7 +1723,7 @@ html {
   transform: translateY(10px) scale(0.88);
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.18s, box-shadow 0.18s;
   z-index: 490;
-  box-shadow: 0 4px 18px rgba(79, 37, 46, 0.30);
+  box-shadow: 0 4px 18px rgba(var(--ink-rgb), 0.30);
   pointer-events: none;
 }
 .back-to-top.visible {
@@ -1636,9 +1732,9 @@ html {
   pointer-events: auto;
 }
 .back-to-top:hover {
-  /* 잉크 면은 잉크로 눌러도 변화가 없으므로 크림으로 들어올린다 */
-  box-shadow: inset 0 0 0 999px rgba(255, 247, 197, 0.18),
-              0 6px 24px rgba(79, 37, 46, 0.42);
+  /* 잉크 면은 잉크로 눌러도 변화가 없으므로 밝은 종이색으로 들어올린다 */
+  box-shadow: inset 0 0 0 999px rgba(var(--card-rgb), 0.18),
+              0 6px 24px rgba(var(--ink-rgb), 0.42);
   transform: translateY(-2px) scale(1.06);
 }
 
@@ -1648,7 +1744,7 @@ html {
 .ripple {
   position: absolute;
   border-radius: 50%;
-  background: rgba(79, 37, 46, 0.16);
+  background: rgba(var(--ink-rgb), 0.16);
   transform: scale(0);
   animation: ripple-burst 0.55s ease-out forwards;
   pointer-events: none;
@@ -1663,7 +1759,7 @@ html {
 .member-card:hover { transform: translateY(-4px); }
 .member-photo { transition: box-shadow 0.22s, border-color 0.22s; }
 .member-card:hover .member-photo {
-  box-shadow: 0 6px 18px rgba(79, 37, 46, 0.18);
+  box-shadow: 0 6px 18px rgba(var(--ink-rgb), 0.18);
   border-color: var(--accent-border);
 }
 
@@ -1674,8 +1770,8 @@ html {
   .member-card:hover .member-info-card {
     transform: translateY(-5px);
     box-shadow:
-      0 2px 6px rgba(79, 37, 46, 0.12),
-      0 12px 28px -6px rgba(79, 37, 46, 0.26);
+      0 2px 6px rgba(var(--ink-rgb), 0.12),
+      0 12px 28px -6px rgba(var(--ink-rgb), 0.26);
   }
 }
 
@@ -1840,4 +1936,30 @@ html {
 .card-num {
   font-weight: 400;
   font-synthesis: none;
+}
+
+/* ── 종이 면 · 질감 ──────────────────────────────────────────
+   지면(body · section-light · section-alt · hero · page-header)은 각자
+   자기 규칙에서 질감을 얹는다. 아래는 그 위에 '놓이는' 종이면 목록이다.
+
+   - 이 블록은 반드시 파일 맨 끝에 둔다. 각 컴포넌트가 background 단축
+     속성으로 색을 지정하므로(예: .member-info-card 의 background: var(--postit)),
+     같은 특이도에서 나중에 선언된 background-image 만 살아남는다.
+   - 잔 섬유(--grain) 한 겹만 쓴다. 카드는 면적이 작아 큰 얼룩(--pulp)까지
+     얹으면 얼룩 한 덩어리가 카드를 가로질러 지저분해 보인다.
+   - 유리(내비 알약)에는 얹지 않는다. 배경이 반투명이라 blend 결과를
+     예측할 수 없고, 뒤 지면의 결이 이미 비쳐 보인다.
+   ──────────────────────────────────────────────────────────── */
+.card,
+.info-card,
+.about-research-snapshot,
+.member-info-card,
+.profile-polaroid,
+.nl-modal-box,
+.form-control,
+.btn-primary,
+.map-link {
+  background-image: var(--grain);
+  background-size: var(--grain-size);
+  background-blend-mode: multiply;
 }
