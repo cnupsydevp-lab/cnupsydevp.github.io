@@ -146,6 +146,26 @@ function setNotifDot(dot, show) {
   }
 }
 
+// 도트 안에는 sr-only '(새 글)' 텍스트가 들어 있어 textContent를 그대로 쓰면 라벨에 섞인다.
+// 첫 텍스트 노드만 메뉴 라벨로 사용.
+function navLabel(el) {
+  const first = [...el.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+  return (first ? first.textContent : el.textContent).trim();
+}
+
+// 데스크톱 내비의 도트 상태를 모바일 메뉴로 복제 (숨겨진 상태면 null)
+function cloneNotifDot(sourceDot) {
+  if (!sourceDot || sourceDot.hidden) return null;
+  const dot = document.createElement('span');
+  dot.className = 'nav-notif-dot';
+  if (sourceDot.dataset.notif) dot.dataset.notif = sourceDot.dataset.notif;
+  const label = document.createElement('span');
+  label.className = 'sr-only';
+  label.textContent = '(새 글)';
+  dot.appendChild(label);
+  return dot;
+}
+
 function isUnseen(section) {
   const latest = NOTIF_LATEST[section];
   if (!latest) return false;
@@ -190,8 +210,11 @@ function initMobileNav() {
 
       const mBtn = document.createElement('button');
       mBtn.className = 'nav-mobile-section-btn';
-      const label = desktopBtn.childNodes[0].textContent.trim();
-      mBtn.innerHTML = `${label} <svg class="nav-mobile-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+      mBtn.innerHTML = `<span class="nav-mobile-label"></span> <svg class="nav-mobile-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+      const mBtnLabel = mBtn.querySelector('.nav-mobile-label');
+      mBtnLabel.textContent = navLabel(desktopBtn);
+      const btnDot = cloneNotifDot(desktopBtn.querySelector('.nav-notif-dot'));
+      if (btnDot) mBtnLabel.appendChild(btnDot);
 
       const mSub = document.createElement('ul');
       mSub.className = 'nav-mobile-sub';
@@ -202,7 +225,9 @@ function initMobileNav() {
         const mSubLi = document.createElement('li');
         const mA = document.createElement('a');
         mA.href = href;
-        mA.textContent = a.textContent.trim();
+        mA.textContent = navLabel(a);
+        const subDot = cloneNotifDot(a.querySelector('.nav-notif-dot'));
+        if (subDot) mA.appendChild(subDot);
         if (href === page) { mA.classList.add('active'); childActive = true; }
         mA.addEventListener('click', closeMenu);
         mSubLi.appendChild(mA);
@@ -223,7 +248,12 @@ function initMobileNav() {
       const href = a.getAttribute('href');
       const mA = document.createElement('a');
       mA.href = href;
-      mA.textContent = a.childNodes[0]?.textContent?.trim() || a.textContent.trim();
+      const mLabel = document.createElement('span');
+      mLabel.className = 'nav-mobile-label';
+      mLabel.textContent = navLabel(a);
+      const linkDot = cloneNotifDot(a.querySelector('.nav-notif-dot'));
+      if (linkDot) mLabel.appendChild(linkDot);
+      mA.appendChild(mLabel);
       if (href === page) mA.classList.add('active');
       mA.addEventListener('click', closeMenu);
       mLi.appendChild(mA);

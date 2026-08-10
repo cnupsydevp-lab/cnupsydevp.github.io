@@ -1532,6 +1532,17 @@ html {
 .nav-mobile-sub a:hover,
 .nav-mobile-sub a:active,
 .nav-mobile-sub a.active { color: var(--accent); background: var(--accent-dim); }
+/* 새 글 도트 — 모바일에서도 PC와 동일하게 붉은 점으로 표시 (글자 크기가 커서 살짝 크게) */
+.nav-mobile-links .nav-notif-dot {
+  width: 7px;
+  height: 7px;
+  margin-left: 5px;
+}
+.nav-mobile-sub .nav-notif-dot {
+  width: 6px;
+  height: 6px;
+  margin-left: 4px;
+}
 .nav-mobile-arrow {
   width: 13px;
   height: 13px;
