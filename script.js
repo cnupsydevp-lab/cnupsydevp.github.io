@@ -135,19 +135,12 @@ function initNotifBadge() {
   });
 }
 
-// 도트 표시 + 스크린리더용 텍스트 라벨 (색상만으로 정보 전달 방지)
+// 도트 표시 — 붉은 점만 띄운다 (텍스트 라벨 없음)
 function setNotifDot(dot, show) {
   dot.hidden = !show;
-  if (show && !dot.querySelector('.sr-only')) {
-    const label = document.createElement('span');
-    label.className = 'sr-only';
-    label.textContent = '(새 글)';
-    dot.appendChild(label);
-  }
 }
 
-// 도트 안에는 sr-only '(새 글)' 텍스트가 들어 있어 textContent를 그대로 쓰면 라벨에 섞인다.
-// 첫 텍스트 노드만 메뉴 라벨로 사용.
+// 메뉴 라벨은 첫 텍스트 노드만 쓴다 — 앞에 붙은 도트 span 과 화살표 SVG 를 건너뛰기 위함.
 function navLabel(el) {
   const first = [...el.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
   return (first ? first.textContent : el.textContent).trim();
@@ -159,10 +152,6 @@ function cloneNotifDot(sourceDot) {
   const dot = document.createElement('span');
   dot.className = 'nav-notif-dot';
   if (sourceDot.dataset.notif) dot.dataset.notif = sourceDot.dataset.notif;
-  const label = document.createElement('span');
-  label.className = 'sr-only';
-  label.textContent = '(새 글)';
-  dot.appendChild(label);
   return dot;
 }
 
@@ -214,7 +203,7 @@ function initMobileNav() {
       const mBtnLabel = mBtn.querySelector('.nav-mobile-label');
       mBtnLabel.textContent = navLabel(desktopBtn);
       const btnDot = cloneNotifDot(desktopBtn.querySelector('.nav-notif-dot'));
-      if (btnDot) mBtnLabel.appendChild(btnDot);
+      if (btnDot) mBtnLabel.prepend(btnDot);
 
       const mSub = document.createElement('ul');
       mSub.className = 'nav-mobile-sub';
@@ -227,7 +216,7 @@ function initMobileNav() {
         mA.href = href;
         mA.textContent = navLabel(a);
         const subDot = cloneNotifDot(a.querySelector('.nav-notif-dot'));
-        if (subDot) mA.appendChild(subDot);
+        if (subDot) mA.prepend(subDot);
         if (href === page) { mA.classList.add('active'); childActive = true; }
         mA.addEventListener('click', closeMenu);
         mSubLi.appendChild(mA);
@@ -252,7 +241,7 @@ function initMobileNav() {
       mLabel.className = 'nav-mobile-label';
       mLabel.textContent = navLabel(a);
       const linkDot = cloneNotifDot(a.querySelector('.nav-notif-dot'));
-      if (linkDot) mLabel.appendChild(linkDot);
+      if (linkDot) mLabel.prepend(linkDot);
       mA.appendChild(mLabel);
       if (href === page) mA.classList.add('active');
       mA.addEventListener('click', closeMenu);

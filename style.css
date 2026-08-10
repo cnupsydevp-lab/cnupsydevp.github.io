@@ -1,17 +1,23 @@
 
 /* ── Variables ──────────────────────────────────────────── */
 /*
-  [색상 수정 가이드 — 4색 팔레트]
+  [색상 수정 가이드 — 4색 팔레트 + 알림색 1]
   이 사이트는 아래 4색만 사용한다. 새 색을 추가하지 말 것.
     --mint  #C1EBE9  기본 배경 (body · section-light)
-    --cream #FFF7C5  카드·종이 면 (section-alt 배경)
-    --amber #F4AE52  강조 면 (버튼 · 푸터 · 배지 · 활성 메뉴)
-    --ink   #4F252E  모든 텍스트 · 아이콘 · 선
+    --cream #FFF7C5  카드·종이 면 (section-alt 배경) · 잉크 면 위의 글자
+    --amber #F4AE52  강조 (기본 버튼 · 활성 메뉴 · eyebrow 룰 · 포커스 헤일로)
+    --ink   #4F252E  모든 텍스트 · 아이콘 · 선 · 푸터 면
 
   - 면 색 변경: --bg / --bg-card / --bg-light-card / --bg-footer 조정
   - 테두리·그림자·hover 음영은 위 4색의 rgba 알파값만 사용
   - 앰버를 글자색으로 쓰지 말 것 (크림 위 1.8:1, 민트 위 1.5:1 — WCAG AA 미달).
     앰버는 항상 "면"이고, 그 위 글자는 항상 잉크(6.7:1).
+  - 앰버는 아껴 쓸 것. 한 화면에 앰버 면이 여러 개면 강조로 읽히지 않는다.
+
+  [예외 1개 — --alert]
+  새 글 알림 도트만 팔레트 밖의 붉은색을 쓴다. "새 것"은 팔레트 안의 어떤 색으로도
+  대체할 수 없는 관습적 신호이고, 앰버로 바꾸면 강조 면과 구분되지 않는다.
+  이 색은 알림 도트 외에 쓰지 말 것.
 */
 :root {
   /* ── 원색 4개 (Single Source of Truth) ────────────────────
@@ -21,6 +27,12 @@
   --cream: #FFF7C5;
   --amber: #F4AE52;
   --ink:   #4F252E;
+
+  /* 팔레트 예외 — 새 글 알림 도트 전용. 다른 곳에 쓰지 말 것.
+     크림 위 3.9:1 · 민트 위 3.3:1 로 그래픽 요소 기준(3:1) 충족.
+     도트는 색 하나로만 뜻을 전달한다 (텍스트 라벨 없음 — 요청 사항).
+     스크린리더 지원이 필요해지면 도트 span 에 aria-label 을 다는 방식이 있다. */
+  --alert: #e03e3e;
 
   /* 배경색 계열 */
   --bg:          var(--mint);    /* 전체 body 기본 배경 */
@@ -88,7 +100,7 @@
 }
 
 /* ── Screen Reader Only ──────────────────────────────────── */
-/* 시각적으로 숨기고 스크린리더에만 읽히는 텍스트 (알림 도트 라벨 등) */
+/* 시각적으로 숨기고 스크린리더에만 읽히는 텍스트 */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -338,12 +350,11 @@ body {
   display: inline-block;
   width: 6px;
   height: 6px;
-  background: var(--amber);
-  /* 앰버는 배경 대비가 낮아 잉크 링으로 윤곽을 준다 (3:1 확보) */
-  box-shadow: 0 0 0 1.5px var(--ink);
+  background: var(--alert);
   border-radius: 50%;
-  vertical-align: super;
-  margin-left: 2px;
+  /* 글자 앞에 놓이는 도트는 위첨자가 아니라 행 중앙에 맞춘다 */
+  vertical-align: middle;
+  margin-right: 5px;
   flex-shrink: 0;
 }
 .nav-notif-dot[hidden] { display: none; }
@@ -1571,12 +1582,12 @@ html {
 .nav-mobile-links .nav-notif-dot {
   width: 7px;
   height: 7px;
-  margin-left: 5px;
+  margin-right: 5px;
 }
 .nav-mobile-sub .nav-notif-dot {
   width: 6px;
   height: 6px;
-  margin-left: 4px;
+  margin-right: 4px;
 }
 .nav-mobile-arrow {
   width: 13px;
