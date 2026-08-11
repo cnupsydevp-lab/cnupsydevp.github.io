@@ -1933,6 +1933,17 @@ a.notice-item:hover::after {
 .post-body strong    { font-weight: 700; }
 .post-body a         { color: var(--text); text-decoration: underline; }
 .post-body h3        { font-size: var(--fs-lg); font-weight: 800; margin: 1.5rem 0 0.5rem; }
+/* 본문에 넣은 이미지(notice-files/ 의 포스터 등). 사이트 전체에 img 규칙이 없어
+   이 한 줄이 없으면 원본 크기 그대로 나가 좁은 화면에서 글 폭을 밀어낸다.
+   자르지 않고 줄이기만 한다 — 포스터 글자가 잘리면 공지의 뜻이 없어진다. */
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
 
 /* ── Divider ─────────────────────────────────────────────── */
 hr {
