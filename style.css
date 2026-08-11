@@ -923,9 +923,6 @@ body {
   box-shadow:
     0 1px 3px rgba(var(--ink-rgb), 0.10),
     0 6px 18px -4px rgba(var(--ink-rgb), 0.20);
-  transition:
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
   overflow: visible;
 }
 
@@ -2065,31 +2062,9 @@ html {
   to { transform: scale(4.5); opacity: 0; }
 }
 
-/* ── Member Card Hover ───────────────────────────────────── */
-/* 대학원생 카드: 기존 카드 단위 리프트 유지 */
-.member-card { transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1); }
-.member-card:hover { transform: translateY(-4px); }
-.member-photo { transition: box-shadow 0.22s, border-color 0.22s; }
-.member-card:hover .member-photo {
-  box-shadow: 0 6px 18px rgba(var(--ink-rgb), 0.18);
-  border-color: var(--accent-border);
-}
-
-/* 말풍선 카드: 카드 전체가 살짝 위로 뜬다 */
-.member-card:has(.member-info-card):hover { transform: none; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .member-card:hover .member-info-card {
-    transform: translateY(-5px);
-    box-shadow:
-      0 2px 6px rgba(var(--ink-rgb), 0.12),
-      0 12px 28px -6px rgba(var(--ink-rgb), 0.26);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .member-info-card { transition: none; }
-}
+/* ── Member Card ─────────────────────────────────────────── */
+/* 구성원 카드에는 호버 효과를 두지 않는다 (사용자 요청).
+   카드 리프트·사진 그림자·말풍선 들어올림 전부 제거했으므로 다시 넣지 말 것. */
 
 /* ── Animations ──────────────────────────────────────────── */
 /*
