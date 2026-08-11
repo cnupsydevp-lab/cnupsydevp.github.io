@@ -62,18 +62,33 @@
 
 <section class="hero">
     <div class="container">
-        <!-- 연구실 풀 이름 로고. 원래 이 자리에 있던 kicker 텍스트와 내용이 같아
-             텍스트를 걷어내고 그림으로 대신한다 — 이름은 alt 가 읽는다(검색·스크린리더).
-             width/height 를 적어 두어야 내려받기 전에도 자리를 잡아 아래 제목이 밀리지 않는다.
-             fetchpriority=high : 첫 화면에서 가장 큰 그림이라 먼저 받아 온다. -->
+        <!-- 첫 화면은 이름 로고 하나만 둔다 (글자·버튼 모두 걷어냄).
+             대학원 진학·연구 분야로 가는 길은 상단 메뉴가 맡고, 바로 아래
+             About 섹션에 소개 글과 '지도교수 소개' 링크가 이어진다.
+
+             h1 은 화면에서 감추되 코드에는 남긴다 — 페이지마다 제목이 하나는 있어야
+             검색 결과에 연구실 소개가 뜨고, 스크린리더도 이 페이지가 무엇인지 읽는다.
+             (.sr-only = 눈에는 안 보이고 보조기기에만 읽히는 유틸)
+
+             그림 자체는 이름을 글자로 담고 있지 않으므로 alt 가 이름을 읽는다.
+             width/height 를 적어 두어야 내려받기 전에도 자리를 잡아 아래 섹션이 밀리지 않고,
+             fetchpriority=high 로 첫 화면에서 가장 큰 그림을 먼저 받아 온다.
+
+             [webp + png 두 벌인 이유] 이 로고는 배경이 투명해서 알파 채널이 필요하다.
+             투명을 지키면서 가벼운 건 WebP(252KB)뿐이다 — 같은 그림의 PNG 는 933KB.
+             그래서 WebP 를 먼저 걸고, WebP 를 못 읽는 옛 브라우저(사파리 14 이전 등)만
+             PNG 로 내려받게 한다. 요즘 브라우저는 WebP 한 개만 받아 온다.
+
+             ※ 글자를 다시 넣고 싶으면 아래 두 줄을 살리면 된다 — CSS(.hero-title,
+               .hero-sub, .hero-cta)는 지우지 않고 그대로 두었다.
+               <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
+               <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 …</p> -->
+        <h1 class="sr-only">전 생애의 마음을 과학으로 탐구합니다 — NOMAD Lab</h1>
         <div class="hero-wordmark">
-            <img src="images/logo/logo-fullname.jpg" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1280" height="648" fetchpriority="high">
-        </div>
-        <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
-        <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 중년부터 노년까지 전 생애 발달을 탐구합니다</p>
-        <div class="hero-cta">
-            <a href="admissions.html" class="btn-primary">대학원 진학 안내</a>
-            <a href="research.html" class="btn-ghost">연구 분야 보기</a>
+            <picture>
+                <source srcset="images/logo/logo-fullname.webp" type="image/webp">
+                <img src="images/logo/logo-fullname.png" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1502" height="712" fetchpriority="high">
+            </picture>
         </div>
     </div>
 </section>

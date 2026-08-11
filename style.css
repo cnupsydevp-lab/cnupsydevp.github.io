@@ -474,8 +474,10 @@ body {
 
 /* ── Hero ───────────────────────────────────────────────── */
 .hero {
-  /* 위 여백을 7rem → 5rem 으로 줄였다 — 이름 로고(약 285px)가 들어와
-     그만큼 아래가 밀리면, 노트북 화면에서 제목·버튼이 첫 화면 밖으로 나간다. */
+  /* 위 여백을 7rem → 5rem 으로 줄였다 — 첫 화면을 채우는 이름 로고가 482px 라
+     여백까지 7rem 이면 다음 섹션이 화면 밖으로 완전히 밀려난다.
+     지금은 80px(위) + 482px(로고) + 88px(아래) = 650px 로, 노트북 첫 화면을
+     로고가 채우고 아래 섹션이 살짝 비쳐 '더 있다'는 신호가 남는다. */
   padding: 5rem 0 5.5rem;
   text-align: center;
   position: relative;
@@ -492,21 +494,26 @@ body {
   background-size: 28px 28px, var(--grain-size), var(--pulp-size), auto;
   background-blend-mode: normal, multiply, multiply, normal;
 }
-/* 히어로 이름 로고 — 어두운 판이 그림 파일 자체에 들어 있어 종이 위에 그냥 얹으면
-   검은 사각형이 뜬다. 그래서 프로필 폴라로이드와 같은 흰 대지(mat)를 두르고
-   '지면에 붙여 놓은 인쇄물'로 읽히게 한다. 대지의 결은 파일 맨 끝 텍스처 블록이 준다.
-   폭 560px : 2:1 비율이라 높이 285px. 이보다 키우면 첫 화면에서 제목을 눌러 버린다.
-   그림 파일은 1280px 폭이라 560px 표시에서 2.3배 — 레티나에서도 또렷하다. */
+/* 히어로 이름 로고 — 첫 화면을 이것 하나로 채운다(글자·버튼 없음).
+   본문 폭을 가득 쓴다: 컨테이너 1080px − 좌우 여백 2rem×2 = 1016px.
+   2.110:1 비율이라 세로 482px.
+
+   [배경 없음] 이 그림은 배경이 투명하다(알파 채널). 그래서 틀·대지·그림자를
+   두르지 않는다 — 두르면 투명한 자리에 사각형이 드러나 그림이 판 위에 얹힌 것처럼
+   보인다. 풍선 글자가 종이 결·모눈·블러시 워시 위에 바로 놓이게 두는 게 맞다.
+   (처음에 JPEG 로 만들었다가 투명한 곳이 검정으로 구워져 검은 띠가 떴다.
+    JPEG 는 알파를 담지 못한다 — 이 로고는 반드시 WebP/PNG 로 둔다.)
+
+   [해상도] 파일은 1502px 폭 — 원본에서 알파가 있는 범위(x 23~1524, y 135~846)만
+   잘라낸 크기이고 늘리지 않았다. 1016px 표시에서 1.48배.
+   2배로 또렷하게 하려면 2032px 이상으로 다시 렌더링해야 한다. */
 .hero-wordmark {
-  max-width: 560px;
-  margin: 0 auto 2.2rem;
-  background: var(--card);
-  padding: 10px;
-  box-shadow: 0 6px 22px rgba(var(--ink-rgb), 0.13), inset 0 1px 0 rgba(var(--card-rgb), 0.9);
+  margin: 0 auto;
   /* 애니메이션의 기준점 — 아래 가운데. 눌림과 기울기가 모두 밑변을 딛고 일어나
      '바닥에 놓인 물체'로 읽힌다. 가운데를 축으로 두면 공중에서 오그라드는 느낌이 된다. */
   transform-origin: 50% 100%;
 }
+.hero-wordmark picture { display: block; }   /* picture 는 인라인이라 아래 여백이 생긴다 */
 .hero-wordmark img {
   display: block;
   width: 100%;
@@ -2449,36 +2456,38 @@ html {
      [키프레임을 손으로 고르지 않은 이유]
      스프링 베지어(cubic-bezier 의 1.5 대 값)는 UI 가 튕기는 느낌이지 중력이 아니다.
      떨어지는 물체는 등가속도라 위치가 시간의 제곱으로 늘어나므로,
-     아래 값은 낙하 물리를 계산해 뽑았다 — 낙하 30px, 반발계수 0.36
-     (되튀는 높이 3.9px), 각 구간을 6등분해 표본을 떴다.
-     0~47.7% 낙하(0.38초) · ~60.9% 첫 접촉(0.11초) · ~95.2% 되튐(0.27초) ·
+     아래 값은 낙하 물리를 계산해 뽑았다 — 낙하 38px, 반발계수 0.36
+     (되튀는 높이 4.9px), 각 구간을 6등분해 표본을 떴다.
+     0~48.7% 낙하(0.39초) · ~60.6% 첫 접촉(0.10초) · ~95.7% 되튐(0.28초) ·
      나머지 두 번째 접촉. 총 0.8초 — 이보다 늘리면 떨어지는 게 아니라 떠내려온다.
 
      ※ timing-function 은 반드시 linear. ease 를 쓰면 구간마다 가감속이 다시 붙어
        계산해 둔 포물선이 뭉개진다.
-     ※ 눌림은 1.8% 만 준다. 이 요소는 액자에 넣은 인쇄물이라 더 누르면 고무처럼
-       보인다(처음 7.5% 로 잡았다가 줄였다). 대신 착지 순간 밑변을 축으로
+     ※ 눌림은 1.0%(4.8px) 만 준다. 그림이 482px 로 커져서 비율을 그대로 두면
+       눌리는 양이 그만큼 커져 고무처럼 보인다(560px 짜리 액자일 때는 1.8% 였고,
+       그전에 계산값 7.5% 로 잡았다가 줄였다). 대신 착지 순간 밑변을 축으로
        0.3도 갸우뚱했다 잦아들게 해, 딱딱한 물체가 바닥을 딛는 쪽으로 읽히게 했다.
-       기울기는 감쇠 7/s 로 끝에서 0.01도만 남아 멈춤이 매끄럽다.
+       폭 1016px 에서 0.3도는 양 끝이 2.7px 어긋나는 정도다.
+       기울기는 감쇠 7/s 로 끝에서 0.03도만 남아 멈춤이 매끄럽다.
      ※ 낱글자를 따로 튕기려면 글자별 그림이 필요하다 — 지금 파일은 한 단어가
        풍선 하나로 이어 붙어 있어('And' 안에 글자색이 끊기는 열이 0개) 쪼갤 수 없다. */
   @keyframes heroWordmarkDrop {
-      0.0% { transform: translateY(-30px); }
-      7.9% { transform: translateY(-29.2px); }
-     15.9% { transform: translateY(-26.7px) scale(0.998, 1.003); }
-     23.8% { transform: translateY(-22.5px) scale(0.997, 1.005); }
-     31.8% { transform: translateY(-16.7px) scale(0.996, 1.007); }
-     39.7% { transform: translateY(-9.2px) scale(0.995, 1.008); }
-     47.7% { transform: translateY(0) scale(0.994, 1.01); }
-     54.3% { transform: translateY(0) rotate(-0.30deg) scale(1.011, 0.982); }
-     60.9% { transform: translateY(0) rotate(-0.15deg); }
-     66.6% { transform: translateY(-2.2px) rotate(0.03deg) scale(0.999, 1.002); }
-     72.4% { transform: translateY(-3.5px) rotate(0.09deg); }
-     78.1% { transform: translateY(-3.9px) rotate(0.05deg); }
-     83.8% { transform: translateY(-3.5px); }
-     89.5% { transform: translateY(-2.2px) rotate(-0.03deg) scale(0.999, 1.002); }
-     95.2% { transform: translateY(0) scale(0.998, 1.004); }
-     97.6% { transform: translateY(0) scale(1.004, 0.994); }
+      0.0% { transform: translateY(-38px); }
+      8.1% { transform: translateY(-36.9px); }
+     16.2% { transform: translateY(-33.8px) scale(0.998, 1.003); }
+     24.3% { transform: translateY(-28.5px) scale(0.998, 1.004); }
+     32.4% { transform: translateY(-21.1px) scale(0.997, 1.005); }
+     40.6% { transform: translateY(-11.6px) scale(0.996, 1.007); }
+     48.7% { transform: translateY(0) scale(0.995, 1.008); }
+     54.7% { transform: translateY(0) rotate(-0.28deg) scale(1.006, 0.99); }
+     60.6% { transform: translateY(0) rotate(-0.25deg); }
+     66.5% { transform: translateY(-2.7px) rotate(-0.09deg); }
+     72.3% { transform: translateY(-4.4px) rotate(0.05deg); }
+     78.2% { transform: translateY(-4.9px) rotate(0.09deg); }
+     84.0% { transform: translateY(-4.4px) rotate(0.06deg); }
+     89.8% { transform: translateY(-2.7px); }
+     95.7% { transform: translateY(0) rotate(-0.02deg) scale(0.998, 1.003); }
+     97.8% { transform: translateY(0) rotate(-0.03deg) scale(1.002, 0.996); }
     100.0% { transform: translateY(0); }
   }
   /* 나타나기는 따로 — 떨어지는 동안 앞머리에서 빨리 켜져야 '이미 떨어지고 있던 것'이 된다 */
@@ -2562,8 +2571,6 @@ html {
   .page-header  { padding: 2.5rem 0 1.75rem; }
   .hero-cta     { flex-direction: column; align-items: center; }
   .hero-title   { font-size: 1.9rem; }
-  /* 모바일: 이름 로고 — 대지를 얇게, 아래 간격도 줄인다 (폭은 화면이 정한다) */
-  .hero-wordmark { padding: 7px; margin-bottom: 1.6rem; }
   .section-title { font-size: 1.5rem; }
   .section-sub  { margin-bottom: 2rem; }
   /* 모바일: 카드 패딩 축소 */
@@ -2669,7 +2676,6 @@ html {
 .about-research-snapshot,
 .member-info-card,
 .profile-polaroid,
-.hero-wordmark,         /* 이름 로고를 두른 흰 대지 — 폴라로이드와 같은 결 */
 .nl-shot,
 .nl-shot-img.is-blank,
 .nl-modal-box,
