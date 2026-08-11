@@ -357,9 +357,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.pointerType === 'touch' || e.button !== 0) return;
     drag = { px: e.clientX, py: e.clientY, ox: offset.x, oy: offset.y,
              base: baseRect(), active: false };
-    // 등장 애니메이션도 transform 을 쓴다. 누르는 순간 끝내 둔다 —
-    // 끄는 도중에 끄면 상자가 한 번 튄다. (CSS 의 .dragging 참고)
-    // 단, 버튼을 누른 것이면 손 모양이 주먹으로 바뀌지 않게 미뤄 둔다.
+    // 등장 애니메이션을 여기서 끝내고 다시 켜지 않는다(뗄 때도 그대로 둔다).
+    // 이 클래스를 떼면 애니메이션이 처음부터 다시 돌면서 옮겨 둔 위치를
+    // 0.22초 동안 덮어쓴다 = 놓을 때마다 제자리로 돌아가는 것처럼 보인다.
+    // 자세한 이유는 style.css 의 .home-popup-box.placed 주석 참고.
+    box.classList.add('placed');
+    // 손 모양은 '끄는 중'에만 주먹으로. 버튼을 누른 것이면 미뤄 둔다 —
     // 버튼에서 끌기 시작하면 아래 pointermove 에서 붙는다.
     if (!e.target.closest('.home-popup-actions')) box.classList.add('dragging');
     // preventDefault 는 하지 않는다 — 버튼이 평소처럼 눌리고 포커스도 받게.
