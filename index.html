@@ -84,17 +84,19 @@
             </div>
             <div class="about-visual">
                 <div class="about-research-snapshot">
+                    <!-- 논문·연구팀원 숫자는 페이지 아래 스크립트가 실제 목록에서 세어 채운다.
+                         여기 적힌 값은 스크립트가 못 돌 때를 위한 대비책이다. -->
                     <div class="ars-stat-row">
                         <div class="ars-stat">
-                            <span class="ars-num">30<sup>+</sup></span>
-                            <span class="ars-label">SSCI 논문</span>
+                            <span class="ars-num" id="ars-pub-count">27</span>
+                            <span class="ars-label">논문</span>
                         </div>
                         <div class="ars-stat">
                             <span class="ars-num">3</span>
                             <span class="ars-label">진행 중인 연구</span>
                         </div>
                         <div class="ars-stat">
-                            <span class="ars-num">8</span>
+                            <span class="ars-num" id="ars-team-count">8</span>
                             <span class="ars-label">연구팀원</span>
                         </div>
                     </div>
@@ -410,6 +412,40 @@ document.addEventListener('DOMContentLoaded', () => {
     clampTo(baseRect());
     apply();
   });
+});
+</script>
+
+<script>
+/* ── 홈 숫자 연동 ──────────────────────────────────────────────
+   '논문'·'연구팀원' 숫자를 손으로 고치지 않도록 실제 목록에서 세어 온다.
+   - 논문    : posts.js 의 POSTS.activities 중 type 이 'publication' 인 항목 수.
+               연구활동 페이지가 '총 N편' 으로 쓰는 값과 같은 계산이라 항상 맞는다.
+   - 연구팀원 : members.html 에서 data-team="current" 가 붙은 격자의 카드 수
+               + 지도교수 1명. 졸업생·인턴 수료생 격자에는 data-team 이 없어
+               세지 않는다 — 현재 팀 인원만 보여 주려는 것이다.
+               (구성원을 늘리거나 줄일 때 members.html 만 고치면 홈도 따라온다)
+   숫자를 못 구하면 HTML 에 적어 둔 값을 그대로 둔다 — 자바스크립트가 꺼진
+   브라우저나 file:// 로 열어 본 경우(fetch 차단)에도 빈칸이 보이지 않는다.
+   ──────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const FACULTY = 1;   // 지도교수 — pi.html 에 따로 있어 구성원 페이지에서 세지 못한다
+
+  const pubEl = document.getElementById('ars-pub-count');
+  if (pubEl && typeof POSTS !== 'undefined' && POSTS.activities) {
+    const n = POSTS.activities.filter(p => p.type === 'publication').length;
+    if (n) pubEl.textContent = n;
+  }
+
+  const teamEl = document.getElementById('ars-team-count');
+  if (!teamEl) return;
+  fetch('members.html')
+    .then(res => res.ok ? res.text() : Promise.reject(new Error(res.status)))
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const n = doc.querySelectorAll('.member-grid[data-team="current"] .member-card').length;
+      if (n) teamEl.textContent = n + FACULTY;
+    })
+    .catch(() => { /* 적어 둔 숫자를 그대로 둔다 */ });
 });
 </script>
 </body>

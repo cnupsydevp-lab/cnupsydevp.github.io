@@ -77,7 +77,10 @@
                  <p class="member-info-value">내용</p>
              </div>
         -->
-        <div class="member-grid">
+        <!-- data-team="current" : 홈의 '연구팀원' 숫자를 세는 표시.
+             현재 팀인 격자(대학원생·학부생)에만 붙인다. 졸업생·인턴 수료생 격자에는
+             붙이지 않는다 — 붙이면 홈 숫자에 함께 더해진다. -->
+        <div class="member-grid" data-team="current">
             <div class="member-card">
                 <img loading="lazy" src="images/Seungcheol.jpeg" alt="이승철" class="member-photo">
                 <h3>이승철</h3>
@@ -136,7 +139,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Undergraduate Students</span>
         <h2 class="section-title">학부생</h2>
-        <div class="member-grid">
+        <div class="member-grid" data-team="current">
             <div class="member-card">
                 <img loading="lazy" src="images/wuseok.jpeg" alt="강우석" class="member-photo">
                 <h3>강우석</h3>
