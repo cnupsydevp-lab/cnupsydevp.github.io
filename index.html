@@ -196,10 +196,10 @@
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const POPUP = {
-    id:    'popup-1',
-    image: '',                 // 예: 'images/popup/2026-08-11_notice.jpeg'
-    alt:   '',                 // 예: '2026년 2학기 연구참여자 모집 안내'
-    link:  '',                 // 클릭 시 이동할 주소 (없으면 빈 문자열)
+    id:    'popup-2026-07-20',
+    image: 'images/popup/2026-07-20_grad-recruit.jpg',
+    alt:   '충남대학교 심리학과 디지털 심리케어 연구실 학부연구생(석사과정 희망자) 모집 안내. 지도교수 노수림. 문의 srnoh@cnu.ac.kr',
+    link:  'images/popup/2026-07-20_grad-recruit.pdf',   // 원본 PDF — 작은 글씨까지 읽을 수 있게
   };
   if (!POPUP.image) return;
 
@@ -223,11 +223,14 @@ document.addEventListener('DOMContentLoaded', () => {
   img.src = POPUP.image;
   img.alt = POPUP.alt || '공지';
 
-  // 링크가 있으면 사진 자리를 통째로 누를 수 있게 <a> 로 바꿔 끼운다
+  // 링크가 있으면 사진 자리를 통째로 누를 수 있게 <a> 로 바꿔 끼운다.
+  // 새 탭으로 여는 이유: 포스터를 크게 보고 돌아왔을 때 홈이 그대로 남아 있게.
   if (POPUP.link) {
     const a = document.createElement('a');
     a.href = POPUP.link;
     a.className = 'home-popup-figure';
+    a.target = '_blank';
+    a.rel = 'noopener';
     a.appendChild(img);
     figure.replaceWith(a);
   }
