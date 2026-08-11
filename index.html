@@ -189,14 +189,16 @@
       "하루동안 보지 않기"를 누른 사람에게도 새 공지가 바로 보인다.
    image 가 빈 문자열이면 팝업은 아예 뜨지 않는다 (지금 상태).
 
-   [언제 뜨는가 — 사이트에 처음 들어왔을 때 한 번]
+   [언제 뜨는가]
    이 스크립트와 마크업은 index.html 안에만 있으므로 다른 메뉴 페이지에서는
    아예 실행되지 않는다. 홈에서 한 번 뜬 뒤에는 sessionStorage 에 표시를 남겨,
    다른 메뉴를 둘러보다 홈으로 돌아와도 다시 뜨지 않는다 (브라우저를 닫으면 초기화).
+   단 새로고침은 예외로, 그 표시를 무시하고 다시 띄운다 — 아래 참조.
 
    [닫기 두 가지의 차이]
-   - 닫기            : 이번 방문 동안만 닫는다. 다음에 새로 들어오면 또 뜬다.
-   - 하루동안 보지 않기 : 24시간 동안 뜨지 않는다 (localStorage 에 기한 저장).
+   - 닫기            : 지금 이 화면에서만 닫는다. 새로고침하면 다시 뜬다.
+   - 하루동안 보지 않기 : 24시간 동안 뜨지 않는다. 새로고침해도 뜨지 않는다
+                        (localStorage 에 기한 저장 — 브라우저를 닫아도 남는다).
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const POPUP = {
@@ -218,10 +220,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved && saved.id === POPUP.id && Date.now() < saved.until) return;
   } catch (e) { /* 무시하고 띄운다 */ }
 
+  // 이번 화면이 새로고침으로 열린 것인지 확인한다.
+  // '닫기' 는 지금 화면에서만 닫는 버튼이므로 새로고침하면 다시 떠야 한다.
+  // 반면 메뉴를 옮겨 다니다 홈으로 돌아온 경우(navigate)는 다시 뜨지 않아야 한다.
+  // 정적 다중 페이지 사이트라 둘 다 '새 페이지 적재'로 똑같아 보이므로,
+  // 브라우저가 알려 주는 이동 방식(reload / navigate)으로 구분한다.
+  let reloaded = false;
+  try {
+    const nav = performance.getEntriesByType('navigation')[0];
+    reloaded = nav ? nav.type === 'reload'
+                   // 구형 사파리용 대비책 (1 = TYPE_RELOAD)
+                   : performance.navigation && performance.navigation.type === 1;
+  } catch (e) { /* 알 수 없으면 새로고침이 아닌 것으로 본다 */ }
+
   // 홈 → 다른 메뉴 → 홈 으로 돌아왔을 때 다시 뜨지 않게. 공지를 바꾸면(id 변경)
   // 같은 방문 중에도 새 공지는 한 번 보여 준다.
   try {
-    if (sessionStorage.getItem(SKEY) === POPUP.id) return;
+    if (!reloaded && sessionStorage.getItem(SKEY) === POPUP.id) return;
   } catch (e) { /* 무시하고 띄운다 */ }
 
   const popup    = document.getElementById('home-popup');
