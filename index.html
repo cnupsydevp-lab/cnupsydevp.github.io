@@ -245,6 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
     figure.replaceWith(a);
   }
 
+  // 상자 모양을 이미지 모양에 맞춘다 — CSS 가 --popup-ratio(가로÷세로)로 폭을 정한다.
+  // 정사각 이미지면 정사각에 가까운 상자, 세로로 길면 좁고 긴 상자가 된다.
+  function applyRatio() {
+    if (!img.naturalWidth || !img.naturalHeight) return;
+    popup.style.setProperty('--popup-ratio', (img.naturalWidth / img.naturalHeight).toFixed(4));
+  }
+  img.addEventListener('load', applyRatio);
+  if (img.complete) applyRatio();      // 캐시에서 바로 온 경우
+
   // 사진을 못 받아오면 빈 상자만 남으므로 아예 열지 않는다
   img.addEventListener('error', () => { popup.hidden = true; document.body.style.overflow = ''; });
 
