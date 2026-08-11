@@ -1531,7 +1531,7 @@ a.notice-item:hover::after {
   cursor: pointer;
   transition: box-shadow 0.15s, background 0.15s;
 }
-/* 하루동안 보지 않기 — 되돌리기 어려운 쪽이라 조용한 테두리 버튼으로 둔다 */
+/* 하루 동안 보지 않기 — 되돌리기 어려운 쪽이라 조용한 테두리 버튼으로 둔다 */
 .home-popup-btn-quiet {
   background: transparent;
   color: var(--text-dark);

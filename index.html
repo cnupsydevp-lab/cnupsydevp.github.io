@@ -173,7 +173,7 @@
     <div class="home-popup-box">
         <span class="home-popup-figure" id="home-popup-figure"><img id="home-popup-img" alt=""></span>
         <div class="home-popup-actions">
-            <button class="home-popup-btn home-popup-btn-quiet" id="home-popup-hide">하루동안 보지 않기</button>
+            <button class="home-popup-btn home-popup-btn-quiet" id="home-popup-hide">하루 동안 보지 않기</button>
             <button class="home-popup-btn home-popup-btn-solid" id="home-popup-dismiss">닫기</button>
         </div>
     </div>
@@ -187,7 +187,7 @@
    1. 이미지를 images/popup/ 에 올린다.
    2. 아래 POPUP.image 에 그 경로를, alt 에 이미지 설명을 적는다.
    3. 내용을 새로 바꿀 때마다 id 를 함께 바꾼다 — id 가 달라지면 앞선 공지에서
-      "하루동안 보지 않기"를 누른 사람에게도 새 공지가 바로 보인다.
+      "하루 동안 보지 않기"를 누른 사람에게도 새 공지가 바로 보인다.
    공지를 내릴 때는 image 를 빈 문자열('')로 바꾼다 — 팝업이 아예 뜨지 않는다.
 
    [언제 뜨는가]
@@ -198,13 +198,13 @@
 
    [닫기 두 가지의 차이]
    - 닫기            : 지금 이 화면에서만 닫는다. 새로고침하면 다시 뜬다.
-   - 하루동안 보지 않기 : 24시간 동안 뜨지 않는다. 새로고침해도 뜨지 않는다
+   - 하루 동안 보지 않기 : 24시간 동안 뜨지 않는다. 새로고침해도 뜨지 않는다
                         (localStorage 에 기한 저장 — 브라우저를 닫아도 남는다).
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const POPUP = {
     id:    'popup-2026-08-11',  // 공지를 바꿀 때 이 값도 같이 바꾼다 —
-                                // 그래야 앞선 '하루동안 보지 않기' 를 무시하고 새로 뜬다
+                                // 그래야 앞선 '하루 동안 보지 않기' 를 무시하고 새로 뜬다
     image: 'images/popup/2026-08-11_grad-recruit.jpg',
     alt:   '충남대학교 심리학과 디지털 심리케어 연구실 학부연구생(석사과정 희망자) 모집 안내. 지도교수 노수림. 문의 srnoh@cnu.ac.kr',
     link:  '',                  // 비워 두면 포스터는 눌러도 아무 일이 없다
