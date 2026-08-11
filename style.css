@@ -1397,6 +1397,8 @@ a.notice-item:hover::after {
      클릭·스크롤이 그대로 뒤로 통과하고, 상자만 auto 로 되돌려 버튼을 받는다.
      그래서 팝업이 떠 있어도 홈을 누르고 스크롤할 수 있다 (스크롤 잠금도 없다).
    - 닫는 방법은 아래 버튼 두 개(모서리 X 없음)와 Esc. 바깥을 눌러도 닫히지 않는다.
+   - 상자 어디를 잡아도 끌어서 옮길 수 있다(마우스만). 옮기는 일은 index.html 의
+     인라인 스크립트가 transform 으로 하고, 여기서는 손 모양과 .dragging 만 맡는다.
    ──────────────────────────────────────────────────────────── */
 /* 가운데가 아니라 왼쪽 위에 붙인다(요청). 가운데 정렬은 위아래 여백을 양쪽에
    똑같이 잡아먹어 포스터가 작아지는데, 위로 붙이면 그 몫을 사진 높이로 쓴다.
@@ -1450,9 +1452,14 @@ a.notice-item:hover::after {
   border: 1px solid var(--border-md);
   box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.30);
   animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  /* 상자 전체가 손잡이다 — 사진이든 흰 테든 버튼 줄이든 잡아 끌면 옮겨진다.
+     버튼은 자기 cursor(pointer)를 따로 갖고 있어 손가락 모양으로 남는다. */
+  cursor: grab;
+  /* 끌 때 글자·이미지가 딸려 선택되지 않게. 팝업에 읽어 갈 글이 없어 잃는 게 없다 */
+  -webkit-user-select: none;
+  user-select: none;
 }
-/* 사진 자리 — 자르지 않는다. 포스터에서 글자가 잘리면 공지의 뜻이 없어진다.
-   포스터가 곧 손잡이다(끌어서 옮기기). 버튼 줄은 누르는 자리라 손잡이가 아니다. */
+/* 사진 자리 — 자르지 않는다. 포스터에서 글자가 잘리면 공지의 뜻이 없어진다. */
 .home-popup-figure {
   display: block;
   background-color: var(--paper);
@@ -1463,7 +1470,6 @@ a.notice-item:hover::after {
   /* 밝은 포스터가 밝은 테에 묻히지 않게 머리카락 굵기 선 하나. 그림자로 주므로
      자리를 차지하지 않아 위 폭 계산이 흔들리지 않는다. */
   box-shadow: 0 0 0 1px rgba(var(--ink-rgb), 0.10);
-  cursor: grab;
 }
 /* 상자 폭이 이미 화면 높이까지 감안해 정해지므로 사진은 폭만 맞추면 된다.
    max-height 로 한 번 더 누르면 좌우에 빈 자리가 생기므로 걸지 않는다. */
@@ -1475,11 +1481,20 @@ a.notice-item:hover::after {
   -webkit-user-drag: none;
   user-select: none;
 }
-/* 끄는 중: 손 모양을 쥔 상태로 바꾸고, 등장 애니메이션이 transform 을 되돌리지
-   못하게 끈다 (둘 다 transform 을 쓰므로 겹치면 상자가 튄다). */
-.home-popup-box.dragging { animation: none; }
+/* 끄는 중 (마우스를 누른 순간부터 뗄 때까지)
+   - 등장 애니메이션을 끈다. 그쪽도 transform 을 쓰므로 겹치면 상자가 튄다.
+   - 옮기는 동안만 이 상자를 별도 층으로 올린다(will-change). 이걸 안 하면
+     상자를 1px 옮길 때마다 넓은 그림자(44px 번짐) + 종이결(SVG 난류 무늬를
+     multiply 로 겹친 배경) + 포스터를 처음부터 다시 그린다. 그게 끌 때
+     미세하게 걸리는 주된 이유다. 층으로 올리면 한 번 그려 둔 그림을 옮기기만 한다.
+     평소에는 걸지 않는다 — 계속 걸어 두면 층과 메모리를 붙들고, 글자가
+     흐릿해질 수 있다. */
+.home-popup-box.dragging {
+  animation: none;
+  will-change: transform;
+}
 .home-popup-box.dragging,
-.home-popup-box.dragging .home-popup-figure { cursor: grabbing; }
+.home-popup-box.dragging .home-popup-btn { cursor: grabbing; }
 
 /* 버튼 줄 — 오른쪽에 몰아 붙인다. 폭을 늘려 채우지 않으므로 상자가 넓어져도
    버튼은 글자 길이만큼만 남는다. 좁으면 자동으로 위아래로 쌓인다.
