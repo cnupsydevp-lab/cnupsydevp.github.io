@@ -170,7 +170,6 @@
 <div class="home-popup" id="home-popup" hidden role="dialog" aria-modal="true" aria-label="공지">
     <div class="home-popup-backdrop" id="home-popup-backdrop"></div>
     <div class="home-popup-box">
-        <button class="home-popup-close" id="home-popup-close" aria-label="닫기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
         <span class="home-popup-figure" id="home-popup-figure"><img id="home-popup-img" alt=""></span>
         <div class="home-popup-actions">
             <button class="home-popup-btn home-popup-btn-quiet" id="home-popup-hide">하루동안 보지 않기</button>
@@ -190,8 +189,13 @@
       "하루동안 보지 않기"를 누른 사람에게도 새 공지가 바로 보인다.
    image 가 빈 문자열이면 팝업은 아예 뜨지 않는다 (지금 상태).
 
+   [언제 뜨는가 — 사이트에 처음 들어왔을 때 한 번]
+   이 스크립트와 마크업은 index.html 안에만 있으므로 다른 메뉴 페이지에서는
+   아예 실행되지 않는다. 홈에서 한 번 뜬 뒤에는 sessionStorage 에 표시를 남겨,
+   다른 메뉴를 둘러보다 홈으로 돌아와도 다시 뜨지 않는다 (브라우저를 닫으면 초기화).
+
    [닫기 두 가지의 차이]
-   - 닫기            : 이번에만 닫는다. 다음에 다시 들어오면 또 뜬다.
+   - 닫기            : 이번 방문 동안만 닫는다. 다음에 새로 들어오면 또 뜬다.
    - 하루동안 보지 않기 : 24시간 동안 뜨지 않는다 (localStorage 에 기한 저장).
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -203,7 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   if (!POPUP.image) return;
 
-  const KEY = 'dpwl_popup_hide';
+  const KEY  = 'dpwl_popup_hide';   // 24시간 숨김 (브라우저를 닫아도 남는다)
+  const SKEY = 'dpwl_popup_seen';   // 이번 방문에 이미 봤다는 표시 (탭을 닫으면 사라진다)
 
   // 저장된 기한이 아직 남아 있고 같은 공지면 띄우지 않는다.
   // 값이 깨져 있으면(수동 편집·구버전) 그냥 띄운다 — 공지를 놓치는 쪽이 더 나쁘다.
@@ -212,9 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved && saved.id === POPUP.id && Date.now() < saved.until) return;
   } catch (e) { /* 무시하고 띄운다 */ }
 
+  // 홈 → 다른 메뉴 → 홈 으로 돌아왔을 때 다시 뜨지 않게. 공지를 바꾸면(id 변경)
+  // 같은 방문 중에도 새 공지는 한 번 보여 준다.
+  try {
+    if (sessionStorage.getItem(SKEY) === POPUP.id) return;
+  } catch (e) { /* 무시하고 띄운다 */ }
+
   const popup    = document.getElementById('home-popup');
   const backdrop = document.getElementById('home-popup-backdrop');
-  const closeBtn = document.getElementById('home-popup-close');
   const hideBtn  = document.getElementById('home-popup-hide');
   const dismiss  = document.getElementById('home-popup-dismiss');
   const figure   = document.getElementById('home-popup-figure');
@@ -251,10 +261,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   popup.hidden = false;
   document.body.style.overflow = 'hidden';
-  closeBtn.focus();
+  dismiss.focus();          // 모서리 X 를 없앴으므로 '닫기' 가 첫 포커스
+  // 띄우는 순간 표시를 남긴다 — 닫는 방식과 상관없이 이번 방문에는 한 번만 뜬다
+  try { sessionStorage.setItem(SKEY, POPUP.id); } catch (e) { /* 저장이 막혀 있어도 진행 */ }
 
   backdrop.addEventListener('click', close);
-  closeBtn.addEventListener('click', close);
   dismiss.addEventListener('click', close);
   hideBtn.addEventListener('click', hideForADay);
   document.addEventListener('keydown', e => {
