@@ -62,7 +62,13 @@
 
 <section class="hero">
     <div class="container">
-        <span class="eyebrow">Noh Mental health And Digital care Lab (NOMAD Lab)</span>
+        <!-- 연구실 풀 이름 로고. 원래 이 자리에 있던 kicker 텍스트와 내용이 같아
+             텍스트를 걷어내고 그림으로 대신한다 — 이름은 alt 가 읽는다(검색·스크린리더).
+             width/height 를 적어 두어야 내려받기 전에도 자리를 잡아 아래 제목이 밀리지 않는다.
+             fetchpriority=high : 첫 화면에서 가장 큰 그림이라 먼저 받아 온다. -->
+        <div class="hero-wordmark">
+            <img src="images/logo/logo-fullname.jpg" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1280" height="648" fetchpriority="high">
+        </div>
         <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
         <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 중년부터 노년까지 전 생애 발달을 탐구합니다</p>
         <div class="hero-cta">
