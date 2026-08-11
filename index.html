@@ -166,7 +166,108 @@
     </div>
 </footer>
 
+<!-- 공지 팝업 — 첫 화면에서만 뜬다. 내용은 아래 스크립트의 POPUP 설정에서 바꾼다 -->
+<div class="home-popup" id="home-popup" hidden role="dialog" aria-modal="true" aria-label="공지">
+    <div class="home-popup-backdrop" id="home-popup-backdrop"></div>
+    <div class="home-popup-box">
+        <button class="home-popup-close" id="home-popup-close" aria-label="닫기"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        <span class="home-popup-figure" id="home-popup-figure"><img id="home-popup-img" alt=""></span>
+        <div class="home-popup-actions">
+            <button class="home-popup-btn home-popup-btn-quiet" id="home-popup-hide">하루동안 보지 않기</button>
+            <button class="home-popup-btn home-popup-btn-solid" id="home-popup-dismiss">닫기</button>
+        </div>
+    </div>
+</div>
+
 <script src="posts.js"></script>
 <script src="script.js"></script>
+<script>
+/* ── 공지 팝업 ────────────────────────────────────────────────
+   [내용을 바꾸는 방법]
+   1. 이미지를 images/popup/ 에 올린다.
+   2. 아래 POPUP.image 에 그 경로를, alt 에 이미지 설명을 적는다.
+   3. 내용을 새로 바꿀 때마다 id 를 함께 바꾼다 — id 가 달라지면 앞선 공지에서
+      "하루동안 보지 않기"를 누른 사람에게도 새 공지가 바로 보인다.
+   image 가 빈 문자열이면 팝업은 아예 뜨지 않는다 (지금 상태).
+
+   [닫기 두 가지의 차이]
+   - 닫기            : 이번에만 닫는다. 다음에 다시 들어오면 또 뜬다.
+   - 하루동안 보지 않기 : 24시간 동안 뜨지 않는다 (localStorage 에 기한 저장).
+   ──────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const POPUP = {
+    id:    'popup-1',
+    image: '',                 // 예: 'images/popup/2026-08-11_notice.jpeg'
+    alt:   '',                 // 예: '2026년 2학기 연구참여자 모집 안내'
+    link:  '',                 // 클릭 시 이동할 주소 (없으면 빈 문자열)
+  };
+  if (!POPUP.image) return;
+
+  const KEY = 'dpwl_popup_hide';
+
+  // 저장된 기한이 아직 남아 있고 같은 공지면 띄우지 않는다.
+  // 값이 깨져 있으면(수동 편집·구버전) 그냥 띄운다 — 공지를 놓치는 쪽이 더 나쁘다.
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && saved.id === POPUP.id && Date.now() < saved.until) return;
+  } catch (e) { /* 무시하고 띄운다 */ }
+
+  const popup    = document.getElementById('home-popup');
+  const backdrop = document.getElementById('home-popup-backdrop');
+  const closeBtn = document.getElementById('home-popup-close');
+  const hideBtn  = document.getElementById('home-popup-hide');
+  const dismiss  = document.getElementById('home-popup-dismiss');
+  const figure   = document.getElementById('home-popup-figure');
+  const img      = document.getElementById('home-popup-img');
+
+  img.src = POPUP.image;
+  img.alt = POPUP.alt || '공지';
+
+  // 링크가 있으면 사진 자리를 통째로 누를 수 있게 <a> 로 바꿔 끼운다
+  if (POPUP.link) {
+    const a = document.createElement('a');
+    a.href = POPUP.link;
+    a.className = 'home-popup-figure';
+    a.appendChild(img);
+    figure.replaceWith(a);
+  }
+
+  // 사진을 못 받아오면 빈 상자만 남으므로 아예 열지 않는다
+  img.addEventListener('error', () => { popup.hidden = true; document.body.style.overflow = ''; });
+
+  function close() {
+    popup.hidden = true;
+    document.body.style.overflow = '';
+  }
+  function hideForADay() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ id: POPUP.id, until: Date.now() + 86400000 }));
+    } catch (e) { /* 저장이 막혀 있어도(사생활 보호 모드) 닫기는 되어야 한다 */ }
+    close();
+  }
+
+  popup.hidden = false;
+  document.body.style.overflow = 'hidden';
+  closeBtn.focus();
+
+  backdrop.addEventListener('click', close);
+  closeBtn.addEventListener('click', close);
+  dismiss.addEventListener('click', close);
+  hideBtn.addEventListener('click', hideForADay);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !popup.hidden) close();
+  });
+
+  // Tab 포커스를 팝업 안에 가둔다 — 뒤 페이지로 새어 나가지 않게
+  popup.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const items = [...popup.querySelectorAll('button, a[href]')].filter(el => el.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+});
+</script>
 </body>
 </html>

@@ -1387,6 +1387,118 @@ a.notice-item:hover::after {
   line-height: 1.85;
 }
 
+/* ── Home Popup (공지 팝업) ───────────────────────────────────
+   첫 화면(index.html)에만 뜨는 이미지 공지창.
+   - 소식지 모달과 같은 무대 구성(가림막 + 종이 상자)을 쓰되, 사진 비율을
+     고정하지 않는다. 포스터가 세로로 길어도 잘리면 안 되므로 높이는
+     내용에 맡기고 화면을 넘지 않을 만큼만 제한한다.
+   - 아래 버튼 두 개(하루동안 보지 않기 · 닫기)는 터치 타깃 44px 를 지킨다.
+   ──────────────────────────────────────────────────────────── */
+.home-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.home-popup[hidden] { display: none; }
+.home-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--ink-rgb), 0.74);
+  backdrop-filter: blur(6px);
+}
+.home-popup-box {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: 12px;
+  max-width: 420px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(var(--ink-rgb), 0.55);
+  animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.home-popup-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(var(--ink-rgb), 0.78);
+  border: none;
+  color: var(--card);
+  width: 2.75rem;             /* 터치 타깃 최소 크기(44px) */
+  height: 2.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  z-index: 2;
+}
+.home-popup-close:hover { background: var(--ink); }
+.home-popup-close:active { transform: scale(0.92); }
+
+/* 사진 자리 — 자르지 않는다. 포스터에서 글자가 잘리면 공지의 뜻이 없어진다 */
+.home-popup-figure {
+  display: block;
+  background-color: var(--paper);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.home-popup-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+}
+
+/* 버튼 줄 — 좁은 화면에서는 위아래로 쌓인다 */
+.home-popup-actions {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem 1.1rem;
+}
+.home-popup-btn {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow 0.15s, background 0.15s;
+}
+/* 하루동안 보지 않기 — 되돌리기 어려운 쪽이라 조용한 테두리 버튼으로 둔다 */
+.home-popup-btn-quiet {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--border-md);
+}
+.home-popup-btn-quiet:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-border);
+}
+/* 닫기 — 기본 행동이므로 채운 면 */
+.home-popup-btn-solid {
+  background: var(--sage);
+  color: var(--text);
+  border: none;
+  box-shadow: inset 0 1px 0 rgba(var(--card-rgb), 0.5);
+}
+.home-popup-btn-solid:hover {
+  box-shadow: inset 0 1px 0 rgba(var(--card-rgb), 0.4),
+              inset 0 0 0 999px rgba(var(--ink-rgb), 0.12);
+}
+@media (max-width: 420px) {
+  .home-popup-actions { flex-direction: column; }
+}
+
 /* ── Newsletter — 노끈에 매달린 폴라로이드 ─────────────────────
    구조: .nl-wall > .nl-hang > (.nl-peg + .nl-shot)
 
@@ -2254,6 +2366,8 @@ html {
 .nl-shot-img.is-blank,
 .nl-modal-box,
 .nl-modal-img-wrap,     /* 사진이 무대보다 좁을 때 남는 여백 — 대지처럼 결이 보이게 */
+.home-popup-box,
+.home-popup-figure,     /* 포스터가 상자보다 좁을 때 남는 여백 — 같은 이유 */
 .form-control,
 .btn-primary,
 .map-link {
