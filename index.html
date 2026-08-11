@@ -167,8 +167,9 @@
 </footer>
 
 <!-- 공지 팝업 — 첫 화면에서만 뜬다. 내용은 아래 스크립트의 POPUP 설정에서 바꾼다 -->
-<div class="home-popup" id="home-popup" hidden role="dialog" aria-modal="true" aria-label="공지">
-    <div class="home-popup-backdrop" id="home-popup-backdrop"></div>
+<!-- aria-modal 을 쓰지 않는다: 뒤 홈페이지를 그대로 읽고 누르고 스크롤할 수 있는
+     '얹어 둔 공지'라서, 나머지 페이지를 감추라고 알리면 사실과 다르다. -->
+<div class="home-popup" id="home-popup" hidden role="dialog" aria-label="공지">
     <div class="home-popup-box">
         <span class="home-popup-figure" id="home-popup-figure"><img id="home-popup-img" alt=""></span>
         <div class="home-popup-actions">
@@ -240,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (e) { /* 무시하고 띄운다 */ }
 
   const popup    = document.getElementById('home-popup');
-  const backdrop = document.getElementById('home-popup-backdrop');
   const hideBtn  = document.getElementById('home-popup-hide');
   const dismiss  = document.getElementById('home-popup-dismiss');
   const figure   = document.getElementById('home-popup-figure');
@@ -271,11 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (img.complete) applyRatio();      // 캐시에서 바로 온 경우
 
   // 사진을 못 받아오면 빈 상자만 남으므로 아예 열지 않는다
-  img.addEventListener('error', () => { popup.hidden = true; document.body.style.overflow = ''; });
+  img.addEventListener('error', () => { popup.hidden = true; });
 
   function close() {
     popup.hidden = true;
-    document.body.style.overflow = '';
   }
   function hideForADay() {
     try {
@@ -284,27 +283,21 @@ document.addEventListener('DOMContentLoaded', () => {
     close();
   }
 
+  // 스크롤을 잠그지 않는다 — 팝업이 떠 있어도 뒤 홈페이지를 그대로 내려볼 수 있다.
+  // 포커스도 옮기지 않는다: '닫기' 에 포커스를 주면 스페이스바로 페이지를 내리려 할 때
+  // 버튼이 눌려 팝업이 닫혀 버린다. 닫는 방법은 버튼 클릭과 Esc 두 가지로 충분하다.
   popup.hidden = false;
-  document.body.style.overflow = 'hidden';
-  dismiss.focus();          // 모서리 X 를 없앴으므로 '닫기' 가 첫 포커스
   // 띄우는 순간 표시를 남긴다 — 닫는 방식과 상관없이 이번 방문에는 한 번만 뜬다
+  // (새로고침은 예외 — 위 reloaded 참조)
   try { sessionStorage.setItem(SKEY, POPUP.id); } catch (e) { /* 저장이 막혀 있어도 진행 */ }
 
-  backdrop.addEventListener('click', close);
+  // 바깥(홈페이지)을 눌러도 닫히지 않는다 — 홈의 메뉴·링크를 누르려던 것일 수 있고,
+  // 실수로 닫혀 공지를 놓치는 편이 더 나쁘다. CSS 의 pointer-events 로 상자 밖 클릭은
+  // 아예 뒤 페이지에 그대로 전달된다.
   dismiss.addEventListener('click', close);
   hideBtn.addEventListener('click', hideForADay);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !popup.hidden) close();
-  });
-
-  // Tab 포커스를 팝업 안에 가둔다 — 뒤 페이지로 새어 나가지 않게
-  popup.addEventListener('keydown', e => {
-    if (e.key !== 'Tab') return;
-    const items = [...popup.querySelectorAll('button, a[href]')].filter(el => el.offsetParent !== null);
-    if (!items.length) return;
-    const first = items[0], last = items[items.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 });
 </script>
