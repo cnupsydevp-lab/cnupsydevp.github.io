@@ -200,10 +200,11 @@
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const POPUP = {
-    id:    'popup-2026-07-20',
-    image: 'images/popup/2026-07-20_grad-recruit.jpg',
+    id:    'popup-2026-08-11',  // 공지를 바꿀 때 이 값도 같이 바꾼다 —
+                                // 그래야 앞선 '하루동안 보지 않기' 를 무시하고 새로 뜬다
+    image: 'images/popup/2026-08-11_grad-recruit.jpg',
     alt:   '충남대학교 심리학과 디지털 심리케어 연구실 학부연구생(석사과정 희망자) 모집 안내. 지도교수 노수림. 문의 srnoh@cnu.ac.kr',
-    link:  '',                 // 비워 두면 포스터는 눌러도 아무 일이 없다 (원본 PDF 는 같은 폴더에 보관)
+    link:  '',                  // 비워 두면 포스터는 눌러도 아무 일이 없다
   };
   if (!POPUP.image) return;
 

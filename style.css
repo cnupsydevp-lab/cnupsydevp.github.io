@@ -1427,14 +1427,14 @@ a.notice-item:hover::after {
    dvh 를 한 번 더 쓰는 이유: 휴대폰 브라우저의 100vh 는 주소창에 가려진 부분까지
    포함해 실제 보이는 높이보다 크다. dvh 를 아는 브라우저는 아래 줄이 이긴다.
    크기를 통째로 키우거나 줄이려면 560px(넓은 화면 상한)을 고친다.
-   기본값 0.71 은 스크립트가 돌기 전 한순간에 쓰이는 값(현재 포스터 비율). */
+   기본값 0.70 은 스크립트가 돌기 전 한순간에 쓰이는 값(현재 포스터 비율). */
 .home-popup-box {
   position: relative;
   background: var(--bg-card);
   border-radius: 12px;
   width: 100%;
-  max-width: min(560px, 90vw, calc((100vh - 140px) * var(--popup-ratio, 0.71)));
-  max-width: min(560px, 90vw, calc((100dvh - 140px) * var(--popup-ratio, 0.71)));
+  max-width: min(560px, 90vw, calc((100vh - 140px) * var(--popup-ratio, 0.70)));
+  max-width: min(560px, 90vw, calc((100dvh - 140px) * var(--popup-ratio, 0.70)));
   max-height: calc(100vh - 96px);
   max-height: calc(100dvh - 96px);
   overflow-y: auto;
@@ -1510,8 +1510,8 @@ a.notice-item:hover::after {
     padding: 3.75rem 1rem 1rem;
   }
   .home-popup-box {
-    max-width: min(560px, 92vw, calc((100vh - 120px) * var(--popup-ratio, 0.71)));
-    max-width: min(560px, 92vw, calc((100dvh - 120px) * var(--popup-ratio, 0.71)));
+    max-width: min(560px, 92vw, calc((100vh - 120px) * var(--popup-ratio, 0.70)));
+    max-width: min(560px, 92vw, calc((100dvh - 120px) * var(--popup-ratio, 0.70)));
     max-height: calc(100vh - 76px);
     max-height: calc(100dvh - 76px);
   }
