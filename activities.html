@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPWL — 연구활동</title>
-    <meta name="description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
+    <title>NOMAD Lab — 연구활동</title>
+    <meta name="description" content="NOMAD Lab 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="DPWL — 발달·노화 심리 연구실">
-    <meta property="og:title" content="DPWL — 연구활동">
-    <meta property="og:description" content="DPWL 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
+    <meta property="og:site_name" content="NOMAD Lab — 발달·노화 심리 연구실">
+    <meta property="og:title" content="NOMAD Lab — 연구활동">
+    <meta property="og:description" content="NOMAD Lab 연구활동 — SSCI 논문 목록, 학술발표, 연구과제 현황.">
     <meta property="og:url" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/activities.html">
     <meta property="og:image" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/images/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -24,7 +24,11 @@
 
 <header class="site-nav">
     <div class="nav-wrapper">
-        <div class="logo"><a href="index.html"><img src="images/logo/logo-nav.png" alt="NOMAD lab" width="360" height="242"></a></div>
+        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹쳐
+             풍선만 은은하게 흔들리게 한다. 두 파일은 같은 캔버스(238×160)를 쓰고
+             합치면 원본과 픽셀이 같아, 정지 상태에서는 이음선이 보이지 않는다.
+             풍선 쪽은 장식이라 alt 를 비워 두고 글자 쪽이 이름을 읽는다. -->
+        <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="NOMAD Lab" width="238" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="238" height="160"></a></div>
         <div class="nav-cluster">
         <a href="index.html" class="nav-home" aria-label="홈">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9a1 1 0 0 0 1 1h3.5v-6h4v6H17.5a1 1 0 0 0 1-1v-9"></path></svg>
@@ -112,7 +116,7 @@
     <div class="container">
         <div class="footer-inner">
             <div class="footer-brand">
-                <span class="footer-logo">DPWL</span>
+                <span class="footer-logo">NOMAD Lab</span>
                 <p>충남대학교 심리학과<br>발달·노화 심리 연구실<br>대전광역시 유성구 대학로 99<br>공동실험실습관(W9) 208호<br><a href="mailto:cnu.psy.devp@gmail.com">cnu.psy.devp@gmail.com</a></p>
             </div>
         </div>
@@ -126,7 +130,7 @@
             <a href="notices.html">공지사항</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <p class="footer-copy">&copy; 2026 DPWL. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 NOMAD Lab. All rights reserved.</p>
     </div>
 </footer>
 

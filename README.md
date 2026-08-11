@@ -1,6 +1,6 @@
-# DPWL 연구실 홈페이지
+# NOMAD Lab 연구실 홈페이지
 
-충남대학교 발달·노화 심리 연구실(DPWL) 공식 홈페이지  
+충남대학교 발달·노화 심리 연구실(NOMAD Lab) 공식 홈페이지  
 **URL:** https://cnupsydevp-lab.github.io
 
 순수 HTML/CSS/JS 정적 사이트 — GitHub Pages로 자동 배포됩니다. 빌드 도구·프레임워크 없음.

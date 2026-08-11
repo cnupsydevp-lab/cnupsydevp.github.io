@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPWL — 발달·노화 심리 연구실</title>
-    <meta name="description" content="충남대학교 발달·노화 심리 연구실(DPWL). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
+    <title>NOMAD Lab — 발달·노화 심리 연구실</title>
+    <meta name="description" content="충남대학교 발달·노화 심리 연구실(NOMAD Lab). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="DPWL — 발달·노화 심리 연구실">
-    <meta property="og:title" content="DPWL — 발달·노화 심리 연구실">
-    <meta property="og:description" content="충남대학교 발달·노화 심리 연구실(DPWL). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
+    <meta property="og:site_name" content="NOMAD Lab — 발달·노화 심리 연구실">
+    <meta property="og:title" content="NOMAD Lab — 발달·노화 심리 연구실">
+    <meta property="og:description" content="충남대학교 발달·노화 심리 연구실(NOMAD Lab). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
     <meta property="og:url" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/">
     <meta property="og:image" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/images/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -24,7 +24,11 @@
 
 <header class="site-nav">
     <div class="nav-wrapper">
-        <div class="logo"><a href="index.html"><img src="images/logo/logo-nav.png" alt="NOMAD lab" width="360" height="242"></a></div>
+        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹쳐
+             풍선만 은은하게 흔들리게 한다. 두 파일은 같은 캔버스(238×160)를 쓰고
+             합치면 원본과 픽셀이 같아, 정지 상태에서는 이음선이 보이지 않는다.
+             풍선 쪽은 장식이라 alt 를 비워 두고 글자 쪽이 이름을 읽는다. -->
+        <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="NOMAD Lab" width="238" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="238" height="160"></a></div>
         <div class="nav-cluster">
         <a href="index.html" class="nav-home" aria-label="홈">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9a1 1 0 0 0 1 1h3.5v-6h4v6H17.5a1 1 0 0 0 1-1v-9"></path></svg>
@@ -58,7 +62,7 @@
 
 <section class="hero">
     <div class="container">
-        <span class="eyebrow">Digital Psychological Wellness Lab (DPWL)</span>
+        <span class="eyebrow">Noh Mental health And Digital care Lab (NOMAD Lab)</span>
         <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
         <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 중년부터 노년까지 전 생애 발달을 탐구합니다</p>
         <div class="hero-cta">
@@ -76,9 +80,9 @@
     <div class="container">
         <div class="about-grid">
             <div class="about-text">
-                <span class="eyebrow">About DPWL</span>
+                <span class="eyebrow">About NOMAD Lab</span>
                 <h2 class="section-title">노화와 전 생애 발달을<br>과학으로 탐구합니다</h2>
-                <p>발달·노화 심리 연구실(Developmental Psychology &amp; Wellness Lab)에 오신 것을 환영합니다.</p>
+                <p>NOMAD Lab(Noh Mental health And Digital care Lab)에 오신 것을 환영합니다.</p>
                 <p>우리는 중년부터 노년까지 전 생애에 걸친 정서·인지 발달을 탐구합니다. 노화에 따른 인지 변화, 안구 운동 추적(Eye Tracking)을 활용한 주의·기억 연구, AI 등 디지털 기술이 노년기 삶의 질에 미치는 영향을 중심으로 연구합니다.</p>
                 <a href="pi.html" class="btn-ghost u-mt-2">지도교수 소개 →</a>
             </div>
@@ -150,7 +154,7 @@
     <div class="container">
         <div class="footer-inner">
             <div class="footer-brand">
-                <span class="footer-logo">DPWL</span>
+                <span class="footer-logo">NOMAD Lab</span>
                 <p>충남대학교 심리학과<br>발달·노화 심리 연구실<br>대전광역시 유성구 대학로 99<br>공동실험실습관(W9) 208호<br><a href="mailto:cnu.psy.devp@gmail.com">cnu.psy.devp@gmail.com</a></p>
             </div>
         </div>
@@ -164,7 +168,7 @@
             <a href="notices.html">공지사항</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <p class="footer-copy">&copy; 2026 DPWL. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 NOMAD Lab. All rights reserved.</p>
     </div>
 </footer>
 
