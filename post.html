@@ -65,16 +65,31 @@
 
 <section class="section section-light">
     <div class="container">
-        <a href="#" class="post-back" id="post-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>목록으로</a>
-        <div class="post-article">
-            <div class="post-meta">
-                <span class="notice-date" id="post-date"></span>
-                <span class="badge" id="post-badge"></span>
-            </div>
-            <h2 class="post-title-heading" id="post-title"></h2>
-            <hr>
-            <div class="post-body" id="post-body">
-                <p class="empty-note">게시글을 불러오는 중…</p>
+        <!-- post-shell : '목록으로' 링크와 기사 틀이 같은 폭·같은 왼쪽 끝을 쓰게 묶는다.
+             (컨테이너는 1080px 이라 기사만 좁히면 지면 왼쪽으로 치우쳐 보인다) -->
+        <div class="post-shell">
+            <a href="#" class="post-back" id="post-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>목록으로</a>
+            <div class="post-article">
+                <div class="post-meta">
+                    <span class="notice-date" id="post-date"></span>
+                    <span class="badge" id="post-badge"></span>
+                </div>
+                <h2 class="post-title-heading" id="post-title"></h2>
+                <!-- 조회수·좋아요는 스크립트가 채운 뒤에 드러낸다.
+                     자바스크립트가 꺼져 있으면 빈 줄이나 눌러도 반응 없는 버튼이
+                     남으므로, hidden 을 기본값으로 둔다. -->
+                <p class="post-views" id="post-views" hidden></p>
+                <hr>
+                <div class="post-body" id="post-body">
+                    <p class="empty-note">게시글을 불러오는 중…</p>
+                </div>
+                <div class="post-like-row" id="post-like-row" hidden>
+                    <button type="button" class="post-like" id="post-like" aria-pressed="false">
+                        <svg class="post-like-heart" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l8.84 8.84 8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        <span>좋아요</span>
+                        <span class="post-like-count" id="post-like-count" hidden></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -149,6 +164,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('post-title').textContent = post.title;
   document.getElementById('post-body').innerHTML = post.body;
+
+  /* ── 조회수 · 좋아요 ───────────────────────────────────────────
+     [중요] 이 사이트는 서버가 없는 정적 사이트(GitHub Pages)라 숫자를
+     방문자의 브라우저(localStorage)에 저장한다. 그래서 값이 방문자끼리
+     합산되지 않는다 —
+       조회수 : 이 브라우저가 이 글을 몇 번 열었는지 (남의 방문은 안 세어진다)
+       좋아요 : 이 브라우저에서 눌렀는지 (누르면 1, 다시 누르면 취소)
+     전체 방문자 합계를 보이려면 서버 카운터가 필요하다. 그때는 아래
+     '읽기/쓰기' 네 곳만 API 호출로 바꾸면 되고 화면 코드는 그대로 쓴다.
+
+     저장이 막힌 환경(사파리 프라이빗 등)에서도 화면은 깨지지 않게
+     try 로 감싸고, 실패하면 이번 화면 값만 보여 준다.
+     ─────────────────────────────────────────────────────────── */
+  const KEY      = `${page}_${id}`;
+  const VIEW_KEY = `dpwl_views_${KEY}`;    // 누적 조회수 (브라우저를 닫아도 남는다)
+  const SEEN_KEY = `dpwl_viewed_${KEY}`;   // 이번 방문에 이미 세었다는 표시 (탭을 닫으면 사라진다)
+  const LIKE_KEY = `dpwl_liked_${KEY}`;
+
+  // 조회수 — 새로고침으로 숫자가 부풀지 않게 한 방문에 한 번만 올린다
+  const viewEl = document.getElementById('post-views');
+  let views = 1;
+  try {
+    views = parseInt(localStorage.getItem(VIEW_KEY), 10) || 0;
+    if (!sessionStorage.getItem(SEEN_KEY)) {
+      views += 1;
+      localStorage.setItem(VIEW_KEY, views);
+      sessionStorage.setItem(SEEN_KEY, '1');
+    }
+  } catch (e) { /* 저장이 막혀 있으면 이번 화면 값(1)만 보여 준다 */ }
+  viewEl.textContent = `조회 ${views}`;
+  viewEl.hidden = false;
+
+  // 좋아요 — 토글. 상태는 aria-pressed 로 알려 준다(스크린리더가 '눌림'으로 읽는다)
+  const likeBtn   = document.getElementById('post-like');
+  const likeCount = document.getElementById('post-like-count');
+  let liked = false;
+  try { liked = localStorage.getItem(LIKE_KEY) === '1'; } catch (e) { /* 무시 */ }
+
+  function paintLike() {
+    likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
+    likeCount.textContent = liked ? '1' : '';
+    likeCount.hidden = !liked;
+  }
+  paintLike();
+  document.getElementById('post-like-row').hidden = false;
+
+  likeBtn.addEventListener('click', () => {
+    liked = !liked;
+    try {
+      if (liked) localStorage.setItem(LIKE_KEY, '1');
+      else localStorage.removeItem(LIKE_KEY);
+    } catch (e) { /* 저장이 막혀도 이번 화면에서는 눌린 상태로 보인다 */ }
+    paintLike();
+  });
 });
 </script>
 </body>

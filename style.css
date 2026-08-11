@@ -1905,21 +1905,99 @@ a.notice-item:hover::after {
 }
 .post-back:hover { color: var(--text); }
 
-.post-article { max-width: 720px; }
+/* 기사가 놓이는 폭. '목록으로' 링크와 기사 틀이 같은 왼쪽 끝에서 시작한다.
+   틀의 좌우 여백(2.5rem×2)을 뺀 본문 폭은 ≈712px 로, 틀을 두르기 전 글 폭과 같다. */
+.post-shell { max-width: 800px; margin: 0 auto; }
 
+/* ── 신문 기사 박스 ───────────────────────────────────────────
+   이중 괘선: 굵은 잉크선(바깥) + 얇은 선(안)을 3px 띄워 두 줄로 두른다.
+   hr 의 '신문 이중 룰'과 같은 관용이고, 선은 잉크가 맡는다는 규칙도 그대로다
+   (세이지·모스는 종이 위 1.4~1.9:1 이라 틀로 쓰면 흐려진다).
+   모서리는 둥글리지 않는다(--radius 미적용) — 신문 기사 박스는 각이 살아 있어야
+   지면에 짜인 단으로 읽히고, 둥근 모서리는 카드 UI 로 읽힌다.
+   면색을 깔지 않아 지면(종이색 + 섬유·펄프 결)이 틀 안까지 그대로 이어진다.
+   ──────────────────────────────────────────────────────────── */
+.post-article {
+  position: relative;
+  padding: 2.75rem 2.5rem 3rem;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+}
+.post-article::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--border-md);
+  pointer-events: none;   /* 틀은 장식일 뿐 — 본문 선택·링크 클릭을 가리지 않는다 */
+}
+
+/* 머리(날짜·배지·제목)만 가운데로 모은다. 본문은 왼쪽 정렬 그대로 —
+   신문도 헤드라인은 단 가운데에 앉히고 기사는 왼쪽에서 읽어 내려간다.
+   본문까지 가운데 정렬하면 줄 시작점이 흔들려 읽는 속도가 떨어진다. */
 .post-meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .post-title-heading {
-  font-size: var(--fs-2xl);
-  font-weight: 800;
-  line-height: 1.45;
+  /* 헤드라인은 제목 서체로 (영문 Abril Fatface · 한글 Do Hyeon) — 페이지 제목·
+     섹션 타이틀과 같은 계열이라 게시글만 본문체로 튀지 않는다 */
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-3xl);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  text-align: center;
   color: var(--text-dark);
 }
+
+/* 조회수 — 제목 바로 아래. 머리가 가운데 정렬이라 함께 가운데에 두고,
+   기사를 읽는 데 방해되지 않게 배지 크기(12px)까지 낮춘다. */
+.post-views {
+  margin-top: 0.55rem;
+  font-family: var(--font-ui);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+  font-variant-numeric: tabular-nums;   /* 숫자 폭이 고정돼 자릿수가 늘어도 흔들리지 않는다 */
+}
+
+/* 머리와 본문을 가르는 이중 룰. 기본 hr 여백(3rem)은 틀 안에서는 너무 넓다 */
+.post-article hr { margin: 1.75rem 0 2rem; }
+
+/* ── 좋아요 ───────────────────────────────────────────────────
+   기사 끝 오른쪽. 모서리는 배지와 같은 2px — 기사 틀이 직각이라
+   --radius(8px) 를 쓰면 버튼만 카드처럼 떠 보인다.
+   눌린 상태는 세이지 면(--accent-dim, hover·active 용) + 잉크로 채운 하트로
+   표시한다. 알림 도트의 --alert 는 '새 글' 신호 전용이라 여기 쓰지 않는다. */
+.post-like-row { display: flex; justify-content: flex-end; margin-top: 2.25rem; }
+.post-like {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  padding: 0.45rem 1rem;
+  background: transparent;
+  color: var(--text-dark);
+  border: 1.5px solid rgba(var(--ink-rgb), 0.55);
+  border-radius: 2px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.post-like:hover  { border-color: var(--text); background: var(--accent-dim); }
+.post-like:active { transform: scale(0.97); }
+.post-like[aria-pressed="true"] { border-color: var(--text); background: var(--accent-dim); }
+.post-like[aria-pressed="true"] .post-like-heart { fill: var(--ink); stroke: var(--ink); }
+.post-like-count { font-variant-numeric: tabular-nums; }
 
 .post-body {
   font-size: var(--fs-base);
@@ -1933,6 +2011,9 @@ a.notice-item:hover::after {
 .post-body strong    { font-weight: 700; }
 .post-body a         { color: var(--text); text-decoration: underline; }
 .post-body h3        { font-size: var(--fs-lg); font-weight: 800; margin: 1.5rem 0 0.5rem; }
+/* 첨부 자료 줄 — 제목 바로 아래에 놓이는 PDF·자료 링크(🔗).
+   본문 문단으로 흘려 읽히지 않게 굵게 하고 아래 여백을 한 줄 더 벌린다. */
+.post-body .post-attach { font-weight: 700; margin-bottom: 1.6rem; }
 /* 본문에 넣은 이미지(notice-files/ 의 포스터 등). 사이트 전체에 img 규칙이 없어
    이 한 줄이 없으면 원본 크기 그대로 나가 좁은 화면에서 글 폭을 밀어낸다.
    자르지 않고 줄이기만 한다 — 포스터 글자가 잘리면 공지의 뜻이 없어진다. */
@@ -1940,9 +2021,12 @@ a.notice-item:hover::after {
   display: block;
   max-width: 100%;
   height: auto;
-  margin: 1.25rem 0;
-  border-radius: 6px;
-  border: 1px solid var(--border);
+  /* auto 로 두면 글 폭보다 좁은 사진(세로 포스터 등)이 단 가운데에 앉는다 */
+  margin: 1.5rem auto;
+  /* 신문 지면의 사진처럼 각을 살린다 — 기사 틀이 직각이라 6px 둥근 모서리만
+     혼자 카드처럼 떠 보였다 */
+  border-radius: 0;
+  border: 1px solid var(--border-md);
 }
 
 /* ── Divider ─────────────────────────────────────────────── */
@@ -2345,6 +2429,9 @@ html {
   /* 모바일: 카드 패딩 축소 */
   .card    { padding: 1.5rem; }
   .info-card { padding: 1.25rem; }
+  /* 모바일: 신문 기사 틀 — 좌우 여백을 줄여 글 폭을 지킨다 (틀은 그대로 둔다) */
+  .post-article        { padding: 1.75rem 1.25rem 2rem; }
+  .post-title-heading  { font-size: var(--fs-2xl); }
   /* 모바일: 폴라로이드 */
   .profile-polaroid { max-width: 210px; }
   /* 모바일: 논문 목록 2열 → 세로 스택 */
