@@ -1404,7 +1404,11 @@ a.notice-item:hover::after {
 .home-popup {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  /* 내비(1000)·내비 드롭다운(1001)·모바일 메뉴 덮개(998) 보다 낮게 둔다.
+     모달이 아니므로 메뉴가 팝업 위로 와야 한다 — 특히 휴대폰에서 햄버거를
+     누르면 메뉴 덮개가 팝업을 가려야 메뉴를 가리지 않는다.
+     (본문 위로는 충분히 높다. 본문 최고값은 back-to-top 490) */
+  z-index: 950;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
