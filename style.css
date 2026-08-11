@@ -1446,12 +1446,14 @@ a.notice-item:hover::after {
   box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.30);
   animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
-/* 사진 자리 — 자르지 않는다. 포스터에서 글자가 잘리면 공지의 뜻이 없어진다 */
+/* 사진 자리 — 자르지 않는다. 포스터에서 글자가 잘리면 공지의 뜻이 없어진다.
+   포스터가 곧 손잡이다(끌어서 옮기기). 버튼 줄은 누르는 자리라 손잡이가 아니다. */
 .home-popup-figure {
   display: block;
   background-color: var(--paper);
   border-radius: 12px 12px 0 0;
   overflow: hidden;
+  cursor: grab;
 }
 /* 상자 폭이 이미 화면 높이까지 감안해 정해지므로 사진은 폭만 맞추면 된다.
    max-height 로 한 번 더 누르면 좌우에 빈 자리가 생기므로 걸지 않는다. */
@@ -1459,7 +1461,15 @@ a.notice-item:hover::after {
   display: block;
   width: 100%;
   height: auto;
+  /* 브라우저 기본 '이미지 끌기'(반투명 고스트) 를 막는다 — 우리가 직접 옮긴다 */
+  -webkit-user-drag: none;
+  user-select: none;
 }
+/* 끄는 중: 손 모양을 쥔 상태로 바꾸고, 등장 애니메이션이 transform 을 되돌리지
+   못하게 끈다 (둘 다 transform 을 쓰므로 겹치면 상자가 튄다). */
+.home-popup-box.dragging { animation: none; }
+.home-popup-box.dragging,
+.home-popup-box.dragging .home-popup-figure { cursor: grabbing; }
 
 /* 버튼 줄 — 오른쪽에 몰아 붙인다. 폭을 늘려 채우지 않으므로 상자가 넓어져도
    버튼은 글자 길이만큼만 남는다. 좁으면 자동으로 위아래로 쌓인다. */
