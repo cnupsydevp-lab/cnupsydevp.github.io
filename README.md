@@ -48,6 +48,7 @@ homepage/
 ├── images/
 │   ├── logo/
 │   │   ├── wordmark/       ← 첫 화면 로고 열 겹 ⚠ 손으로 고치지 말 것 (README 참고)
+│   │   │   └── w800/       ←   같은 열 겹의 좁은 화면용 축소본 (휴대폰 117KB)
 │   │   └── README.md       ← 로고 파일 규칙
 │   ├── newsletter/         ← 소식지 사진
 │   └── *.jpeg              ← 구성원 사진, og-image

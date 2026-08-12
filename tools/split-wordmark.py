@@ -43,6 +43,7 @@ images/logo/wordmark/ 아래 열 장으로 갈라 놓고, index.html·style.css 
 import json
 import os
 import sys
+from math import ceil
 
 import numpy as np
 from PIL import Image
@@ -50,6 +51,11 @@ from scipy import ndimage
 
 SRC = 'images/logo/logo-fullname.png'
 OUT = 'images/logo/wordmark'
+# 좁은 화면용 축소본. 화폭 800px 은 눈대중이 아니다 — 가장 넓은 휴대폰(430px)에서
+# 로고가 398px 로 보이고, 배율 2배 화면이면 796px 이 필요하다. 딱 그만큼이다.
+# 이 한 벌로 배율 2배 휴대폰 전 기종이 덮인다(배율 3배는 1194px 이 필요해 원본을 받는다).
+SMALL = 'images/logo/wordmark/w800'
+SMALL_CANVAS = 800
 
 # 구슬 중심·반지름 (거리변환 극대점에서 읽은 값). 원본이 바뀌면 다시 재야 한다.
 BEADS = {'beadBlue': (1130, 111, 38), 'beadPink': (107, 599, 38)}
@@ -63,6 +69,25 @@ SLIDE = 12          # 구슬이 끈을 따라 미끄러지는 거리 (원본 픽
 WEBP_QUALITY = 86
 
 
+def shrink(im, k):
+    """RGBA 그림을 k 배로 줄인다.
+
+    ⚠ 알파를 곱해 두고(premultiply) 줄인 뒤 다시 나눈다. 그냥 줄이면 투명한
+      자리의 검정(0,0,0)이 이웃 픽셀에 섞여 글자 가장자리에 검은 테가 생긴다
+      (images/logo/README.md 에 같은 경고가 있다).
+    """
+    a = np.array(im.convert('RGBA'), float)
+    al = a[..., 3:4]
+    pm = np.concatenate([a[..., :3] * (al / 255), al], 2)
+    # 내림이 아니라 올림이다. 반올림하면 겹에 따라 필요한 폭보다 0.5px 모자랄 수
+    # 있고, 그러면 그 겹만 원본을 받아 열 겹의 크기가 섞인다(주석의 약속이 깨진다).
+    w, h = max(1, ceil(im.width * k)), max(1, ceil(im.height * k))
+    sm = np.array(Image.fromarray(pm.astype(np.uint8)).resize((w, h), Image.LANCZOS), float)
+    aa = np.clip(sm[..., 3:4], 0, 255)
+    rgb = np.where(aa > 0, sm[..., :3] / np.maximum(aa / 255, 1e-6), 0)
+    return Image.fromarray(np.clip(np.concatenate([rgb, aa], 2), 0, 255).astype(np.uint8))
+
+
 def disk(r):
     y, x = np.ogrid[-r:r + 1, -r:r + 1]
     return x * x + y * y <= r * r
@@ -72,6 +97,7 @@ def main():
     if not os.path.exists(SRC):
         sys.exit(f'원본을 찾을 수 없다: {SRC} (저장소 루트에서 실행할 것)')
     os.makedirs(OUT, exist_ok=True)
+    os.makedirs(SMALL, exist_ok=True)
 
     a = np.array(Image.open(SRC).convert('RGBA'))
     H, W = a.shape[:2]
@@ -223,7 +249,9 @@ def main():
         sub = Image.fromarray(img[y0:y1, x0:x1])
         sub.save(f'{OUT}/{n}.png', optimize=True)
         sub.save(f'{OUT}/{n}.webp', quality=WEBP_QUALITY, method=6, exact=True)
-        geo[n] = dict(x=x0, y=y0, w=x1 - x0, h=y1 - y0,
+        smaller = shrink(sub, SMALL_CANVAS / W)
+        smaller.save(f'{SMALL}/{n}.webp', quality=WEBP_QUALITY, method=6, exact=True)
+        geo[n] = dict(x=x0, y=y0, w=x1 - x0, h=y1 - y0, smallw=smaller.width,
                       left=round(x0 / W * 100, 4), top=round(y0 / H * 100, 4),
                       width=round((x1 - x0) / W * 100, 4))
 
@@ -233,6 +261,31 @@ def main():
         if n != 'letters':
             print(f'  {n:9s} left:{g["left"]}%;top:{g["top"]}%;width:{g["width"]}%  '
                   f'(width="{g["w"]}" height="{g["h"]}")')
+
+    # ── index.html 에 그대로 붙일 <picture> 줄
+    # sizes 는 "이 겹이 화면에서 몇 px 로 보이는가" 다. 겹의 폭 = 로고 폭 × 제 비율이고,
+    # 로고 폭은 .container(max-width 1080px)의 안쪽이라 좌우 padding 만큼 빠진다.
+    # padding 이 화면 폭에 따라 2 → 1.5 → 1.25 → 1rem 로 바뀌므로 그 구간을 그대로 옮겼다.
+    # 브라우저는 이 값 × 화면 배율(DPR)보다 큰 것 중 가장 작은 후보를 고른다 —
+    # 계산해 보면 어느 겹이든 조건이 "800 ≥ 로고폭 × DPR" 로 같아진다.
+    print('\n── index.html <picture> ──')
+    for n in names:
+        g = geo[n]
+        f = g['width'] / 100
+        sizes = (f'(min-width:1080px) {1016 * f:.0f}px,'
+                 f'(min-width:861px) calc((100vw - 64px)*{f:.4f}),'
+                 f'(min-width:641px) calc((100vw - 48px)*{f:.4f}),'
+                 f'(min-width:481px) calc((100vw - 40px)*{f:.4f}),'
+                 f'calc((100vw - 32px)*{f:.4f})')
+        src = (f'<source type="image/webp" srcset="{SMALL}/{n}.webp {g["smallw"]}w, '
+               f'{OUT}/{n}.webp {g["w"]}w" sizes="{sizes}">')
+        if n == 'letters':
+            print(f'<picture>{src}\n    <img class="wm-letters" src="{OUT}/{n}.png" alt="…" '
+                  f'width="{g["w"]}" height="{g["h"]}" fetchpriority="high"></picture>')
+        else:
+            print(f'<picture>{src}<img class="wm-layer" '
+                  f'style="left:{g["left"]}%;top:{g["top"]}%;width:{g["width"]}%" '
+                  f'src="{OUT}/{n}.png" alt="" width="{g["w"]}" height="{g["h"]}"></picture>')
 
     print('\n── style.css @keyframes 값 ──')
     for n, amp in SWAY.items():

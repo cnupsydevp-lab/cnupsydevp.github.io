@@ -95,6 +95,21 @@
         <h1 class="sr-only">전 생애의 마음을 과학으로 탐구합니다 — NOMAD Lab</h1>
         <div class="hero-wordmark">
         <div class="wm">
+            <!-- srcset/sizes — 좁은 화면에는 축소본(w800/)을 내려보낸다.
+                 열 겹 합계가 299KB 인데 휴대폰에서 로고는 328~398px 로 보인다.
+                 배율 2배 화면이라도 796px 이면 충분한데 원본 겹은 1502px 이다.
+                 그래서 화폭 800px 짜리 한 벌을 따로 뒀다(117KB).
+                 sizes 는 '이 겹이 화면에서 몇 px 로 보이는가' 다. 겹의 폭은
+                 로고 폭 × 제 비율이고, 로고 폭은 .container 안쪽이라 좌우 padding
+                 만큼 빠진다(2 → 1.5 → 1.25 → 1rem 로 바뀌므로 그 구간을 그대로 옮겼다).
+                 브라우저는 sizes × 화면배율보다 큰 후보 중 가장 작은 것을 고르는데,
+                 계산하면 어느 겹이든 조건이 "800 ≥ 로고폭 × 배율" 로 같아진다.
+                 그래서 거의 모든 화면에서 열 겹이 같은 크기끼리 짝을 이룬다.
+                 딱 그 경계에 걸리는 폭(1배 849~873px, 2배 433~438px)에서만
+                 겹마다 1px 반올림이 갈려 크기가 섞이는데, 재 보니 차이가 전부
+                 윤곽선 위 안티에일리어싱 수준이라 이음선은 생기지 않는다.
+                 → 배율 2배 휴대폰 전 기종 117KB, 배율 3배 휴대폰·데스크톱 299KB.
+                 값은 손으로 쓰지 말 것. tools/split-wordmark.py 가 찍어 준다. -->
             <!-- 끈 — 흔들림 단위 4개. 각 단위는 통째로 로고 바깥쪽/안쪽으로 아주 조금씩
                  숨쉰다. 단위끼리 만나는 자리는 전부 글자 뒤나 나비매듭 아래라
                  서로 어긋나도 이음선이 드러나지 않는다.
@@ -102,29 +117,29 @@
                  구슬이 끈에서 떨어져 나가지 않고 끈을 따라 같이 움직인다.
                  (구슬이 끈 위를 미끄러지는 움직임은 넣었다가 뺐다 — 2026-08-12) -->
             <div class="wm-unit wm-a">
-                <picture><source srcset="images/logo/wordmark/cordA.webp" type="image/webp"><img class="wm-layer" style="left:50.9987%;top:11.6573%;width:49.0013%" src="images/logo/wordmark/cordA.png" alt="" width="736" height="364"></picture>
-                <picture><source srcset="images/logo/wordmark/beadBlue.webp" type="image/webp"><img class="wm-layer" style="left:71.5712%;top:9.1292%;width:6.9907%" src="images/logo/wordmark/beadBlue.png" alt="" width="105" height="94"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 498px,(min-width:861px) calc((100vw - 64px)*0.4900),(min-width:641px) calc((100vw - 48px)*0.4900),(min-width:481px) calc((100vw - 40px)*0.4900),calc((100vw - 32px)*0.4900)" srcset="images/logo/wordmark/w800/cordA.webp 393w, images/logo/wordmark/cordA.webp 736w"><img class="wm-layer" style="left:50.9987%;top:11.6573%;width:49.0013%" src="images/logo/wordmark/cordA.png" alt="" width="736" height="364"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 71px,(min-width:861px) calc((100vw - 64px)*0.0699),(min-width:641px) calc((100vw - 48px)*0.0699),(min-width:481px) calc((100vw - 40px)*0.0699),calc((100vw - 32px)*0.0699)" srcset="images/logo/wordmark/w800/beadBlue.webp 56w, images/logo/wordmark/beadBlue.webp 105w"><img class="wm-layer" style="left:71.5712%;top:9.1292%;width:6.9907%" src="images/logo/wordmark/beadBlue.png" alt="" width="105" height="94"></picture>
             </div>
             <div class="wm-unit wm-b">
-                <picture><source srcset="images/logo/wordmark/cordB.webp" type="image/webp"><img class="wm-layer" style="left:48.6684%;top:75.2809%;width:39.747%" src="images/logo/wordmark/cordB.png" alt="" width="597" height="176"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 404px,(min-width:861px) calc((100vw - 64px)*0.3975),(min-width:641px) calc((100vw - 48px)*0.3975),(min-width:481px) calc((100vw - 40px)*0.3975),calc((100vw - 32px)*0.3975)" srcset="images/logo/wordmark/w800/cordB.webp 318w, images/logo/wordmark/cordB.webp 597w"><img class="wm-layer" style="left:48.6684%;top:75.2809%;width:39.747%" src="images/logo/wordmark/cordB.png" alt="" width="597" height="176"></picture>
             </div>
             <div class="wm-unit wm-c">
-                <picture><source srcset="images/logo/wordmark/cordC.webp" type="image/webp"><img class="wm-layer" style="left:0.0%;top:47.0506%;width:45.6059%" src="images/logo/wordmark/cordC.png" alt="" width="685" height="377"></picture>
-                <picture><source srcset="images/logo/wordmark/beadPink.webp" type="image/webp"><img class="wm-layer" style="left:3.5952%;top:76.1236%;width:7.0573%" src="images/logo/wordmark/beadPink.png" alt="" width="106" height="107"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 463px,(min-width:861px) calc((100vw - 64px)*0.4561),(min-width:641px) calc((100vw - 48px)*0.4561),(min-width:481px) calc((100vw - 40px)*0.4561),calc((100vw - 32px)*0.4561)" srcset="images/logo/wordmark/w800/cordC.webp 365w, images/logo/wordmark/cordC.webp 685w"><img class="wm-layer" style="left:0.0%;top:47.0506%;width:45.6059%" src="images/logo/wordmark/cordC.png" alt="" width="685" height="377"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 72px,(min-width:861px) calc((100vw - 64px)*0.0706),(min-width:641px) calc((100vw - 48px)*0.0706),(min-width:481px) calc((100vw - 40px)*0.0706),calc((100vw - 32px)*0.0706)" srcset="images/logo/wordmark/w800/beadPink.webp 57w, images/logo/wordmark/beadPink.webp 106w"><img class="wm-layer" style="left:3.5952%;top:76.1236%;width:7.0573%" src="images/logo/wordmark/beadPink.png" alt="" width="106" height="107"></picture>
             </div>
             <div class="wm-unit wm-d">
-                <picture><source srcset="images/logo/wordmark/cordD.webp" type="image/webp"><img class="wm-layer" style="left:37.0173%;top:81.6011%;width:11.9174%" src="images/logo/wordmark/cordD.png" alt="" width="179" height="131"></picture>
+                <picture><source type="image/webp" sizes="(min-width:1080px) 121px,(min-width:861px) calc((100vw - 64px)*0.1192),(min-width:641px) calc((100vw - 48px)*0.1192),(min-width:481px) calc((100vw - 40px)*0.1192),calc((100vw - 32px)*0.1192)" srcset="images/logo/wordmark/w800/cordD.webp 96w, images/logo/wordmark/cordD.webp 179w"><img class="wm-layer" style="left:37.0173%;top:81.6011%;width:11.9174%" src="images/logo/wordmark/cordD.png" alt="" width="179" height="131"></picture>
             </div>
             <!-- 글자 — 이 한 장만 흐름 안에 남겨 히어로의 높이를 정한다.
                  나머지 아홉 장은 absolute 라 자리를 차지하지 않는다.
                  position:relative 가 붙어 있어야 위 끈들보다 뒤가 아니라 앞에 그려진다
                  (배치된 요소가 일반 흐름 요소보다 항상 위에 그려지기 때문). -->
-            <picture><source srcset="images/logo/wordmark/letters.webp" type="image/webp">
+            <picture><source type="image/webp" sizes="(min-width:1080px) 1016px,(min-width:861px) calc((100vw - 64px)*1.0000),(min-width:641px) calc((100vw - 48px)*1.0000),(min-width:481px) calc((100vw - 40px)*1.0000),calc((100vw - 32px)*1.0000)" srcset="images/logo/wordmark/w800/letters.webp 801w, images/logo/wordmark/letters.webp 1502w">
                 <img class="wm-letters" src="images/logo/wordmark/letters.png" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1502" height="712" fetchpriority="high"></picture>
             <!-- 별 — 글자보다 앞. 셋 다 글자와 겹치지 않아 순서는 사실 자유롭다. -->
-            <picture><source srcset="images/logo/wordmark/star1.webp" type="image/webp"><img class="wm-layer wm-star wm-star-1" style="left:78.6951%;top:0.0%;width:7.257%" src="images/logo/wordmark/star1.png" alt="" width="109" height="112"></picture>
-            <picture><source srcset="images/logo/wordmark/star2.webp" type="image/webp"><img class="wm-layer wm-star wm-star-2" style="left:12.2503%;top:4.2135%;width:11.7843%" src="images/logo/wordmark/star2.png" alt="" width="177" height="167"></picture>
-            <picture><source srcset="images/logo/wordmark/star3.webp" type="image/webp"><img class="wm-layer wm-star wm-star-3" style="left:92.4101%;top:55.618%;width:6.3249%" src="images/logo/wordmark/star3.png" alt="" width="95" height="141"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 74px,(min-width:861px) calc((100vw - 64px)*0.0726),(min-width:641px) calc((100vw - 48px)*0.0726),(min-width:481px) calc((100vw - 40px)*0.0726),calc((100vw - 32px)*0.0726)" srcset="images/logo/wordmark/w800/star1.webp 59w, images/logo/wordmark/star1.webp 109w"><img class="wm-layer wm-star wm-star-1" style="left:78.6951%;top:0.0%;width:7.257%" src="images/logo/wordmark/star1.png" alt="" width="109" height="112"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 120px,(min-width:861px) calc((100vw - 64px)*0.1178),(min-width:641px) calc((100vw - 48px)*0.1178),(min-width:481px) calc((100vw - 40px)*0.1178),calc((100vw - 32px)*0.1178)" srcset="images/logo/wordmark/w800/star2.webp 95w, images/logo/wordmark/star2.webp 177w"><img class="wm-layer wm-star wm-star-2" style="left:12.2503%;top:4.2135%;width:11.7843%" src="images/logo/wordmark/star2.png" alt="" width="177" height="167"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 64px,(min-width:861px) calc((100vw - 64px)*0.0632),(min-width:641px) calc((100vw - 48px)*0.0632),(min-width:481px) calc((100vw - 40px)*0.0632),calc((100vw - 32px)*0.0632)" srcset="images/logo/wordmark/w800/star3.webp 51w, images/logo/wordmark/star3.webp 95w"><img class="wm-layer wm-star wm-star-3" style="left:92.4101%;top:55.618%;width:6.3249%" src="images/logo/wordmark/star3.png" alt="" width="95" height="141"></picture>
         </div>
         </div>
     </div>
