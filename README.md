@@ -38,12 +38,17 @@ homepage/
 │   ├── nav.html
 │   └── footer.html
 ├── tools/
-│   └── sync-partials.py    ← partials를 전 페이지에 반영하는 스크립트
+│   ├── sync-partials.py    ← partials를 전 페이지에 반영하는 스크립트
+│   ├── make-newsletter-thumbs.py ← 소식지 사진 썸네일 생성
+│   └── split-wordmark.py   ← 히어로 이름 로고를 움직일 수 있는 열 겹으로 가름
 ├── papers/                 ← 논문 PDF (27개)
 ├── presentations/
 │   ├── abstracts/          ← 학술발표 초록 PDF
 │   └── posters/            ← 학술발표 포스터 PDF
 ├── images/
+│   ├── logo/
+│   │   ├── wordmark/       ← 첫 화면 로고 열 겹 ⚠ 손으로 고치지 말 것 (README 참고)
+│   │   └── README.md       ← 로고 파일 규칙
 │   ├── newsletter/         ← 소식지 사진
 │   └── *.jpeg              ← 구성원 사진, og-image
 ├── favicon.svg

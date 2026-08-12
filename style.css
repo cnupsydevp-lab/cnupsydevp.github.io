@@ -513,11 +513,32 @@ body {
      '바닥에 놓인 물체'로 읽힌다. 가운데를 축으로 두면 공중에서 오그라드는 느낌이 된다. */
   transform-origin: 50% 100%;
 }
-.hero-wordmark picture { display: block; }   /* picture 는 인라인이라 아래 여백이 생긴다 */
-.hero-wordmark img {
+
+/* ── 이름 로고 열 겹 ──────────────────────────────────────
+   끈·구슬·별을 따로 움직이려고 원본 한 장을 열 장으로 갈라 포갠 것.
+   겹치는 픽셀이 없어서 정지 상태에서는 원본과 같은 그림이 된다.
+   (자세한 내용은 index.html 의 .wm 주석, 만드는 법은 images/logo/README.md) */
+.wm { position: relative; }
+.wm picture { display: block; }   /* picture 는 인라인이라 아래 여백이 생긴다 */
+/* 글자 한 장만 흐름에 남아 히어로의 높이를 정한다.
+   relative 를 주는 건 위치 이동이 아니라 그리는 순서 때문이다 — 이게 없으면
+   absolute 인 끈들이 항상 글자 위에 그려져 앞뒤가 뒤집힌다. */
+.wm-letters {
   display: block;
   width: 100%;
   height: auto;
+  position: relative;
+}
+/* 나머지 아홉 겹. left·top·width 는 조각마다 다르므로 마크업에 인라인으로 두었다
+   (원본 1502×712 안에서의 제 자리를 % 로 옮긴 값이라 화면 폭이 변해도 맞는다). */
+.wm-layer { position: absolute; height: auto; }
+/* 흔들림·미끄러짐을 담는 상자. 로고 판과 같은 크기로 깔아 두는 게 핵심이다 —
+   transform 의 % 는 자기 상자 크기가 기준이라, 이렇게 해야 움직이는 거리가
+   조각 크기가 아니라 로고 전체 크기에 비례한다(화면이 줄면 움직임도 같이 준다). */
+.wm-unit, .wm-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
 }
 
 /* 신문 kicker 스타일: 상단 가로 룰 + 소문자 추적 */
@@ -2522,6 +2543,96 @@ html {
     animation: heroWordmarkDrop 1.2s  linear   0.1s both,
                heroWordmarkFade 0.3s  ease-out 0.1s both;
   }
+
+  /* ── 로고가 자리를 잡은 뒤: 끈·구슬·별이 은은하게 움직인다 ──────────
+     떨어지기가 끝나는 시각이 0.1s(지연) + 1.2s = 1.3초다. 아래 애니메이션은
+     전부 그 뒤에서 시작한다 — 떨어지는 중에 끈까지 흔들리면 두 움직임이 겹쳐
+     어느 쪽도 읽히지 않는다.
+
+     [모든 키프레임이 0%·50%·100% 에서 제자리인 이유]
+     시작할 때 튀지 않게 하려면 첫 프레임이 '원래 자리'여야 하고, 동시에
+     그 순간 속도가 0이어야 한다. 0→25%(한쪽 끝)→50%(제자리)→75%(반대쪽 끝)로
+     끊고 구간마다 ease-in-out 을 걸면 모든 마디에서 속도가 0이 된다.
+     그래서 1.3초에 정지 상태에서 소리 없이 미끄러져 나온다.
+
+     [주기를 8.3·9.7·7.1·6.3초로 어긋낸 이유]
+     서로 나누어지지 않는 수라 네 단위가 같은 모양으로 겹치는 일이 거의 없다.
+     시작 지연도 0.2초씩 밀어 두어(A→B→매듭→C) 처음 한 바퀴는 물결이
+     끈을 타고 도는 것처럼 보이고, 그 뒤로는 서서히 어긋나 반복이 안 잡힌다. */
+
+  /* 끈 — 로고 중심에서 바깥쪽으로 향하는 방향으로 3~4px(원본 기준) 숨쉰다.
+     방향은 각 조각의 무게중심이 로고 중심에서 어느 쪽에 있는지로 정했다.
+     ⚠ 진폭을 키우지 말 것. 끈은 글자 뒤로 지나가고, 글자 뒤에 숨은 여유분을
+       11px(원본 기준)만 그려 두었다. 그보다 크게 움직이면 글자 옆으로
+       끈 끝동이 삐져나온다. */
+  @keyframes wmSwayA {
+      0%, 50%, 100% { transform: translate(0, 0); }
+     25%            { transform: translate(0.2382%, -0.1795%); }
+     75%            { transform: translate(-0.2382%, 0.1795%); }
+  }
+  @keyframes wmSwayB {
+      0%, 50%, 100% { transform: translate(0, 0); }
+     25%            { transform: translate(0.1275%, 0.36%); }
+     75%            { transform: translate(-0.1275%, -0.36%); }
+  }
+  @keyframes wmSwayC {
+      0%, 50%, 100% { transform: translate(0, 0); }
+     25%            { transform: translate(-0.2336%, 0.2047%); }
+     75%            { transform: translate(0.2336%, -0.2047%); }
+  }
+  /* 나비 리본만 예외로 회전이다 — 매듭은 묶여 있어 움직이지 않고 고리와 꼬리만
+     나풀거리는 게 맞다. 매듭(48.4% 88.94%)을 축으로 삼았고, 매듭 자체는
+     글자 레이어에 들어 있어 실제로 붙박이다. 꼬리 끝에서 약 2px 흔들린다. */
+  @keyframes wmBowSway {
+      0%, 50%, 100% { transform: rotate(0deg); }
+     25%            { transform: rotate(1.4deg); }
+     75%            { transform: rotate(-1.4deg); }
+  }
+  .wm-a { animation: wmSwayA   8.3s ease-in-out 1.35s infinite; }
+  .wm-b { animation: wmSwayB   9.7s ease-in-out 1.55s infinite; }
+  .wm-d { animation: wmBowSway 6.3s ease-in-out 1.75s infinite;
+          transform-origin: 48.4% 88.94%; }
+  .wm-c { animation: wmSwayC   7.1s ease-in-out 1.95s infinite; }
+
+  /* 구슬 — 끈에 꿰어 있으므로 '끈을 따라' 미끄러진다.
+     끈이 흔들리는 상자 안에 들어 있어 흔들림은 저절로 따라가고, 여기서는
+     그 위에 미끄러짐만 얹는다. 아래 두 값은 눈대중이 아니라 구슬 둘레의
+     끈 중심선을 2차식으로 근사해 ±12px(원본 기준) 지점을 찍은 것이다 —
+     그래서 곧은 선이 아니라 끈이 휘는 대로 따라간다(화면에서 약 8px).
+     주기를 11.3·13.1초로 길게 둔 건, 구슬이 스스로 왕복하면 기계처럼 보이고
+     아주 느리게 흘러야 '가만히 있다가 살짝 미끄러진' 것으로 읽히기 때문이다.
+     ⚠ 진폭을 키우면 구슬이 비켜난 자리에 끈이 없다. 구슬 밑에 감춰져 있던
+       끈은 구슬 반지름(원본 38px)만큼만 복원해 두었다. */
+  @keyframes wmSlideBlue {
+      0%, 50%, 100% { transform: translate(0, 0); }
+     25%            { transform: translate(0.7984%, -0.0593%); }
+     75%            { transform: translate(-0.798%, 0.082%); }
+  }
+  @keyframes wmSlidePink {
+      0%, 50%, 100% { transform: translate(0, 0); }
+     25%            { transform: translate(0.7189%, 0.7366%); }
+     75%            { transform: translate(-0.7017%, -0.8067%); }
+  }
+  .wm-slide-blue { animation: wmSlideBlue 11.3s ease-in-out 2.1s infinite; }
+  .wm-slide-pink { animation: wmSlidePink 13.1s ease-in-out 2.4s infinite; }
+
+  /* 별 — 반짝임. 크기·기울기·투명도를 한꺼번에 조금씩 건드린다.
+     축은 별의 진짜 한가운데다(그림 상자의 한가운데가 아니다 — 조각을 자를 때
+     알파가 아주 옅은 픽셀까지 담기느라 상자가 별보다 크게 잡혔다).
+     두 벌을 두어 셋이 같은 박자로 깜빡이지 않게 했다. */
+  @keyframes wmTwinkle {
+      0%, 100% { transform: scale(1)    rotate(0deg);    opacity: 1; }
+     32%       { transform: scale(1.07) rotate(3.5deg);  opacity: 1; }
+     66%       { transform: scale(0.93) rotate(-2.5deg); opacity: 0.72; }
+  }
+  @keyframes wmTwinkleAlt {
+      0%, 100% { transform: scale(1)    rotate(0deg);    opacity: 1; }
+     28%       { transform: scale(0.92) rotate(-3deg);   opacity: 0.7; }
+     62%       { transform: scale(1.06) rotate(2.5deg);  opacity: 1; }
+  }
+  .wm-star-1 { transform-origin: 49.6% 47.0%; animation: wmTwinkle    5.9s ease-in-out 1.8s  infinite; }
+  .wm-star-2 { transform-origin: 49.7% 57.7%; animation: wmTwinkleAlt 7.3s ease-in-out 1.5s  infinite; }
+  .wm-star-3 { transform-origin: 47.9% 34.5%; animation: wmTwinkleAlt 4.7s ease-in-out 2.15s infinite; }
 
   /* 히어로 진입 — 각 요소가 순서대로 나타남 */
   .hero-title          { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
