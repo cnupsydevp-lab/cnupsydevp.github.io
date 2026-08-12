@@ -2456,10 +2456,20 @@ html {
      [키프레임을 손으로 고르지 않은 이유]
      스프링 베지어(cubic-bezier 의 1.5 대 값)는 UI 가 튕기는 느낌이지 중력이 아니다.
      떨어지는 물체는 등가속도라 위치가 시간의 제곱으로 늘어나므로,
-     아래 값은 낙하 물리를 계산해 뽑았다 — 낙하 38px, 반발계수 0.36
-     (되튀는 높이 4.9px), 각 구간을 6등분해 표본을 떴다.
-     0~48.7% 낙하(0.39초) · ~60.6% 첫 접촉(0.10초) · ~95.7% 되튐(0.28초) ·
-     나머지 두 번째 접촉. 총 0.8초 — 이보다 늘리면 떨어지는 게 아니라 떠내려온다.
+     아래 값은 낙하 물리를 계산해 뽑았다 — 중력 500px/s², 낙하 64px,
+     반발계수 0.36, 각 비행 구간을 6등분(둘째 되튐은 4등분)해 표본을 떴다.
+     0~42.1% 낙하(0.506초) · ~50.4% 첫 접촉(0.10초) · ~80.8% 첫 되튐 8.3px(0.364초) ·
+     ~85.8% 둘째 접촉(0.06초) · ~96.7% 둘째 되튐 1.1px(0.131초) · 나머지 정착.
+     총 1.2초.
+
+     [0.8초에서 1.2초로 늘린 방법 — 2026-08-12]
+     duration 만 늘리면 같은 거리를 더 오래 떨어지므로 중력이 작아져 '떠내려오는'
+     그림이 된다. 그래서 g 는 500px/s² 그대로 두고 ① 낙하를 38→64px 로 높이고
+     ② 되튐을 한 번 더(1.1px) 살려 시간을 벌었다. 낙하 시간은 √(2h/g) 라 높이를
+     1.68배 올려야 시간이 1.3배 는다 — 눈에는 '조금 더 높은 데서 떨어진다'로만 읽힌다.
+     ⚠ 64px 은 .hero 의 위 padding(5rem=80px) 안쪽 한계다. .hero 가 overflow:hidden
+       이라 이보다 더 높이면 시작 순간 로고 윗동이 잘린다. 더 길게 하려면 높이가
+       아니라 반발계수(0.36)를 올려 되튐 횟수를 늘릴 것.
 
      ※ timing-function 은 반드시 linear. ease 를 쓰면 구간마다 가감속이 다시 붙어
        계산해 둔 포물선이 뭉개진다.
@@ -2472,32 +2482,45 @@ html {
      ※ 낱글자를 따로 튕기려면 글자별 그림이 필요하다 — 지금 파일은 한 단어가
        풍선 하나로 이어 붙어 있어('And' 안에 글자색이 끊기는 열이 0개) 쪼갤 수 없다. */
   @keyframes heroWordmarkDrop {
-      0.0% { transform: translateY(-38px); }
-      8.1% { transform: translateY(-36.9px); }
-     16.2% { transform: translateY(-33.8px) scale(0.998, 1.003); }
-     24.3% { transform: translateY(-28.5px) scale(0.998, 1.004); }
-     32.4% { transform: translateY(-21.1px) scale(0.997, 1.005); }
-     40.6% { transform: translateY(-11.6px) scale(0.996, 1.007); }
-     48.7% { transform: translateY(0) scale(0.995, 1.008); }
-     54.7% { transform: translateY(0) rotate(-0.28deg) scale(1.006, 0.99); }
-     60.6% { transform: translateY(0) rotate(-0.25deg); }
-     66.5% { transform: translateY(-2.7px) rotate(-0.09deg); }
-     72.3% { transform: translateY(-4.4px) rotate(0.05deg); }
-     78.2% { transform: translateY(-4.9px) rotate(0.09deg); }
-     84.0% { transform: translateY(-4.4px) rotate(0.06deg); }
-     89.8% { transform: translateY(-2.7px); }
-     95.7% { transform: translateY(0) rotate(-0.02deg) scale(0.998, 1.003); }
-     97.8% { transform: translateY(0) rotate(-0.03deg) scale(1.002, 0.996); }
+    /* 낙하 */
+      0.0% { transform: translateY(-64px); }
+      7.0% { transform: translateY(-62.2px) scale(0.999, 1.001); }
+     14.0% { transform: translateY(-56.9px) scale(0.998, 1.003); }
+     21.1% { transform: translateY(-48px)   scale(0.998, 1.004); }
+     28.1% { transform: translateY(-35.6px) scale(0.997, 1.005); }
+     35.1% { transform: translateY(-19.6px) scale(0.996, 1.007); }
+     42.1% { transform: translateY(0) scale(0.995, 1.008); }
+    /* 첫 접촉 — 눌림 + 밑변 갸우뚱 */
+     46.7% { transform: translateY(0) rotate(-0.28deg) scale(1.006, 0.99); }
+     50.4% { transform: translateY(0) rotate(-0.25deg); }
+    /* 첫 되튐 8.3px — 심어진 기울기가 감쇠 7/s 로 잦아든다 */
+     55.5% { transform: translateY(-4.6px) rotate(-0.04deg); }
+     60.5% { transform: translateY(-7.4px) rotate(0.1deg); }
+     65.6% { transform: translateY(-8.3px) rotate(0.04deg); }
+     70.7% { transform: translateY(-7.4px) rotate(-0.03deg); }
+     75.7% { transform: translateY(-4.6px) rotate(-0.03deg); }
+     80.8% { transform: translateY(0); }
+    /* 둘째 접촉 */
+     83.3% { transform: translateY(0) rotate(-0.1deg)  scale(1.003, 0.995); }
+     85.8% { transform: translateY(0) rotate(-0.09deg); }
+    /* 둘째 되튐 1.1px */
+     88.5% { transform: translateY(-0.8px) rotate(-0.05deg); }
+     91.2% { transform: translateY(-1.1px); }
+     93.9% { transform: translateY(-0.8px) rotate(0.03deg); }
+     96.7% { transform: translateY(0) rotate(0.04deg); }
+    /* 정착 */
+     98.3% { transform: translateY(0) scale(1.002, 0.997); }
     100.0% { transform: translateY(0); }
   }
-  /* 나타나기는 따로 — 떨어지는 동안 앞머리에서 빨리 켜져야 '이미 떨어지고 있던 것'이 된다 */
+  /* 나타나기는 따로 — 떨어지는 동안 앞머리에서 빨리 켜져야 '이미 떨어지고 있던 것'이 된다.
+     낙하가 0.39→0.506초로 길어진 만큼 켜지는 시간도 같은 비율로 늘렸다(낙하의 약 60%). */
   @keyframes heroWordmarkFade {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
   .hero-wordmark {
-    animation: heroWordmarkDrop 0.8s  linear   0.1s both,
-               heroWordmarkFade 0.24s ease-out 0.1s both;
+    animation: heroWordmarkDrop 1.2s  linear   0.1s both,
+               heroWordmarkFade 0.3s  ease-out 0.1s both;
   }
 
   /* 히어로 진입 — 각 요소가 순서대로 나타남 */
