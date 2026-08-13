@@ -940,7 +940,12 @@ body {
   box-shadow: 0 6px 24px rgba(var(--ink-rgb), 0.30), 0 2px 6px rgba(var(--ink-rgb), 0.16);
   transform: rotate(-3deg);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
-  cursor: pointer;
+  /* cursor: pointer 를 뺐다 (2026-08-13). 이 폴라로이드는 링크도 아니고 클릭
+     핸들러도 없어서, 손가락 커서만 보고 눌러 본 사람에게는 아무 일도 일어나지
+     않았다. 아래 hover(똑바로 세워 들여다보기)는 그대로 둔다 — 사진을 들여다보는
+     장식이고, 같은 파일에서 .card 의 hover 리프트를 뺀 이유(클릭 가능해 보이는
+     오해)는 커서 모양이 만들던 것이다.
+     나중에 확대 보기를 붙이면 그때 cursor: pointer 를 되살릴 것. */
   width: 100%;
   box-sizing: border-box;
 }
@@ -1979,8 +1984,17 @@ a.notice-item:hover::after {
 @media (prefers-reduced-motion: reduce) {
   .nl-shot,
   .nl-shot-img img { transition: none; }
+  /* hover 는 그대로 둔다 — 사진을 똑바로 세워 들여다보는 동작이 이 목록의 유일한
+     '눌러 볼 수 있다'는 신호다. 다만 transition 이 없으므로 애니메이션 없이
+     즉시 바뀐다 (모션 줄이기의 요구는 '움직임을 보여 주지 말라'는 것이다).
+     ⚠ translate(--dx, --dy) 를 반드시 함께 적을 것. 이걸 빼고 rotate 만 적어 두었더니
+     hover 할 때마다 사진이 흐트러짐만큼(최대 5px 옆·8px 위) 순간이동했고,
+     그만큼 이웃 사진과의 여유(위 주석 계산: 데스크톱 9.0 · 태블릿 4.7 · 폰 4.0px)를
+     잡아먹어 두 장이 닿을 수 있었다 (2026-08-13 수정). */
   .nl-shot:hover,
-  .nl-shot:focus-visible { transform: rotate(var(--tilt)); }
+  .nl-shot:focus-visible {
+    transform: translate(var(--dx), var(--dy)) rotate(0deg) scale(1.025);
+  }
   .nl-shot:hover .nl-shot-img img { transform: none; }
 }
 

@@ -155,9 +155,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.title = `NOMAD Lab — ${post.title}`;
 
+  // 배지는 공지·연구참여 글에만 있다. 소식지 글에는 badge/badgeText 자체가 없어서
+  // 그대로 넣으면 'badge undefined' 클래스에 글자 'undefined' 가 찍힌다
+  // (소식지는 목록에서 모달로 열지만, 이 주소로도 열 수 있다 — 링크 공유·북마크).
+  // 배지가 없으면 줄을 통째로 걷어낸다. 빈 .post-meta 만 남기면 flex 줄의
+  // 아래 여백(0.85rem)이 그대로 남아 제목 위에 빈 자리가 생긴다.
   const badge = document.getElementById('post-badge');
-  badge.className = `badge ${post.badge}`;
-  badge.textContent = post.badgeText;
+  if (post.badgeText) {
+    badge.className = `badge ${post.badge}`;
+    badge.textContent = post.badgeText;
+  } else {
+    badge.closest('.post-meta').remove();
+  }
 
   document.getElementById('post-title').textContent = post.title;
   document.getElementById('post-body').innerHTML = post.body;
