@@ -8,9 +8,11 @@ favicon.svg 한 장으로는 부족하다. 사파리가 SVG 파비콘을 읽지 
 
 그래서 같은 그림을 세 형식으로 함께 만든다:
 
-    favicon.svg           손으로 관리 (이 스크립트가 건드리지 않음) — 크롬·파이어폭스
-    favicon.ico           16·32·48 세 크기를 한 파일에 — 사파리·구형 브라우저
-    apple-touch-icon.png  180x180 — iOS 홈 화면, 맥 사파리 대체용
+    favicon-v3.svg           손으로 관리 (이 스크립트가 건드리지 않음) — 크롬·파이어폭스
+    favicon-v3.ico           16·32·48 세 크기를 한 파일에 — 사파리·구형 브라우저
+    apple-touch-icon-v3.png  180x180 — iOS 홈 화면, 맥 사파리 대체용
+
+파일명 끝의 -v3 은 캐시를 끊기 위한 것이다. 아래 두 번째 경고를 보라.
 
 그림은 favicon.svg 와 똑같이 맞춘다: 짙은 녹색 모서리 둥근 사각형에 크림색 N.
 색을 바꾸려면 아래 BG·FG 만 고치면 세 형식에 함께 반영된다.
@@ -18,15 +20,19 @@ favicon.svg 한 장으로는 부족하다. 사파리가 SVG 파비콘을 읽지 
 사용법 (저장소 루트에서):
     python3 tools/make-favicon.py
 
-⚠️ 색이나 글자를 바꾸면 favicon.svg 도 같이 손으로 고쳐야 한다.
+⚠️ 색이나 글자를 바꾸면 favicon-v3.svg 도 같이 손으로 고쳐야 한다.
    그 한 장만 따로 놀면 크롬과 사파리가 서로 다른 아이콘을 보여 준다.
 
-⚠️ 그리고 열두 페이지 <head> 의 ?v= 번호를 반드시 올린다.
+⚠️ 그림을 바꿀 때는 ?v= 쿼리를 올리지 말고 파일명의 -v3 을 -v4 로 올린다.
    파비콘은 일반 캐시와 다른 곳(크롬 Favicons DB, 사파리 Favicon Cache)에
-   따로 저장되고 강력 새로고침으로도 안 지워진다. 주소가 그대로면 파일을
-   갈아 끼워도 몇 달 전 아이콘이 계속 뜬다 — 2026-08-13 에 맥·윈도우 양쪽에서
-   DPWL 시절 갈색 D 가 뜬 것이 이 때문이었다.
-   일괄 수정:  sed -i 's|?v=2|?v=3|g' *.html
+   따로 저장되고 강력 새로고침으로도 안 지워진다. 게다가 그 계층은 아이콘
+   요청의 쿼리스트링을 무시하기 때문에 ?v= 를 올려도 캐시가 끊기지 않는다 —
+   2026-08-13 에 ?v=2 를 붙여 배포했는데도 시크릿 창에서까지 DPWL 시절 D 가
+   계속 뜬 것이 이 때문이었다. 파일명을 바꿔야 확실히 끊긴다.
+   일괄 수정 (og-image-v3 까지 같이 바뀌지 않게 접두사를 붙여 지정한다):
+       sed -i -e 's|favicon-v3|favicon-v4|g' \
+              -e 's|apple-touch-icon-v3|apple-touch-icon-v4|g' *.html
+   그리고 이 파일의 출력 이름(ICO_NAME·TOUCH_NAME)도 같이 올린다.
 """
 
 from pathlib import Path
@@ -54,6 +60,11 @@ FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
 
 SS = 8  # 이 배율로 크게 그린 뒤 줄여서 가장자리를 매끄럽게 만든다
 
+# 캐시를 끊는 것은 쿼리가 아니라 파일명이다 (위 두 번째 경고).
+# 그림을 바꿀 때 여기와 열두 페이지 <head> 를 같은 번호로 올린다.
+ICO_NAME = 'favicon-v3.ico'
+TOUCH_NAME = 'apple-touch-icon-v3.png'
+
 
 def draw_mark(size, rounded):
     """size 픽셀 정사각형에 마크를 그려 돌려준다."""
@@ -78,7 +89,7 @@ def draw_mark(size, rounded):
 
 
 def main():
-    ico = ROOT / 'favicon.ico'
+    ico = ROOT / ICO_NAME
     # 한 .ico 안에 세 크기를 넣는다. 탭은 16, 즐겨찾기는 32, 바탕화면은 48 을 쓴다.
     sizes = [16, 32, 48]
     # 큰 것부터. Pillow 는 원본보다 큰 크기를 말없이 건너뛰므로 가장 큰 장을
@@ -90,7 +101,7 @@ def main():
     print(f'{ico.relative_to(ROOT)} — {"·".join(map(str, sizes))}px, '
           f'{ico.stat().st_size // 1024 or 1}KB')
 
-    touch = ROOT / 'apple-touch-icon.png'
+    touch = ROOT / TOUCH_NAME
     # 애플은 투명한 곳을 검게 칠한다. 알파를 없애고 배경색으로 눌러 둔다.
     flat = Image.new('RGB', (180, 180), BG)
     mark = draw_mark(180, rounded=False)
