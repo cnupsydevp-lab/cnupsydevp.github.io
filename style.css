@@ -2610,7 +2610,12 @@ html {
         rgba(255, 253, 246, 0.72) 50%,
         rgba(255, 251, 240, 0.14) 75%,
         rgba(255, 251, 240, 0)   100%);
-    animation: wmShine 7s linear 2.2s infinite;
+    /* backwards 가 반드시 있어야 한다 — 없으면 지연 2.2초 동안 이 띠가 제 정지
+       위치(left:0, transform 없음)에 그대로 놓여, 로고가 나타나는 순간부터
+       왼쪽 글자가 밝게 켜진 채 멈춰 있다가 2.2초에 왼쪽 밖으로 튄다.
+       backwards 는 지연 중에도 첫 마디(0%: translateX(-160%) = 글자 왼쪽 바깥)를
+       미리 적용해 준다. forwards 는 필요 없다 — infinite 라 끝이 없다. */
+    animation: wmShine 7s linear 2.2s infinite backwards;
   }
 
   /* 별 — 느린 '숨쉬기' 위에 짧은 '번쩍임'을 겹친다.
