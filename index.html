@@ -291,7 +291,8 @@
 
    [닫기 두 가지의 차이]
    - 닫기            : 지금 이 화면에서만 닫는다. 새로고침하면 다시 뜬다.
-   - 하루 동안 보지 않기 : 24시간 동안 뜨지 않는다. 새로고침해도 뜨지 않는다
+   - 하루 동안 보지 않기 : 오늘이 끝날 때(자정)까지 뜨지 않는다. 새로고침해도 뜨지 않고,
+                        날짜가 바뀌면 다시 뜬다
                         (localStorage 에 기한 저장 — 브라우저를 닫아도 남는다).
    ──────────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
@@ -308,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   if (!POPUP.image) return;
 
-  const KEY  = 'dpwl_popup_hide';   // 24시간 숨김 (브라우저를 닫아도 남는다)
+  const KEY  = 'dpwl_popup_hide';   // 오늘 자정까지 숨김 (브라우저를 닫아도 남는다)
   const SKEY = 'dpwl_popup_seen';   // 이번 방문에 이미 봤다는 표시 (탭을 닫으면 사라진다)
 
   // 저장된 기한이 아직 남아 있고 같은 공지면 띄우지 않는다.
@@ -384,9 +385,27 @@ document.addEventListener('DOMContentLoaded', () => {
   function close() {
     popup.hidden = true;
   }
-  function hideForADay() {
+  // 숨기는 기한은 '누른 뒤 24시간' 이 아니라 '오늘이 끝날 때까지' 다 (2026-08-13 변경).
+  // 전에는 Date.now() + 86400000 이어서, 어제 저녁에 누르면 날짜가 바뀐 오늘 낮에도
+  // 그 시각이 되기 전까지 안 떴다. 날짜가 바뀌면 공지를 다시 보여 주려는 것이다.
+  // setHours(24, 0, 0, 0) 은 '다음 날 00:00' = 오늘의 끝이다. 보는 사람의 시간대와
+  // 서머타임을 브라우저가 알아서 맞춘다(한국은 서머타임이 없지만 그대로 맞는다).
+  //
+  // ⚠ 버튼 문구는 "하루 동안 보지 않기" 로 그대로 두었다(2026-08-13, 사용자 결정).
+  //   문구와 동작이 정확히 같지는 않다 — 자정 직전에 누르면 몇 분만 숨는다.
+  //   둘을 맞추려면 문구를 "오늘 하루 보지 않기" 로 바꾸는 쪽이지, 이 계산을
+  //   24시간으로 되돌리는 쪽이 아니다. 되돌리면 위의 '어제 눌렀는데 오늘도 안 뜬다'
+  //   문제가 그대로 돌아온다.
+  //   밤늦게 누른 사람에게 최소 몇 시간을 보장하려면 아래에서 자정과
+  //   (지금 + N시간) 중 늦은 쪽을 고르면 된다.
+  function endOfToday() {
+    const d = new Date();
+    d.setHours(24, 0, 0, 0);
+    return d.getTime();
+  }
+  function hideForToday() {
     try {
-      localStorage.setItem(KEY, JSON.stringify({ id: POPUP.id, until: Date.now() + 86400000 }));
+      localStorage.setItem(KEY, JSON.stringify({ id: POPUP.id, until: endOfToday() }));
     } catch (e) { /* 저장이 막혀 있어도(사생활 보호 모드) 닫기는 되어야 한다 */ }
     close();
   }
@@ -403,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 실수로 닫혀 공지를 놓치는 편이 더 나쁘다. CSS 의 pointer-events 로 상자 밖 클릭은
   // 아예 뒤 페이지에 그대로 전달된다.
   dismiss.addEventListener('click', close);
-  hideBtn.addEventListener('click', hideForADay);
+  hideBtn.addEventListener('click', hideForToday);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !popup.hidden) close();
   });
