@@ -24,9 +24,10 @@
 
 <header class="site-nav">
     <div class="nav-wrapper">
-        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹쳐
-             풍선만 은은하게 흔들리게 한다. 두 파일은 같은 캔버스(238×160)를 쓰고
-             합치면 원본과 픽셀이 같아, 정지 상태에서는 이음선이 보이지 않는다.
+        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹친 것.
+             풍선만 따로 흔들려고 가른 것인데 그 움직임은 뺐다(2026-08-13, 사용자 요청).
+             두 파일은 같은 캔버스(238×160)를 쓰고 합치면 원본과 픽셀이 같아
+             멈춰 있어도 이음선이 보이지 않는다 — 그래서 겹은 그대로 두었다.
              풍선 쪽은 장식이라 alt 를 비워 두고 글자 쪽이 이름을 읽는다. -->
         <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="NOMAD Lab" width="238" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="238" height="160"></a></div>
         <div class="nav-cluster">
@@ -110,12 +111,12 @@
                  윤곽선 위 안티에일리어싱 수준이라 이음선은 생기지 않는다.
                  → 배율 2배 휴대폰 전 기종 117KB, 배율 3배 휴대폰·데스크톱 299KB.
                  값은 손으로 쓰지 말 것. tools/split-wordmark.py 가 찍어 준다. -->
-            <!-- 끈 — 흔들림 단위 4개. 각 단위는 통째로 로고 바깥쪽/안쪽으로 아주 조금씩
-                 숨쉰다. 단위끼리 만나는 자리는 전부 글자 뒤나 나비매듭 아래라
-                 서로 어긋나도 이음선이 드러나지 않는다.
-                 구슬은 자기가 올라탄 단위 '안에' 넣는다 — 그래야 끈이 흔들릴 때
-                 구슬이 끈에서 떨어져 나가지 않고 끈을 따라 같이 움직인다.
-                 (구슬이 끈 위를 미끄러지는 움직임은 넣었다가 뺐다 — 2026-08-12) -->
+            <!-- 끈 — 조각을 담는 단위 4개. 지금은 넷 다 붙박이다.
+                 (끈 흔들림 wmSway*·wmBowSway 는 뺐다 — 2026-08-13, 사용자 요청.
+                  구슬이 끈 위를 미끄러지는 움직임도 앞서 뺐다 — 2026-08-12.
+                  상자는 그대로 두었으니 되살리려면 style.css 에 애니메이션만 다시 걸면 된다.)
+                 구슬은 자기가 올라탄 단위 '안에' 둔다 — 끈이 다시 움직이게 되면
+                 구슬이 끈에서 떨어져 나가지 않고 끈을 따라 같이 움직여야 하기 때문이다. -->
             <div class="wm-unit wm-a">
                 <picture><source type="image/webp" sizes="(min-width:1080px) 498px,(min-width:861px) calc((100vw - 64px)*0.4900),(min-width:641px) calc((100vw - 48px)*0.4900),(min-width:481px) calc((100vw - 40px)*0.4900),calc((100vw - 32px)*0.4900)" srcset="images/logo/wordmark/w800/cordA.webp 393w, images/logo/wordmark/cordA.webp 736w"><img class="wm-layer" style="left:50.9987%;top:11.6573%;width:49.0013%" src="images/logo/wordmark/cordA.png" alt="" width="736" height="364"></picture>
                 <picture><source type="image/webp" sizes="(min-width:1080px) 71px,(min-width:861px) calc((100vw - 64px)*0.0699),(min-width:641px) calc((100vw - 48px)*0.0699),(min-width:481px) calc((100vw - 40px)*0.0699),calc((100vw - 32px)*0.0699)" srcset="images/logo/wordmark/w800/beadBlue.webp 56w, images/logo/wordmark/beadBlue.webp 105w"><img class="wm-layer" style="left:71.5712%;top:9.1292%;width:6.9907%" src="images/logo/wordmark/beadBlue.png" alt="" width="105" height="94"></picture>
@@ -136,6 +137,15 @@
                  (배치된 요소가 일반 흐름 요소보다 항상 위에 그려지기 때문). -->
             <picture><source type="image/webp" sizes="(min-width:1080px) 1016px,(min-width:861px) calc((100vw - 64px)*1.0000),(min-width:641px) calc((100vw - 48px)*1.0000),(min-width:481px) calc((100vw - 40px)*1.0000),calc((100vw - 32px)*1.0000)" srcset="images/logo/wordmark/w800/letters.webp 801w, images/logo/wordmark/letters.webp 1502w">
                 <img class="wm-letters" src="images/logo/wordmark/letters.png" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1502" height="712" fetchpriority="high"></picture>
+            <!-- 글자 위를 왼쪽에서 오른쪽으로 지나가는 빛 (2026-08-13).
+                 글자 그림은 한 장이고 낱글자로 쪼갤 수 없다 — 풍선이 서로 붙어 있어
+                 글자 사이에 빈 열이 하나도 없다(확인함). 그래서 '글자마다 따로 켜기'가
+                 아니라 좁은 빛 띠 하나를 글자 실루엣 안에서 왼→오른쪽으로 지나가게 했다.
+                 띠가 좁아 한 번에 한두 글자만 밝아지므로 결과는 글자가 차례로 켜지는 그림이 된다.
+                 빈 span 인 이유: 그리는 건 CSS(마스크 + 그러데이션 띠)가 다 하고
+                 이 요소는 그 자리를 잡아 줄 뿐이라 읽을 내용이 없다.
+                 글자 picture 뒤에 두어야 글자 위에 그려진다(둘 다 배치 요소, 뒤가 위). -->
+            <span class="wm-shine" aria-hidden="true"></span>
             <!-- 별 — 글자보다 앞. 셋 다 글자와 겹치지 않아 순서는 사실 자유롭다. -->
             <picture><source type="image/webp" sizes="(min-width:1080px) 74px,(min-width:861px) calc((100vw - 64px)*0.0726),(min-width:641px) calc((100vw - 48px)*0.0726),(min-width:481px) calc((100vw - 40px)*0.0726),calc((100vw - 32px)*0.0726)" srcset="images/logo/wordmark/w800/star1.webp 59w, images/logo/wordmark/star1.webp 109w"><img class="wm-layer wm-star wm-star-1" style="left:78.6951%;top:0.0%;width:7.257%" src="images/logo/wordmark/star1.png" alt="" width="109" height="112"></picture>
             <picture><source type="image/webp" sizes="(min-width:1080px) 120px,(min-width:861px) calc((100vw - 64px)*0.1178),(min-width:641px) calc((100vw - 48px)*0.1178),(min-width:481px) calc((100vw - 40px)*0.1178),calc((100vw - 32px)*0.1178)" srcset="images/logo/wordmark/w800/star2.webp 95w, images/logo/wordmark/star2.webp 177w"><img class="wm-layer wm-star wm-star-2" style="left:12.2503%;top:4.2135%;width:11.7843%" src="images/logo/wordmark/star2.png" alt="" width="177" height="167"></picture>

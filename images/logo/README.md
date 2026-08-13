@@ -16,9 +16,9 @@
 
     | 조각 | 내용 | 움직임 |
     |---|---|---|
-    | `letters` | 글자 + 나비매듭의 매듭 | 없음 (히어로 높이의 기준) |
-    | `cordA`~`cordD` | 끈 네 도막 | 바깥/안쪽으로 3~4px 숨쉬기 |
-    | `beadBlue`, `beadPink` | 구슬 둘 | 자기 움직임 없음 (올라탄 끈을 따라감) |
+    | `letters` | 글자 + 나비매듭의 매듭 | 빛 지나가기 (히어로 높이의 기준) |
+    | `cordA`~`cordD` | 끈 네 도막 | 없음 (2026-08-13 숨쉬기 제거) |
+    | `beadBlue`, `beadPink` | 구슬 둘 | 없음 (올라탄 끈을 따라감 — 그 끈이 멈춰 있다) |
     | `star1`~`star3` | 별 셋 | 반짝임 (크기·기울기·투명도) + 번쩍임 (밝기·후광) |
 
     겹치는 픽셀이 하나도 없다. 그래서 열 장을 겹치면 원본과 **픽셀 단위로 같은**
@@ -44,9 +44,33 @@
 
     ⚠️ **손으로 고치지 말 것.** `python3 tools/split-wordmark.py` 가 만든다.
     로고를 새로 렌더링하면 그 스크립트를 다시 돌리고, 끝에 찍히는 좌표·키프레임
-    값을 `index.html` 의 인라인 style 과 `style.css` 의 `wmSway*`,
-    `.wm-d`/`.wm-star-*` 에 옮겨 적어야 한다(그림에 딸린 값이라 자동으로 안 따라간다).
+    값을 `index.html` 의 인라인 style 과 `style.css` 의 `.wm-star-*` 에 옮겨 적어야
+    한다(그림에 딸린 값이라 자동으로 안 따라간다). 끈 흔들림 값(`wmSway*`)도
+    같이 찍히지만 지금은 쓰지 않는다 — 끈은 2026-08-13 부터 붙박이다.
     가르는 원리와 주의점은 그 스크립트 맨 위 설명에 적어 두었다.
+
+  - `wordmark/letters-mask.png` — 글자 실루엣만 담은 **마스크** (500×237, 7KB).
+    글자 위를 지나가는 빛(`style.css` 의 `wmShine`)을 글자 안에 가두는 데 쓴다.
+    빛이 종이로 새지 않게 하려면 글자 모양대로 오려 낼 그림이 필요한데,
+    `letters.png`(783KB)를 한 벌 더 받게 할 이유가 없어 따로 떴다.
+    색은 안 쓰고 알파만 쓰므로 흑백(LA) PNG 다. WebP 짝을 만들지 않은 건
+    CSS `mask-image` 에는 폴백 문법이 없어서다 — 못 읽는 브라우저가 하나라도
+    있으면 마스크가 통째로 빠지고 흰 띠가 로고 사각형 위를 지나간다.
+    다시 만드는 법 (`homepage/` 에서):
+    ```
+    python3 -c "
+    from PIL import Image
+    im = Image.open('images/logo/wordmark/letters.png').convert('RGBA')
+    a  = im.getchannel('A'); w = 500; h = round(im.height * w / im.width)
+    s  = a.resize((w, h), Image.LANCZOS)
+    q  = s.point(lambda v: 0 if v < 24 else min(255, (v // 32) * 32 + 16))
+    Image.merge('LA', (Image.new('L', (w, h), 255), q)).save(
+        'images/logo/wordmark/letters-mask.png', optimize=True)"
+    ```
+    500px 로 줄이고 알파를 8단계로 뭉갠 건 파일을 4배 가볍게 하려는 것이다
+    (31KB → 7KB). 마스크는 부드러운 빛을 오려 내는 용도라 경계가 조금 무뎌도
+    화면에서 차이가 보이지 않는다. 알파 24 미만을 버리는 건 글자 둘레의 옅은
+    후광까지 빛이 번지지 않게 하려는 것.
 
   - `logo-fullname.webp` / `logo-fullname.png` — 위 열 겹의 **원본 한 장**.
     연구실 풀 이름(Noh Mental health And Digital care)이 풍선 글자로 그려진 로고.

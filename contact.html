@@ -24,9 +24,10 @@
 
 <header class="site-nav">
     <div class="nav-wrapper">
-        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹쳐
-             풍선만 은은하게 흔들리게 한다. 두 파일은 같은 캔버스(238×160)를 쓰고
-             합치면 원본과 픽셀이 같아, 정지 상태에서는 이음선이 보이지 않는다.
+        <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹친 것.
+             풍선만 따로 흔들려고 가른 것인데 그 움직임은 뺐다(2026-08-13, 사용자 요청).
+             두 파일은 같은 캔버스(238×160)를 쓰고 합치면 원본과 픽셀이 같아
+             멈춰 있어도 이음선이 보이지 않는다 — 그래서 겹은 그대로 두었다.
              풍선 쪽은 장식이라 alt 를 비워 두고 글자 쪽이 이름을 읽는다. -->
         <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="NOMAD Lab" width="238" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="238" height="160"></a></div>
         <div class="nav-cluster">
@@ -71,7 +72,7 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Contact Information</span>
         <h2 class="section-title">연락처</h2>
-        <div class="info-grid u-mt-2">
+        <div class="info-grid info-grid-center u-mt-2">
             <div class="info-card">
                 <h3>위치</h3>
                 <p>충남대학교<br>공동실험실습관(W9) 208호<br>대전광역시 유성구 대학로 99</p>
