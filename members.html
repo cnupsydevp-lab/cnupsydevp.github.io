@@ -213,8 +213,26 @@
                          <span class="member-badge">박사 졸업</span>
                      </div>
                  </div>
-                 카드를 추가하면 아래 empty-note 문단은 삭제한다. -->
-            <p class="empty-note">등록된 졸업생이 없습니다.</p>
+                 (첫 카드가 들어오면서 '등록된 졸업생이 없습니다' empty-note 는 지웠다.
+                  졸업생이 다시 0명이 되면 그 문단을 되살릴 것.) -->
+            <div class="member-card">
+                <!-- 사진이 아직 없어 빈 원을 둔다 — img 가 통째로 없으면 이 카드만
+                     이름이 위로 붙어 격자에서 혼자 어긋난다. div 에 .member-photo 를
+                     그대로 주면 같은 110px 원(카드색 + 테두리)이 자리를 지킨다.
+                     사진이 오면 이 div 를 아래 한 줄로 갈아 끼우면 된다:
+                     <img loading="lazy" src="images/<파일명>" alt="윤소영" class="member-photo"> -->
+                <div class="member-photo" aria-hidden="true"></div>
+                <h3>윤소영</h3>
+                <span class="badge badge-gold member-name-en">So Yeong Yoon</span>
+                <div class="member-info-card">
+                    <span class="member-badge">석사 졸업</span>
+                    <!-- 관심분야는 아직 미정 — 정해지면 다른 카드와 같은 모양으로 넣는다:
+                         <div class="member-info-row">
+                             <span class="member-info-label">관심분야</span>
+                             <p class="member-info-value">내용</p>
+                         </div> -->
+                </div>
+            </div>
         </div>
     </div>
 </section>
