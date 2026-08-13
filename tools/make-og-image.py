@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
-"""링크 미리보기 그림(images/og-image-v2.png) 생성 스크립트.
+"""링크 미리보기 그림을 코드로 그리는 예비 생성기.
 
-카카오톡·디스코드·페이스북 등에 주소를 붙여 넣으면 뜨는 카드 그림이다.
-모든 페이지의 <head> 가 이 한 장을 가리킨다:
+카카오톡·디스코드·페이스북 등에 주소를 붙여 넣으면 뜨는 카드 그림 이야기다.
+모든 페이지의 <head> 가 그 한 장을 가리킨다:
 
-    <meta property="og:image" content=".../images/og-image-v2.png">
+    <meta property="og:image" content=".../images/og-image-v3.png">
 
-그래서 이 파일이 없으면 열두 페이지의 링크 미리보기가 전부 그림 없이 뜬다.
+⚠️ 지금 걸려 있는 og-image-v3.png 는 이 스크립트가 만든 것이 아니다.
+   2026-08-13 에 사용자가 따로 만들어 올린 그림(원본은 og-image-v3-source.png)
+   으로 갈아 끼웠다. 그래서 이 스크립트는 live 파일명을 건드리지 않고
+   og-image-generated.png 로만 내놓는다 — 그대로 돌려도 올린 그림이 지워지지
+   않는다. 이 그림을 다시 쓰려면 결과를 확인한 뒤 손으로 번호를 올려 옮긴다.
 
-⚠️ 그림을 갈아 끼울 때는 반드시 파일명 뒤 번호를 올린다 (og-image-v2 → v3 …)
+⚠️ 그림을 갈아 끼울 때는 반드시 파일명 뒤 번호를 올린다 (v3 → v4 …)
    그리고 열두 페이지의 <head> 경로도 같이 고친다. 같은 파일명에 덮어쓰면
    카카오톡이 예전 그림을 계속 물고 있는다 — 카카오는 주소 단위로 미리보기를
    저장해 두고, 개인이 그 저장분을 지울 방법이 없다 (2026-08-13에 겪은 일).
-   경로 일괄 수정:  sed -i 's|og-image-v2|og-image-v3|g' *.html tools/make-og-image.py
+   경로 일괄 수정:  sed -i 's|og-image-v3|og-image-v4|g' *.html tools/make-og-image.py
 
 사용법 (저장소 루트에서):
     python3 tools/make-og-image.py --font <IBMPlexSansKR-*.ttf 가 있는 폴더>
@@ -43,7 +47,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent.parent
 LOGO = ROOT / 'images' / 'logo' / 'logo-full.png'
-OUT = ROOT / 'images' / 'og-image-v2.png'
+OUT = ROOT / 'images' / 'og-image-generated.png'
 
 W, H = 1200, 630
 
