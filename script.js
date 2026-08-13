@@ -1,5 +1,8 @@
-// posts.js의 데이터에서 각 섹션의 최신 날짜를 자동으로 가져옴
-// activities는 posts.js에 없으므로 수동 관리 (null이면 비활성)
+// posts.js의 데이터에서 각 섹션의 최신 날짜를 자동으로 가져옴.
+// 네 섹션(공지·소식지·연구활동·연구참여) 모두 posts.js 에서 읽는다 — 수동 관리는 없다.
+// 배열이 비었거나 posts.js 가 아직 안 실렸으면 null 이 되고, 그 섹션의 알림 도트는 뜨지 않는다.
+// (2026-08-13: 'activities 는 수동 관리' 라고 적혀 있던 주석을 고쳤다 — 실제로는 아래 10번째 줄에서
+//  POSTS.activities 를 읽는다. 연구활동 글을 추가하면 알림 도트도 함께 따라온다.)
 function _latestDate(arr) {
   if (!arr?.length) return null;
   return arr.reduce((max, p) => (p.date > max ? p.date : max), '');
