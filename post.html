@@ -85,15 +85,6 @@
                 <div class="post-body" id="post-body">
                     <p class="empty-note">게시글을 불러오는 중…</p>
                 </div>
-                <!-- 좋아요는 스크립트가 상태를 채운 뒤에 드러낸다 — 자바스크립트가
-                     꺼져 있으면 눌러도 반응 없는 버튼이 남기 때문. -->
-                <div class="post-like-row" id="post-like-row" hidden>
-                    <button type="button" class="post-like" id="post-like" aria-pressed="false">
-                        <svg class="post-like-heart" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l8.84 8.84 8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                        <span>좋아요</span>
-                        <span class="post-like-count" id="post-like-count" hidden></span>
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -168,40 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('post-title').textContent = post.title;
   document.getElementById('post-body').innerHTML = post.body;
 
-  /* ── 좋아요 ───────────────────────────────────────────────────
-     서버가 없는 정적 사이트(GitHub Pages)라 상태를 방문자의 브라우저
-     (localStorage)에 저장한다. 따라서 '이 브라우저에서 눌렀는지'만 남고
-     방문자끼리 합산되지 않는다 — 전체 좋아요 수가 아니라 내 표시다.
-     (조회수는 같은 이유로 방문자별 값이 되어 공개 지표가 못 되므로 두지 않는다)
-     전체 합계가 필요해지면 아래 읽기·쓰기 두 곳만 서버 API 호출로 바꾸면 되고
-     화면 코드는 그대로 쓴다.
-
-     저장이 막힌 환경(사파리 프라이빗 등)에서도 화면이 깨지지 않게 try 로 감싼다.
-     ─────────────────────────────────────────────────────────── */
-  const LIKE_KEY = `dpwl_liked_${page}_${id}`;
-
-  // 토글 버튼. 상태는 aria-pressed 로 알려 준다(스크린리더가 '눌림'으로 읽는다)
-  const likeBtn   = document.getElementById('post-like');
-  const likeCount = document.getElementById('post-like-count');
-  let liked = false;
-  try { liked = localStorage.getItem(LIKE_KEY) === '1'; } catch (e) { /* 무시 */ }
-
-  function paintLike() {
-    likeBtn.setAttribute('aria-pressed', liked ? 'true' : 'false');
-    likeCount.textContent = liked ? '1' : '';
-    likeCount.hidden = !liked;
-  }
-  paintLike();
-  document.getElementById('post-like-row').hidden = false;
-
-  likeBtn.addEventListener('click', () => {
-    liked = !liked;
-    try {
-      if (liked) localStorage.setItem(LIKE_KEY, '1');
-      else localStorage.removeItem(LIKE_KEY);
-    } catch (e) { /* 저장이 막혀도 이번 화면에서는 눌린 상태로 보인다 */ }
-    paintLike();
-  });
+  /* (기사 끝 '좋아요' 버튼은 뺐다 — 2026-08-13, 사용자 요청. 서버가 없어
+      localStorage 에 저장하던 것이라 방문자끼리 합산되지 않고 '내 브라우저에서
+      눌렀는지'만 남는 표시였다. 마크업·스타일·스크립트와 그 근거는 git 이력에
+      남아 있고, 남은 dpwl_liked_* 키는 아무 데서도 읽지 않는다.) */
 });
 </script>
 </body>

@@ -2091,34 +2091,8 @@ a.notice-item:hover::after {
 /* 머리와 본문을 가르는 이중 룰. 기본 hr 여백(3rem)은 틀 안에서는 너무 넓다 */
 .post-article hr { margin: 1.75rem 0 2rem; }
 
-/* ── 좋아요 ───────────────────────────────────────────────────
-   기사 끝 오른쪽. 모서리는 배지와 같은 2px — 기사 틀이 직각이라
-   --radius(8px) 를 쓰면 버튼만 카드처럼 떠 보인다.
-   눌린 상태는 세이지 면(--accent-dim, hover·active 용) + 잉크로 채운 하트로
-   표시한다. 알림 도트의 --alert 는 '새 글' 신호 전용이라 여기 쓰지 않는다. */
-.post-like-row { display: flex; justify-content: flex-end; margin-top: 2.25rem; }
-.post-like {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: 40px;
-  padding: 0.45rem 1rem;
-  background: transparent;
-  color: var(--text-dark);
-  border: 1.5px solid rgba(var(--ink-rgb), 0.55);
-  border-radius: 2px;
-  font-family: var(--font-ui);
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-.post-like:hover  { border-color: var(--text); background: var(--accent-dim); }
-.post-like:active { transform: scale(0.97); }
-.post-like[aria-pressed="true"] { border-color: var(--text); background: var(--accent-dim); }
-.post-like[aria-pressed="true"] .post-like-heart { fill: var(--ink); stroke: var(--ink); }
-.post-like-count { font-variant-numeric: tabular-nums; }
+/* (기사 끝 '좋아요' 버튼 .post-like* 은 뺐다 — 2026-08-13, 사용자 요청.
+   값과 이유는 git 이력에 남아 있다.) */
 
 .post-body {
   font-size: var(--fs-base);
