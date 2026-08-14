@@ -37,6 +37,7 @@ homepage/
 ├── index.html              ← 진입점
 ├── style.css               ← 전체 디자인 시스템 (색 토큰·질감·컴포넌트)
 ├── script.js               ← 전 페이지 공통 동작
+├── contact-form.js         ← 문의 폼 전송 (admissions·intern 공용) ⚠ 아래 "문의 폼 연동" 참고
 ├── posts.js                ← 모든 콘텐츠 데이터 (공지·소식지·연구활동·연구참여)
 ├── partials/               ← 내비·푸터 단일 소스 ⚠ 아래 "공용 마크업" 참고
 │   ├── nav.html
@@ -466,13 +467,46 @@ git push origin main
 
 ## 문의 폼 연동
 
-`admissions.html`, `intern.html` 두 폼 모두 `https://growingmind.ppai-lab.com/api/contact`로
-`fetch` 전송합니다(각 파일 아래쪽 인라인 스크립트의 `CONTACT_API` 상수).
-ageart 서버의 Contact API가 이메일 전송을 처리합니다.
+`admissions.html`, `intern.html` 두 페이지의 문의 폼은 **`contact-form.js` 한 파일**을
+같이 씁니다. 보내는 곳은 `https://growingmind.ppai-lab.com/api/contact`(그 파일의
+`CONTACT_API` 상수)이고, ageart 서버의 Contact API가 이메일 전송을 처리합니다.
 
-두 페이지의 스크립트는 **글자 하나 다르지 않은 사본**입니다. 한쪽을 고치면 다른 쪽도
-같이 고치세요 — 폼 마크업은 `<input type="hidden" name="type">` 값(`admissions` / `intern`)만
-다르고 스크립트가 그 값을 폼에서 읽어 함께 보냅니다.
+원래는 두 페이지 아래쪽에 **글자 하나 다르지 않은 사본**이 인라인으로 각각 들어 있어서
+한쪽만 고치면 다른 쪽이 조용히 어긋났습니다(2026-08-13 통합). 폼 마크업은
+`<input type="hidden" name="type">` 값(`admissions` / `intern`)만 다르고 스크립트가 그 값을
+폼에서 읽어 함께 보내므로 한 파일로 충분합니다.
+
+**문의 폼을 쓰는 페이지를 새로 만들 때**는 아래 이름을 그대로 쓰고 스크립트만 불러오면
+됩니다. 알림창은 스크립트가 만들어 붙이므로 HTML에 따로 적을 것이 없습니다.
+
+| 이름 | 무엇 |
+|---|---|
+| `#contact-form` | `<form>` 자신 — 이 id가 없는 페이지에서는 스크립트가 조용히 지나갑니다 |
+| `#inq-btn` | 보내기 버튼 |
+| `name="type"` | 문의 종류 (`admissions` / `intern` …) — hidden |
+| `name="name"` `"email"` `"subject"` `"message"` | 보내는 내용 |
+| `name="_gotcha"` | 사람 눈에 안 보이는 스팸 덫 칸 |
+
+```html
+<script src="contact-form.js"></script>
+```
+
+### 전송 결과 알림창
+
+성공·실패 모두 화면 가운데 알림창(`.inq-toast`)이 떴다가 스스로 사라집니다
+(성공 3.2초 · 실패 6초, 상자를 누르거나 Esc로 즉시 닫힘).
+
+- 뒤 페이지를 어둡게 덮지 않습니다. 바깥 틀이 `pointer-events: none`이라 창이 떠 있어도
+  스크롤·클릭이 그대로 통과합니다 — 첫 화면 공지 팝업과 같은 규칙입니다.
+- 보내기 버튼은 글자가 바뀌지 않고, 응답이 오면 성공이든 실패든 곧바로 원래대로
+  돌아옵니다. 기다리는 동안만 잠깐 눌리지 않게 막아 중복 전송을 방지합니다.
+- 성공하면 폼을 감추지 않고 내용만 비웁니다.
+- 실패 문구는 서버가 이유를 알려 준 경우(응답의 `error`)만 그대로 보여 줍니다.
+  네트워크·CORS로 전송 자체가 실패하면 브라우저가 주는 영어 메시지 대신 우리말 안내를 냅니다.
+- 머무는 시간은 `contact-form.js`의 `SHOW_MS`에서 고칩니다. 사라지는 데 걸리는 시간
+  `FADE_MS`는 CSS `.inq-toast-box.is-closing` 애니메이션 길이와 **같은 값으로** 맞출 것.
+- 실패 표시에 붉은색(`--alert`)을 쓰지 않습니다 — 그 색은 '새 글' 도트 전용입니다
+  (위 "색 팔레트" 참고). 대신 왼쪽 띠를 세이지(성공) / 잉크(실패)로 나눕니다.
 
 이 홈페이지는 GitHub Pages 정적 사이트라 자체 서버가 없어서, 폼 전송은 브라우저가
 **다른 출처로 보내는 요청**이 됩니다. 즉 받는 쪽에서 CORS 를 열어 줘야 전송이 됩니다.
