@@ -1178,14 +1178,64 @@ body {
   transform: translateY(-1px);
 }
 .inq-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none !important; }
-.inquiry-done {
-  padding: 1.5rem 1.75rem;
-  background: rgba(var(--sage-rgb), 0.32);
-  border: 1px solid rgba(var(--ink-rgb), 0.25);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
+
+/* ── 문의 결과 알림창 ─────────────────────────────────────────
+   '보내기' 의 결과(성공·실패)를 잠깐 띄웠다 스스로 지우는 창.
+   상자는 contact-form.js 가 만들어 <body> 끝에 붙인다 — 문의 폼을 쓰는
+   페이지가 늘어도 HTML 은 그대로 두려고 (그 파일 머리말 참고).
+   - 뒤를 어둡게 덮거나 흐리지 않는다. 공지 팝업과 같은 규칙 — 지면 위에
+     종이 한 장을 얹은 모양이고, 대신 테두리와 그림자로 떠 보이게 한다.
+   - 바깥 틀은 pointer-events: none 이라 창이 떠 있어도 페이지를 그대로 쓴다.
+     상자만 클릭을 받아 눌러서 바로 닫을 수 있다 (Esc 도 스크립트가 받는다).
+   - 성공은 세이지 띠, 실패는 잉크 띠. 실패에 --alert(붉은색)를 쓰지 않는
+     이유는 맨 위 팔레트 규칙 참고 — 그 색은 '새 글' 도트 전용이다.
+   ──────────────────────────────────────────────────────────── */
+.inq-toast {
+  position: fixed;
+  inset: 0;
+  /* 내비(1000)·내비 드롭다운(1001)·모바일 메뉴 덮개(998) 보다 낮게 —
+     알림창이 로고와 메뉴를 덮지 않는다. 본문 최고값(back-to-top 490) 보다는 높다. */
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  pointer-events: none;
 }
-.inquiry-done p { font-size: var(--fs-base); font-weight: 700; color: var(--accent-dark); margin: 0; line-height: 1.75; }
+.inq-toast[hidden] { display: none; }
+.inq-toast-box {
+  pointer-events: auto;
+  margin: 0;
+  max-width: min(400px, 88vw);
+  padding: 1.4rem 1.6rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-md);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(var(--ink-rgb), 0.30);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.75;
+  word-break: keep-all;
+  /* 스크립트가 넣는 \n 을 줄바꿈으로 읽는다 — 글을 textContent 로 넣으므로
+     (서버가 준 오류 문구가 태그로 해석되면 안 된다) <br> 을 쓸 수 없다. */
+  white-space: pre-line;
+  cursor: pointer;                /* 눌러서 닫을 수 있다는 표시 */
+  animation: modalIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.inq-toast-box.is-error { border-left-color: var(--ink); }
+/* 사라질 때 — 스크립트가 이 클래스를 붙이고 애니메이션이 끝나면 창을 감춘다.
+   시간을 고치면 contact-form.js 의 FADE_MS 도 같은 값으로 고칠 것. */
+.inq-toast-box.is-closing { animation: toastOut 0.26s cubic-bezier(0.4, 0, 1, 1) forwards; }
+@keyframes toastOut {
+  to { opacity: 0; transform: scale(0.96) translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* 움직임 없이 그냥 나타났다 사라진다 — 머무는 시간은 스크립트가 정하므로 그대로다 */
+  .inq-toast-box,
+  .inq-toast-box.is-closing { animation: none; }
+}
 
 /* ── Publication List ────────────────────────────────────── */
 .pub-header {
@@ -2844,8 +2894,6 @@ html {
 .pub-links .pub-download { margin-top: 0; }
 /* 연구과제 기간 */
 .grant-period { font-size: var(--fs-sm); color: var(--muted); }
-/* 폼 오류 텍스트 */
-.form-error { color: var(--ink); font-weight: 700; }   /* 본문 검정과 구분되는 오류 톤 */
 /* PI 연구 관심사 소개문 */
 .profile-intro { font-size: var(--fs-base); color: var(--text); line-height: 1.9; font-style: italic; }
 

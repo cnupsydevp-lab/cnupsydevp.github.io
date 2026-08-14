@@ -102,14 +102,12 @@
                 </div>
                 <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
                 <div class="form-actions">
-                    <p class="form-note form-error" id="inq-error" hidden aria-live="polite" role="alert"></p>
                     <p class="form-note" id="inq-hint"><span class="form-req">*</span> 표시 항목은 필수입니다</p>
                     <button type="submit" class="btn-primary inq-btn" id="inq-btn">보내기</button>
                 </div>
             </form>
-            <div class="inquiry-done" hidden aria-live="polite">
-                <p>문의가 전달되었습니다.<br>검토 후 입력하신 이메일로 회신 드리겠습니다.</p>
-            </div>
+            <!-- 전송 결과(성공·실패)는 화면 가운데 알림창으로 떴다 사라진다.
+                 그 상자는 contact-form.js 가 만들어 붙이므로 여기엔 자리가 없다. -->
         </div>
     </div>
 </section>
@@ -138,54 +136,7 @@
 
 <script src="posts.js"></script>
 <script src="script.js"></script>
-<script>
-(function () {
-  var CONTACT_API = 'https://growingmind.ppai-lab.com/api/contact';
-  var form  = document.getElementById('contact-form');
-  var done  = document.querySelector('.inquiry-done');
-  var btn   = document.getElementById('inq-btn');
-  var hint  = document.getElementById('inq-hint');
-  var errEl = document.getElementById('inq-error');
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
-
-    btn.disabled = true;
-    btn.textContent = '전송 중…';
-    errEl.hidden = true;
-
-    var payload = {
-      type:     form.querySelector('[name="type"]').value,
-      name:     form.querySelector('[name="name"]').value.trim(),
-      email:    form.querySelector('[name="email"]').value.trim(),
-      subject:  form.querySelector('[name="subject"]').value.trim(),
-      message:  form.querySelector('[name="message"]').value.trim(),
-      _gotcha:  form.querySelector('[name="_gotcha"]').value,
-    };
-
-    try {
-      var res  = await fetch(CONTACT_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      var json = await res.json().catch(function () { return {}; });
-      if (res.ok) {
-        form.hidden = true;
-        done.hidden = false;
-      } else {
-        throw new Error(json.error || '오류가 발생했습니다.');
-      }
-    } catch (err) {
-      errEl.textContent = err.message || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
-      errEl.hidden = false;
-      hint.hidden  = true;
-      btn.disabled = false;
-      btn.textContent = '보내기';
-    }
-  });
-}());
-</script>
+<!-- 문의 폼 전송 — admissions.html 과 같은 파일을 쓴다 (contact-form.js 머리말 참고) -->
+<script src="contact-form.js"></script>
 </body>
 </html>
