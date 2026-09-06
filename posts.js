@@ -148,6 +148,11 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       authors: 'Matthew C. Shake, Soo Rim Noh, Elizabeth A. L. Stine-Morrow',
       journal: 'Applied Cognitive Psychology, 23, 561–578',
       url: 'https://onlinelibrary.wiley.com/doi/10.1002/acp.1494' },
+    { type: 'publication', year: '2009', date: '2009-01-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Predispositional Engagement, Activity Engagement, and Cognition among Older Adults',
+      authors: 'Jeanine M. Parisi, Elizabeth A. L. Stine-Morrow, Soo Rim Noh, Daniel G. Morrow',
+      journal: 'Aging, Neuropsychology, and Cognition, 16(4), 485–504',
+      url: 'https://www.tandfonline.com/doi/full/10.1080/13825580902866653' },
 
     { type: 'publication', year: '2026', date: '2026-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: '한국 중ㆍ고령 성인의 스트레스, 외로움 및 사회적 관계망 간의 종단적 상호관계: 무선절편 교차지연 패널모형(RI-CLPM) 분석',
