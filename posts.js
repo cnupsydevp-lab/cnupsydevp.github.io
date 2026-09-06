@@ -132,6 +132,12 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       journal: '한국안전학회지, 31(3), 102–108',
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002121748',
       pdf: 'papers/Bae_et_al_2016.pdf' },
+    { type: 'publication', year: '2015', date: '2015-01-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'The Effects of Varying Contextual Demands on Age-Related Positive Gaze Preferences',
+      authors: 'Soo Rim Noh, Derek M. Isaacowitz',
+      journal: 'Psychology and Aging, 30(2), 356–368',
+      url: 'https://psycnet.apa.org/record/2015-24168-002',
+      pdf: 'papers/Noh_et_al_2015.pdf' },
 
     { type: 'publication', year: '2026', date: '2026-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: '한국 중ㆍ고령 성인의 스트레스, 외로움 및 사회적 관계망 간의 종단적 상호관계: 무선절편 교차지연 패널모형(RI-CLPM) 분석',
