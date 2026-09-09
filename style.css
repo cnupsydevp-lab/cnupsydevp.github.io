@@ -1244,14 +1244,28 @@ body {
   justify-content: space-between;
   margin-bottom: 0;
 }
-.pub-search-wrap { margin-top: 1rem; }
-.pub-search-input { max-width: 360px; }
 .pub-empty { color: var(--muted); padding: 1.5rem 0; }
+.pub-header-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-left: auto;
+  padding-top: 0.45rem;
+}
 .pub-sort-btns {
   display: flex;
   gap: 0.5rem;
-  margin-left: auto;
-  padding-top: 0.45rem;
+}
+.pub-search-input {
+  max-width: 240px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(var(--card-rgb), 0.82);
+  border: 1px solid rgba(var(--ink-rgb), 0.10);
+  box-shadow: 0 6px 22px rgba(var(--ink-rgb), 0.13), inset 0 1px 0 rgba(var(--card-rgb), 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
 }
 .pub-sort-btn {
   font-family: var(--font-ui);
