@@ -85,6 +85,9 @@
             <button class="pub-sort-btn" id="sort-asc">오래된순</button>
           </div>
         </div>
+        <div class="pub-search-wrap">
+          <input type="search" id="pub-search" class="form-control pub-search-input" placeholder="논문 제목 또는 저자명으로 검색">
+        </div>
         <div class="pub-list" id="pub-list"></div>
         <div class="pub-pagination" id="pub-pagination"></div>
     </div>
@@ -146,13 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const pubs   = POSTS.activities.filter(p => p.type === 'publication');
   const countEl = document.getElementById('pub-count');
-  if (countEl) countEl.textContent = `총 ${pubs.length}편`;
   const pres   = POSTS.activities.filter(p => p.type === 'presentation');
   const grants = POSTS.activities.filter(p => p.type === 'grant');
 
   const PER_PAGE = 5;
   let sortDesc = true;
   let currentPage = 1;
+  let pubQuery = '';
 
   function pubCard(p) {
     return `<div class="pub-item">
@@ -169,15 +172,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderPubs() {
-    const sorted = [...pubs].sort((a, b) =>
+    const q = pubQuery.trim().toLowerCase();
+    const matched = q
+      ? pubs.filter(p => p.title.toLowerCase().includes(q) || p.authors.toLowerCase().includes(q))
+      : pubs;
+    if (countEl) countEl.textContent = q ? `검색결과 ${matched.length}편` : `총 ${pubs.length}편`;
+
+    const sorted = [...matched].sort((a, b) =>
       sortDesc ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date)
     );
-    const totalPages = Math.ceil(sorted.length / PER_PAGE);
+    const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
     const start = (currentPage - 1) * PER_PAGE;
     const page = sorted.slice(start, start + PER_PAGE);
 
     const pubList = document.getElementById('pub-list');
-    if (pubList) pubList.innerHTML = page.map(pubCard).join('');
+    if (pubList) {
+      pubList.innerHTML = page.length
+        ? page.map(pubCard).join('')
+        : `<p class="pub-empty">검색 결과가 없습니다.</p>`;
+    }
 
     const pagination = document.getElementById('pub-pagination');
     if (pagination) {
@@ -215,6 +228,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('sort-desc').classList.remove('active');
     renderPubs();
   });
+
+  const pubSearch = document.getElementById('pub-search');
+  if (pubSearch) {
+    pubSearch.addEventListener('input', function() {
+      pubQuery = this.value;
+      currentPage = 1;
+      renderPubs();
+    });
+  }
 
   renderPubs();
 

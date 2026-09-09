@@ -1244,6 +1244,9 @@ body {
   justify-content: space-between;
   margin-bottom: 0;
 }
+.pub-search-wrap { margin-top: 1rem; }
+.pub-search-input { max-width: 360px; }
+.pub-empty { color: var(--muted); padding: 1.5rem 0; }
 .pub-sort-btns {
   display: flex;
   gap: 0.5rem;
