@@ -238,6 +238,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003173838',
       pdf: 'papers/Park_et_al_2025.pdf' },
 
+    { type: 'publication', year: '2024', date: '2024-01-05', badge: 'badge-gold', badgeText: 'SCIE',
+      title: 'Exploring age-related changes in saccades during cognitive tasks in healthy adults',
+      authors: 'Hee Won Yang, Jin Yeong Choe, Soo Rim Noh, Jeong Lan Kim, Ji Won Han, Ki Woong Kim',
+      journal: 'Frontiers in Behavioral Neuroscience, 17, 1301318',
+      url: 'https://www.frontiersin.org/journals/behavioral-neuroscience/articles/10.3389/fnbeh.2023.1301318/full',
+      pdf: 'papers/Yang_et_al_2024.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
