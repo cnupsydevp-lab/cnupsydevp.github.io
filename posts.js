@@ -245,6 +245,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://www.frontiersin.org/journals/behavioral-neuroscience/articles/10.3389/fnbeh.2023.1301318/full',
       pdf: 'papers/Yang_et_al_2024.pdf' },
 
+    { type: 'publication', year: '2012', date: '2012-08-31', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'The Role of Affect in Attentional Functioning for Younger and Older Adults',
+      authors: 'Soo Rim Noh, Mary Jo Larcom, Xiaodong Liu, Derek M. Isaacowitz',
+      journal: 'Frontiers in Psychology, 3, 311',
+      url: 'https://www.frontiersin.org/articles/10.3389/fpsyg.2012.00311/full',
+      pdf: 'papers/Noh_et_al_2012.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
