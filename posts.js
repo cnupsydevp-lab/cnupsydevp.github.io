@@ -252,6 +252,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://www.frontiersin.org/articles/10.3389/fpsyg.2012.00311/full',
       pdf: 'papers/Noh_et_al_2012.pdf' },
 
+    { type: 'publication', year: '2009', date: '2009-09-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Age differences in tracking characters during narrative comprehension',
+      authors: 'Soo Rim Noh, Elizabeth A. L. Stine-Morrow',
+      journal: 'Memory & Cognition, 37(6), 769–778',
+      url: 'https://link.springer.com/article/10.3758/MC.37.6.769',
+      pdf: 'papers/Noh_et_al_2009.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
