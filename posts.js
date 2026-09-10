@@ -231,6 +231,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002371324',
       pdf: 'papers/Yun_et_al_2018.pdf' },
 
+    { type: 'publication', year: '2025', date: '2025-01-01', badge: 'badge-gold', badgeText: 'KCI',
+      title: '마른 체형의 역설: 노인의 체형인식과 정신건강의 연관성',
+      authors: '박세윤, 김용민, 노수림, 조성근, 윤대현',
+      journal: '한국체육학회지, 64(1), 435–446',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003173838',
+      pdf: 'papers/Park_et_al_2025.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
