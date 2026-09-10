@@ -1258,7 +1258,7 @@ body {
   gap: 0.5rem;
 }
 .pub-search-input {
-  max-width: 240px;
+  max-width: 180px;
   padding: 0.5rem 1.1rem;
   border-radius: 999px;
   background: rgba(var(--card-rgb), 0.82);
