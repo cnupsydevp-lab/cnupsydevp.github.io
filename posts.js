@@ -266,6 +266,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0038244',
       pdf: 'papers/Stine-Morrow_et_al_2014.pdf' },
 
+    { type: 'publication', year: '2006', date: '2006-12-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Adult Age Differences in the Effects of Goals on Self-Regulated Sentence Processing',
+      authors: 'Elizabeth A. L. Stine-Morrow, Matthew C. Shake, Joseph R. Miles, Soo Rim Noh',
+      journal: 'Psychology and Aging, 21(4), 790–803',
+      url: 'https://psycnet.apa.org/doiLanding?doi=10.1037%2F0882-7974.21.4.790',
+      pdf: 'papers/Stine-Morrow_et_al_2006.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
