@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOMAD Lab — 발달·노화 심리 연구실</title>
-    <meta name="description" content="충남대학교 발달·노화 심리 연구실(NOMAD Lab). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
+    <title>LIFE:ON LAB — 발달·노화 심리 연구실</title>
+    <meta name="description" content="충남대학교 발달·노화 심리 연구실(LIFE:ON LAB). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="NOMAD Lab — 발달·노화 심리 연구실">
-    <meta property="og:title" content="NOMAD Lab — 발달·노화 심리 연구실">
-    <meta property="og:description" content="충남대학교 발달·노화 심리 연구실(NOMAD Lab). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
+    <meta property="og:site_name" content="LIFE:ON LAB — 발달·노화 심리 연구실">
+    <meta property="og:title" content="LIFE:ON LAB — 발달·노화 심리 연구실">
+    <meta property="og:description" content="충남대학교 발달·노화 심리 연구실(LIFE:ON LAB). 노화, 정서, 인지, 안구 운동 추적을 통해 전 생애 발달을 탐구합니다.">
     <meta property="og:url" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/">
     <meta property="og:image" content="https://cnupsydevp-lab.github.io/cnupsydevp.github.io/images/og-image-v3.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="favicon-v3.ico" sizes="16x16 32x32 48x48">
-    <link rel="icon" type="image/svg+xml" href="favicon-v3.svg">
-    <link rel="apple-touch-icon" href="apple-touch-icon-v3.png">
+    <link rel="icon" href="favicon-v4.ico" sizes="16x16 32x32 48x48">
+    <link rel="icon" type="image/svg+xml" href="favicon-v4.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon-v4.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;700&family=Ultra&display=swap">
@@ -28,11 +28,12 @@
 <header class="site-nav">
     <div class="nav-wrapper">
         <!-- 로고는 두 겹이다: 글자(logo-nav-body) 위에 풍선(logo-nav-balloon)을 겹친 것.
-             풍선만 따로 흔들려고 가른 것인데 그 움직임은 뺐다(2026-08-13, 사용자 요청).
-             두 파일은 같은 캔버스(238×160)를 쓰고 합치면 원본과 픽셀이 같아
-             멈춰 있어도 이음선이 보이지 않는다 — 그래서 겹은 그대로 두었다.
+             2026-09-11 로고 교체(LIFE:ON LAB) 이후 풍선 겹은 완전히 빈 캔버스다 —
+             새 도안엔 따로 흔들 요소가 없다. 두 파일은 같은 캔버스(459×160)를 쓰고
+             합치면 원본과 픽셀이 같아 멈춰 있어도 이음선이 보이지 않는다 —
+             그래서 겹은 그대로 두었다.
              풍선 쪽은 장식이라 alt 를 비워 두고 글자 쪽이 이름을 읽는다. -->
-        <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="NOMAD Lab" width="238" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="238" height="160"></a></div>
+        <div class="logo"><a href="index.html"><img class="logo-body" src="images/logo/logo-nav-body.png" alt="LIFE:ON LAB" width="459" height="160"><img class="logo-balloon" src="images/logo/logo-nav-balloon.png" alt="" width="459" height="160"></a></div>
         <div class="nav-cluster">
         <a href="index.html" class="nav-home" aria-label="홈">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"></path><path d="M5.5 10v9a1 1 0 0 0 1 1h3.5v-6h4v6H17.5a1 1 0 0 0 1-1v-9"></path></svg>
@@ -83,63 +84,39 @@
              그래서 WebP 를 먼저 걸고, WebP 를 못 읽는 옛 브라우저(사파리 14 이전 등)만
              PNG 로 내려받게 한다. 요즘 브라우저는 WebP 만 받아 온다.
 
-             [그림을 10겹으로 가른 이유 — 2026-08-12]
-             끈·구슬·별이 따로 움직이려면 한 장짜리 그림으로는 안 된다. 원본
-             logo-fullname.png 를 굵기(형태학적 열림)와 색으로 갈라 images/logo/wordmark/
-             아래 열 장으로 나눠 두었다. 겹치는 픽셀이 하나도 없어서, 움직임을 끄면
-             (모션 줄이기 설정) 열 장이 겹쳐 원본과 똑같은 그림이 된다.
-             겹치는 순서가 곧 앞뒤 관계다: 끈 → 구슬 → 글자 → 별.
-             끈은 반드시 글자보다 먼저 와야 한다 — 원본에서 끈은 글자 뒤로 지나간다.
+             [그림을 겹으로 가른 이유 — 2026-08-12, 2026-09-11 로고 교체로 4겹으로 정리]
+             별이 따로 반짝이려면 한 장짜리 그림으로는 안 된다. 원본 logo-fullname.png
+             에서 몸통과 완전히 떨어진 별 셋만 도려내 images/logo/wordmark/star1~3 로
+             빼고, 나머지 전부(고리·끈·구슬·사각형·글자·리본)는 letters 한 장으로
+             묶었다 — 지금 살아 있는 애니메이션이 별 반짝임과 글자 위 빛 지나가기
+             (아래 wm-shine) 뿐이라 끈·구슬을 따로 흔들 필요가 없어졌다(그 기능은
+             2026-08-12/13 에 이미 껐다). 겹치는 픽셀이 하나도 없어서, 움직임을 끄면
+             (모션 줄이기 설정) 네 장이 겹쳐 원본과 똑같은 그림이 된다.
              만드는 법과 각 조각의 뜻은 images/logo/README.md 에 적어 두었다.
 
              ※ 글자를 다시 넣고 싶으면 아래 두 줄을 살리면 된다 — CSS(.hero-title,
                .hero-sub, .hero-cta)는 지우지 않고 그대로 두었다.
                <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
                <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 …</p> -->
-        <h1 class="sr-only">전 생애의 마음을 과학으로 탐구합니다 — NOMAD Lab</h1>
+        <h1 class="sr-only">전 생애의 마음을 과학으로 탐구합니다 — LIFE:ON LAB</h1>
         <div class="hero-wordmark">
         <div class="wm">
             <!-- srcset/sizes — 좁은 화면에는 축소본(w800/)을 내려보낸다.
-                 열 겹 합계가 299KB 인데 휴대폰에서 로고는 328~398px 로 보인다.
-                 배율 2배 화면이라도 796px 이면 충분한데 원본 겹은 1502px 이다.
-                 그래서 화폭 800px 짜리 한 벌을 따로 뒀다(117KB).
+                 네 겹 합계가 308KB 인데 휴대폰에서 로고는 328~398px 로 보인다.
+                 배율 2배 화면이라도 796px 이면 충분한데 원본 겹은 2085px 이다.
+                 그래서 화폭 800px 짜리 한 벌을 따로 뒀다.
                  sizes 는 '이 겹이 화면에서 몇 px 로 보이는가' 다. 겹의 폭은
                  로고 폭 × 제 비율이고, 로고 폭은 .container 안쪽이라 좌우 padding
                  만큼 빠진다(2 → 1.5 → 1.25 → 1rem 로 바뀌므로 그 구간을 그대로 옮겼다).
                  브라우저는 sizes × 화면배율보다 큰 후보 중 가장 작은 것을 고르는데,
                  계산하면 어느 겹이든 조건이 "800 ≥ 로고폭 × 배율" 로 같아진다.
-                 그래서 거의 모든 화면에서 열 겹이 같은 크기끼리 짝을 이룬다.
-                 딱 그 경계에 걸리는 폭(1배 849~873px, 2배 433~438px)에서만
-                 겹마다 1px 반올림이 갈려 크기가 섞이는데, 재 보니 차이가 전부
-                 윤곽선 위 안티에일리어싱 수준이라 이음선은 생기지 않는다.
-                 → 배율 2배 휴대폰 전 기종 117KB, 배율 3배 휴대폰·데스크톱 299KB.
-                 값은 손으로 쓰지 말 것. tools/split-wordmark.py 가 찍어 준다. -->
-            <!-- 끈 — 조각을 담는 단위 4개. 지금은 넷 다 붙박이다.
-                 (끈 흔들림 wmSway*·wmBowSway 는 뺐다 — 2026-08-13, 사용자 요청.
-                  구슬이 끈 위를 미끄러지는 움직임도 앞서 뺐다 — 2026-08-12.
-                  상자는 그대로 두었으니 되살리려면 style.css 에 애니메이션만 다시 걸면 된다.)
-                 구슬은 자기가 올라탄 단위 '안에' 둔다 — 끈이 다시 움직이게 되면
-                 구슬이 끈에서 떨어져 나가지 않고 끈을 따라 같이 움직여야 하기 때문이다. -->
-            <div class="wm-unit wm-a">
-                <picture><source type="image/webp" sizes="(min-width:1080px) 498px,(min-width:861px) calc((100vw - 64px)*0.4900),(min-width:641px) calc((100vw - 48px)*0.4900),(min-width:481px) calc((100vw - 40px)*0.4900),calc((100vw - 32px)*0.4900)" srcset="images/logo/wordmark/w800/cordA.webp 393w, images/logo/wordmark/cordA.webp 736w"><img class="wm-layer" style="left:50.9987%;top:11.6573%;width:49.0013%" src="images/logo/wordmark/cordA.png" alt="" width="736" height="364"></picture>
-                <picture><source type="image/webp" sizes="(min-width:1080px) 71px,(min-width:861px) calc((100vw - 64px)*0.0699),(min-width:641px) calc((100vw - 48px)*0.0699),(min-width:481px) calc((100vw - 40px)*0.0699),calc((100vw - 32px)*0.0699)" srcset="images/logo/wordmark/w800/beadBlue.webp 56w, images/logo/wordmark/beadBlue.webp 105w"><img class="wm-layer" style="left:71.5712%;top:9.1292%;width:6.9907%" src="images/logo/wordmark/beadBlue.png" alt="" width="105" height="94"></picture>
-            </div>
-            <div class="wm-unit wm-b">
-                <picture><source type="image/webp" sizes="(min-width:1080px) 404px,(min-width:861px) calc((100vw - 64px)*0.3975),(min-width:641px) calc((100vw - 48px)*0.3975),(min-width:481px) calc((100vw - 40px)*0.3975),calc((100vw - 32px)*0.3975)" srcset="images/logo/wordmark/w800/cordB.webp 318w, images/logo/wordmark/cordB.webp 597w"><img class="wm-layer" style="left:48.6684%;top:75.2809%;width:39.747%" src="images/logo/wordmark/cordB.png" alt="" width="597" height="176"></picture>
-            </div>
-            <div class="wm-unit wm-c">
-                <picture><source type="image/webp" sizes="(min-width:1080px) 463px,(min-width:861px) calc((100vw - 64px)*0.4561),(min-width:641px) calc((100vw - 48px)*0.4561),(min-width:481px) calc((100vw - 40px)*0.4561),calc((100vw - 32px)*0.4561)" srcset="images/logo/wordmark/w800/cordC.webp 365w, images/logo/wordmark/cordC.webp 685w"><img class="wm-layer" style="left:0.0%;top:47.0506%;width:45.6059%" src="images/logo/wordmark/cordC.png" alt="" width="685" height="377"></picture>
-                <picture><source type="image/webp" sizes="(min-width:1080px) 72px,(min-width:861px) calc((100vw - 64px)*0.0706),(min-width:641px) calc((100vw - 48px)*0.0706),(min-width:481px) calc((100vw - 40px)*0.0706),calc((100vw - 32px)*0.0706)" srcset="images/logo/wordmark/w800/beadPink.webp 57w, images/logo/wordmark/beadPink.webp 106w"><img class="wm-layer" style="left:3.5952%;top:76.1236%;width:7.0573%" src="images/logo/wordmark/beadPink.png" alt="" width="106" height="107"></picture>
-            </div>
-            <div class="wm-unit wm-d">
-                <picture><source type="image/webp" sizes="(min-width:1080px) 121px,(min-width:861px) calc((100vw - 64px)*0.1192),(min-width:641px) calc((100vw - 48px)*0.1192),(min-width:481px) calc((100vw - 40px)*0.1192),calc((100vw - 32px)*0.1192)" srcset="images/logo/wordmark/w800/cordD.webp 96w, images/logo/wordmark/cordD.webp 179w"><img class="wm-layer" style="left:37.0173%;top:81.6011%;width:11.9174%" src="images/logo/wordmark/cordD.png" alt="" width="179" height="131"></picture>
-            </div>
-            <!-- 글자 — 이 한 장만 흐름 안에 남겨 히어로의 높이를 정한다.
-                 나머지 아홉 장은 absolute 라 자리를 차지하지 않는다.
-                 position:relative 가 붙어 있어야 위 끈들보다 뒤가 아니라 앞에 그려진다
+                 값은 손으로 쓰지 말 것. tools/build-wordmark.py 가 찍어 준다. -->
+            <!-- 글자(고리·끈·구슬·사각형·리본 포함) — 이 한 장만 흐름 안에 남겨
+                 히어로의 높이를 정한다. 별 셋은 absolute 라 자리를 차지하지 않는다.
+                 position:relative 가 붙어 있어야 별들보다 뒤가 아니라 앞에 그려진다
                  (배치된 요소가 일반 흐름 요소보다 항상 위에 그려지기 때문). -->
-            <picture><source type="image/webp" sizes="(min-width:1080px) 1016px,(min-width:861px) calc((100vw - 64px)*1.0000),(min-width:641px) calc((100vw - 48px)*1.0000),(min-width:481px) calc((100vw - 40px)*1.0000),calc((100vw - 32px)*1.0000)" srcset="images/logo/wordmark/w800/letters.webp 801w, images/logo/wordmark/letters.webp 1502w">
-                <img class="wm-letters" src="images/logo/wordmark/letters.png" alt="Noh Mental health And Digital care Lab (NOMAD Lab)" width="1502" height="712" fetchpriority="high"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 1016px,(min-width:861px) calc((100vw - 64px)*1.0000),(min-width:641px) calc((100vw - 48px)*1.0000),(min-width:481px) calc((100vw - 40px)*1.0000),calc((100vw - 32px)*1.0000)" srcset="images/logo/wordmark/w800/letters.webp 800w, images/logo/wordmark/letters.webp 2085w">
+                <img class="wm-letters" src="images/logo/wordmark/letters.png" alt="LIFE:ON LAB" width="2085" height="729" fetchpriority="high"></picture>
             <!-- 글자 위를 왼쪽에서 오른쪽으로 지나가는 빛 (2026-08-13).
                  글자 그림은 한 장이고 낱글자로 쪼갤 수 없다 — 풍선이 서로 붙어 있어
                  글자 사이에 빈 열이 하나도 없다(확인함). 그래서 '글자마다 따로 켜기'가
@@ -149,10 +126,12 @@
                  이 요소는 그 자리를 잡아 줄 뿐이라 읽을 내용이 없다.
                  글자 picture 뒤에 두어야 글자 위에 그려진다(둘 다 배치 요소, 뒤가 위). -->
             <span class="wm-shine" aria-hidden="true"></span>
-            <!-- 별 — 글자보다 앞. 셋 다 글자와 겹치지 않아 순서는 사실 자유롭다. -->
-            <picture><source type="image/webp" sizes="(min-width:1080px) 74px,(min-width:861px) calc((100vw - 64px)*0.0726),(min-width:641px) calc((100vw - 48px)*0.0726),(min-width:481px) calc((100vw - 40px)*0.0726),calc((100vw - 32px)*0.0726)" srcset="images/logo/wordmark/w800/star1.webp 59w, images/logo/wordmark/star1.webp 109w"><img class="wm-layer wm-star wm-star-1" style="left:78.6951%;top:0.0%;width:7.257%" src="images/logo/wordmark/star1.png" alt="" width="109" height="112"></picture>
-            <picture><source type="image/webp" sizes="(min-width:1080px) 120px,(min-width:861px) calc((100vw - 64px)*0.1178),(min-width:641px) calc((100vw - 48px)*0.1178),(min-width:481px) calc((100vw - 40px)*0.1178),calc((100vw - 32px)*0.1178)" srcset="images/logo/wordmark/w800/star2.webp 95w, images/logo/wordmark/star2.webp 177w"><img class="wm-layer wm-star wm-star-2" style="left:12.2503%;top:4.2135%;width:11.7843%" src="images/logo/wordmark/star2.png" alt="" width="177" height="167"></picture>
-            <picture><source type="image/webp" sizes="(min-width:1080px) 64px,(min-width:861px) calc((100vw - 64px)*0.0632),(min-width:641px) calc((100vw - 48px)*0.0632),(min-width:481px) calc((100vw - 40px)*0.0632),calc((100vw - 32px)*0.0632)" srcset="images/logo/wordmark/w800/star3.webp 51w, images/logo/wordmark/star3.webp 95w"><img class="wm-layer wm-star wm-star-3" style="left:92.4101%;top:55.618%;width:6.3249%" src="images/logo/wordmark/star3.png" alt="" width="95" height="141"></picture>
+            <!-- 별 — 글자보다 앞. 셋 다 글자와 겹치지 않아 순서는 사실 자유롭다.
+                 (원본에는 별이 넷인데 하나는 끈에 닿아 있어 글자 겹에 그대로 남겨 뒀다
+                  — 반짝이는 건 몸통과 완전히 떨어진 이 셋뿐이다.) -->
+            <picture><source type="image/webp" sizes="(min-width:1080px) 87px,(min-width:861px) calc((100vw - 64px)*0.0854),(min-width:641px) calc((100vw - 48px)*0.0854),(min-width:481px) calc((100vw - 40px)*0.0854),calc((100vw - 32px)*0.0854)" srcset="images/logo/wordmark/w800/star1.webp 69w, images/logo/wordmark/star1.webp 178w"><img class="wm-layer wm-star wm-star-1" style="left:76.1631%;top:3.5665%;width:8.5372%" src="images/logo/wordmark/star1.png" alt="" width="178" height="216"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 76px,(min-width:861px) calc((100vw - 64px)*0.0748),(min-width:641px) calc((100vw - 48px)*0.0748),(min-width:481px) calc((100vw - 40px)*0.0748),calc((100vw - 32px)*0.0748)" srcset="images/logo/wordmark/w800/star2.webp 60w, images/logo/wordmark/star2.webp 156w"><img class="wm-layer wm-star wm-star-2" style="left:32.6619%;top:18.5185%;width:7.482%" src="images/logo/wordmark/star2.png" alt="" width="156" height="194"></picture>
+            <picture><source type="image/webp" sizes="(min-width:1080px) 61px,(min-width:861px) calc((100vw - 64px)*0.0600),(min-width:641px) calc((100vw - 48px)*0.0600),(min-width:481px) calc((100vw - 40px)*0.0600),calc((100vw - 32px)*0.0600)" srcset="images/logo/wordmark/w800/star3.webp 48w, images/logo/wordmark/star3.webp 125w"><img class="wm-layer wm-star wm-star-3" style="left:0.0%;top:55.6927%;width:5.9952%" src="images/logo/wordmark/star3.png" alt="" width="125" height="148"></picture>
         </div>
         </div>
     </div>
@@ -166,9 +145,9 @@
     <div class="container">
         <div class="about-grid">
             <div class="about-text">
-                <span class="eyebrow">About NOMAD Lab</span>
+                <span class="eyebrow">About LIFE:ON LAB</span>
                 <h2 class="section-title">노화와 전 생애 발달을<br>과학으로 탐구합니다</h2>
-                <p>NOMAD Lab(Noh Mental health And Digital care Lab)에 오신 것을 환영합니다.</p>
+                <p>LIFE:ON LAB에 오신 것을 환영합니다.</p>
                 <p>우리는 중년부터 노년까지 전 생애에 걸친 정서·인지 발달을 탐구합니다. 노화에 따른 인지 변화, 안구 운동 추적(Eye Tracking)을 활용한 주의·기억 연구, AI 등 디지털 기술이 노년기 삶의 질에 미치는 영향을 중심으로 연구합니다.</p>
                 <a href="pi.html" class="btn-ghost u-mt-2">지도교수 소개 →</a>
             </div>
@@ -241,7 +220,7 @@
     <div class="container">
         <div class="footer-inner">
             <div class="footer-brand">
-                <span class="footer-logo">NOMAD Lab</span>
+                <span class="footer-logo">LIFE:ON LAB</span>
                 <p>충남대학교 심리학과<br>발달·노화 심리 연구실<br>대전광역시 유성구 대학로 99<br>공동실험실습관(W9) 208호<br><a href="mailto:cnu.psy.devp@gmail.com">cnu.psy.devp@gmail.com</a></p>
             </div>
         </div>
@@ -255,7 +234,7 @@
             <a href="notices.html">공지사항</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <p class="footer-copy">&copy; 2026 NOMAD Lab. All rights reserved.</p>
+        <p class="footer-copy">&copy; 2026 LIFE:ON LAB. All rights reserved.</p>
     </div>
 </footer>
 

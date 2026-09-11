@@ -4,23 +4,24 @@
 favicon.svg 한 장으로는 부족하다. 사파리가 SVG 파비콘을 읽지 않기 때문이다.
 사파리는 favicon.ico 를 찾고, 그것도 없으면 apple-touch-icon.png 로 내려앉는다.
 2026-08-13 에 겪은 일: apple-touch-icon.png 만 옛 DPWL 시절 갈색 D 로 남아 있어서
-크롬에서는 새 N 마크가, 맥 사파리 주소창에서는 갈색 D 가 뜨고 있었다.
+크롬에서는 새 N 마크가, 맥 사파리 주소창에서는 갈색 D 가 뜨고 있었다
+(그 N 은 2026-09-11 로고 교체로 L 이 되었다 — 아래 LETTER).
 
 그래서 같은 그림을 세 형식으로 함께 만든다:
 
-    favicon-v3.svg           손으로 관리 (이 스크립트가 건드리지 않음) — 크롬·파이어폭스
-    favicon-v3.ico           16·32·48 세 크기를 한 파일에 — 사파리·구형 브라우저
-    apple-touch-icon-v3.png  180x180 — iOS 홈 화면, 맥 사파리 대체용
+    favicon-v4.svg           손으로 관리 (이 스크립트가 건드리지 않음) — 크롬·파이어폭스
+    favicon-v4.ico           16·32·48 세 크기를 한 파일에 — 사파리·구형 브라우저
+    apple-touch-icon-v4.png  180x180 — iOS 홈 화면, 맥 사파리 대체용
 
-파일명 끝의 -v3 은 캐시를 끊기 위한 것이다. 아래 두 번째 경고를 보라.
+파일명 끝의 -v4 는 캐시를 끊기 위한 것이다. 아래 두 번째 경고를 보라.
 
-그림은 favicon.svg 와 똑같이 맞춘다: 짙은 녹색 모서리 둥근 사각형에 크림색 N.
+그림은 favicon.svg 와 똑같이 맞춘다: 짙은 녹색 모서리 둥근 사각형에 크림색 L.
 색을 바꾸려면 아래 BG·FG 만 고치면 세 형식에 함께 반영된다.
 
 사용법 (저장소 루트에서):
     python3 tools/make-favicon.py
 
-⚠️ 색이나 글자를 바꾸면 favicon-v3.svg 도 같이 손으로 고쳐야 한다.
+⚠️ 색이나 글자를 바꾸면 favicon-v4.svg 도 같이 손으로 고쳐야 한다.
    그 한 장만 따로 놀면 크롬과 사파리가 서로 다른 아이콘을 보여 준다.
 
 ⚠️ 그림을 바꿀 때는 ?v= 쿼리를 올리지 말고 파일명의 -v3 을 -v4 로 올린다.
@@ -44,7 +45,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # favicon.svg 와 같은 값. style.css 의 --blush / --ink 다.
 BG = '#E7CCCC'
 FG = '#3D4A33'
-LETTER = 'N'
+LETTER = 'L'   # 2026-09-11 로고 교체(NOMAD Lab → LIFE:ON LAB)로 N → L
 
 # 블러시는 밝아서 흰 탭 막대 위에 놓으면 아이콘 테두리가 배경에 묻는다.
 # 잉크를 22% 섞은 값으로 가장자리만 한 겹 둘러 형태를 잡아 준다.
@@ -62,8 +63,8 @@ SS = 8  # 이 배율로 크게 그린 뒤 줄여서 가장자리를 매끄럽게
 
 # 캐시를 끊는 것은 쿼리가 아니라 파일명이다 (위 두 번째 경고).
 # 그림을 바꿀 때 여기와 열두 페이지 <head> 를 같은 번호로 올린다.
-ICO_NAME = 'favicon-v3.ico'
-TOUCH_NAME = 'apple-touch-icon-v3.png'
+ICO_NAME = 'favicon-v4.ico'
+TOUCH_NAME = 'apple-touch-icon-v4.png'
 
 
 def draw_mark(size, rounded):

@@ -32,10 +32,10 @@ OG 표준 권장값이자 가로세로 1.91:1 이다. 카카오톡·디스코드
 카드가 작은 썸네일 모양으로 바뀐다.
 
 [구성]
-종이색 바탕에 NOMAD Lab 풍선 로고 한 장, 그 아래 한글 한 줄 + 영문 한 줄이다.
-히어로의 긴 워드마크(logo-fullname.png)를 쓰지 않은 것은 미리보기 카드가
-실제로는 폭 300px 안팎으로 보이기 때문이다 — 그 크기에서 'Noh Mental health
-And Digital care' 는 뭉개져 읽히지 않지만 'NOMAD Lab' 은 또렷하다.
+종이색 바탕에 LIFE:ON LAB 풍선 로고 한 장, 그 아래 한글 한 줄 + 영문 한 줄이다.
+히어로의 긴 워드마크(logo-fullname.png, 'LIFE:ON LAB')를 쓰지 않은 것은
+미리보기 카드가 실제로는 폭 300px 안팎으로 보이기 때문이다 — logo-full.png
+쪽이 획이 굵어 그 크기에서도 또렷하다.
 """
 import sys
 from pathlib import Path
@@ -60,7 +60,7 @@ INK = (61, 74, 51)
 INK_SOFT = (110, 118, 98)
 
 LINE_KO = '충남대학교 심리학과 발달·노화 심리 연구실'
-LINE_EN = 'Noh Mental health And Digital care Lab'
+LINE_EN = 'LIFE:ON LAB'
 
 LOGO_W = 540            # 로고 폭 — 세로는 원본 비율대로 따라온다
 LOGO_TOP = 52

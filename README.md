@@ -1,6 +1,6 @@
-# NOMAD Lab 연구실 홈페이지
+# LIFE:ON LAB 연구실 홈페이지
 
-충남대학교 발달·노화 심리 연구실(NOMAD Lab) 공식 홈페이지  
+충남대학교 발달·노화 심리 연구실(LIFE:ON LAB) 공식 홈페이지  
 **URL:** https://cnupsydevp-lab.github.io/cnupsydevp.github.io/
 
 > 주소 끝의 `/cnupsydevp.github.io/` 를 빼면 404 입니다. 저장소 이름(`cnupsydevp.github.io`)이
@@ -47,7 +47,7 @@ homepage/
 │   ├── make-newsletter-thumbs.py ← 소식지 사진 썸네일 생성
 │   ├── make-favicon.py     ← 파비콘(.ico + apple-touch-icon) 생성 ⚠ 그림 교체 시 파일명 번호를 올릴 것
 │   ├── make-og-image.py    ← 카톡·SNS 공유 미리보기 이미지 생성
-│   └── split-wordmark.py   ← 히어로 이름 로고를 움직일 수 있는 열 겹으로 가름
+│   └── build-wordmark.py   ← 히어로 이름 로고를 별 3겹 + 글자 1겹으로 가름
 ├── papers/                 ← 논문 PDF (37개)
 ├── presentations/
 │   ├── abstracts/          ← 학술발표 초록 PDF
@@ -55,32 +55,33 @@ homepage/
 ├── notice-files/           ← 공지에 첨부하는 PDF (모집 요강 등)
 ├── images/
 │   ├── logo/
-│   │   ├── wordmark/       ← 첫 화면 로고 열 겹 ⚠ 손으로 고치지 말 것 (README 참고)
-│   │   │   └── w800/       ←   같은 열 겹의 좁은 화면용 축소본 (휴대폰 117KB)
+│   │   ├── wordmark/       ← 첫 화면 로고 넉 겹 ⚠ 손으로 고치지 말 것 (README 참고)
+│   │   │   └── w800/       ←   같은 넉 겹의 좁은 화면용 축소본 (휴대폰 75KB)
 │   │   └── README.md       ← 로고 파일 규칙
 │   ├── newsletter/         ← 소식지 사진
 │   │   └── thumb/          ←   목록용 정사각 썸네일 (make-newsletter-thumbs.py 가 생성)
 │   ├── popup/              ← 첫 화면 팝업 이미지
 │   ├── og-image-v3.png     ← 카톡·SNS 공유 미리보기 (1200×630)
 │   └── *.jpeg / *.JPG      ← 구성원 사진 (파일명 = 이름, members.html·pi.html 이 직접 참조)
-├── favicon-v3.ico          ← 파비콘 ⚠ 그림을 바꿀 때는 ?v= 쿼리가 아니라 파일명 번호를 올린다
-├── favicon-v3.svg          ←   (브라우저 아이콘 캐시는 쿼리를 무시한다 — 2026-08-13 확인)
-├── apple-touch-icon-v3.png ←   iOS 홈 화면 아이콘
-├── favicon.ico             ← 위 -v3 판과 같은 그림. HTML 이 가리키지 않지만
+├── favicon-v4.ico          ← 파비콘 ⚠ 그림을 바꿀 때는 ?v= 쿼리가 아니라 파일명 번호를 올린다
+├── favicon-v4.svg          ←   (브라우저 아이콘 캐시는 쿼리를 무시한다 — 2026-08-13 확인)
+├── apple-touch-icon-v4.png ←   iOS 홈 화면 아이콘
+├── favicon.ico             ← 위 -v4 판과 같은 그림. HTML 이 가리키지 않지만
 ├── apple-touch-icon.png    ←   브라우저·iOS 가 파일명 없이 직접 찾아가므로 지우지 말 것
 └── *.html                  ← 각 페이지
 ```
 
-> ⚠ **웹에서 안 쓰이는데 지우면 안 되는 파일이 다섯 개 있습니다** (합 4.9MB).
+> ⚠ **웹에서 안 쓰이는데 지우면 안 되는 파일이 네 개 있습니다** (합 3.5MB).
 > 방문자가 내려받지는 않지만 `tools/` 스크립트의 입력이거나 다시 만들 때의 원본입니다.
 >
 > | 파일 | 왜 필요한가 |
 > |---|---|
-> | `images/logo/logo-fullname.png` | `split-wordmark.py` 입력 — 히어로 로고 열 겹을 다시 만들 때 |
-> | `images/logo/logo-fullname-source.png` | 위 파일로 자르기 전 원본 (1536×1024, 투명) |
-> | `images/logo/logo-fullname.webp` | 열 겹으로 가르기 전 원본 한 장 |
+> | `images/logo/logo-fullname.png` | `build-wordmark.py` 입력 — 히어로 로고 넉 겹을 다시 만들 때 |
+> | `images/logo/logo-fullname.webp` | 넉 겹으로 가르기 전 원본 한 장 |
 > | `images/logo/logo-full.png` | `make-og-image.py` 입력 — 공유 미리보기를 다시 만들 때 |
-> | `images/og-image-v3-source.png` | 위 미리보기를 만들기 전 원본 |
+> | `images/og-image-v3-source.png` | 지금 live 인 og-image-v3.png(2026-08-13, 수동 제작)를 만들기 전 원본 —
+>   ⚠ 2026-09-11 로고 교체 후에는 옛 로고 기준이라 그대로 다시 쓸 수 없다. 새로
+>   만들려면 `make-og-image.py` 로 초안(`og-image-generated.png`)을 뽑아 검토할 것 |
 
 ---
 
@@ -383,24 +384,24 @@ const POPUP = {
 
 | 파일 | 누가 읽는가 | 만드는 방법 |
 |------|-------------|-------------|
-| `favicon-v3.svg` | 크롬·파이어폭스 | **손으로 편집** (도형 한 줄짜리 SVG) |
-| `favicon-v3.ico` | 사파리 · 오래된 브라우저 (16·32·48px) | `tools/make-favicon.py` |
-| `apple-touch-icon-v3.png` | iOS 홈 화면 (180px) | 같은 스크립트 |
+| `favicon-v4.svg` | 크롬·파이어폭스 | **손으로 편집** (도형 한 줄짜리 SVG) |
+| `favicon-v4.ico` | 사파리 · 오래된 브라우저 (16·32·48px) | `tools/make-favicon.py` |
+| `apple-touch-icon-v4.png` | iOS 홈 화면 (180px) | 같은 스크립트 |
 
-그림을 바꿀 때 순서:
+그림을 바꿀 때 순서(아래는 v4 → v5 예시 — 항상 **현재 번호의 다음 번호**로 올린다):
 
-1. `favicon-v3.svg` 를 고칩니다.
+1. `favicon-v4.svg` 를 고쳐 `favicon-v5.svg` 로 저장합니다.
 2. `tools/make-favicon.py` 의 도형·색 상수를 **SVG 와 같은 모양으로** 맞춥니다
    (스크립트는 SVG 를 읽지 않고 자기 안의 값으로 다시 그립니다 — 여기서 어긋나면
    브라우저마다 다른 아이콘이 보입니다).
-3. 스크립트의 `ICO_NAME` · `TOUCH_NAME` 을 `-v4` 로 올리고 실행합니다.
+3. 스크립트의 `ICO_NAME` · `TOUCH_NAME` 을 `-v5` 로 올리고 실행합니다.
    ```bash
    python3 tools/make-favicon.py
    ```
 4. 열두 페이지의 `<head>` 도 같은 번호로 올립니다.
    ```bash
-   sed -i -e 's|favicon-v3|favicon-v4|g' \
-          -e 's|apple-touch-icon-v3|apple-touch-icon-v4|g' *.html
+   sed -i -e 's|favicon-v4|favicon-v5|g' \
+          -e 's|apple-touch-icon-v4|apple-touch-icon-v5|g' *.html
    ```
 5. 번호 없는 `favicon.ico` · `apple-touch-icon.png` 도 새 그림으로 덮어씁니다.
    HTML 이 가리키지 않지만 브라우저와 iOS 가 파일명 없이 그 자리를 직접 찾아갑니다.
