@@ -280,6 +280,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://www.tandfonline.com/doi/full/10.1080/02699931.2010.541668',
       pdf: 'papers/Noh_et_al_2011.pdf' },
 
+    { type: 'publication', year: '2011', date: '2011-09-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'In The Zone: Flow State and Cognition in Older Adults',
+      authors: 'Brennan R. Payne, Joshua J. Jackson, Soo Rim Noh, Elizabeth A. L. Stine-Morrow',
+      journal: 'Psychology and Aging, 26(3), 738–743',
+      url: 'https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0022359',
+      pdf: 'papers/Payne_et_al_2011.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
