@@ -48,7 +48,7 @@ homepage/
 │   ├── make-favicon.py     ← 파비콘(.ico + apple-touch-icon) 생성 ⚠ 그림 교체 시 파일명 번호를 올릴 것
 │   ├── make-og-image.py    ← 카톡·SNS 공유 미리보기 이미지 생성
 │   └── split-wordmark.py   ← 히어로 이름 로고를 움직일 수 있는 열 겹으로 가름
-├── papers/                 ← 논문 PDF (27개)
+├── papers/                 ← 논문 PDF (37개)
 ├── presentations/
 │   ├── abstracts/          ← 학술발표 초록 PDF
 │   └── posters/            ← 학술발표 포스터 PDF
@@ -309,7 +309,7 @@ partial에 `class="active"`를 넣지 않습니다.
    (자세한 규칙은 `notice-files/README.md`)
 3. 커밋 & 푸시
 
-> 올리기 전에 **파일 크기**를 보세요. 지금 있는 PDF 42개의 중간값은 0.7MB 인데
+> 올리기 전에 **파일 크기**를 보세요. 지금 있는 PDF 52개의 중간값은 0.7MB 인데
 > `presentations/abstracts/Yun_et_al_2024_KDPA.pdf` 한 개만 11MB 남짓입니다 —
 > 휴대폰으로 보는 사람이 그만큼을 내려받습니다. 스캔·사진으로 만든 PDF 는
 > 올리기 전에 압축하는 편이 좋습니다.
