@@ -287,6 +287,13 @@ NOMAD Lab 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.ac.
       url: 'https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0022359',
       pdf: 'papers/Payne_et_al_2011.pdf' },
 
+    { type: 'publication', year: '2012', date: '2012-01-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'The Effects of Print Exposure on Sentence Processing and Memory in Older Adults: Evidence for Efficiency and Reserve',
+      authors: 'Brennan R. Payne, Xuefei Gao, Soo Rim Noh, Carolyn J. Anderson, Elizabeth A. L. Stine-Morrow',
+      journal: 'Aging, Neuropsychology, and Cognition, 19(1-2), 122–149',
+      url: 'https://www.tandfonline.com/doi/full/10.1080/13825585.2011.628376',
+      pdf: 'papers/Payne_et_al_2012.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
