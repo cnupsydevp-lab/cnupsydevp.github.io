@@ -68,12 +68,17 @@
 
 <section class="hero">
     <div class="container">
-        <!-- 첫 화면은 이름 로고 하나만 둔다 (글자·버튼 모두 걷어냄).
-             대학원 진학·연구 분야로 가는 길은 상단 메뉴가 맡고, 바로 아래
-             About 섹션에 소개 글과 '지도교수 소개' 링크가 이어진다.
+        <!-- 첫 화면 = 이름 로고 + 제목 한 줄 + 소개 두 줄 + 버튼 둘.
+             [2026-09-12] 한동안 로고 한 장만 두었는데, 그러면 첫 화면에 보이는
+             글자가 하나도 없었다 — 무슨 분야인지·어느 대학인지가 스크롤해야 나오는
+             About 섹션까지 밀려 있었다. 검색으로 처음 온 사람은 브랜드보다 정보를
+             먼저 찾는다. 그래서 제목·소개 줄·버튼을 로고 아래에 다시 두었다
+             (CSS 는 지운 적이 없어 .hero-title / .hero-sub / .hero-cta 를 그대로 쓴다.
+              높이가 늘어난 만큼 .hero 의 위아래 여백을 style.css 에서 줄였다).
 
-             h1 은 화면에서 감추되 코드에는 남긴다 — 페이지마다 제목이 하나는 있어야
-             검색 결과에 연구실 소개가 뜨고, 스크린리더도 이 페이지가 무엇인지 읽는다.
+             h1 에서 이름 부분만 .sr-only 로 감싼다 — 로고 그림이 바로 위에서 이름을
+             보여 주므로 화면에 두 번 적을 이유가 없지만, 검색 결과와 스크린리더에는
+             '무엇을 하는 곳 — 어디' 가 한 문장으로 들어가는 편이 낫다.
              (.sr-only = 눈에는 안 보이고 보조기기에만 읽히는 유틸)
 
              그림 자체는 이름을 글자로 담고 있지 않으므로 alt 가 이름을 읽는다.
@@ -93,13 +98,7 @@
              (아래 wm-shine) 뿐이라 끈·구슬을 따로 흔들 필요가 없어졌다(그 기능은
              2026-08-12/13 에 이미 껐다). 겹치는 픽셀이 하나도 없어서, 움직임을 끄면
              (모션 줄이기 설정) 네 장이 겹쳐 원본과 똑같은 그림이 된다.
-             만드는 법과 각 조각의 뜻은 images/logo/README.md 에 적어 두었다.
-
-             ※ 글자를 다시 넣고 싶으면 아래 두 줄을 살리면 된다 — CSS(.hero-title,
-               .hero-sub, .hero-cta)는 지우지 않고 그대로 두었다.
-               <h1 class="hero-title">전 생애의 마음을<br>과학으로 탐구합니다</h1>
-               <p class="hero-sub">노화, 정서, 인지, 안구 운동 추적을 통해 …</p> -->
-        <h1 class="sr-only">전 생애의 마음을 과학으로 탐구합니다 — LIFE:ON LAB</h1>
+             만드는 법과 각 조각의 뜻은 images/logo/README.md 에 적어 두었다. -->
         <div class="hero-wordmark">
         <div class="wm">
             <!-- srcset/sizes — 좁은 화면에는 축소본(w800/)을 내려보낸다.
@@ -134,6 +133,18 @@
             <picture><source type="image/webp" sizes="(min-width:1080px) 76px,(min-width:861px) calc((100vw - 64px)*0.0748),(min-width:641px) calc((100vw - 48px)*0.0748),(min-width:481px) calc((100vw - 40px)*0.0748),calc((100vw - 32px)*0.0748)" srcset="images/logo/wordmark/w800/star2.webp 60w, images/logo/wordmark/star2.webp 156w"><img class="wm-layer wm-star wm-star-2" style="left:32.6619%;top:18.5185%;width:7.482%" src="images/logo/wordmark/star2.png" alt="" width="156" height="194"></picture>
             <picture><source type="image/webp" sizes="(min-width:1080px) 61px,(min-width:861px) calc((100vw - 64px)*0.0600),(min-width:641px) calc((100vw - 48px)*0.0600),(min-width:481px) calc((100vw - 40px)*0.0600),calc((100vw - 32px)*0.0600)" srcset="images/logo/wordmark/w800/star3.webp 48w, images/logo/wordmark/star3.webp 125w"><img class="wm-layer wm-star wm-star-3" style="left:0.0%;top:55.6927%;width:5.9952%" src="images/logo/wordmark/star3.png" alt="" width="125" height="148"></picture>
         </div>
+        </div>
+        <h1 class="hero-title">전 생애의 마음을 과학으로 탐구합니다<span class="sr-only"> — LIFE:ON LAB</span></h1>
+        <p class="hero-sub">충남대학교 심리학과 발달·노화 심리 연구실<br>정서·인지 노화와 안구 운동 추적을 연구합니다</p>
+        <!-- 이 페이지에서 주 버튼(btn-primary)은 여기 하나뿐이다.
+             아래 About·Research 섹션의 '지도교수 소개'·'연구 전체 보기' 는 둘 다
+             btn-ghost 로 둔다 — 한 화면에 꽉 찬 버튼이 여럿이면 어느 것이 이 연구실이
+             바라는 다음 걸음인지 읽히지 않는다.
+             두 길은 이 연구실이 실제로 사람을 받는 두 통로다: 대학원 진학(admissions)
+             과 연구 참여(participation). 나머지 안내는 상단 메뉴가 맡는다. -->
+        <div class="hero-cta">
+            <a href="admissions.html" class="btn-primary">대학원 진학 문의 →</a>
+            <a href="participation.html" class="btn-ghost">연구 참여 안내 →</a>
         </div>
     </div>
 </section>
