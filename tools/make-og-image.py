@@ -4,19 +4,21 @@
 카카오톡·디스코드·페이스북 등에 주소를 붙여 넣으면 뜨는 카드 그림 이야기다.
 모든 페이지의 <head> 가 그 한 장을 가리킨다:
 
-    <meta property="og:image" content=".../images/og-image-v3.png">
+    <meta property="og:image" content=".../images/og-image-v4.png">
 
-⚠️ 지금 걸려 있는 og-image-v3.png 는 이 스크립트가 만든 것이 아니다.
-   2026-08-13 에 사용자가 따로 만들어 올린 그림(원본은 og-image-v3-source.png)
-   으로 갈아 끼웠다. 그래서 이 스크립트는 live 파일명을 건드리지 않고
-   og-image-generated.png 로만 내놓는다 — 그대로 돌려도 올린 그림이 지워지지
-   않는다. 이 그림을 다시 쓰려면 결과를 확인한 뒤 손으로 번호를 올려 옮긴다.
+⚠️ 지금 걸려 있는 og-image-v4.png 는 이 스크립트가 만든 것이 아니다.
+   2026-08-13 에 사용자가 만들어 올린 v3 을 거쳐, 2026-09-12 에 다시 사용자가
+   새로 만들어 올린 그림(원본은 og-image-v4-source.png, 1672×941 을 1200×630
+   비율로 가운데를 잘라 냄)으로 갈아 끼웠다. 그래서 이 스크립트는 live
+   파일명을 건드리지 않고 og-image-generated.png 로만 내놓는다 — 그대로
+   돌려도 올린 그림이 지워지지 않는다. 이 그림을 다시 쓰려면 결과를 확인한
+   뒤 손으로 번호를 올려 옮긴다.
 
 ⚠️ 그림을 갈아 끼울 때는 반드시 파일명 뒤 번호를 올린다 (v3 → v4 …)
    그리고 열두 페이지의 <head> 경로도 같이 고친다. 같은 파일명에 덮어쓰면
    카카오톡이 예전 그림을 계속 물고 있는다 — 카카오는 주소 단위로 미리보기를
    저장해 두고, 개인이 그 저장분을 지울 방법이 없다 (2026-08-13에 겪은 일).
-   경로 일괄 수정:  sed -i 's|og-image-v3|og-image-v4|g' *.html tools/make-og-image.py
+   경로 일괄 수정:  sed -i 's|og-image-v4|og-image-v5|g' *.html tools/make-og-image.py
 
 사용법 (저장소 루트에서):
     python3 tools/make-og-image.py --font <IBMPlexSansKR-*.ttf 가 있는 폴더>

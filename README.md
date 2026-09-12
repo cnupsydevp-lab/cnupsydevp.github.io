@@ -61,17 +61,17 @@ homepage/
 │   ├── newsletter/         ← 소식지 사진
 │   │   └── thumb/          ←   목록용 정사각 썸네일 (make-newsletter-thumbs.py 가 생성)
 │   ├── popup/              ← 첫 화면 팝업 이미지
-│   ├── og-image-v3.png     ← 카톡·SNS 공유 미리보기 (1200×630)
+│   ├── og-image-v4.png     ← 카톡·SNS 공유 미리보기 (1200×630)
 │   └── *.jpeg / *.JPG      ← 구성원 사진 (파일명 = 이름, members.html·pi.html 이 직접 참조)
-├── favicon-v4.ico          ← 파비콘 ⚠ 그림을 바꿀 때는 ?v= 쿼리가 아니라 파일명 번호를 올린다
-├── favicon-v4.svg          ←   (브라우저 아이콘 캐시는 쿼리를 무시한다 — 2026-08-13 확인)
-├── apple-touch-icon-v4.png ←   iOS 홈 화면 아이콘
-├── favicon.ico             ← 위 -v4 판과 같은 그림. HTML 이 가리키지 않지만
+├── favicon-v5.ico          ← 파비콘 ⚠ 그림을 바꿀 때는 ?v= 쿼리가 아니라 파일명 번호를 올린다
+├── favicon-v5.svg          ←   (브라우저 아이콘 캐시는 쿼리를 무시한다 — 2026-08-13 확인)
+├── apple-touch-icon-v5.png ←   iOS 홈 화면 아이콘
+├── favicon.ico             ← 위 -v5 판과 같은 그림. HTML 이 가리키지 않지만
 ├── apple-touch-icon.png    ←   브라우저·iOS 가 파일명 없이 직접 찾아가므로 지우지 말 것
 └── *.html                  ← 각 페이지
 ```
 
-> ⚠ **웹에서 안 쓰이는데 지우면 안 되는 파일이 네 개 있습니다** (합 3.5MB).
+> ⚠ **웹에서 안 쓰이는데 지우면 안 되는 파일이 세 개 있습니다** (합 2.9MB).
 > 방문자가 내려받지는 않지만 `tools/` 스크립트의 입력이거나 다시 만들 때의 원본입니다.
 >
 > | 파일 | 왜 필요한가 |
@@ -79,9 +79,9 @@ homepage/
 > | `images/logo/logo-fullname.png` | `build-wordmark.py` 입력 — 히어로 로고 넉 겹을 다시 만들 때 |
 > | `images/logo/logo-fullname.webp` | 넉 겹으로 가르기 전 원본 한 장 |
 > | `images/logo/logo-full.png` | `make-og-image.py` 입력 — 공유 미리보기를 다시 만들 때 |
-> | `images/og-image-v3-source.png` | 지금 live 인 og-image-v3.png(2026-08-13, 수동 제작)를 만들기 전 원본 —
->   ⚠ 2026-09-11 로고 교체 후에는 옛 로고 기준이라 그대로 다시 쓸 수 없다. 새로
->   만들려면 `make-og-image.py` 로 초안(`og-image-generated.png`)을 뽑아 검토할 것 |
+>
+> `images/og-image-v4-source.png`(og-image-v4.png의 크롭 전 원본, 2026-09-12 업로드)도
+> 같은 이유로 지우지 않지만, `make-og-image.py` 입력은 아니고 다시 크롭할 때만 쓴다.
 
 ---
 
