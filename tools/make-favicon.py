@@ -63,8 +63,8 @@ SS = 8  # 이 배율로 크게 그린 뒤 줄여서 가장자리를 매끄럽게
 
 # 캐시를 끊는 것은 쿼리가 아니라 파일명이다 (위 두 번째 경고).
 # 그림을 바꿀 때 여기와 열두 페이지 <head> 를 같은 번호로 올린다.
-ICO_NAME = 'favicon-v4.ico'
-TOUCH_NAME = 'apple-touch-icon-v4.png'
+ICO_NAME = 'favicon-v5.ico'
+TOUCH_NAME = 'apple-touch-icon-v5.png'
 
 
 def draw_mark(size, rounded):
