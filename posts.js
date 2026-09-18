@@ -308,6 +308,13 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       url: 'https://psycnet.apa.org/doiLanding?doi=10.1037%2Fa0030234',
       pdf: 'papers/Noh_et_al_2013.pdf' },
 
+    { type: 'publication', year: '2007', date: '2007-03-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Age differences in learning from text: The effects of content preexposure on reading',
+      authors: 'Soo Rim Noh, Matthew C. Shake, Jeanine M. Parisi, Adam D. Joncich, Daniel G. Morrow, Elizabeth A. L. Stine-Morrow',
+      journal: 'International Journal of Behavioral Development, 31(2), 133–148',
+      url: 'https://journals.sagepub.com/doi/10.1177/0165025407073581',
+      pdf: 'papers/Noh_et_al_2007.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
