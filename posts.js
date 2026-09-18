@@ -329,6 +329,13 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       url: 'https://link.springer.com/article/10.3758/s13423-010-0014-4',
       pdf: 'papers/Gao_et_al_2011.pdf' },
 
+    { type: 'publication', year: '2011', date: '2011-08-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Does Looking at the Positive Mean Feeling Good? Age and Individual Differences Matter',
+      authors: 'Derek M. Isaacowitz, Soo Rim Noh',
+      journal: 'Social and Personality Psychology Compass, 5(8), 505–517',
+      url: 'https://compass.onlinelibrary.wiley.com/doi/10.1111/j.1751-9004.2011.00374.x',
+      pdf: 'papers/Isaacowitz_et_al_2011.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
