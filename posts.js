@@ -315,6 +315,20 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       url: 'https://journals.sagepub.com/doi/10.1177/0165025407073581',
       pdf: 'papers/Noh_et_al_2007.pdf' },
 
+    { type: 'publication', year: '2026', date: '2026-07-25', badge: 'badge-gold', badgeText: 'SCIE',
+      title: 'Loneliness, Depression, and Subjective Memory Complaints in Middle-Aged and Older Adults: The Role of Meaning in Life',
+      authors: 'Seung Chul Lee, Sungkun Cho, Yerin Shim, Dae-Hyun Yun, Taehyun Kim, Soo Rim Noh',
+      journal: 'Psychiatry Investigation, 23(7), 892–902',
+      url: 'https://psychiatryinvestigation.org/journal/view.php?doi=10.30773/pi.2025.0326',
+      pdf: 'papers/Lee_et_al_2026.pdf' },
+
+    { type: 'publication', year: '2011', date: '2011-02-01', badge: 'badge-gold', badgeText: 'SSCI',
+      title: 'Visual noise disrupts conceptual integration in reading',
+      authors: 'Xuefei Gao, Elizabeth A. L. Stine-Morrow, Soo Rim Noh, Rhea T. Eskew Jr.',
+      journal: 'Psychonomic Bulletin & Review, 18(1), 83–88',
+      url: 'https://link.springer.com/article/10.3758/s13423-010-0014-4',
+      pdf: 'papers/Gao_et_al_2011.pdf' },
+
     // 학술발표
     { type: 'presentation', year: '2025', date: '2025-07-03', badge: 'badge-muted', badgeText: '국내',
       title: '아동과 청년의 전칭 양화사 문장 이해: 안구 운동 추적 연구',
