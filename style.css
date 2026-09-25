@@ -852,7 +852,8 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.25rem;
 }
-/* 카드가 링크가 아니므로 hover 리프트 없음 — 클릭 가능해 보이는 오해 방지 */
+/* 기본 .card 는 눌리지 않는다 — hover 리프트도 없다 (클릭 가능해 보이는 오해 방지).
+   예외는 .card-expandable (연구분야) 하나뿐이고, 그쪽은 아래에서 따로 손짓을 준다. */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -883,6 +884,66 @@ body {
   line-height: 1.8;
 }
 .card-badge { margin-bottom: 1rem; }
+
+/* ── 펼쳐지는 카드 (연구분야) ─────────────────────────────── */
+/* 격자 기본값은 stretch 라 한 카드가 길어지면 같은 줄 전체가 따라 늘어나
+   옆 카드가 속 빈 상자가 된다. start 로 두면 카드마다 제 내용만큼만 높아진다.
+   ⚠️ 닫힌 상태에서도 카드 높이가 더 이상 서로 맞지 않는다 — 펼침 격자에만 준다. */
+.card-grid-expandable { align-items: start; }
+
+.card-expandable {
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+/* hover·펼침 손짓은 .info-card 와 같은 값을 쓴다 — 사이트에 이미 있는 카드 반응 */
+.card-expandable:hover { border-color: var(--accent-border); box-shadow: 0 6px 18px rgba(var(--ink-rgb), 0.14); }
+.card-expandable.is-open { border-color: var(--accent-border); }
+
+/* 제목 글자만 감싼 '진짜' 버튼 — 생김새는 h3 그대로 물려받는다.
+   카드 전체가 클릭을 받으므로(script.js) 이 버튼은 키보드·스크린리더의 손잡이다. */
+.card-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.card-chevron {
+  flex: none;
+  color: rgba(var(--text-rgb), 0.5);
+  transition: transform 0.25s ease;
+}
+.card-expandable.is-open .card-chevron { transform: rotate(180deg); }
+
+.card-detail {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+.card-detail p {
+  font-size: var(--fs-md);
+  color: var(--muted);
+  line-height: 1.8;
+}
+.card-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+/* 펼칠 때만 살짝 밀려 올라온다 — 접을 때는 display:none 이라 애니메이션이 없다.
+   fadeUp 키프레임은 아래 prefers-reduced-motion: no-preference 블록에서 정의된다. */
+@media (prefers-reduced-motion: no-preference) {
+  .card-detail { animation: fadeUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
 
 /* ── Info Cards ──────────────────────────────────────────── */
 .info-grid {

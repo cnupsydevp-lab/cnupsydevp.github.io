@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initBackToTop();
   initRipple();
+  initCardToggle();
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -327,3 +328,27 @@ function initRipple() {
   });
 }
 
+// 연구분야 카드 여닫이 — 카드를 누르면 아래 자세한 내용이 펼쳐진다 (research.html).
+// 클릭 리스너는 카드 하나에만 단다. 제목 버튼을 눌러도 클릭이 카드까지 올라오므로
+// 한 번만 토글되고, 키보드로 버튼을 눌렀을 때도 같은 경로를 탄다
+// (버튼에 따로 리스너를 달면 두 번 토글되어 열리자마자 닫힌다).
+function initCardToggle() {
+  document.querySelectorAll('.card-expandable').forEach(card => {
+    const btn = card.querySelector('.card-toggle');
+    const panel = btn && document.getElementById(btn.getAttribute('aria-controls'));
+    if (!btn || !panel) return;
+
+    card.addEventListener('click', e => {
+      // 카드 안에 링크가 생기면 그 링크가 우선한다
+      if (e.target.closest('a')) return;
+      // 본문을 드래그해 고른 직후의 클릭은 흘려보낸다 — 읽다가 카드가 닫히지 않게
+      const sel = window.getSelection && window.getSelection().toString();
+      if (sel && !e.target.closest('.card-toggle')) return;
+
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+      card.classList.toggle('is-open', !open);
+    });
+  });
+}

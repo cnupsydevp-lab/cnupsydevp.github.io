@@ -78,24 +78,58 @@
     <div class="container">
         <span class="eyebrow section-eyebrow">Current Research</span>
         <h2 class="section-title">연구 분야</h2>
-        <div class="card-grid u-mt-2">
-            <div class="card">
+        <!-- 카드를 누르면 아래에 자세한 내용이 펼쳐진다 (2026-09-25).
+             ⚠️ <button> 안에는 <h3> 를 넣을 수 없다 — button 은 phrasing content 만 받는다.
+                그래서 제목 글자만 button 으로 감싸 '진짜' 컨트롤로 두고, 카드 아무 데나
+                눌러도 열리도록 script.js(initCardToggle)가 카드 전체의 클릭을 받는다.
+                키보드·스크린리더는 제목 버튼 하나만 만나므로 컨트롤이 중복되지 않는다.
+             ⚠️ 펼침 패널이 카드 안에 있어 열면 그 카드만 길어진다. 같은 줄의 다른 카드가
+                따라 늘어나지 않도록 격자에 .card-grid-expandable(align-items:start)을 준다. -->
+        <div class="card-grid card-grid-expandable u-mt-2">
+            <div class="card card-expandable">
                 <div class="card-badge"><span class="badge badge-navy">현재 진행 중</span></div>
                 <div class="card-num">01</div>
-                <h3>정서와 인지 노화</h3>
+                <h3><button type="button" class="card-toggle" aria-expanded="false" aria-controls="ra-detail-01">정서와 인지 노화<svg class="card-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button></h3>
                 <p>중년·노년기의 정서 조절 전략 변화와 심리적 안녕감의 관계를 전 생애 발달 관점에서 탐구합니다</p>
+                <div class="card-detail" id="ra-detail-01" hidden>
+                    <p>나이가 들며 정서를 다루는 방식이 어떻게 달라지는지, 그리고 그 변화가 심리적 안녕감과 어떻게 이어지는지를 살펴봅니다. 연령대 간 비교와 종단 추적을 함께 사용해 '연령에 따른 차이'와 '시간에 따른 변화'를 구분해 읽습니다.</p>
+                    <div class="card-keys">
+                        <span class="badge badge-muted">정서 조절</span>
+                        <span class="badge badge-muted">심리적 안녕감</span>
+                        <span class="badge badge-muted">주관적 노화</span>
+                        <span class="badge badge-muted">중·노년기</span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
+            <div class="card card-expandable">
                 <div class="card-badge"><span class="badge badge-gold">현재 진행 중</span></div>
                 <div class="card-num">02</div>
-                <h3>안구 운동 추적과 인지</h3>
+                <h3><button type="button" class="card-toggle" aria-expanded="false" aria-controls="ra-detail-02">안구 운동 추적과 인지<svg class="card-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button></h3>
                 <p>아이트래킹(Eye Tracking) 기법으로 노화에 따른 주의·기억·의사결정 과정을 정밀하게 측정합니다</p>
+                <div class="card-detail" id="ra-detail-02" hidden>
+                    <p>시선이 어디에 먼저 가고 얼마나 머무는지를 기록해, 스스로 보고하기 어려운 처리 과정을 비침습적으로 관찰합니다. 같은 과제를 수행해도 연령에 따라 달라지는 주의 배분과 정보 탐색 방식을 비교합니다.</p>
+                    <div class="card-keys">
+                        <span class="badge badge-muted">아이트래킹</span>
+                        <span class="badge badge-muted">시각 주의</span>
+                        <span class="badge badge-muted">기억</span>
+                        <span class="badge badge-muted">의사결정</span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
+            <div class="card card-expandable">
                 <div class="card-badge"><span class="badge badge-muted">종단 연구</span></div>
                 <div class="card-num">03</div>
-                <h3>전 생애 발달과 디지털 기술</h3>
+                <h3><button type="button" class="card-toggle" aria-expanded="false" aria-controls="ra-detail-03">전 생애 발달과 디지털 기술<svg class="card-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></button></h3>
                 <p>AI 등 디지털 기술이 중년·노년의 인지 기능과 일상 적응에 미치는 영향을 연구합니다</p>
+                <div class="card-detail" id="ra-detail-03" hidden>
+                    <p>AI와 디지털 기기가 일상으로 들어오면서 중년·노년의 인지 기능과 생활 적응이 어떻게 달라지는지를 장기간 추적합니다. 기술을 쓰는 경험 자체가 발달 궤적에 남기는 흔적과, 그 과정에서 벌어지는 격차를 함께 봅니다.</p>
+                    <div class="card-keys">
+                        <span class="badge badge-muted">디지털 리터러시</span>
+                        <span class="badge badge-muted">AI</span>
+                        <span class="badge badge-muted">인지 기능</span>
+                        <span class="badge badge-muted">일상 적응</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
