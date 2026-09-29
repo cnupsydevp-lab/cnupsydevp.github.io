@@ -361,6 +361,7 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       title: '청소년 스마트폰 의존의 종단적 변화 궤적 및 잠재 유형 분석: 성장 혼합 모형 적용',
       authors: '최유준, 이승철, 이은빈, 전수영, 노수림',
       venue: '제79차 한국심리학회 연차학술대회, 일산, 대한민국. (포스터 발표)',
+      abstract: 'presentations/abstracts/Choi_et_al_2025_KPS79.pdf',
       poster: 'presentations/posters/Choi_et_al_2025_KPS79.pdf' },
     { type: 'presentation', year: '2025', date: '2025-08-21', badge: 'badge-muted', badgeText: '국내',
       title: '외로움이 생애주기별 인지 편향(주의, 기억, 표정 해석)에 미치는 영향',
