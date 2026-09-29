@@ -165,7 +165,7 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       title: '한국 중·고령 성인의 사회적 고립이 외로움 변화에 미치는 종단적 영향: 자기통제력의 역할',
       authors: '이승철, 서수정, 최원일, 노수림',
       journal: '한국심리학회지: 발달, 39(3), 117–145',
-      url: 'https://doi.org/10.35574/KJDP.2026.9.39.3.117',
+      url: 'https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003380893',
       pdf: 'papers/Lee_et_al_2026b.pdf' },
 
     { type: 'publication', year: '2026', date: '2026-06-30', badge: 'badge-gold', badgeText: 'KCI',
