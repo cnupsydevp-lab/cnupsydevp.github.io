@@ -161,6 +161,13 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       journal: 'Aging, Neuropsychology, and Cognition, 16(4), 485–504',
       url: 'https://www.tandfonline.com/doi/full/10.1080/13825580902866653' },
 
+    { type: 'publication', year: '2026', date: '2026-09-30', badge: 'badge-gold', badgeText: 'KCI',
+      title: '한국 중·고령 성인의 사회적 고립이 외로움 변화에 미치는 종단적 영향: 자기통제력의 역할',
+      authors: '이승철, 서수정, 최원일, 노수림',
+      journal: '한국심리학회지: 발달, 39(3), 117–145',
+      url: 'https://doi.org/10.35574/KJDP.2026.9.39.3.117',
+      pdf: 'papers/Lee_et_al_2026b.pdf' },
+
     { type: 'publication', year: '2026', date: '2026-06-30', badge: 'badge-gold', badgeText: 'KCI',
       title: '한국 중ㆍ고령 성인의 스트레스, 외로움 및 사회적 관계망 간의 종단적 상호관계: 무선절편 교차지연 패널모형(RI-CLPM) 분석',
       authors: '윤소영, 이승철, 노수림',
