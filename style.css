@@ -1402,8 +1402,8 @@ body {
 }
 /* 터치 기기: 손가락으로 누르기 쉬운 정도만 살짝 키운다 (마우스 환경은 위의 컴팩트 크기) */
 @media (pointer: coarse) {
-  .pub-sort-btn { min-height: 32px; padding: 0.35rem 0.8rem; }
-  .pub-page-btn { width: 2.1rem; height: 2.1rem; }
+  .pub-sort-btn { min-height: 28px; padding: 0.28rem 0.7rem; }
+  .pub-page-btn { width: 1.9rem; height: 1.9rem; }
   .pub-page-nav { width: auto; }
 }
 .pub-page-nav:disabled,
@@ -2961,7 +2961,7 @@ html {
   .pub-item { grid-template-columns: 44px 1fr; }
   .pub-item .badge { display: none; }
   /* 모바일: 논문 검색창 — 글자는 16px(iOS 확대 방지)로 두고 높이·안내문만 줄인다 */
-  .pub-search-input { padding: 0.35rem 0.9rem; max-width: 160px; }
+  .pub-search-input { padding: 0.28rem 0.8rem; max-width: 150px; }
   .pub-search-input::placeholder { font-size: var(--fs-xs); }
   /* 모바일: 섹션 CTA 간격 */
   .section-cta  { margin-top: 2rem; }
