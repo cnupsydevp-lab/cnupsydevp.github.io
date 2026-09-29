@@ -2430,7 +2430,7 @@ html {
   cursor: pointer;
   border-radius: var(--radius);
   flex-shrink: 0;
-  transition: background 0.18s;
+  transition: background 0.18s, opacity 0.3s ease, visibility 0.3s ease;
 }
 .nav-hamburger:hover { background: var(--accent-dim); }
 .nav-hamburger span {
@@ -2911,6 +2911,12 @@ html {
   /* 모바일 내비게이션 */
   .nav-cluster { display: none; }
   .nav-hamburger { display: flex; }
+  /* 스크롤하면 햄버거도 로고처럼 사라진다. 메뉴를 연 상태(.open)에서는 닫기(X)
+     버튼이라 남겨 둔다. 이 폭에선 내비가 통째로 비므로 투명한 머리띠가 아래
+     내용의 탭을 가로채지 않게 pointer-events 도 끈다. */
+  .site-nav.scrolled { pointer-events: none; }
+  .site-nav.scrolled .nav-hamburger:not(.open) { opacity: 0; visibility: hidden; }
+  .site-nav.scrolled .nav-hamburger.open { pointer-events: auto; }
   /* 공지 팝업은 이 폭부터 다시 내비 뒤로 간다 (PC 값 1100 → 950). 여기서부터
      메뉴가 햄버거로 접히는데, 펼친 덮개(.nav-mobile-overlay 998)가 화면을 통째로
      덮으므로 팝업이 그보다 앞이면 메뉴 한가운데 포스터가 뜬다.
