@@ -51,7 +51,8 @@ homepage/
 ├── papers/                 ← 논문 PDF (37개)
 ├── presentations/
 │   ├── abstracts/          ← 학술발표 초록 PDF
-│   └── posters/            ← 학술발표 포스터 PDF
+│   ├── posters/            ← 학술발표 포스터 PDF
+│   └── slides/             ← 구두발표 발표자료 PDF
 ├── notice-files/           ← 공지에 첨부하는 PDF (모집 요강 등)
 ├── images/
 │   ├── logo/
@@ -283,7 +284,8 @@ partial에 `class="active"`를 넣지 않습니다.
   authors: '이승철, 김미숙, 김혜민, 노수림',
   venue: '한국심리언어학회 정기학술대회, 서울, 대한민국. (구두 발표)',
   abstract: 'presentations/abstracts/Lee_et_al_2025_KPLS.pdf',   // 선택
-  poster: 'presentations/posters/Choi_et_al_2025_KPS79.pdf' },   // 선택
+  poster: 'presentations/posters/Choi_et_al_2025_KPS79.pdf',    // 선택
+  slides: 'presentations/slides/Lee_et_al_2025_KPLS.pdf' },      // 선택 (구두발표 발표자료)
 
 // 연구과제
 { type: 'grant', date: '2024-01-01',
@@ -302,10 +304,11 @@ partial에 `class="active"`를 넣지 않습니다.
 | 논문 | `papers/` | `<제1저자 성>_et_al_<연도>.pdf` | `Noh_et_al_2021.pdf` |
 | 발표 초록 | `presentations/abstracts/` | `<성>_et_al_<연도>_<학회코드>.pdf` | `Lee_et_al_2025_KPLS.pdf` |
 | 발표 포스터 | `presentations/posters/` | 위와 같음 | `Choi_et_al_2025_KPS79.pdf` |
+| 구두발표 자료 | `presentations/slides/` | 위와 같음 | `Lee_et_al_2025_KPLS.pdf` |
 | 공지 첨부 | `notice-files/` | `YYYY-MM-DD_<주제>.pdf` | `2026-08-11_grad-recruit.pdf` |
 
 1. 폴더에 PDF 업로드
-2. `posts.js`의 `POSTS.activities`에 항목 추가 (`pdf` / `abstract` / `poster` 경로 지정)
+2. `posts.js`의 `POSTS.activities`에 항목 추가 (`pdf` / `abstract` / `poster` / `slides` 경로 지정)
    — 공지 첨부는 `POSTS.notices` 의 `body` 안에 `<a href="notice-files/…">` 로 직접 씁니다
    (자세한 규칙은 `notice-files/README.md`)
 3. 커밋 & 푸시
