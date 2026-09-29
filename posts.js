@@ -413,7 +413,6 @@ LIFE:ON LAB 지도교수 노수림: <a href="mailto:srnoh@cnu.ac.kr">srnoh@cnu.a
       title: '중고령 성인의 외로움이 우울에 미치는 영향: 주관적 기억 감퇴의 매개 역할을 중심으로',
       authors: '이승철, 윤소영, 노수림',
       venue: '한국건강심리학회 창립 30주년 기념행사 및 제67차 춘계학술대회, 대전, 대한민국. (포스터 발표)',
-      abstract: 'presentations/abstracts/Lee_et_al_2024_KHPA67.pdf',
       poster: 'presentations/posters/Lee_et_al_2024_KHPA67.pdf' },
 
     // 연구과제
